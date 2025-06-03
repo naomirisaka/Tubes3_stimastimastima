@@ -1,25 +1,21 @@
 import mysql.connector
-import json
 import os
 
-# Database config
+# database config
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_NAME = "ats_db"
 
-# Auto-detect password
 DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
 if not DB_PASSWORD:
     try:
-        # Try without password first
+        # try w/o password
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
-        print("✓ Connected to MySQL without password")
     except:
-        DB_PASSWORD = input("Password MySQL: ")
+        DB_PASSWORD = input("Input MySQL Password: ")
 
 def view_specific_cv(applicant_id=None):
-    """View specific CV sections in detail"""
     try:
         db = mysql.connector.connect(
             host=DB_HOST,
@@ -52,16 +48,18 @@ def view_specific_cv(applicant_id=None):
         if result:
             first, last, role, summary, skills, experience, education, accomplishments, cv_path = result
             
-            print(f"\n🔍 DETAILED CV VIEW: {first} {last} ({role})")
-            print(f"📁 CV File: {cv_path}")
+            print(f"\nDetailed CV")
+            print(f"Name: {first} {last}")
+            print(f"Applied Position: {role}")
+            print(f"CV File: {cv_path}")
             print("=" * 70)
             
             sections = [
-                ("📝 SUMMARY", summary),
-                ("🔧 SKILLS", skills), 
-                ("💼 EXPERIENCE", experience),
-                ("🎓 EDUCATION", education),
-                ("🏆 ACCOMPLISHMENTS", accomplishments)
+                ("SUMMARY", summary),
+                ("SKILLS", skills), 
+                ("EXPERIENCE", experience),
+                ("EDUCATION", education),
+                ("ACCOMPLISHMENTS", accomplishments)
             ]
             
             for title, content in sections:
@@ -83,7 +81,7 @@ def view_specific_cv(applicant_id=None):
 
 def test_database():
     try:
-        # Connect to database
+        # connect to database
         db = mysql.connector.connect(
             host=DB_HOST,
             user=DB_USER,
@@ -92,20 +90,17 @@ def test_database():
         )
         cursor = db.cursor()
         
-        print("=== ATS DATABASE TEST ===\n")
-        
-        # 1. Count records
+        print("ATS DATABASE\n")
         cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
         profile_count = cursor.fetchone()[0]
         
         cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
         detail_count = cursor.fetchone()[0]
         
-        print(f"📊 Total Profiles: {profile_count}")
-        print(f"📊 Total Applications: {detail_count}\n")
+        print(f"Total Profiles: {profile_count}")
+        print(f"Total Applications: {detail_count}\n")
         
-        # 2. Show sample profiles
-        print("👥 SAMPLE PROFILES:")
+        print("Sample Profiles")
         cursor.execute("""
             SELECT p.applicant_id, p.first_name, p.last_name, p.phone_number, d.application_role, d.cv_path
             FROM ApplicantProfile p 
@@ -118,8 +113,7 @@ def test_database():
             filename = cv_path.split('/')[-1] if '/' in cv_path else cv_path.split('\\')[-1]
             print(f"  [{id}] {first} {last} | {phone} | {role} | {filename}")
         
-        # 3. Show roles distribution
-        print(f"\n🎯 ROLES DISTRIBUTION:")
+        print(f"\nRoles Distribution")
         cursor.execute("""
             SELECT application_role, COUNT(*) as count 
             FROM ApplicationDetail 
@@ -130,8 +124,7 @@ def test_database():
         for role, count in cursor.fetchall():
             print(f"  {role}: {count}")
         
-        # 4. Test sections extraction
-        print(f"\n📝 SECTIONS EXTRACTION TEST:")
+        print(f"\nSections Extraction Test")
         cursor.execute("""
             SELECT 
                 COUNT(CASE WHEN summary_section IS NOT NULL AND summary_section != '' THEN 1 END) as summary_count,
@@ -150,8 +143,7 @@ def test_database():
         print(f"  Education: {edu}/{total} ({edu/total*100:.1f}%)")
         print(f"  Accomplishments: {acc}/{total} ({acc/total*100:.1f}%)")
         
-        # 5. Show sample extracted data (FULL CONTENT)
-        print(f"\n📄 SAMPLE EXTRACTED DATA (FULL):")
+        print(f"\nSample of Extracted Data")
         cursor.execute("""
             SELECT p.first_name, p.last_name, d.application_role, 
                    d.skills_section, d.summary_section, d.experience_section, d.cv_path
@@ -162,22 +154,22 @@ def test_database():
         """)
         
         for first, last, role, skills, summary, experience, cv_path in cursor.fetchall():
-            print(f"👤 {first} {last} ({role})")
-            print(f"📁 CV Path: {cv_path}")
+            print(f"Profile: {first} {last} ({role})")
+            print(f"CV Path: {cv_path}")
             print("=" * 50)
             
             if skills:
-                print("🔧 SKILLS:")
+                print("SKILLS:")
                 print(skills)
                 print()
             
             if summary:
-                print("📝 SUMMARY:")
+                print("SUMMARY:")
                 print(summary)
                 print()
                 
             if experience:
-                print("💼 EXPERIENCE:")
+                print("EXPERIENCE:")
                 print(experience[:500] + "..." if len(experience) > 500 else experience)
                 print()
             
@@ -186,15 +178,15 @@ def test_database():
         
         cursor.close()
         db.close()
-        print("✅ Database test completed!")
+        print("Database test completed!")
         
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
-    print("1. Basic test")
+    print("1. Overall data")
     print("2. View detailed CV")
-    choice = input("Choose (1/2): ")
+    choice = input("Input the option (1/2): ")
     
     if choice == "2":
         applicant_id = input("Enter applicant ID (or press Enter for first record): ")
