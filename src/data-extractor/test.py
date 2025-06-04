@@ -9,7 +9,6 @@ DB_NAME = "ats_db"
 DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
 if not DB_PASSWORD:
     try:
-        # try w/o password
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
     except:
@@ -29,7 +28,7 @@ def view_specific_cv(applicant_id=None):
             cursor.execute("""
                 SELECT p.first_name, p.last_name, d.application_role, 
                        d.summary_section, d.skills_section, d.experience_section, 
-                       d.education_section, d.accomplishments_section
+                       d.education_section, d.accomplishments_section, d.cv_path
                 FROM ApplicantProfile p 
                 JOIN ApplicationDetail d ON p.applicant_id = d.applicant_id 
                 WHERE p.applicant_id = %s
@@ -44,32 +43,42 @@ def view_specific_cv(applicant_id=None):
                 LIMIT 1
             """)
         
-        result = cursor.fetchone()
-        if result:
-            first, last, role, summary, skills, experience, education, accomplishments, cv_path = result
-            
-            print(f"\nDetailed CV")
-            print(f"Name: {first} {last}")
-            print(f"Applied Position: {role}")
-            print(f"CV File: {cv_path}")
-            print("=" * 70)
-            
-            sections = [
-                ("SUMMARY", summary),
-                ("SKILLS", skills), 
-                ("EXPERIENCE", experience),
-                ("EDUCATION", education),
-                ("ACCOMPLISHMENTS", accomplishments)
-            ]
-            
-            for title, content in sections:
-                print(f"\n{title}:")
-                print("-" * 30)
-                if content and content.strip():
-                    print(content)
-                else:
-                    print("(No data extracted)")
-                print()
+        results = cursor.fetchall()
+        if results:
+            if len(results) > 1:
+                print(f"\nFound {len(results)} applications for this applicant:")
+                
+            for i, result in enumerate(results, 1):
+                first, last, role, summary, skills, experience, education, accomplishments, cv_path = result
+                
+                if len(results) > 1:
+                    print(f"\n--- Application {i} ---")
+                
+                print(f"\nDetailed CV")
+                print(f"Name: {first} {last}")
+                print(f"Applied Position: {role}")
+                print(f"CV File: {cv_path}")
+                print("=" * 70)
+                
+                sections = [
+                    ("SUMMARY", summary),
+                    ("SKILLS", skills), 
+                    ("EXPERIENCE", experience),
+                    ("EDUCATION", education),
+                    ("ACCOMPLISHMENTS", accomplishments)
+                ]
+                
+                for title, content in sections:
+                    print(f"\n{title}:")
+                    print("-" * 30)
+                    if content and content.strip():
+                        print(content)
+                    else:
+                        print("(No data extracted)")
+                    print()
+                
+                if len(results) > 1 and i < len(results):
+                    print("=" * 70)
         else:
             print("No data found!")
             
@@ -81,7 +90,6 @@ def view_specific_cv(applicant_id=None):
 
 def test_database():
     try:
-        # connect to database
         db = mysql.connector.connect(
             host=DB_HOST,
             user=DB_USER,
@@ -97,10 +105,35 @@ def test_database():
         cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
         detail_count = cursor.fetchone()[0]
         
-        print(f"Total Profiles: {profile_count}")
-        print(f"Total Applications: {detail_count}\n")
+        cursor.execute("SELECT COUNT(DISTINCT applicant_id) FROM ApplicationDetail")
+        unique_profiles_used = cursor.fetchone()[0]
         
-        print("Sample Profiles")
+        print(f"Total Profiles: {profile_count}")
+        print(f"Total Applications: {detail_count}")
+        print(f"Unique Profiles Used: {unique_profiles_used}")
+        print(f"One-to-Many Relationships: {detail_count - unique_profiles_used}")
+        print(f"Average Applications per Profile: {detail_count/unique_profiles_used:.2f}\n")
+        
+        print("Sample Profiles with Multiple Applications:")
+        cursor.execute("""
+            SELECT p.applicant_id, p.first_name, p.last_name, COUNT(d.detail_id) as app_count,
+                   GROUP_CONCAT(d.application_role SEPARATOR ', ') as roles
+            FROM ApplicantProfile p 
+            JOIN ApplicationDetail d ON p.applicant_id = d.applicant_id 
+            GROUP BY p.applicant_id, p.first_name, p.last_name
+            HAVING app_count > 1
+            ORDER BY app_count DESC
+            LIMIT 5
+        """)
+        
+        multiple_apps = cursor.fetchall()
+        if multiple_apps:
+            for id, first, last, count, roles in multiple_apps:
+                print(f"  [{id}] {first} {last} - {count} applications ({roles})")
+        else:
+            print("  No profiles with multiple applications found")
+        
+        print(f"\nSample Profiles:")
         cursor.execute("""
             SELECT p.applicant_id, p.first_name, p.last_name, p.phone_number, d.application_role, d.cv_path
             FROM ApplicantProfile p 
@@ -113,7 +146,7 @@ def test_database():
             filename = cv_path.split('/')[-1] if '/' in cv_path else cv_path.split('\\')[-1]
             print(f"  [{id}] {first} {last} | {phone} | {role} | {filename}")
         
-        print(f"\nRoles Distribution")
+        print(f"\nRoles Distribution:")
         cursor.execute("""
             SELECT application_role, COUNT(*) as count 
             FROM ApplicationDetail 
@@ -124,7 +157,7 @@ def test_database():
         for role, count in cursor.fetchall():
             print(f"  {role}: {count}")
         
-        print(f"\nSections Extraction Test")
+        print(f"\nSections Extraction Success Rate:")
         cursor.execute("""
             SELECT 
                 COUNT(CASE WHEN summary_section IS NOT NULL AND summary_section != '' THEN 1 END) as summary_count,
@@ -143,7 +176,7 @@ def test_database():
         print(f"  Education: {edu}/{total} ({edu/total*100:.1f}%)")
         print(f"  Accomplishments: {acc}/{total} ({acc/total*100:.1f}%)")
         
-        print(f"\nSample of Extracted Data")
+        print(f"\nSample Extracted Data:")
         cursor.execute("""
             SELECT p.first_name, p.last_name, d.application_role, 
                    d.skills_section, d.summary_section, d.experience_section, d.cv_path
@@ -178,7 +211,7 @@ def test_database():
         
         cursor.close()
         db.close()
-        print("Database test completed!")
+        print("Database test completed")
         
     except Exception as e:
         print(f"Error: {e}")

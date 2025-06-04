@@ -7,12 +7,6 @@ from PyPDF2 import PdfReader
 import mysql.connector
 from datetime import datetime
 
-# skills baru include highlights, skills yg di end of the file keignore
-# parsing for education n experience still needs to be fixed
-# error in callback if dia kolomnya ada yg empty (not avail in the pdf)
-# all in lower case feels informal
-# is there no alternative to manually inputting the sql password??
-
 # database configuration
 DB_HOST = "localhost"
 DB_USER = "root"
@@ -27,7 +21,6 @@ if not DB_PASSWORD:
         test_conn.close()
     except:
         DB_PASSWORD = input("Input MySQL Password: ")
-
 
 create_applicant_profile_table = """
 CREATE TABLE IF NOT EXISTS ApplicantProfile (
@@ -86,10 +79,9 @@ def generate_phone():
     return "08" + ''.join(faker.random_choices(elements='0123456789', length=10))
 
 def generate_fake_profile():
-    full_name = faker.name()
-    name_parts = full_name.split(' ', 1)
-    first_name = name_parts[0]
-    last_name = name_parts[1] if len(name_parts) > 1 else ""
+    # use simple Indonesian name generation
+    first_name = faker.first_name()
+    last_name = faker.last_name() 
     
     return {
         "first_name": first_name,
@@ -105,12 +97,10 @@ def extract_text_from_pdf(pdf_path):
         text = "\n".join([page.extract_text() or "" for page in reader.pages])
         return text.strip()
     except Exception as e:
-        print(f"[!] Gagal membaca {pdf_path}: {e}")
+        print(f"Failed to read {pdf_path}: {e}")
         return ""
 
-
 def extract_cv_sections(cv_text):
-    """Improved regex extraction with better patterns for real CV data"""
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
     # normalize text
@@ -131,7 +121,7 @@ def extract_cv_sections(cv_text):
             sections['summary'] = match.group(1).strip()[:1000]
             break
     
-    # skills and highlights
+    # skills and highlights - combine both sections
     skills_content = []
     
     highlights_patterns = [
@@ -146,9 +136,9 @@ def extract_cv_sections(cv_text):
             skills_content.append(match.group(1).strip())
             break
     
-    # get skill section thats on the end of the cv (BLM WORK??)
+    # get skills section at end of cv
     skills_patterns = [
-        r'skills\s+(.*?)(?=certifications|interests|additional information|$)',
+        r'(?:^|\s)skills\s+(.*?)(?=certifications|interests|additional information|$)',
         r'technical skills\s+(.*?)(?=certifications|interests|additional information|$)',
         r'professional skills\s+(.*?)(?=certifications|interests|additional information|$)'
     ]
@@ -162,12 +152,12 @@ def extract_cv_sections(cv_text):
     if skills_content:
         sections['skills'] = ' '.join(skills_content)[:1500]
     
-    # experience (still messed up...)
+    # experience
     experience_patterns = [
-        r'experience\s+(.*?)(?=education|certifications|interests|additional|skills)',
-        r'work experience\s+(.*?)(?=education|certifications|interests|additional|skills)',
-        r'employment history\s+(.*?)(?=education|certifications|interests|additional|skills)',
-        r'professional experience\s+(.*?)(?=education|certifications|interests|additional|skills)'
+        r'experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
+        r'work experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
+        r'employment history\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
+        r'professional experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))'
     ]
     
     for pattern in experience_patterns:
@@ -179,11 +169,11 @@ def extract_cv_sections(cv_text):
             sections['experience'] = exp_text[:2000]
             break
     
-    # education (still messed up part 2)
+    # education
     education_patterns = [
-        r'education\s+(.*?)(?=certifications|interests|additional|skills|$)',
-        r'academic background\s+(.*?)(?=certifications|interests|additional|skills|$)',
-        r'qualifications\s+(.*?)(?=certifications|interests|additional|skills|$)'
+        r'education\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
+        r'academic background\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
+        r'qualifications\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)'
     ]
     
     for pattern in education_patterns:
@@ -206,7 +196,7 @@ def extract_cv_sections(cv_text):
             sections['accomplishments'] = match.group(1).strip()[:1500]
             break
     
-    # Fallback: If no sections found, try line-by-line parsing
+    # fallback parsing
     if not any(sections.values()):
         sections = extract_cv_sections_fallback(cv_text)
     
@@ -249,7 +239,6 @@ def extract_cv_sections_fallback(cv_text):
         elif current_section:
             content.append(line)
             
-            # limit content length (should i not???)
             if len(' '.join(content)) > 1500:
                 break
     
@@ -272,7 +261,6 @@ def insert_applicant_profile(profile_data):
     return cursor.lastrowid
 
 def insert_application_detail(applicant_id, cv_path, cv_text, sections):
-    # Extract potential role from CV text or path
     role = extract_application_role(cv_text, cv_path)
     
     cursor.execute("""
@@ -315,7 +303,6 @@ def extract_application_role(cv_text, cv_path):
         if re.search(r'(\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9})|(@)|(\d{5})', line_clean):
             continue
             
-        # find role in pdf
         role_keywords = [
             'chef', 'cook', 'accountant', 'engineer', 'developer', 'manager', 'analyst',
             'designer', 'consultant', 'specialist', 'coordinator', 'assistant', 'director',
@@ -327,9 +314,8 @@ def extract_application_role(cv_text, cv_path):
         line_lower = line_clean.lower()
         for keyword in role_keywords:
             if keyword in line_lower:
-                return line_clean.title()[:100]  # should i not limit??
+                return line_clean.title()[:100]
     
-    # find role in pdf
     cv_lower = cv_text.lower()
     role_patterns = [
         r'(?:job title|position|role|objective):\s*([^\n]+)',
@@ -369,90 +355,116 @@ def process_folder(base_folder):
         return
     
     total_files = len(pdf_files)
+    print(f"Found {total_files} PDF files to process")
     
+    # CLEAR DATABASE FIRST - removed from here since it's in main now
+    # print("Clearing existing data...")
+    # cursor.execute("DELETE FROM ApplicationDetail")
+    # cursor.execute("DELETE FROM ApplicantProfile")
+    # db.commit()
+    # print("Database cleared")
+    
+    # create base profiles for one-to-many
     base_profiles = []
-    num_base_profiles = min(int(total_files * 0.3), 1000)  
+    num_base_profiles = 200  # Fixed number for testing
+    
+    print(f"Creating {num_base_profiles} base profiles")
     
     for i in range(num_base_profiles):
         profile_data = generate_fake_profile()
         applicant_id = insert_applicant_profile(profile_data)
         base_profiles.append({
             'id': applicant_id,
-            'data': profile_data,
             'application_count': 0
         })
+        
+        if (i + 1) % 50 == 0:
+            print(f"Created {i + 1} profiles...")
     
     db.commit()
     
-    # process pdfs
+    # verify profile count
+    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
+    profile_count_after_creation = cursor.fetchone()[0]
+    print(f"Verified: {profile_count_after_creation} profiles in database")
+    
+    if profile_count_after_creation != num_base_profiles:
+        print(f"ERROR: Expected {num_base_profiles} but found {profile_count_after_creation}")
+        return
+    
+    # process pdfs - NEVER create new profiles
     processed = 0
     failed = 0
-    one_to_many_count = 0
+    
+    print("Starting PDF processing...")
     
     for i, path in enumerate(pdf_files):
         try:
-            print(f"[{i+1}/{total_files}] 📄 {os.path.basename(path)}", end=" ... ")
+            if i % 100 == 0:
+                print(f"Processing file {i+1}/{total_files}")
             
             cv_text = extract_text_from_pdf(path)
             if not cv_text or len(cv_text) < 50:
-                print("File empty or content is too short")
                 failed += 1
                 continue
+                
             sections = extract_cv_sections(cv_text)
             
-            # reuse profile for one-to-many relationships
-            reuse_chance = 0.30
-            
-            if base_profiles and faker.random.random() < reuse_chance:
-                available_profiles = [p for p in base_profiles if p['application_count'] < 4]
-                if available_profiles:
-                    selected_profile = faker.random.choice(available_profiles)
-                    applicant_id = selected_profile['id']
-                    selected_profile['application_count'] += 1
-                    one_to_many_count += 1
-                    # print("🔗", end="") # Reused profile indicator
-                else:
-                    profile_data = generate_fake_profile()
-                    applicant_id = insert_applicant_profile(profile_data)
-                    # print("👤", end="")  # New profile indicator
-            else:
-                profile_data = generate_fake_profile()
-                applicant_id = insert_applicant_profile(profile_data)
-                # print("👤", end="")  # New profile indicator
+            # ONLY use existing profiles
+            selected_profile = min(base_profiles, key=lambda p: p['application_count'])
+            applicant_id = selected_profile['id']
+            selected_profile['application_count'] += 1
             
             insert_application_detail(applicant_id, path, cv_text, sections)
             processed += 1
             
-            # batch processing 
-            if processed % 20 == 0:
+            # check if profiles are being created somehow
+            if processed % 100 == 0:
+                cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
+                current_profile_count = cursor.fetchone()[0]
+                if current_profile_count != num_base_profiles:
+                    print(f"ALERT: Profile count changed to {current_profile_count}!")
+                    break
                 db.commit()
-                print(f"Progress: {processed}/{total_files}")
             
         except Exception as e:
-            print(f"{str(e)[:30]}")
+            print(f"Error processing {path}: {e}")
             failed += 1
             continue
     
     db.commit()
     
+    # final statistics
     cursor.execute("SELECT COUNT(DISTINCT applicant_id) FROM ApplicationDetail")
     unique_profiles = cursor.fetchone()[0]
     
     cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
     total_applications = cursor.fetchone()[0]
     
-    print(f"\nProcessing completed!")
+    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
+    total_profiles_in_table = cursor.fetchone()[0]
+    
+    print(f"\nProcessing completed")
     print(f"Successfully processed: {processed}")
     print(f"Failed: {failed}")
-    print(f"Total profiles: {unique_profiles}")
+    print(f"Profiles in ApplicantProfile table: {total_profiles_in_table}")
+    print(f"Unique profiles used in applications: {unique_profiles}")
     print(f"Total applications: {total_applications}")
+    
+    if total_profiles_in_table != num_base_profiles:
+        print(f"ERROR: Something created extra profiles! Expected {num_base_profiles}")
+    
+    if unique_profiles != num_base_profiles:
+        print(f"ERROR: Not all profiles were used! Expected {num_base_profiles}")
+    
+    print(f"Average applications per profile: {total_applications/unique_profiles:.2f}")
 
 def export_data_to_sql(filename):
     try:
-        cursor.execute("SELECT * FROM ApplicantProfile")
+        cursor.execute("SELECT * FROM ApplicantProfile ORDER BY applicant_id")
         profiles = cursor.fetchall()
         
-        cursor.execute("SELECT * FROM ApplicationDetail")
+        cursor.execute("SELECT * FROM ApplicationDetail ORDER BY detail_id")
         details = cursor.fetchall()
         
         def escape_sql(val):
@@ -470,35 +482,43 @@ def export_data_to_sql(filename):
             f.write(create_application_detail_table.strip() + ";\n\n")
             
             f.write("-- Insert ApplicantProfile data\n")
-            for profile in profiles:
-                applicant_id, first_name, last_name, dob, address, phone = profile
+            for i, profile in enumerate(profiles, 1):  # start from 1
+                original_id, first_name, last_name, dob, address, phone = profile
                 dob_val = escape_sql(dob.isoformat() if dob else None)
                 
+                # use sequential IDs starting from 1
                 insert_stmt = (
                     "INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number) VALUES ("
-                    f"{applicant_id}, {escape_sql(first_name)}, {escape_sql(last_name)}, {dob_val}, "
+                    f"{i}, {escape_sql(first_name)}, {escape_sql(last_name)}, {dob_val}, "
                     f"{escape_sql(address)}, {escape_sql(phone)});\n"
                 )
                 f.write(insert_stmt)
             
             f.write("\n-- Insert ApplicationDetail data\n")
-            for detail in details:
-                detail_id, applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments = detail
+            
+            # create mapping from old IDs to new IDs to maintain relationships
+            id_mapping = {}
+            for i, profile in enumerate(profiles, 1):
+                original_id = profile[0]
+                id_mapping[original_id] = i
+            
+            for i, detail in enumerate(details, 1):  # start from 1
+                detail_id, original_applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments = detail
+                new_applicant_id = id_mapping[original_applicant_id]  # maintain one-to-many relationships
                 
                 insert_stmt = (
                     "INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, "
                     "summary_section, skills_section, experience_section, education_section, accomplishments_section) VALUES ("
-                    f"{detail_id}, {applicant_id}, {escape_sql(role)}, {escape_sql(cv_path)}, {escape_sql(cv_raw_text)}, "
+                    f"{i}, {new_applicant_id}, {escape_sql(role)}, {escape_sql(cv_path)}, {escape_sql(cv_raw_text)}, "
                     f"{escape_sql(summary)}, {escape_sql(skills)}, {escape_sql(experience)}, "
                     f"{escape_sql(education)}, {escape_sql(accomplishments)});\n"
                 )
                 f.write(insert_stmt)
         
-        print(f"Data exported sucessfully to: {filename}")
+        print(f"Data exported successfully to: {filename}")
         
     except Exception as e:
         print(f"Error while exporting data: {e}")
-
 
 def test_extraction(pdf_path):
     print(f"Testing extraction on: {pdf_path}")
@@ -514,24 +534,22 @@ def test_extraction(pdf_path):
         else:
             print("(Not found)")
 
-
 if __name__ == "__main__":
     print("=== CV ATS Extraction App ===\n")
+    
+    # CLEAR DATABASE FIRST
+    print("Clearing existing data...")
+    cursor.execute("DELETE FROM ApplicationDetail")
+    cursor.execute("DELETE FROM ApplicantProfile")
+    cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
+    cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
+    db.commit()
+    print("Database cleared and AUTO_INCREMENT reset")
     
     # test_extraction("../../data/CHEF/10276858.pdf")
     
     process_folder("../../data")
     export_data_to_sql("../../data/ats.sql")
-    
-    # cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-    # profile_count = cursor.fetchone()[0]
-    
-    # cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
-    # detail_count = cursor.fetchone()[0]
-    
-    # print(f"\n=== STATISTICS ===")
-    # print(f"Total Profiles: {profile_count}")
-    # print(f"Total Applications: {detail_count}")
     
     cursor.close()
     db.close()
