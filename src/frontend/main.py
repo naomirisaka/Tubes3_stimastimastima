@@ -1,6 +1,6 @@
 # main flet app
 import flet as ft
-from views import home_view
+from frontend.views import home_view
 
 def main(page: ft.Page):
     page.title = "ATS CV Finder"

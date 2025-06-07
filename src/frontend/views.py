@@ -1,22 +1,17 @@
 import flet as ft
+from frontend.controller import search_top_matches, get_applicant_summary_from_path
 
 def home_view(page: ft.Page):
-    page.padding = ft.padding.only(left=0, right=0, top=0, bottom=30)
-
-    page.title = "🎯 ATS CV Matcher"
-    page.theme_mode = ft.ThemeMode.LIGHT
-    page.vertical_alignment = ft.MainAxisAlignment.START
-    page.padding = 30
+    page.padding = ft.padding.only(left=0, right=0, top=0, bottom=20)
     page.scroll = ft.ScrollMode.AUTO
 
-    # Fungsi untuk snackbar
-    def show_snack(e):
-        page.snack_bar = ft.SnackBar(content=ft.Text("Mencari..."))
-        page.update()
+    result_column = ft.Column()
 
-    # State CV count (slider + textfield sync)
+    # Ref untuk kontrol interaktif
     cv_count = ft.Ref[ft.Slider]()
     cv_input = ft.Ref[ft.TextField]()
+    keyword_input = ft.Ref[ft.TextField]()
+    algorithm_selector = ft.Ref[ft.Dropdown]()
 
     def update_cv_input(e):
         cv_input.current.value = str(int(e.control.value))
@@ -31,7 +26,81 @@ def home_view(page: ft.Page):
         except:
             pass
 
-    # Navbar
+    last_search_results = []
+
+    def render_search_results():
+        result_column.controls.clear()
+        for m in last_search_results:
+            result_column.controls.append(
+                ft.Card(
+                    content=ft.Column([
+                        ft.Text(f"Match: {m['match']}"),
+                        ft.Text(f"Keywords: {m['keywords']}"),
+                        ft.TextButton("📄 Summary", on_click=lambda e, p=m['cv_path']: show_summary(p)),
+                    ])
+                )
+            )
+        page.update()
+
+    def on_search(e):
+        keywords = (keyword_input.current.value or "").strip()
+        algo = (algorithm_selector.current.value or "").strip()
+        top_n = int(cv_count.current.value or 10)
+
+        nonlocal last_search_results
+        last_search_results = search_top_matches(keywords, algo, top_n)
+        render_search_results() 
+
+
+        # matches = search_top_matches(keywords, algo, top_n)
+
+        # result_column.controls.clear()
+        # for m in matches:
+        #     result_column.controls.append(
+        #         ft.Card(
+        #             content=ft.Column([
+        #                 ft.Text(f"Match: {m['match']}"),
+        #                 ft.Text(f"Keywords: {m['keywords']}"),
+        #                 ft.TextButton("📄 Summary", on_click=lambda e, p=m['cv_path']: show_summary(p)),
+        #             ])
+        #         )
+        #     )
+        # page.update()
+
+    def show_summary(cv_path):
+        summary = get_applicant_summary_from_path(cv_path)
+        if not summary:
+            page.snack_bar = ft.SnackBar(ft.Text("Summary not found"))
+            page.update()
+            return
+
+        result_column.controls.clear()
+        result_column.controls.append(
+            ft.Card(
+                content=ft.Column([
+                    ft.Text(f"👤 {summary['first_name']} {summary['last_name']}"),
+                    ft.Text(f"📞 {summary['phone']}"),
+                    ft.Text(f"🏠 {summary['address']}"),
+                    ft.Text(f"📝 Summary: \n{summary['summary']}"),
+                    ft.Text(f"🧠 Skills: \n{summary['skills']}"),
+                    ft.Text(f"💼 Experience: \n{summary['experience']}"),
+                    ft.Text(f"🎓 Education: \n{summary['education']}"),
+                    ft.Text(f"🏆 Accomplishments: \n{summary['accomplishments']}"),
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.END,
+                        controls=[
+                            ft.ElevatedButton("⬅ Back", on_click=go_back_to_home)
+                        ]
+                    )
+                ], spacing=10)
+            )
+        )
+        page.update()
+
+    def go_back_to_home(e):
+        render_search_results()
+
+    # UI components
     navbar = ft.Container(
         bgcolor="#A6DAFF",
         padding=20,
@@ -42,11 +111,10 @@ def home_view(page: ft.Page):
                 ft.Text("by stimastimastima", italic=True)
             ]
         ),
-        expand=True, 
-        border_radius=ft.BorderRadius(top_left=0, top_right=0, bottom_left=10, bottom_right=10)
+        expand=True,
+        # border_radius=ft.BorderRadius(top_left=0, top_right=0, bottom_left=10, bottom_right=10)
     )
 
-    # Welcome text
     welcome_text = ft.Text(
         "Welcome to the Smartest CV Finder in the Galaxy 🚀",
         size=20,
@@ -54,21 +122,18 @@ def home_view(page: ft.Page):
         text_align=ft.TextAlign.CENTER
     )
 
-    # Keyword input
-    keyword_input = ft.Container(
-        content=ft.TextField(
-            width=400,
-            label="Masukkan Keyword",
-            hint_text="Contoh: Python, SQL",
-            border_radius=20,
-            bgcolor="#F1C6E7",
-            filled=True
-        ),
-        alignment=ft.alignment.center
+    keyword_input_field = ft.TextField(
+        ref=keyword_input,
+        width=400,
+        label="Masukkan Keyword",
+        hint_text="Contoh: Python, SQL",
+        border_radius=20,
+        bgcolor="#F1C6E7",
+        filled=True
     )
 
-    # Dropdown + slider
-    algorithm_selector = ft.Dropdown(
+    algorithm_selector_dropdown = ft.Dropdown(
+        ref=algorithm_selector,
         label="Pilih Algoritma",
         options=[ft.dropdown.Option("KMP"), ft.dropdown.Option("BM")],
         bgcolor="#B7E5DD",
@@ -78,7 +143,6 @@ def home_view(page: ft.Page):
 
     slider_row = ft.Row(
         alignment=ft.MainAxisAlignment.CENTER,
-        # spacing=5,
         controls=[
             ft.Text("1"),
             ft.Slider(
@@ -103,27 +167,22 @@ def home_view(page: ft.Page):
 
     control_row = ft.Row(
         alignment=ft.MainAxisAlignment.CENTER,
-        controls=[algorithm_selector, slider_row]
+        controls=[algorithm_selector_dropdown, slider_row]
     )
 
-    # Search button
     search_button = ft.ElevatedButton(
         text="🔍 Search",
         style=ft.ButtonStyle(bgcolor="#FDCEDF", shape=ft.RoundedRectangleBorder(radius=20)),
-        on_click=show_snack
-    )
-
-    button_row = ft.Row(
-        alignment=ft.MainAxisAlignment.CENTER,
-        controls=[search_button]
+        on_click=on_search
     )
 
     layout = ft.Column([
         navbar,
         ft.Container(welcome_text, alignment=ft.alignment.center),
-        keyword_input,
+        ft.Container(keyword_input_field, alignment=ft.alignment.center),
         control_row,
-        button_row
+        ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
+        ft.Container(result_column, padding=20)
     ], spacing=25)
 
     page.add(layout)
