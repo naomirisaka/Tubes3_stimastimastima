@@ -4,6 +4,242 @@ import flet as ft
 from frontend.controller import get_controller, get_applicant_summary_from_detail_id
 import os
 import subprocess
+import platform
+import webbrowser
+
+# Simple PDF utilities (inline instead of separate module)
+def open_pdf_with_system_viewer(pdf_path: str) -> bool:
+    """Open PDF with system default viewer."""
+    if not pdf_path or not os.path.exists(pdf_path):
+        print(f"❌ PDF file not found: {pdf_path}")
+        return False
+    
+    try:
+        system = platform.system().lower()
+        
+        if system == "windows":
+            os.startfile(pdf_path)
+        elif system == "darwin":  # macOS
+            subprocess.run(['open', pdf_path], check=True)
+        elif system == "linux":
+            subprocess.run(['xdg-open', pdf_path], check=True)
+        else:
+            webbrowser.open(f'file://{os.path.abspath(pdf_path)}')
+        
+        print(f"✅ Opened PDF: {pdf_path}")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error opening PDF: {e}")
+        return False
+
+def open_pdf_in_browser(pdf_path: str) -> bool:
+    """Open PDF in web browser."""
+    try:
+        abs_path = os.path.abspath(pdf_path)
+        file_url = f'file:///{abs_path.replace(os.sep, "/")}'
+        webbrowser.open(file_url)
+        print(f"✅ Opened PDF in browser: {pdf_path}")
+        return True
+    except Exception as e:
+        print(f"❌ Error opening PDF in browser: {e}")
+        return False
+
+def validate_pdf_path(pdf_path: str) -> tuple:
+    """Validate PDF path and return status."""
+    if not pdf_path:
+        return False, "No PDF path provided"
+    
+    if not os.path.exists(pdf_path):
+        return False, f"File not found: {pdf_path}"
+    
+    if not pdf_path.lower().endswith('.pdf'):
+        return False, f"Not a PDF file: {pdf_path}"
+    
+    return True, "Valid PDF file"
+
+def get_pdf_info(pdf_path: str) -> dict:
+    """Get basic PDF file information."""
+    if not os.path.exists(pdf_path):
+        return {}
+    
+    try:
+        stat = os.stat(pdf_path)
+        return {
+            "filename": os.path.basename(pdf_path),
+            "size_mb": round(stat.st_size / (1024 * 1024), 2),
+            "exists": True
+        }
+    except Exception as e:
+        return {"error": str(e), "exists": False}
+
+def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
+    """Show PDF viewing options dialog."""
+    print(f"🔍 Showing PDF dialog for: {pdf_path}")
+    
+    # Validate PDF first
+    is_valid, message = validate_pdf_path(pdf_path)
+    
+    if not is_valid:
+        # Show error dialog
+        error_dialog = ft.AlertDialog(
+            title=ft.Text("❌ PDF Error"),
+            content=ft.Text(f"Cannot open PDF: {message}"),
+            actions=[
+                ft.TextButton("OK", on_click=lambda e: close_dialog(page))
+            ],
+            modal=True
+        )
+        page.dialog = error_dialog
+        error_dialog.open = True
+        page.update()
+        return
+    
+    # Get PDF info
+    pdf_info = get_pdf_info(pdf_path)
+    
+    def open_system_and_close(e):
+        """Open with system viewer and close dialog."""
+        success = open_pdf_with_system_viewer(pdf_path)
+        page.snack_bar = ft.SnackBar(
+            ft.Text("PDF opened successfully" if success else "Failed to open PDF"),
+            bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
+        )
+        page.snack_bar.open = True
+        close_dialog(page)
+    
+    def open_browser_and_close(e):
+        """Open in browser and close dialog."""
+        success = open_pdf_in_browser(pdf_path)
+        page.snack_bar = ft.SnackBar(
+            ft.Text("PDF opened in browser" if success else "Failed to open in browser"),
+            bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
+        )
+        page.snack_bar.open = True
+        close_dialog(page)
+    
+    def copy_path_and_close(e):
+        """Copy path to clipboard and close dialog."""
+        try:
+            page.set_clipboard(pdf_path)
+            page.snack_bar = ft.SnackBar(
+                ft.Text("Path copied to clipboard"),
+                bgcolor=ft.Colors.BLUE_400
+            )
+            page.snack_bar.open = True
+        except:
+            page.snack_bar = ft.SnackBar(
+                ft.Text("Could not copy to clipboard"),
+                bgcolor=ft.Colors.RED_400
+            )
+            page.snack_bar.open = True
+        close_dialog(page)
+    
+    # Create dialog content
+    dialog_content = ft.Column([
+        # PDF Info
+        ft.Container(
+            content=ft.Column([
+                ft.Row([
+                    ft.Icon(ft.Icons.PICTURE_AS_PDF, color=ft.Colors.RED_600, size=24),
+                    ft.Text(pdf_info.get('filename', 'CV.pdf'), 
+                           weight=ft.FontWeight.W_500, size=16)
+                ], spacing=10),
+                ft.Text(f"💾 Size: {pdf_info.get('size_mb', 0)} MB", size=12),
+                ft.Text(f"📁 Location: {os.path.dirname(pdf_path)}", size=10, color=ft.Colors.GREY_600),
+            ], spacing=5),
+            padding=10,
+            bgcolor=ft.Colors.BLUE_50,
+            border_radius=8
+        ),
+        
+        ft.Divider(),
+        
+        ft.Text("Choose how to view the PDF:", weight=ft.FontWeight.W_500),
+        
+        # Viewing options
+        ft.Column([
+            ft.ElevatedButton(
+                content=ft.Row([
+                    ft.Icon(ft.Icons.OPEN_IN_NEW, size=20),
+                    ft.Text("Open with System PDF Viewer")
+                ], spacing=10),
+                style=ft.ButtonStyle(
+                    bgcolor=ft.Colors.GREEN_100,
+                    color=ft.Colors.GREEN_800,
+                    padding=ft.padding.symmetric(horizontal=20, vertical=10)
+                ),
+                on_click=open_system_and_close,
+                width=300
+            ),
+            
+            ft.ElevatedButton(
+                content=ft.Row([
+                    ft.Icon(ft.Icons.WEB, size=20),
+                    ft.Text("Open in Web Browser")
+                ], spacing=10),
+                style=ft.ButtonStyle(
+                    bgcolor=ft.Colors.BLUE_100,
+                    color=ft.Colors.BLUE_800,
+                    padding=ft.padding.symmetric(horizontal=20, vertical=10)
+                ),
+                on_click=open_browser_and_close,
+                width=300
+            ),
+            
+            ft.ElevatedButton(
+                content=ft.Row([
+                    ft.Icon(ft.Icons.COPY, size=20),
+                    ft.Text("Copy File Path")
+                ], spacing=10),
+                style=ft.ButtonStyle(
+                    bgcolor=ft.Colors.PURPLE_100,
+                    color=ft.Colors.PURPLE_800,
+                    padding=ft.padding.symmetric(horizontal=20, vertical=10)
+                ),
+                on_click=copy_path_and_close,
+                width=300
+            ),
+        ], spacing=10),
+        
+        ft.Divider(),
+        
+        # Path display
+        ft.Container(
+            content=ft.Column([
+                ft.Text("Full Path:", size=12, weight=ft.FontWeight.W_500),
+                ft.Text(pdf_path, size=10, color=ft.Colors.GREY_700)
+            ], spacing=2),
+            padding=8,
+            bgcolor=ft.Colors.GREY_50,
+            border_radius=4
+        )
+    ], spacing=10)
+    
+    # Create and show dialog
+    dialog = ft.AlertDialog(
+        title=ft.Text(f"📄 {applicant_name}'s CV" if applicant_name else "📄 CV Viewer"),
+        content=ft.Container(
+            content=dialog_content,
+            width=350,
+            height=400
+        ),
+        actions=[
+            ft.TextButton("Cancel", on_click=lambda e: close_dialog(page))
+        ],
+        modal=True
+    )
+    
+    page.dialog = dialog
+    dialog.open = True
+    page.update()
+    print(f"✅ PDF dialog shown for: {applicant_name}")
+
+def close_dialog(page: ft.Page):
+    """Close any open dialog."""
+    if page.dialog:
+        page.dialog.open = False
+        page.update()
 
 def home_view(page: ft.Page):
     page.padding = ft.padding.only(left=0, right=0, top=0, bottom=20)
@@ -37,7 +273,41 @@ def home_view(page: ft.Page):
     last_search_results = []
     last_search_metadata = {}
 
+    def open_cv_dialog(cv_path: str, applicant_name: str = ""):
+        """Open CV file with enhanced dialog."""
+        print(f"🔍 Opening CV dialog for: {applicant_name} - {cv_path}")
+        
+        if not cv_path:
+            page.snack_bar = ft.SnackBar(
+                ft.Text("No CV path available"), 
+                bgcolor=ft.Colors.RED_400
+            )
+            page.snack_bar.open = True
+            page.update()
+            return
+        
+        # Show the PDF dialog
+        show_pdf_dialog(page, cv_path, applicant_name)
+
+    def quick_open_cv(cv_path: str):
+        """Quick open CV with system viewer."""
+        if not cv_path:
+            page.snack_bar = ft.SnackBar(ft.Text("No CV path available"), bgcolor=ft.Colors.RED_400)
+            page.snack_bar.open = True
+            page.update()
+            return
+        
+        success = open_pdf_with_system_viewer(cv_path)
+        
+        page.snack_bar = ft.SnackBar(
+            ft.Text("PDF opened successfully" if success else "Failed to open PDF"),
+            bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
+        )
+        page.snack_bar.open = True
+        page.update()
+
     def render_search_results():
+        """Render search results."""
         result_column.controls.clear()
         
         # Show search metadata if available
@@ -70,9 +340,14 @@ def home_view(page: ft.Page):
                 if count > 0:
                     keyword_display.append(f"{keyword}: {count}")
             
-            keyword_text = " | ".join(keyword_display[:3])  # Show top 3 keywords
+            keyword_text = " | ".join(keyword_display[:3])
             if len(cv.get('keywords', {})) > 3:
                 keyword_text += "..."
+            
+            # Check if PDF exists
+            cv_path = cv.get('cv_path', '')
+            pdf_exists = bool(cv_path and os.path.exists(cv_path))
+            applicant_name = cv.get('applicant_name', 'Unknown')
             
             result_column.controls.append(
                 ft.Card(
@@ -80,8 +355,7 @@ def home_view(page: ft.Page):
                         content=ft.Column([
                             ft.Row([
                                 ft.Text(f"#{i}", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600),
-                                ft.Text(cv.get('applicant_name', 'Unknown'), 
-                                        size=16, weight=ft.FontWeight.W_500),
+                                ft.Text(applicant_name, size=16, weight=ft.FontWeight.W_500),
                                 ft.Container(
                                     content=ft.Text(f"Score: {cv.get('match', 0)}", 
                                                    color=ft.Colors.WHITE, size=12),
@@ -97,24 +371,39 @@ def home_view(page: ft.Page):
                             ft.Text(f"🎯 {keyword_text}", 
                                    size=12, color=ft.Colors.GREY_600),
                             
+                            # PDF Status
+                            ft.Row([
+                                ft.Icon(
+                                    ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
+                                    color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
+                                    size=16
+                                ),
+                                ft.Text(
+                                    "PDF Available" if pdf_exists else "PDF Not Found",
+                                    size=10,
+                                    color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED
+                                )
+                            ], spacing=5),
+                            
                             ft.Row([
                                 ft.ElevatedButton(
-                                    "📄 View Summary", 
+                                    "📄 Summary", 
                                     on_click=lambda e, detail_id=cv.get('detail_id'): show_summary(detail_id),
-                                    style=ft.ButtonStyle(
-                                        bgcolor=ft.Colors.BLUE_100,
-                                        color=ft.Colors.BLUE_800
-                                    )
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_100, color=ft.Colors.BLUE_800)
                                 ),
                                 ft.ElevatedButton(
-                                    "📁 Open CV", 
-                                    on_click=lambda e, cv_path=cv.get('cv_path'): open_cv_file(cv_path),
-                                    style=ft.ButtonStyle(
-                                        bgcolor=ft.Colors.GREEN_100,
-                                        color=ft.Colors.GREEN_800
-                                    )
-                                ) if cv.get('cv_path') else None
-                            ], spacing=10)
+                                    "📁 View CV", 
+                                    on_click=lambda e, path=cv_path, name=applicant_name: open_cv_dialog(path, name),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_100, color=ft.Colors.PURPLE_800),
+                                    disabled=not pdf_exists
+                                ),
+                                ft.ElevatedButton(
+                                    "🚀 Quick Open", 
+                                    on_click=lambda e, path=cv_path: quick_open_cv(path),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_100, color=ft.Colors.GREEN_800),
+                                    disabled=not pdf_exists
+                                )
+                            ], spacing=8)
                         ], spacing=8),
                         padding=15
                     ),
@@ -135,6 +424,7 @@ def home_view(page: ft.Page):
         page.update()
 
     def on_search(e):
+        """Handle search button click."""
         keywords = (keyword_input.current.value or "").strip()
         algo = (algorithm_selector.current.value or "").strip()
         top_n = int(cv_count.current.value or 10)
@@ -166,7 +456,6 @@ def home_view(page: ft.Page):
         page.update()
 
         try:
-            # Perform search using new backend
             search_result = controller.search_top_matches(keywords, algo, top_n)
             
             nonlocal last_search_results, last_search_metadata
@@ -192,6 +481,7 @@ def home_view(page: ft.Page):
             page.update()
 
     def show_summary(detail_id):
+        """Show detailed CV summary."""
         if not detail_id:
             page.snack_bar = ft.SnackBar(ft.Text("Invalid CV selection"), bgcolor=ft.Colors.RED_400)
             page.snack_bar.open = True
@@ -220,6 +510,10 @@ def home_view(page: ft.Page):
                 render_search_results()
                 return
 
+            cv_path = summary.get('cv_path', '')
+            pdf_exists = bool(cv_path and os.path.exists(cv_path))
+            applicant_name = f"{summary['first_name']} {summary['last_name']}"
+
             result_column.controls.clear()
             result_column.controls.append(
                 ft.Card(
@@ -229,8 +523,7 @@ def home_view(page: ft.Page):
                             ft.Container(
                                 content=ft.Row([
                                     ft.Icon(ft.Icons.PERSON, size=30, color=ft.Colors.BLUE_600),
-                                    ft.Text(f"{summary['first_name']} {summary['last_name']}", 
-                                           size=24, weight=ft.FontWeight.BOLD)
+                                    ft.Text(applicant_name, size=24, weight=ft.FontWeight.BOLD)
                                 ]),
                                 bgcolor=ft.Colors.BLUE_50,
                                 padding=15,
@@ -245,7 +538,26 @@ def home_view(page: ft.Page):
                             
                             ft.Text(f"🏠 {summary['address']}", size=14),
                             
-                            # Sections
+                            # PDF Status
+                            ft.Container(
+                                content=ft.Row([
+                                    ft.Icon(
+                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
+                                        color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
+                                        size=20
+                                    ),
+                                    ft.Text(
+                                        f"📄 {os.path.basename(cv_path) if pdf_exists else 'PDF Not Available'}",
+                                        weight=ft.FontWeight.W_500,
+                                        color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED
+                                    )
+                                ], spacing=10),
+                                padding=10,
+                                bgcolor=ft.Colors.GREEN_50 if pdf_exists else ft.Colors.RED_50,
+                                border_radius=8
+                            ),
+                            
+                            # Summary sections
                             create_summary_section("📝 Summary", summary['summary']),
                             create_summary_section("🧠 Skills", summary['skills']),
                             create_summary_section("💼 Experience", summary['experience']),
@@ -255,15 +567,22 @@ def home_view(page: ft.Page):
                             # Action buttons
                             ft.Row([
                                 ft.ElevatedButton(
-                                    "⬅ Back to Results", 
-                                    on_click=go_back_to_results,
+                                    "⬅ Back", 
+                                    on_click=lambda e: render_search_results(),
                                     style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_200)
                                 ),
                                 ft.ElevatedButton(
-                                    "📁 Open CV File", 
-                                    on_click=lambda e: open_cv_file(summary.get('cv_path')),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200)
-                                ) if summary.get('cv_path') else None
+                                    "📁 View CV", 
+                                    on_click=lambda e: open_cv_dialog(cv_path, applicant_name),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_200),
+                                    disabled=not pdf_exists
+                                ),
+                                ft.ElevatedButton(
+                                    "🚀 Quick Open", 
+                                    on_click=lambda e: quick_open_cv(cv_path),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200),
+                                    disabled=not pdf_exists
+                                )
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=10)
                         ], spacing=15),
                         padding=20
@@ -285,10 +604,10 @@ def home_view(page: ft.Page):
             page.update()
 
     def create_summary_section(title, content):
+        """Create a section for CV details."""
         if not content or content.strip() == "":
             content = "Not available"
         
-        # Truncate long content
         display_content = content[:300] + "..." if len(content) > 300 else content
         
         return ft.Container(
@@ -301,31 +620,6 @@ def home_view(page: ft.Page):
             border_radius=8,
             border=ft.border.all(1, ft.Colors.GREY_300)
         )
-
-    def go_back_to_results(e):
-        render_search_results()
-
-    def open_cv_file(cv_path):
-        if not cv_path or not os.path.exists(cv_path):
-            page.snack_bar = ft.SnackBar(ft.Text("CV file not found"), bgcolor=ft.Colors.RED_400)
-            page.snack_bar.open = True
-            page.update()
-            return
-        
-        try:
-            if os.name == 'nt':  # Windows
-                os.startfile(cv_path)
-            elif os.name == 'posix':  # macOS and Linux
-                subprocess.call(['open' if 'darwin' in os.uname().sysname.lower() else 'xdg-open', cv_path])
-            
-            page.snack_bar = ft.SnackBar(ft.Text("Opening CV file..."), bgcolor=ft.Colors.GREEN_400)
-            page.snack_bar.open = True
-            page.update()
-            
-        except Exception as e:
-            page.snack_bar = ft.SnackBar(ft.Text(f"Error opening file: {str(e)}"), bgcolor=ft.Colors.RED_400)
-            page.snack_bar.open = True
-            page.update()
 
     # UI Components
     navbar = ft.Container(
