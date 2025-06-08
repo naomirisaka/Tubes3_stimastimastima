@@ -1,5 +1,3 @@
-# src/backend/kmp.py
-
 from typing import List, Dict
 
 def compute_lps(pattern: str) -> List[int]:
