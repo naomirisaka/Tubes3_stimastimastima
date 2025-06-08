@@ -1,8 +1,6 @@
 # src/backend/kmp.py
 
 from typing import List, Dict
-import os
-import fitz
 
 def compute_lps(pattern: str) -> List[int]:
     lps = [0] * len(pattern)
@@ -51,26 +49,8 @@ def parse_keywords(input_str: str) -> List[str]:
     return [kw.strip() for kw in input_str.split(',') if kw.strip()]
 
 def read_file(filepath: str) -> str:
-    """
-    Cari file di semua folder /data, lalu ekstrak teks dari PDF
-    """
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    data_dir = os.path.join(base_dir, "data")
-    filename_only = os.path.basename(filepath)
-
-    for root, _, files in os.walk(data_dir):
-        if filename_only in files:
-            full_path = os.path.join(root, filename_only)
-            print("Resolved CV path:", full_path)
-
-            # Ekstrak isi PDF
-            with fitz.open(full_path) as doc:
-                text = ""
-                for page in doc:
-                    text += page.get_text()
-                return text
-
-    raise FileNotFoundError(f"CV file not found: {filename_only} in {data_dir}")
+    with open(filepath, 'r', encoding='utf-8') as f:
+        return f.read()
 
 def count_keyword_occurrences_in_file(filepath: str, keyword_string: str) -> Dict[str, int]:
     text = read_file(filepath).lower()
@@ -83,7 +63,7 @@ def count_keyword_occurrences_in_file(filepath: str, keyword_string: str) -> Dic
     return result
 
 if __name__ == "__main__":
-    path = "data/ats.sql"
+    path = "data/schema.sql"
     input_keywords = "React, Next.js, HTML"
 
     counts = count_keyword_occurrences_in_file(path, input_keywords)
