@@ -242,6 +242,9 @@ def close_dialog(page: ft.Page):
         page.update()
 
 def home_view(page: ft.Page):
+    results_per_page = 5
+    current_page = 0
+
     page.padding = ft.padding.only(left=0, right=0, top=0, bottom=20)
     page.scroll = ft.ScrollMode.AUTO
 
@@ -289,139 +292,54 @@ def home_view(page: ft.Page):
         # Show the PDF dialog
         show_pdf_dialog(page, cv_path, applicant_name)
 
-    def quick_open_cv(cv_path: str):
-        """Quick open CV with system viewer."""
-        if not cv_path:
-            page.snack_bar = ft.SnackBar(ft.Text("No CV path available"), bgcolor=ft.Colors.RED_400)
-            page.snack_bar.open = True
-            page.update()
+    # def quick_open_cv(cv_path: str):
+    #     """Quick open CV with system viewer."""
+    #     if not cv_path:
+    #         page.snack_bar = ft.SnackBar(ft.Text("No CV path available"), bgcolor=ft.Colors.RED_400)
+    #         page.snack_bar.open = True
+    #         page.update()
+    #         return
+        
+    #     success = open_pdf_with_system_viewer(cv_path)
+        
+    #     page.snack_bar = ft.SnackBar(
+    #         ft.Text("PDF opened successfully" if success else "Failed to open PDF"),
+    #         bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
+    #     )
+    #     page.snack_bar.open = True
+    #     page.update()
+
+    def render_search_metadata():
+        """Render search metadata/info (algorithm, time, etc)."""
+        if not last_search_metadata:
             return
         
-        success = open_pdf_with_system_viewer(cv_path)
-        
-        page.snack_bar = ft.SnackBar(
-            ft.Text("PDF opened successfully" if success else "Failed to open PDF"),
-            bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
-        )
-        page.snack_bar.open = True
-        page.update()
+        meta = last_search_metadata
+        stats_info = f"🔍 Algorithm: {meta.get('algorithm_used', 'N/A').upper()} | "
+        stats_info += f"⏱️ Time: {meta.get('exact_time_ms', 0):.1f}ms | "
+        stats_info += f"📄 Scanned: {meta.get('cvs_scanned', 0)} CVs | "
+        stats_info += f"🎯 Exact matches: {meta.get('total_exact_matches', 0)}"
 
-    def render_search_results():
-        """Render search results."""
-        result_column.controls.clear()
-        
-        # Show search metadata if available
-        if last_search_metadata:
-            meta = last_search_metadata
-            stats_info = f"🔍 Algorithm: {meta.get('algorithm_used', 'N/A').upper()} | "
-            stats_info += f"⏱️ Time: {meta.get('exact_time_ms', 0):.1f}ms | "
-            stats_info += f"📄 Scanned: {meta.get('cvs_scanned', 0)} CVs | "
-            stats_info += f"🎯 Exact matches: {meta.get('total_exact_matches', 0)}"
-            
-            if meta.get('fuzzy_matches_found', 0) > 0:
-                stats_info += f" | 🔍 Fuzzy: {meta.get('fuzzy_matches_found', 0)} keywords"
-            
-            stats_text.value = stats_info
-            result_column.controls.append(
-                ft.Container(
-                    content=stats_text,
-                    padding=10,
-                    bgcolor=ft.Colors.BLUE_50,
-                    border_radius=10,
-                    margin=ft.margin.only(bottom=10)
-                )
+        if meta.get('fuzzy_matches_found', 0) > 0:
+            stats_info += f" | 🔍 Fuzzy: {meta.get('fuzzy_matches_found', 0)} keywords"
+
+        stats_text.value = stats_info
+        result_column.controls.append(
+            ft.Row(
+                alignment=ft.MainAxisAlignment.CENTER,
+                controls=[
+                    ft.Container(
+                        content=ft.Row([
+                            ft.Icon(size=18, color=ft.Colors.BLUE_600),
+                            stats_text
+                        ], spacing=5),
+                        padding=10,
+                        bgcolor=ft.Colors.BLUE_50,
+                        border_radius=20,
+                    )
+                ]
             )
-        
-        # Show CV results
-        for i, cv in enumerate(last_search_results, 1):
-            # Create keyword breakdown display
-            keyword_display = []
-            for keyword, count in cv.get('keywords', {}).items():
-                if count > 0:
-                    keyword_display.append(f"{keyword}: {count}")
-            
-            keyword_text = " | ".join(keyword_display[:3])
-            if len(cv.get('keywords', {})) > 3:
-                keyword_text += "..."
-            
-            # Check if PDF exists
-            cv_path = cv.get('cv_path', '')
-            pdf_exists = bool(cv_path and os.path.exists(cv_path))
-            applicant_name = cv.get('applicant_name', 'Unknown')
-            
-            result_column.controls.append(
-                ft.Card(
-                    content=ft.Container(
-                        content=ft.Column([
-                            ft.Row([
-                                ft.Text(f"#{i}", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600),
-                                ft.Text(applicant_name, size=16, weight=ft.FontWeight.W_500),
-                                ft.Container(
-                                    content=ft.Text(f"Score: {cv.get('match', 0)}", 
-                                                   color=ft.Colors.WHITE, size=12),
-                                    bgcolor=ft.Colors.GREEN_600,
-                                    padding=ft.padding.symmetric(horizontal=8, vertical=2),
-                                    border_radius=10
-                                )
-                            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                            
-                            ft.Text(f"🏢 {cv.get('application_role', 'Not specified')}", 
-                                   size=14, color=ft.Colors.GREY_700),
-                            
-                            ft.Text(f"🎯 {keyword_text}", 
-                                   size=12, color=ft.Colors.GREY_600),
-                            
-                            # PDF Status
-                            ft.Row([
-                                ft.Icon(
-                                    ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
-                                    color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
-                                    size=16
-                                ),
-                                ft.Text(
-                                    "PDF Available" if pdf_exists else "PDF Not Found",
-                                    size=10,
-                                    color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED
-                                )
-                            ], spacing=5),
-                            
-                            ft.Row([
-                                ft.ElevatedButton(
-                                    "📄 Summary", 
-                                    on_click=lambda e, detail_id=cv.get('detail_id'): show_summary(detail_id),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_100, color=ft.Colors.BLUE_800)
-                                ),
-                                ft.ElevatedButton(
-                                    "📁 View CV", 
-                                    on_click=lambda e, path=cv_path, name=applicant_name: open_cv_dialog(path, name),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_100, color=ft.Colors.PURPLE_800),
-                                    disabled=not pdf_exists
-                                ),
-                                ft.ElevatedButton(
-                                    "🚀 Quick Open", 
-                                    on_click=lambda e, path=cv_path: quick_open_cv(path),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_100, color=ft.Colors.GREEN_800),
-                                    disabled=not pdf_exists
-                                )
-                            ], spacing=8)
-                        ], spacing=8),
-                        padding=15
-                    ),
-                    elevation=2
-                )
-            )
-        
-        if not last_search_results:
-            result_column.controls.append(
-                ft.Container(
-                    content=ft.Text("No results found. Try different keywords or algorithms.", 
-                                   text_align=ft.TextAlign.CENTER),
-                    padding=20,
-                    alignment=ft.alignment.center
-                )
-            )
-        
-        page.update()
+        )
 
     def on_search(e):
         """Handle search button click."""
@@ -467,7 +385,8 @@ def home_view(page: ft.Page):
                 last_search_results = search_result if search_result else []
                 last_search_metadata = {}
             
-            render_search_results()
+            current_page = 0
+            render_paginated_results()
             
         except Exception as e:
             result_column.controls.clear()
@@ -507,7 +426,7 @@ def home_view(page: ft.Page):
             if not summary:
                 page.snack_bar = ft.SnackBar(ft.Text("Summary not found"), bgcolor=ft.Colors.RED_400)
                 page.snack_bar.open = True
-                render_search_results()
+                render_paginated_results()
                 return
 
             cv_path = summary.get('cv_path', '')
@@ -567,22 +486,22 @@ def home_view(page: ft.Page):
                             # Action buttons
                             ft.Row([
                                 ft.ElevatedButton(
-                                    "⬅ Back", 
-                                    on_click=lambda e: render_search_results(),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_200)
-                                ),
-                                ft.ElevatedButton(
                                     "📁 View CV", 
                                     on_click=lambda e: open_cv_dialog(cv_path, applicant_name),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_200),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_100),
                                     disabled=not pdf_exists
                                 ),
                                 ft.ElevatedButton(
-                                    "🚀 Quick Open", 
-                                    on_click=lambda e: quick_open_cv(cv_path),
-                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200),
-                                    disabled=not pdf_exists
+                                    "⬅ Back", 
+                                    on_click=lambda e: render_paginated_results(),
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200)
                                 )
+                                # ft.ElevatedButton(
+                                #     "🚀 Quick Open", 
+                                #     on_click=lambda e: quick_open_cv(cv_path),
+                                #     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200),
+                                #     disabled=not pdf_exists
+                                # )
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=10)
                         ], spacing=15),
                         padding=20
@@ -620,6 +539,159 @@ def home_view(page: ft.Page):
             border_radius=8,
             border=ft.border.all(1, ft.Colors.GREY_300)
         )
+    page_info_label = ft.Text("", size=12, color=ft.Colors.GREY_600)
+
+    def go_to_page(target_page):
+        nonlocal current_page
+        current_page = target_page
+        render_paginated_results()
+
+    def render_paginated_results():
+        result_column.controls.clear()
+
+        render_search_metadata()
+
+        if not last_search_results:
+            result_column.controls.append(
+                ft.Container(
+                    content=ft.Text("No results found. Try different keywords or algorithms.",
+                                    text_align=ft.TextAlign.CENTER),
+                    padding=20,
+                    alignment=ft.alignment.center
+                )
+            )
+            page.update()
+            return
+
+        # Hitung total halaman
+        total_results = len(last_search_results)
+        total_pages = (total_results + results_per_page - 1) // results_per_page
+
+        # Clamp halaman saat ini
+        nonlocal current_page
+        if current_page >= total_pages:
+            current_page = total_pages - 1
+        if current_page < 0:
+            current_page = 0
+
+        # Ambil hasil sesuai halaman
+        start_idx = current_page * results_per_page
+        end_idx = min(start_idx + results_per_page, total_results)
+        paginated_results = last_search_results[start_idx:end_idx]
+
+        # Tambahkan header statistik kalau ada
+        # if last_search_metadata:
+        #     result_column.controls.append(
+        #         ft.Container(
+        #             content=stats_text,
+        #             padding=10,
+        #             bgcolor=ft.Colors.BLUE_50,
+        #             border_radius=10,
+        #             margin=ft.margin.only(bottom=10)
+        #         )
+        #     )
+
+        # Tampilkan hasil
+        if not paginated_results:
+            result_column.controls.append(
+                ft.Text("No results found.")
+            )
+        else:
+            for i, cv in enumerate(paginated_results, start=start_idx + 1):
+                keyword_display = []
+                for keyword, count in cv.get('keywords', {}).items():
+                    if count > 0:
+                        keyword_display.append(f"{keyword}: {count}")
+                
+                keyword_text = " | ".join(keyword_display[:3])
+                if len(cv.get('keywords', {})) > 3:
+                    keyword_text += "..."
+                
+                # Check if PDF exists
+                cv_path = cv.get('cv_path', '')
+                pdf_exists = bool(cv_path and os.path.exists(cv_path))
+                applicant_name = cv.get('applicant_name', 'Unknown')
+                
+                result_column.controls.append(
+                    ft.Card(
+                        content=ft.Container(
+                            content=ft.Column([
+                                ft.Row([
+                                    ft.Text(f"#{i}", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600),
+                                    ft.Text(applicant_name, size=16, weight=ft.FontWeight.W_500),
+                                    ft.Container(
+                                        content=ft.Text(f"Score: {cv.get('match', 0)}", 
+                                                    color=ft.Colors.WHITE, size=12),
+                                        bgcolor=ft.Colors.GREEN_600,
+                                        padding=ft.padding.symmetric(horizontal=8, vertical=2),
+                                        border_radius=10
+                                    )
+                                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                                
+                                ft.Text(f"🏢 {cv.get('application_role', 'Not specified')}", 
+                                    size=14, color=ft.Colors.GREY_700),
+                                
+                                ft.Text(f"🎯 {keyword_text}", 
+                                    size=12, color=ft.Colors.GREY_600),
+                                
+                                # PDF Status
+                                ft.Row([
+                                    ft.Icon(
+                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
+                                        color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
+                                        size=16
+                                    ),
+                                    ft.Text(
+                                        "PDF Available" if pdf_exists else "PDF Not Found",
+                                        size=10,
+                                        color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED
+                                    )
+                                ], spacing=5),
+                                
+                                ft.Row([
+                                    ft.ElevatedButton(
+                                        "📄 Summary", 
+                                        on_click=lambda e, detail_id=cv.get('detail_id'): show_summary(detail_id),
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_100, color=ft.Colors.BLUE_800)
+                                    ),
+                                    ft.ElevatedButton(
+                                        "📁 View CV", 
+                                        on_click=lambda e, path=cv_path, name=applicant_name: open_cv_dialog(path, name),
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_100, color=ft.Colors.PURPLE_800),
+                                        disabled=not pdf_exists
+                                    )
+                                    # ft.ElevatedButton(
+                                    #     "🚀 Quick Open", 
+                                    #     on_click=lambda e, path=cv_path: quick_open_cv(path),
+                                    #     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_100, color=ft.Colors.GREEN_800),
+                                    #     disabled=not pdf_exists
+                                    # )
+                                ], spacing=8)
+                            ], spacing=8),
+                            padding=15
+                        ),
+                        elevation=2
+                    )
+                )
+
+        # ⬇ Pagination Controls
+        total_pages = max(1, (len(last_search_results) + results_per_page - 1) // results_per_page)
+
+        page_info_label.value = f"Page {current_page + 1} / {total_pages}"
+
+        pagination_row = ft.Row(
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            controls=[
+                page_info_label,
+                ft.Row([
+                    ft.ElevatedButton("Prev", on_click=lambda e: go_to_page(current_page - 1), disabled=current_page == 0),
+                    ft.ElevatedButton("Next", on_click=lambda e: go_to_page(current_page + 1), disabled=current_page >= total_pages - 1)
+                ])
+            ]
+        )
+        result_column.controls.append(pagination_row)
+
+        page.update()
 
     # UI Components
     navbar = ft.Container(
@@ -721,8 +793,26 @@ def home_view(page: ft.Page):
         ft.Container(keyword_input_field, alignment=ft.alignment.center),
         control_row,
         ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
-        ft.Container(stats_text, alignment=ft.alignment.center, padding=ft.padding.only(top=10)),
+        # ft.Container(stats_text, alignment=ft.alignment.center, padding=ft.padding.only(top=10)),
         ft.Container(result_column, padding=20)
     ], spacing=25)
+
+    # Tampilkan info database sebagai tampilan awal
+    result_column.controls.append(
+        ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.Container(
+                    content=ft.Row([
+                        ft.Icon(size=18, color=ft.Colors.GREY_800),
+                        stats_text
+                    ], spacing=5),
+                    padding=10,
+                    bgcolor=ft.Colors.GREY_100,
+                    border_radius=20,
+                )
+            ]
+        )
+    )
 
     page.add(layout)
