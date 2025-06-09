@@ -1,26 +1,37 @@
 import os
 import glob
 import re
-import json
 from faker import Faker
 from PyPDF2 import PdfReader
 import mysql.connector
-from datetime import datetime
+import getpass 
+import random
 
-# database configuration
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_NAME = "ats_db"
 
-import os
 DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')  
 
 if not DB_PASSWORD:
     try:
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
-    except:
-        DB_PASSWORD = input("Input MySQL Password: ")
+        DB_PASSWORD = "" 
+    except mysql.connector.Error:
+        DB_PASSWORD = getpass.getpass("Enter MySQL Password: ")
+
+        try:
+            test_conn = mysql.connector.connect(
+                host=DB_HOST, 
+                user=DB_USER, 
+                password=DB_PASSWORD
+            )
+            test_conn.close()
+            print("Password verified successfully")
+        except mysql.connector.Error as e:
+            print("Password verification failed")
+            exit(1) 
 
 create_applicant_profile_table = """
 CREATE TABLE IF NOT EXISTS ApplicantProfile (
@@ -138,9 +149,9 @@ def extract_cv_sections(cv_text):
     
     # get skills section at end of cv
     skills_patterns = [
-        r'(?:^|\s)skills\s+(.*?)(?=certifications|interests|additional information|$)',
-        r'technical skills\s+(.*?)(?=certifications|interests|additional information|$)',
-        r'professional skills\s+(.*?)(?=certifications|interests|additional information|$)'
+        r'(?:^|\s)skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)',
+        r'technical skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)',
+        r'professional skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)'
     ]
     
     for pattern in skills_patterns:
@@ -154,10 +165,10 @@ def extract_cv_sections(cv_text):
     
     # experience
     experience_patterns = [
-        r'experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'work experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'employment history\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'professional experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))'
+        r'experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
+        r'work experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
+        r'employment history\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
+        r'professional experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)'
     ]
     
     for pattern in experience_patterns:
@@ -171,9 +182,9 @@ def extract_cv_sections(cv_text):
     
     # education
     education_patterns = [
-        r'education\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
-        r'academic background\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
-        r'qualifications\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)'
+        r'education\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)',
+        r'academic background\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)',
+        r'qualifications\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)'
     ]
     
     for pattern in education_patterns:
@@ -185,11 +196,19 @@ def extract_cv_sections(cv_text):
     
     # accomplishments
     accomplishments_patterns = [
-        r'accomplishments\s+(.*?)(?=experience|education|certifications|interests|additional|skills)',
-        r'achievements\s+(.*?)(?=experience|education|certifications|interests|additional|skills)',
-        r'key achievements\s+(.*?)(?=experience|education|certifications|interests|additional|skills)'
+        r'accomplishments\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'achievements\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'key achievements\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'certificates\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'professional certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'licenses and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'awards and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'qualifications and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'licenses\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'awards\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
+        r'honors\s+(.*?)(?=highlights|experience|education|interests|additional|skills)'
     ]
-    
     for pattern in accomplishments_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
@@ -214,7 +233,9 @@ def extract_cv_sections_fallback(cv_text):
         'skills': ['highlights', 'skills', 'technical skills', 'competencies', 'core competencies'],
         'experience': ['experience', 'work experience', 'employment', 'professional experience'],
         'education': ['education', 'academic', 'qualifications'],
-        'accomplishments': ['accomplishments', 'achievements', 'certifications', 'awards']
+        'accomplishments': ['accomplishments', 'achievements', 'certifications', 'certificates', 
+        'awards', 'professional certifications', 'licenses', 'honors',
+        'licenses and certifications', 'awards and certifications']
     }
     
     for line in lines:
@@ -366,7 +387,8 @@ def process_folder(base_folder):
     
     # create base profiles for one-to-many
     base_profiles = []
-    num_base_profiles = 200  # Fixed number for testing
+    profile_percentage = random.uniform(0.40, 0.50)
+    num_base_profiles = max(50, int(total_files * profile_percentage)) 
     
     print(f"Creating {num_base_profiles} base profiles")
     

@@ -1,18 +1,32 @@
-import mysql.connector
 import os
+import mysql.connector
+import getpass 
 
-# database config
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_NAME = "ats_db"
 
-DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
+DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')  
+
 if not DB_PASSWORD:
     try:
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
-    except:
-        DB_PASSWORD = input("Input MySQL Password: ")
+        DB_PASSWORD = "" 
+    except mysql.connector.Error:
+        DB_PASSWORD = getpass.getpass("Enter MySQL Password: ")
+
+        try:
+            test_conn = mysql.connector.connect(
+                host=DB_HOST, 
+                user=DB_USER, 
+                password=DB_PASSWORD
+            )
+            test_conn.close()
+            print("Password verified successfully")
+        except mysql.connector.Error as e:
+            print("Password verification failed")
+            exit(1) 
 
 def view_specific_cv(applicant_id=None):
     try:
