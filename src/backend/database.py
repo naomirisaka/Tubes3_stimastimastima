@@ -1,5 +1,6 @@
 import mysql.connector
 import os
+import getpass
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 
@@ -40,7 +41,7 @@ class DatabaseManager:
                 test_conn.close()
                 self.password = ""
             except:
-                self.password = input("Enter MySQL Password: ")
+                self.password = getpass.getpass("Enter MySQL Password: ")
     
     def connect(self):
         try:
