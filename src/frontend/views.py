@@ -255,6 +255,8 @@ def close_dialog(page: ft.Page):
 def home_view(page: ft.Page):
     showing_summary = ft.Ref[bool]()
     showing_summary.current = False
+    layout_ref = ft.Ref[ft.Column]()
+
     results_per_page = 5
     current_page = 0
 
@@ -500,6 +502,10 @@ def home_view(page: ft.Page):
                     elevation=3
                 )
             )
+            print("layout_ref:", layout_ref.current)
+
+            layout_ref.current.controls.clear()
+            layout_ref.current.controls.extend(build_layout().controls)
             page.update()
             
         except Exception as e:
@@ -511,6 +517,8 @@ def home_view(page: ft.Page):
                     alignment=ft.alignment.center
                 )
             )
+            layout_ref.current.controls.clear()
+            layout_ref.current.controls.extend(build_layout().controls)
             page.update()
 
     def create_summary_section(title: str, content: str):
@@ -702,92 +710,200 @@ def home_view(page: ft.Page):
         )
         result_column.controls.append(pagination_row)
 
+        print("layout_ref:", layout_ref.current)
+
+        layout_ref.current.controls.clear()
+        layout_ref.current.controls.extend(build_layout().controls)
         page.update()
 
-    # UI Components
-    navbar = ft.Container(
-        bgcolor="#A6DAFF",
-        padding=20,
-        content=ft.Row(
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            controls=[
-                ft.Text("📄 ATS CV Matcher", size=26, weight=ft.FontWeight.BOLD),
-                ft.Text("by stimastimastima", italic=True)
-            ]
-        ),
-        expand=True,
-    )
-
-    welcome_text = ft.Text(
-        "Welcome to the Smartest CV Finder in the Galaxy 🚀",
-        size=20,
-        weight=ft.FontWeight.W_600,
-        text_align=ft.TextAlign.CENTER
-    )
-
-    keyword_input_field = ft.TextField(
-        ref=keyword_input,
-        width=400,
-        label="Enter Keywords",
-        hint_text="Example: Python, SQL, React, Machine Learning",
-        border_radius=20,
-        bgcolor="#F1C6E7",
-        filled=True
-    )
-
-    algorithm_selector_dropdown = ft.Dropdown(
-        ref=algorithm_selector,
-        label="Select Algorithm",
-        options=[
-            ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
-            ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
-            ft.dropdown.Option("AC", "AC (Aho-Corasick)")
-        ],
-        bgcolor="#B7E5DD",
-        border_radius=20,
-        width=250
-    )
-
-    slider_row = ft.Row(
-        alignment=ft.MainAxisAlignment.CENTER,
-        controls=[
-            ft.Text("1"),
-            ft.Slider(
-                ref=cv_count,
-                min=1,
-                max=50,
-                divisions=49,
-                label="{value}",
-                on_change=update_cv_input,
-                width=150,
-                value=10
+    def build_layout():
+        navbar = ft.Container(
+            bgcolor="#A6DAFF",
+            padding=20,
+            content=ft.Row(
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                controls=[
+                    ft.Text("📄 ATS CV Matcher", size=26, weight=ft.FontWeight.BOLD),
+                    ft.Text("by stimastimastima", italic=True)
+                ]
             ),
-            ft.Text("50"),
-            ft.TextField(
-                ref=cv_input,
-                value="10",
-                label="Top CVs",
-                width=100,
-                on_change=update_slider
-            )
-        ]
-    )
+            expand=True,
+        )
 
-    control_row = ft.Row(
-        alignment=ft.MainAxisAlignment.CENTER,
-        controls=[algorithm_selector_dropdown, slider_row],
-        spacing=20
-    )
+        welcome_text = ft.Text(
+            "Welcome to the Smartest CV Finder in the Galaxy 🚀",
+            size=20,
+            weight=ft.FontWeight.W_600,
+            text_align=ft.TextAlign.CENTER
+        )
 
-    search_button = ft.ElevatedButton(
-        text="🔍 Search CVs",
-        style=ft.ButtonStyle(
-            bgcolor="#FDCEDF", 
-            shape=ft.RoundedRectangleBorder(radius=20),
-            padding=ft.padding.symmetric(horizontal=30, vertical=15)
-        ),
-        on_click=on_search
-    )
+        keyword_input_field = ft.TextField(
+            ref=keyword_input,
+            width=400,
+            label="Enter Keywords",
+            hint_text="Example: Python, SQL, React, Machine Learning",
+            border_radius=20,
+            bgcolor="#F1C6E7",
+            filled=True
+        )
+
+        algorithm_selector_dropdown = ft.Dropdown(
+            ref=algorithm_selector,
+            label="Select Algorithm",
+            options=[
+                ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
+                ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
+                ft.dropdown.Option("AC", "AC (Aho-Corasick)")
+            ],
+            bgcolor="#B7E5DD",
+            border_radius=20,
+            width=250
+        )
+
+        slider_row = ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.Text("1"),
+                ft.Slider(
+                    ref=cv_count,
+                    min=1,
+                    max=50,
+                    divisions=49,
+                    label="{value}",
+                    on_change=update_cv_input,
+                    width=150,
+                    value=10
+                ),
+                ft.Text("50"),
+                ft.TextField(
+                    ref=cv_input,
+                    value="10",
+                    label="Top CVs",
+                    width=100,
+                    on_change=update_slider
+                )
+            ]
+        )
+
+        control_row = ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[algorithm_selector_dropdown, slider_row],
+            spacing=20
+        )
+
+        search_button = ft.ElevatedButton(
+            text="🔍 Search CVs",
+            style=ft.ButtonStyle(
+                bgcolor="#FDCEDF", 
+                shape=ft.RoundedRectangleBorder(radius=20),
+                padding=ft.padding.symmetric(horizontal=30, vertical=15)
+            ),
+            on_click=on_search
+        )
+
+        return ft.Column(
+            ref=layout_ref,
+            controls=(
+                [navbar] +
+                (
+                    [
+                        ft.Container(welcome_text, alignment=ft.alignment.center),
+                        ft.Container(keyword_input_field, alignment=ft.alignment.center),
+                        control_row,
+                        ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
+                    ] if not showing_summary.current else [
+                        ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
+                    ]
+                ) +
+                [ft.Container(result_column, padding=20)]
+            ),
+            spacing=25
+        )
+
+    # UI Components
+    # navbar = ft.Container(
+    #     bgcolor="#A6DAFF",
+    #     padding=20,
+    #     content=ft.Row(
+    #         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+    #         controls=[
+    #             ft.Text("📄 ATS CV Matcher", size=26, weight=ft.FontWeight.BOLD),
+    #             ft.Text("by stimastimastima", italic=True)
+    #         ]
+    #     ),
+    #     expand=True,
+    # )
+
+    # welcome_text = ft.Text(
+    #     "Welcome to the Smartest CV Finder in the Galaxy 🚀",
+    #     size=20,
+    #     weight=ft.FontWeight.W_600,
+    #     text_align=ft.TextAlign.CENTER
+    # )
+
+    # keyword_input_field = ft.TextField(
+    #     ref=keyword_input,
+    #     width=400,
+    #     label="Enter Keywords",
+    #     hint_text="Example: Python, SQL, React, Machine Learning",
+    #     border_radius=20,
+    #     bgcolor="#F1C6E7",
+    #     filled=True
+    # )
+
+    # algorithm_selector_dropdown = ft.Dropdown(
+    #     ref=algorithm_selector,
+    #     label="Select Algorithm",
+    #     options=[
+    #         ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
+    #         ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
+    #         ft.dropdown.Option("AC", "AC (Aho-Corasick)")
+    #     ],
+    #     bgcolor="#B7E5DD",
+    #     border_radius=20,
+    #     width=250
+    # )
+
+    # slider_row = ft.Row(
+    #     alignment=ft.MainAxisAlignment.CENTER,
+    #     controls=[
+    #         ft.Text("1"),
+    #         ft.Slider(
+    #             ref=cv_count,
+    #             min=1,
+    #             max=50,
+    #             divisions=49,
+    #             label="{value}",
+    #             on_change=update_cv_input,
+    #             width=150,
+    #             value=10
+    #         ),
+    #         ft.Text("50"),
+    #         ft.TextField(
+    #             ref=cv_input,
+    #             value="10",
+    #             label="Top CVs",
+    #             width=100,
+    #             on_change=update_slider
+    #         )
+    #     ]
+    # )
+
+    # control_row = ft.Row(
+    #     alignment=ft.MainAxisAlignment.CENTER,
+    #     controls=[algorithm_selector_dropdown, slider_row],
+    #     spacing=20
+    # )
+
+    # search_button = ft.ElevatedButton(
+    #     text="🔍 Search CVs",
+    #     style=ft.ButtonStyle(
+    #         bgcolor="#FDCEDF", 
+    #         shape=ft.RoundedRectangleBorder(radius=20),
+    #         padding=ft.padding.symmetric(horizontal=30, vertical=15)
+    #     ),
+    #     on_click=on_search
+    # )
 
     # Initialize with database stats
     try:
@@ -798,24 +914,24 @@ def home_view(page: ft.Page):
     except:
         stats_text.value = "📊 Database: Ready"
 
-    layout = ft.Column(
-        controls = (
-            [navbar]
-            + (
-                # Jika tidak sedang lihat summary → tampilkan input
-                [
-                    ft.Container(welcome_text, alignment=ft.alignment.center),
-                    ft.Container(keyword_input_field, alignment=ft.alignment.center),
-                    control_row,
-                    ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
-                ] if not showing_summary.current else [
-                    ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
-                ]
-            )
-            + [ft.Container(result_column, padding=20)]
-        ),
-        spacing=25
-    )
+    # layout = ft.Column(
+    #     controls = (
+    #         [navbar]
+    #         + (
+    #             # Jika tidak sedang lihat summary → tampilkan input
+    #             [
+    #                 ft.Container(welcome_text, alignment=ft.alignment.center),
+    #                 ft.Container(keyword_input_field, alignment=ft.alignment.center),
+    #                 control_row,
+    #                 ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
+    #             ] if not showing_summary.current else [
+    #                 ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
+    #             ]
+    #         )
+    #         + [ft.Container(result_column, padding=20)]
+    #     ),
+    #     spacing=25
+    # )
 
     # Tampilkan info database sebagai tampilan awal
     result_column.controls.append(
@@ -835,4 +951,5 @@ def home_view(page: ft.Page):
         )
     )
 
-    page.add(layout)
+    page.add(build_layout())
+    print("DEBUG: layout_ref.current is", layout_ref.current)
