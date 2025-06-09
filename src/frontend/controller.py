@@ -131,7 +131,7 @@ class ATSController:
                 keywords=keywords,
                 algorithm=backend_algorithm,
                 top_results=top_n,
-                fuzzy_threshold=75.0
+                fuzzy_threshold=60.0
             )
             
             if not results.get('success'):
