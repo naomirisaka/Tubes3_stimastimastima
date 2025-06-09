@@ -6,6 +6,40 @@ import os
 import subprocess
 import platform
 import webbrowser
+import fitz 
+
+def extract_pdf_text(pdf_path: str) -> str:
+    try:
+        doc = fitz.open(pdf_path)
+        text = ""
+        for page in doc:
+            text += page.get_text()
+        return text.strip()
+    except Exception as e:
+        return f"❌ Error reading PDF: {e}"
+    
+def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
+    extracted_text = extract_pdf_text(pdf_path)
+
+    dialog = ft.AlertDialog(
+        title=ft.Text(f"📄 {applicant_name}'s CV (Text View)"),
+        content=ft.Container(
+            content=ft.Column([
+                ft.Text(extracted_text, selectable=True, size=12)
+            ], scroll=ft.ScrollMode.AUTO),
+            width=600,
+            height=400,
+            padding=10,
+            bgcolor=ft.Colors.GREY_50,
+            border_radius=8
+        ),
+        actions=[ft.TextButton("Close", on_click=lambda e: close_dialog(page))],
+        modal=True
+    )
+
+    page.dialog = dialog
+    dialog.open = True
+    page.update()
 
 # Simple PDF utilities (inline instead of separate module)
 def open_pdf_with_system_viewer(pdf_path: str) -> bool:
@@ -31,18 +65,6 @@ def open_pdf_with_system_viewer(pdf_path: str) -> bool:
         
     except Exception as e:
         print(f"❌ Error opening PDF: {e}")
-        return False
-
-def open_pdf_in_browser(pdf_path: str) -> bool:
-    """Open PDF in web browser."""
-    try:
-        abs_path = os.path.abspath(pdf_path)
-        file_url = f'file:///{abs_path.replace(os.sep, "/")}'
-        webbrowser.open(file_url)
-        print(f"✅ Opened PDF in browser: {pdf_path}")
-        return True
-    except Exception as e:
-        print(f"❌ Error opening PDF in browser: {e}")
         return False
 
 def validate_pdf_path(pdf_path: str) -> tuple:
@@ -108,16 +130,6 @@ def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
         page.snack_bar.open = True
         close_dialog(page)
     
-    def open_browser_and_close(e):
-        """Open in browser and close dialog."""
-        success = open_pdf_in_browser(pdf_path)
-        page.snack_bar = ft.SnackBar(
-            ft.Text("PDF opened in browser" if success else "Failed to open in browser"),
-            bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
-        )
-        page.snack_bar.open = True
-        close_dialog(page)
-    
     def copy_path_and_close(e):
         """Copy path to clipboard and close dialog."""
         try:
@@ -161,29 +173,28 @@ def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
         ft.Column([
             ft.ElevatedButton(
                 content=ft.Row([
-                    ft.Icon(ft.Icons.OPEN_IN_NEW, size=20),
-                    ft.Text("Open with System PDF Viewer")
+                    ft.Icon(ft.Icons.DESCRIPTION, size=20),
+                    ft.Text("View as Text")
                 ], spacing=10),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.Colors.GREEN_100,
+                    bgcolor=ft.Colors.GREEN_200,
                     color=ft.Colors.GREEN_800,
                     padding=ft.padding.symmetric(horizontal=20, vertical=10)
                 ),
-                on_click=open_system_and_close,
+                on_click=lambda e: show_pdf_as_text(page, pdf_path, applicant_name),
                 width=300
-            ),
-            
+            ),          
             ft.ElevatedButton(
                 content=ft.Row([
-                    ft.Icon(ft.Icons.WEB, size=20),
-                    ft.Text("Open in Web Browser")
+                    ft.Icon(ft.Icons.PICTURE_AS_PDF, size=20),
+                    ft.Text("Open with System PDF Viewer")
                 ], spacing=10),
                 style=ft.ButtonStyle(
                     bgcolor=ft.Colors.BLUE_100,
                     color=ft.Colors.BLUE_800,
                     padding=ft.padding.symmetric(horizontal=20, vertical=10)
                 ),
-                on_click=open_browser_and_close,
+                on_click=open_system_and_close,
                 width=300
             ),
             
@@ -291,23 +302,6 @@ def home_view(page: ft.Page):
         
         # Show the PDF dialog
         show_pdf_dialog(page, cv_path, applicant_name)
-
-    # def quick_open_cv(cv_path: str):
-    #     """Quick open CV with system viewer."""
-    #     if not cv_path:
-    #         page.snack_bar = ft.SnackBar(ft.Text("No CV path available"), bgcolor=ft.Colors.RED_400)
-    #         page.snack_bar.open = True
-    #         page.update()
-    #         return
-        
-    #     success = open_pdf_with_system_viewer(cv_path)
-        
-    #     page.snack_bar = ft.SnackBar(
-    #         ft.Text("PDF opened successfully" if success else "Failed to open PDF"),
-    #         bgcolor=ft.Colors.GREEN_400 if success else ft.Colors.RED_400
-    #     )
-    #     page.snack_bar.open = True
-    #     page.update()
 
     def render_search_metadata():
         """Render search metadata/info (algorithm, time, etc)."""
@@ -496,12 +490,6 @@ def home_view(page: ft.Page):
                                     on_click=lambda e: render_paginated_results(),
                                     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200)
                                 )
-                                # ft.ElevatedButton(
-                                #     "🚀 Quick Open", 
-                                #     on_click=lambda e: quick_open_cv(cv_path),
-                                #     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200),
-                                #     disabled=not pdf_exists
-                                # )
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=10)
                         ], spacing=15),
                         padding=20
@@ -578,18 +566,6 @@ def home_view(page: ft.Page):
         start_idx = current_page * results_per_page
         end_idx = min(start_idx + results_per_page, total_results)
         paginated_results = last_search_results[start_idx:end_idx]
-
-        # Tambahkan header statistik kalau ada
-        # if last_search_metadata:
-        #     result_column.controls.append(
-        #         ft.Container(
-        #             content=stats_text,
-        #             padding=10,
-        #             bgcolor=ft.Colors.BLUE_50,
-        #             border_radius=10,
-        #             margin=ft.margin.only(bottom=10)
-        #         )
-        #     )
 
         # Tampilkan hasil
         if not paginated_results:
