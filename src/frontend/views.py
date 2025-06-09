@@ -253,6 +253,8 @@ def close_dialog(page: ft.Page):
         page.update()
 
 def home_view(page: ft.Page):
+    showing_summary = ft.Ref[bool]()
+    showing_summary.current = False
     results_per_page = 5
     current_page = 0
 
@@ -336,7 +338,7 @@ def home_view(page: ft.Page):
         )
 
     def on_search(e):
-        """Handle search button click."""
+        showing_summary.current = False
         keywords = (keyword_input.current.value or "").strip()
         algo = (algorithm_selector.current.value or "").strip()
         top_n = int(cv_count.current.value or 10)
@@ -381,6 +383,7 @@ def home_view(page: ft.Page):
             
             current_page = 0
             render_paginated_results()
+
             
         except Exception as e:
             result_column.controls.clear()
@@ -394,7 +397,7 @@ def home_view(page: ft.Page):
             page.update()
 
     def show_summary(detail_id):
-        """Show detailed CV summary."""
+        showing_summary.current = True
         if not detail_id:
             page.snack_bar = ft.SnackBar(ft.Text("Invalid CV selection"), bgcolor=ft.Colors.RED_400)
             page.snack_bar.open = True
@@ -510,23 +513,55 @@ def home_view(page: ft.Page):
             )
             page.update()
 
-    def create_summary_section(title, content):
-        """Create a section for CV details."""
-        if not content or content.strip() == "":
+    def create_summary_section(title: str, content: str):
+        """Create a collapsible CV section with Read more / Show less."""
+
+        original_content = content or ""
+        is_empty = not original_content.strip()
+
+        if is_empty:
             content = "Not available"
-        
-        display_content = content[:300] + "..." if len(content) > 300 else content
-        
+            is_trimmed = False
+        else:
+            MAX_LENGTH = 300
+            is_trimmed = len(original_content) > MAX_LENGTH
+            content = original_content.strip()
+
+        short_content = content[:300] + "..." if is_trimmed else content
+
+        # State
+        full_text = ft.Text(content, size=14, color=ft.Colors.GREY_800, visible=False)
+        short_text = ft.Text(short_content, size=14, color=ft.Colors.GREY_800, visible=True)
+        toggle_btn = ft.Ref[ft.TextButton]()
+
+        def toggle_visibility(e):
+            full_text.visible = not full_text.visible
+            short_text.visible = not short_text.visible
+            toggle_btn.current.text = "Show less" if full_text.visible else "Read more"
+            e.page.update()
+
+        section_content = [
+            ft.Text(title, size=16, weight=ft.FontWeight.W_600, color=ft.Colors.BLUE_700),
+            short_text,
+            full_text,
+        ]
+
+        if is_trimmed:
+            section_content.append(
+                ft.Row(
+                    [ft.TextButton("Read more", ref=toggle_btn, on_click=toggle_visibility)],
+                    alignment=ft.MainAxisAlignment.END
+                )
+            )
+
         return ft.Container(
-            content=ft.Column([
-                ft.Text(title, size=16, weight=ft.FontWeight.W_600, color=ft.Colors.BLUE_700),
-                ft.Text(display_content, size=14, color=ft.Colors.GREY_800)
-            ], spacing=5),
+            content=ft.Column(section_content, spacing=5),
             padding=10,
             bgcolor=ft.Colors.GREY_50,
             border_radius=8,
             border=ft.border.all(1, ft.Colors.GREY_300)
         )
+
     page_info_label = ft.Text("", size=12, color=ft.Colors.GREY_600)
 
     def go_to_page(target_page):
@@ -763,15 +798,24 @@ def home_view(page: ft.Page):
     except:
         stats_text.value = "📊 Database: Ready"
 
-    layout = ft.Column([
-        navbar,
-        ft.Container(welcome_text, alignment=ft.alignment.center),
-        ft.Container(keyword_input_field, alignment=ft.alignment.center),
-        control_row,
-        ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
-        # ft.Container(stats_text, alignment=ft.alignment.center, padding=ft.padding.only(top=10)),
-        ft.Container(result_column, padding=20)
-    ], spacing=25)
+    layout = ft.Column(
+        controls = (
+            [navbar]
+            + (
+                # Jika tidak sedang lihat summary → tampilkan input
+                [
+                    ft.Container(welcome_text, alignment=ft.alignment.center),
+                    ft.Container(keyword_input_field, alignment=ft.alignment.center),
+                    control_row,
+                    ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
+                ] if not showing_summary.current else [
+                    ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
+                ]
+            )
+            + [ft.Container(result_column, padding=20)]
+        ),
+        spacing=25
+    )
 
     # Tampilkan info database sebagai tampilan awal
     result_column.controls.append(
