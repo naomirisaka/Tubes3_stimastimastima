@@ -7,6 +7,7 @@ import subprocess
 import platform
 import webbrowser
 import fitz 
+import re
 
 def extract_pdf_text(pdf_path: str) -> str:
     try:
@@ -16,10 +17,14 @@ def extract_pdf_text(pdf_path: str) -> str:
             text += page.get_text()
         return text.strip()
     except Exception as e:
-        return f"❌ Error reading PDF: {e}"
+        return f"Error reading PDF: {e}"
     
 def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
     extracted_text = extract_pdf_text(pdf_path)
+
+    section_headers = ["Summary", "Skills", "Experience", "Education", "Accomplishments"]
+    for header in section_headers:
+        extracted_text = re.sub(fr"\b{header}\b", f"\n{header}", extracted_text, flags=re.IGNORECASE)
 
     dialog = ft.AlertDialog(
         title=ft.Text(f"📄 {applicant_name}'s CV (Text View)"),
@@ -45,7 +50,7 @@ def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
 def open_pdf_with_system_viewer(pdf_path: str) -> bool:
     """Open PDF with system default viewer."""
     if not pdf_path or not os.path.exists(pdf_path):
-        print(f"❌ PDF file not found: {pdf_path}")
+        print(f"PDF file not found: {pdf_path}")
         return False
     
     try:
@@ -60,11 +65,11 @@ def open_pdf_with_system_viewer(pdf_path: str) -> bool:
         else:
             webbrowser.open(f'file://{os.path.abspath(pdf_path)}')
         
-        print(f"✅ Opened PDF: {pdf_path}")
+        print(f"Opened PDF: {pdf_path}")
         return True
         
     except Exception as e:
-        print(f"❌ Error opening PDF: {e}")
+        print(f"Error opening PDF: {e}")
         return False
 
 def validate_pdf_path(pdf_path: str) -> tuple:
@@ -97,7 +102,7 @@ def get_pdf_info(pdf_path: str) -> dict:
 
 def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
     """Show PDF viewing options dialog."""
-    print(f"🔍 Showing PDF dialog for: {pdf_path}")
+    print(f"Showing PDF dialog for: {pdf_path}")
     
     # Validate PDF first
     is_valid, message = validate_pdf_path(pdf_path)
@@ -105,7 +110,7 @@ def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
     if not is_valid:
         # Show error dialog
         error_dialog = ft.AlertDialog(
-            title=ft.Text("❌ PDF Error"),
+            title=ft.Text("PDF Error"),
             content=ft.Text(f"Cannot open PDF: {message}"),
             actions=[
                 ft.TextButton("OK", on_click=lambda e: close_dialog(page))
@@ -244,7 +249,7 @@ def show_pdf_dialog(page: ft.Page, pdf_path: str, applicant_name: str = ""):
     page.dialog = dialog
     dialog.open = True
     page.update()
-    print(f"✅ PDF dialog shown for: {applicant_name}")
+    print(f"PDF dialog shown for: {applicant_name}")
 
 def close_dialog(page: ft.Page):
     """Close any open dialog."""
@@ -255,7 +260,6 @@ def close_dialog(page: ft.Page):
 def home_view(page: ft.Page):
     showing_summary = ft.Ref[bool]()
     showing_summary.current = False
-    layout_ref = ft.Ref[ft.Column]()
 
     results_per_page = 5
     current_page = 0
@@ -293,7 +297,7 @@ def home_view(page: ft.Page):
 
     def open_cv_dialog(cv_path: str, applicant_name: str = ""):
         """Open CV file with enhanced dialog."""
-        print(f"🔍 Opening CV dialog for: {applicant_name} - {cv_path}")
+        print(f"Opening CV dialog for: {applicant_name} - {cv_path}")
         
         if not cv_path:
             page.snack_bar = ft.SnackBar(
@@ -320,6 +324,9 @@ def home_view(page: ft.Page):
 
         if meta.get('fuzzy_matches_found', 0) > 0:
             stats_info += f" | 🔍 Fuzzy: {meta.get('fuzzy_matches_found', 0)} keywords"
+
+        if 'fuzzy_time_ms' in meta:
+            stats_info += f" | ⏱️ Fuzzy Time: {meta['fuzzy_time_ms']:.1f}ms"
 
         stats_text.value = stats_info
         result_column.controls.append(
@@ -492,7 +499,10 @@ def home_view(page: ft.Page):
                                 ),
                                 ft.ElevatedButton(
                                     "⬅ Back", 
-                                    on_click=lambda e: render_paginated_results(),
+                                    on_click=lambda e: (
+                                        setattr(showing_summary, "current", False),
+                                        render_paginated_results()
+                                    ),
                                     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_200)
                                 )
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=10)
@@ -502,10 +512,9 @@ def home_view(page: ft.Page):
                     elevation=3
                 )
             )
-            print("layout_ref:", layout_ref.current)
 
-            layout_ref.current.controls.clear()
-            layout_ref.current.controls.extend(build_layout().controls)
+            page.controls.clear()
+            page.add(build_layout())
             page.update()
             
         except Exception as e:
@@ -517,8 +526,8 @@ def home_view(page: ft.Page):
                     alignment=ft.alignment.center
                 )
             )
-            layout_ref.current.controls.clear()
-            layout_ref.current.controls.extend(build_layout().controls)
+            page.controls.clear()
+            page.add(build_layout())
             page.update()
 
     def create_summary_section(title: str, content: str):
@@ -569,7 +578,76 @@ def home_view(page: ft.Page):
             border_radius=8,
             border=ft.border.all(1, ft.Colors.GREY_300)
         )
+    
+    # Komponen input
+    keyword_input_field = ft.TextField(
+        ref=keyword_input,
+        width=400,
+        label="Enter Keywords",
+        hint_text="Example: Python, SQL, React, Machine Learning",
+        border_radius=20,
+        bgcolor="#F1C6E7",
+        filled=True
+    )
 
+    algorithm_selector_dropdown = ft.Dropdown(
+        ref=algorithm_selector,
+        label="Select Algorithm",
+        options=[
+            ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
+            ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
+            ft.dropdown.Option("AC", "AC (Aho-Corasick)")
+        ],
+        bgcolor="#B7E5DD",
+        border_radius=20,
+        width=250
+    )
+
+    slider_control = ft.Slider(
+        ref=cv_count,
+        min=1,
+        max=50,
+        divisions=49,
+        label="{value}",
+        on_change=update_cv_input,
+        width=150,
+        value=10
+    )
+
+    cv_text_field = ft.TextField(
+        ref=cv_input,
+        value="10",
+        label="Top CVs",
+        width=100,
+        on_change=update_slider
+    )
+
+    slider_row = ft.Row(
+        alignment=ft.MainAxisAlignment.CENTER,
+        controls=[
+            ft.Text("1"),
+            slider_control,
+            ft.Text("50"),
+            cv_text_field
+        ]
+    )
+
+    control_row = ft.Row(
+        alignment=ft.MainAxisAlignment.CENTER,
+        controls=[algorithm_selector_dropdown, slider_row],
+        spacing=20
+    )
+
+    search_button = ft.ElevatedButton(
+        text="🔍 Search CVs",
+        style=ft.ButtonStyle(
+            bgcolor="#FDCEDF", 
+            shape=ft.RoundedRectangleBorder(radius=20),
+            padding=ft.padding.symmetric(horizontal=30, vertical=15)
+        ),
+        on_click=on_search
+    )
+    
     page_info_label = ft.Text("", size=12, color=ft.Colors.GREY_600)
 
     def go_to_page(target_page):
@@ -710,13 +788,13 @@ def home_view(page: ft.Page):
         )
         result_column.controls.append(pagination_row)
 
-        print("layout_ref:", layout_ref.current)
-
-        layout_ref.current.controls.clear()
-        layout_ref.current.controls.extend(build_layout().controls)
+        page.controls.clear()
+        page.add(build_layout())
         page.update()
 
     def build_layout():
+        print("showing_summary is", showing_summary.current)
+
         navbar = ft.Container(
             bgcolor="#A6DAFF",
             padding=20,
@@ -737,173 +815,32 @@ def home_view(page: ft.Page):
             text_align=ft.TextAlign.CENTER
         )
 
-        keyword_input_field = ft.TextField(
-            ref=keyword_input,
-            width=400,
-            label="Enter Keywords",
-            hint_text="Example: Python, SQL, React, Machine Learning",
-            border_radius=20,
-            bgcolor="#F1C6E7",
-            filled=True
-        )
-
-        algorithm_selector_dropdown = ft.Dropdown(
-            ref=algorithm_selector,
-            label="Select Algorithm",
-            options=[
-                ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
-                ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
-                ft.dropdown.Option("AC", "AC (Aho-Corasick)")
-            ],
-            bgcolor="#B7E5DD",
-            border_radius=20,
-            width=250
-        )
-
-        slider_row = ft.Row(
-            alignment=ft.MainAxisAlignment.CENTER,
-            controls=[
-                ft.Text("1"),
-                ft.Slider(
-                    ref=cv_count,
-                    min=1,
-                    max=50,
-                    divisions=49,
-                    label="{value}",
-                    on_change=update_cv_input,
-                    width=150,
-                    value=10
-                ),
-                ft.Text("50"),
-                ft.TextField(
-                    ref=cv_input,
-                    value="10",
-                    label="Top CVs",
-                    width=100,
-                    on_change=update_slider
-                )
-            ]
-        )
-
-        control_row = ft.Row(
-            alignment=ft.MainAxisAlignment.CENTER,
-            controls=[algorithm_selector_dropdown, slider_row],
-            spacing=20
-        )
-
-        search_button = ft.ElevatedButton(
-            text="🔍 Search CVs",
-            style=ft.ButtonStyle(
-                bgcolor="#FDCEDF", 
-                shape=ft.RoundedRectangleBorder(radius=20),
-                padding=ft.padding.symmetric(horizontal=30, vertical=15)
-            ),
-            on_click=on_search
-        )
-
         return ft.Column(
-            ref=layout_ref,
-            controls=(
-                [navbar] +
-                (
-                    [
-                        ft.Container(welcome_text, alignment=ft.alignment.center),
-                        ft.Container(keyword_input_field, alignment=ft.alignment.center),
-                        control_row,
-                        ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
-                    ] if not showing_summary.current else [
-                        ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
-                    ]
-                ) +
-                [ft.Container(result_column, padding=20)]
-            ),
+            controls=([
+                navbar
+            ] + (
+                [
+                    ft.Container(welcome_text, alignment=ft.alignment.center),
+                    ft.Container(keyword_input_field, alignment=ft.alignment.center),
+                    control_row,
+                    ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
+                ] if not showing_summary.current else [
+                    ft.Container(
+                        content=ft.Text(
+                            "📄 CV Summary",
+                            size=32,
+                            weight=ft.FontWeight.BOLD,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        alignment=ft.alignment.center,
+                        padding=10
+                    )
+                ]
+            ) + [
+                ft.Container(result_column, padding=20)
+            ]),
             spacing=25
         )
-
-    # UI Components
-    # navbar = ft.Container(
-    #     bgcolor="#A6DAFF",
-    #     padding=20,
-    #     content=ft.Row(
-    #         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-    #         controls=[
-    #             ft.Text("📄 ATS CV Matcher", size=26, weight=ft.FontWeight.BOLD),
-    #             ft.Text("by stimastimastima", italic=True)
-    #         ]
-    #     ),
-    #     expand=True,
-    # )
-
-    # welcome_text = ft.Text(
-    #     "Welcome to the Smartest CV Finder in the Galaxy 🚀",
-    #     size=20,
-    #     weight=ft.FontWeight.W_600,
-    #     text_align=ft.TextAlign.CENTER
-    # )
-
-    # keyword_input_field = ft.TextField(
-    #     ref=keyword_input,
-    #     width=400,
-    #     label="Enter Keywords",
-    #     hint_text="Example: Python, SQL, React, Machine Learning",
-    #     border_radius=20,
-    #     bgcolor="#F1C6E7",
-    #     filled=True
-    # )
-
-    # algorithm_selector_dropdown = ft.Dropdown(
-    #     ref=algorithm_selector,
-    #     label="Select Algorithm",
-    #     options=[
-    #         ft.dropdown.Option("KMP", "KMP (Knuth-Morris-Pratt)"),
-    #         ft.dropdown.Option("BM", "BM (Boyer-Moore)"),
-    #         ft.dropdown.Option("AC", "AC (Aho-Corasick)")
-    #     ],
-    #     bgcolor="#B7E5DD",
-    #     border_radius=20,
-    #     width=250
-    # )
-
-    # slider_row = ft.Row(
-    #     alignment=ft.MainAxisAlignment.CENTER,
-    #     controls=[
-    #         ft.Text("1"),
-    #         ft.Slider(
-    #             ref=cv_count,
-    #             min=1,
-    #             max=50,
-    #             divisions=49,
-    #             label="{value}",
-    #             on_change=update_cv_input,
-    #             width=150,
-    #             value=10
-    #         ),
-    #         ft.Text("50"),
-    #         ft.TextField(
-    #             ref=cv_input,
-    #             value="10",
-    #             label="Top CVs",
-    #             width=100,
-    #             on_change=update_slider
-    #         )
-    #     ]
-    # )
-
-    # control_row = ft.Row(
-    #     alignment=ft.MainAxisAlignment.CENTER,
-    #     controls=[algorithm_selector_dropdown, slider_row],
-    #     spacing=20
-    # )
-
-    # search_button = ft.ElevatedButton(
-    #     text="🔍 Search CVs",
-    #     style=ft.ButtonStyle(
-    #         bgcolor="#FDCEDF", 
-    #         shape=ft.RoundedRectangleBorder(radius=20),
-    #         padding=ft.padding.symmetric(horizontal=30, vertical=15)
-    #     ),
-    #     on_click=on_search
-    # )
 
     # Initialize with database stats
     try:
@@ -952,4 +889,3 @@ def home_view(page: ft.Page):
     )
 
     page.add(build_layout())
-    print("DEBUG: layout_ref.current is", layout_ref.current)

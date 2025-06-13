@@ -83,14 +83,14 @@ backend_path = os.path.join(current_dir, '..', 'backend')
 if backend_path not in sys.path:
     sys.path.insert(0, backend_path)
 
-print(f"🔧 Looking for backend at: {backend_path}")
+print(f"Looking for backend at: {backend_path}")
 
 try:
     # Import the new backend
     from main_be import get_ats_backend
-    print("✅ Successfully imported backend!")
+    print("Successfully imported backend!")
 except ImportError as e:
-    print(f"❌ Failed to import backend: {e}")
+    print(f"Failed to import backend: {e}")
     raise e
 
 class ATSController:
@@ -103,12 +103,12 @@ class ATSController:
     def initialize(self):
         """Initialize the backend connection."""
         if not self.initialized:
-            print("🔧 Initializing ATS backend...")
+            print("Initializing ATS backend...")
             self.initialized = self.backend.initialize()
             if self.initialized:
-                print("✅ Backend initialized successfully!")
+                print("Backend initialized successfully!")
             else:
-                print("❌ Backend initialization failed!")
+                print("Backend initialization failed!")
         return self.initialized
     
     def search_top_matches(self, keywords: str, algorithm: str, top_n: int):
@@ -135,7 +135,7 @@ class ATSController:
             )
             
             if not results.get('success'):
-                print(f"❌ Search failed: {results.get('error')}")
+                print(f"Search failed: {results.get('error')}")
                 return []
             
             # Convert backend results to frontend format with resolved paths
@@ -149,7 +149,7 @@ class ATSController:
                 
                 # Debug path resolution
                 if not resolved_cv_path:
-                    print(f"⚠️ Could not resolve path for {cv['applicant_name']}: {original_cv_path}")
+                    print(f"Could not resolve path for {cv['applicant_name']}: {original_cv_path}")
                     
                     # Try alternative: search by detail_id or applicant name
                     # Extract filename if possible
@@ -157,7 +157,7 @@ class ATSController:
                         filename = os.path.basename(original_cv_path)
                         resolved_cv_path = find_cv_by_filename(filename)
                         if resolved_cv_path:
-                            print(f"✅ Found by filename: {resolved_cv_path}")
+                            print(f"Found by filename: {resolved_cv_path}")
                 
                 frontend_results.append({
                     "detail_id": cv['detail_id'],
@@ -184,7 +184,7 @@ class ATSController:
             }
             
         except Exception as e:
-            print(f"❌ Search error: {e}")
+            print(f"Search error: {e}")
             import traceback
             traceback.print_exc()
             return []
@@ -226,11 +226,11 @@ class ATSController:
                     "original_path": original_cv_path  # Keep original for debugging
                 }
             else:
-                print(f"❌ Failed to get summary: {result.get('error')}")
+                print(f"Failed to get summary: {result.get('error')}")
                 return None
                 
         except Exception as e:
-            print(f"❌ Summary error: {e}")
+            print(f"Summary error: {e}")
             return None
     
     def get_database_stats(self):
@@ -244,7 +244,7 @@ class ATSController:
                 return result['stats']
             return {}
         except Exception as e:
-            print(f"❌ Stats error: {e}")
+            print(f"Stats error: {e}")
             return {}
     
     def validate_keywords(self, keywords: str):
@@ -283,7 +283,7 @@ def get_controller():
 # Test function
 def test_path_resolution():
     """Test CV path resolution."""
-    print("🧪 TESTING CV PATH RESOLUTION")
+    print("TESTING CV PATH RESOLUTION")
     print("=" * 40)
     
     # Test with sample paths
@@ -295,7 +295,7 @@ def test_path_resolution():
     
     for path in test_paths:
         resolved = resolve_cv_path(path)
-        print(f"'{path}' -> '{resolved}' ({'✅' if resolved and os.path.exists(resolved) else '❌'})")
+        print(f"'{path}' -> '{resolved}' ({'Successed' if resolved and os.path.exists(resolved) else 'Failed'})")
 
 if __name__ == "__main__":
     test_path_resolution()
