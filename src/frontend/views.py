@@ -324,8 +324,6 @@ def home_view(page: ft.Page):
 
         if meta.get('fuzzy_matches_found', 0) > 0:
             stats_info += f" | 🔍 Fuzzy: {meta.get('fuzzy_matches_found', 0)} keywords"
-
-        if 'fuzzy_time_ms' in meta:
             stats_info += f" | ⏱️ Fuzzy Time: {meta['fuzzy_time_ms']:.1f}ms"
 
         stats_text.value = stats_info
