@@ -1,13 +1,13 @@
 # frontend/controller.py
+
 """
-Updated controller with encryption support.
-This is a minimal change to your existing controller.py
+Updated controller with proper CV path resolution.
 """
 
 import sys
 import os
 
-# Add path resolution utilities (keep your existing functions)
+# Add path resolution utilities
 def resolve_cv_path(cv_path: str) -> str:
     """Resolve CV path to absolute path."""
     if not cv_path:
@@ -77,7 +77,7 @@ def find_cv_by_filename(filename: str) -> str:
     
     return ""
 
-# Add backend path to imports - Updated for encryption support
+# Add backend path to imports - Fixed path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 backend_path = os.path.join(current_dir, '..', 'backend')
 if backend_path not in sys.path:
@@ -85,68 +85,34 @@ if backend_path not in sys.path:
 
 print(f"Looking for backend at: {backend_path}")
 
-# 🔐 ENCRYPTION SUPPORT: Check if encryption is enabled
-USE_ENCRYPTION = os.getenv('ATS_USE_ENCRYPTION', 'false').lower() == 'true'
-
 try:
-    if USE_ENCRYPTION:
-        print("🔐 Using ENCRYPTED backend")
-        from backend.encrypted_main_be import get_ats_backend
-        print("✅ Successfully imported encrypted backend!")
-    else:
-        print("🔓 Using STANDARD backend")
-        from backend.main_be import get_ats_backend
-        print("✅ Successfully imported standard backend!")
-        
+    # Import the new backend
+    from main_be import get_ats_backend
+    print("Successfully imported backend!")
 except ImportError as e:
-    print(f"❌ Failed to import backend: {e}")
-    
-    # Fallback logic
-    if USE_ENCRYPTION:
-        print("🔄 Encrypted backend not available, trying standard...")
-        try:
-            from backend.main_be import get_ats_backend
-            print("⚠️  Using standard backend as fallback")
-        except ImportError:
-            print("❌ No backend available!")
-            raise e
-    else:
-        print("🔄 Standard backend not available, trying encrypted...")
-        try:
-            from backend.encrypted_main_be import get_ats_backend
-            print("⚠️  Using encrypted backend as fallback")
-        except ImportError:
-            print("❌ No backend available!")
-            raise e
+    print(f"Failed to import backend: {e}")
+    raise e
 
 class ATSController:
-    """Controller for the ATS frontend using the appropriate backend."""
+    """Controller for the ATS frontend using the new backend."""
     
     def __init__(self):
         self.backend = get_ats_backend()
         self.initialized = False
-        self.encryption_enabled = USE_ENCRYPTION
     
     def initialize(self):
         """Initialize the backend connection."""
         if not self.initialized:
-            if self.encryption_enabled:
-                print("🔐 Initializing encrypted ATS backend...")
-            else:
-                print("🔓 Initializing standard ATS backend...")
-                
+            print("Initializing ATS backend...")
             self.initialized = self.backend.initialize()
-            
             if self.initialized:
-                print("✅ Backend initialized successfully!")
-                if self.encryption_enabled:
-                    print("🔐 All data will be decrypted during searches")
+                print("Backend initialized successfully!")
             else:
-                print("❌ Backend initialization failed!")
+                print("Backend initialization failed!")
         return self.initialized
     
     def search_top_matches(self, keywords: str, algorithm: str, top_n: int):
-        """Search for top CV matches using the backend."""
+        """Search for top CV matches using the new backend."""
         if not self.initialize():
             return []
         
@@ -160,7 +126,7 @@ class ATSController:
         backend_algorithm = algorithm_map.get(algorithm, "kmp")
         
         try:
-            # Use the backend search (works with both encrypted and standard)
+            # Use the new backend search
             results = self.backend.search_cvs(
                 keywords=keywords,
                 algorithm=backend_algorithm,
@@ -210,11 +176,10 @@ class ATSController:
                 "metadata": {
                     "algorithm_used": metadata['algorithm_used'],
                     "exact_time_ms": metadata['exact_match_time_ms'],
-                    "fuzzy_time_ms": metadata.get('fuzzy_match_time_ms', 0),
+                    "fuzzy_time_ms": metadata['fuzzy_match_time_ms'],
                     "cvs_scanned": metadata['total_cvs_scanned'],
                     "total_exact_matches": sum(results['exact_matches'].values()),
-                    "fuzzy_matches_found": len([k for k, v in results.get('fuzzy_matches', {}).items() if v]),
-                    "encryption_status": "🔐 ENCRYPTED" if self.encryption_enabled else "🔓 STANDARD"
+                    "fuzzy_matches_found": len([k for k, v in results['fuzzy_matches'].items() if v])
                 }
             }
             
@@ -225,7 +190,7 @@ class ATSController:
             return []
     
     def get_applicant_summary_from_detail_id(self, detail_id: int):
-        """Get applicant summary using detail_id from the backend."""
+        """Get applicant summary using detail_id from the new backend."""
         if not self.initialize():
             return None
         
@@ -258,8 +223,7 @@ class ATSController:
                     "education": summary.get('education', 'No education listed'),
                     "accomplishments": summary.get('accomplishments', 'No accomplishments listed'),
                     "cv_path": resolved_cv_path,  # Use resolved path
-                    "original_path": original_cv_path,  # Keep original for debugging
-                    "encryption_status": "🔐 DECRYPTED" if self.encryption_enabled else "🔓 STANDARD"
+                    "original_path": original_cv_path  # Keep original for debugging
                 }
             else:
                 print(f"Failed to get summary: {result.get('error')}")
@@ -277,10 +241,7 @@ class ATSController:
         try:
             result = self.backend.get_database_statistics()
             if result.get('success'):
-                stats = result['stats']
-                # Add encryption status to stats
-                stats['encryption_enabled'] = self.encryption_enabled
-                return stats
+                return result['stats']
             return {}
         except Exception as e:
             print(f"Stats error: {e}")
@@ -311,7 +272,7 @@ def search_top_matches(keywords: str, algorithm: str, top_n: int):
         return []
 
 def get_applicant_summary_from_detail_id(detail_id: int):
-    """Function for getting summary by detail_id."""
+    """New function for getting summary by detail_id."""
     return ats_controller.get_applicant_summary_from_detail_id(detail_id)
 
 # Export the controller for direct use
@@ -320,37 +281,21 @@ def get_controller():
     return ats_controller
 
 # Test function
-def test_encryption_integration():
-    """Test encryption integration with controller."""
-    print("🧪 TESTING ENCRYPTION INTEGRATION")
+def test_path_resolution():
+    """Test CV path resolution."""
+    print("TESTING CV PATH RESOLUTION")
     print("=" * 40)
     
-    controller = get_controller()
+    # Test with sample paths
+    test_paths = [
+        "../../data/ENGINEERING/13149176.pdf",
+        "data/ENGINEERING/13149176.pdf",
+        "ENGINEERING/13149176.pdf"
+    ]
     
-    print(f"Encryption enabled: {controller.encryption_enabled}")
-    print(f"Backend type: {type(controller.backend).__name__}")
-    
-    if controller.initialize():
-        print("✅ Controller initialization: PASSED")
-        
-        # Test database stats
-        stats = controller.get_database_stats()
-        if stats:
-            print(f"📊 Found {stats.get('total_applications', 0)} CVs")
-            if 'encryption_status' in stats:
-                print(f"🔐 Status: {stats['encryption_status']}")
-            print("✅ Database stats: PASSED")
-        else:
-            print("⚠️  Database stats: No data")
-        
-        # Test keyword validation
-        validation = controller.validate_keywords("Python, Java")
-        if validation.get('valid'):
-            print("✅ Keyword validation: PASSED")
-        else:
-            print("❌ Keyword validation: FAILED")
-    else:
-        print("❌ Controller initialization: FAILED")
+    for path in test_paths:
+        resolved = resolve_cv_path(path)
+        print(f"'{path}' -> '{resolved}' ({'Successed' if resolved and os.path.exists(resolved) else 'Failed'})")
 
 if __name__ == "__main__":
-    test_encryption_integration()
+    test_path_resolution()

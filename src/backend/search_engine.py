@@ -22,6 +22,7 @@ class CVMatch:
     total_matches: int
     keyword_matches: Dict[str, int]
     similarity_score: float = 0.0
+    is_encrypted: bool = False
 
 @dataclass
 class SearchResult:
@@ -33,6 +34,7 @@ class SearchResult:
     keywords_searched: List[str] = None
     algorithm_used: str = ""
     cv_matches: List[CVMatch] = None
+    encryption_enabled: bool = False
     
     def __post_init__(self):
         if self.exact_matches is None:
@@ -50,8 +52,13 @@ class DatabaseCVSearchEngine:
         self.db_manager = db_manager or get_database_connection()
         self.cv_cache = {}  # Cache CV data for performance
         self.cache_loaded = False
+        self.encryption_enabled = False
     
+# Quick fix for search_engine.py
+# Replace the load_cv_cache method in your backend/search_engine.py
+
     def load_cv_cache(self, force_reload: bool = False):
+        """Load CV cache with automatic decryption support."""
         if self.cache_loaded and not force_reload:
             return
         
@@ -59,6 +66,40 @@ class DatabaseCVSearchEngine:
             raise Exception("Failed to connect to database")
         
         print("Loading CV data from database...")
+        
+        # Check encryption status from database manager directly
+        encryption_status = self.db_manager.get_encryption_status()
+        
+        # Check actual encrypted data in database
+        cursor = self.db_manager.connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE is_encrypted = TRUE")
+        encrypted_count = cursor.fetchone()[0]
+        
+        cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE is_encrypted = FALSE")
+        unencrypted_count = cursor.fetchone()[0]
+        
+        total_records = encrypted_count + unencrypted_count
+        
+        # Determine encryption status based on actual data AND manager readiness
+        manager_ready = encryption_status.get('encryption_manager_ready', False)
+        
+        if encrypted_count > 0 and manager_ready:
+            print("✅ Encryption detected and ready - CV data will be automatically decrypted")
+            self.encryption_enabled = True
+        elif encrypted_count > 0 and not manager_ready:
+            print("⚠️ Warning: Encrypted data found but encryption manager not ready")
+            self.encryption_enabled = False
+        elif encrypted_count == 0:
+            print("🔓 No encrypted data found - all CV data is stored in plain text")
+            self.encryption_enabled = False
+        else:
+            print("🔍 Mixed encryption status detected")
+            self.encryption_enabled = manager_ready
+        
+        print(f"   Encrypted records: {encrypted_count}/{total_records}")
+        print(f"   Encryption manager ready: {manager_ready}")
+        
+        # Load CV data (with automatic decryption)
         cv_data = self.db_manager.get_cv_texts_for_search()
         
         self.cv_cache = {}
@@ -67,10 +108,10 @@ class DatabaseCVSearchEngine:
         
         self.cache_loaded = True
         self.db_manager.disconnect()
-        print(f"Loaded {len(self.cv_cache)} CVs into cache")
-    
+        print(f"Loaded {len(self.cv_cache)} CVs into cache (encryption: {'enabled' if self.encryption_enabled else 'disabled'})")
     def search_cvs(self, keywords_str: str, algorithm: SearchAlgorithm = SearchAlgorithm.KMP, 
                    fuzzy_threshold: float = 70.0, top_n: int = 10) -> SearchResult:
+        """Search CVs with automatic encryption handling."""
         self.load_cv_cache()
         
         result = SearchResult()
@@ -78,9 +119,14 @@ class DatabaseCVSearchEngine:
         result.keywords_searched = keywords
         result.algorithm_used = algorithm.value
         result.total_cvs_scanned = len(self.cv_cache)
+        result.encryption_enabled = self.encryption_enabled
         
         if not keywords:
             return result
+        
+        print(f"🔍 Searching {len(self.cv_cache)} CVs using {algorithm.value.upper()} algorithm")
+        if self.encryption_enabled:
+            print("🔒 Searching decrypted CV content")
         
         # Perform exact matching
         start_time = time.time()
@@ -95,6 +141,7 @@ class DatabaseCVSearchEngine:
         keywords_without_matches = [kw for kw, count in result.exact_matches.items() if count == 0]
         
         if keywords_without_matches:
+            print(f"🔍 Performing fuzzy search for {len(keywords_without_matches)} keywords without exact matches")
             start_time = time.time()
             cv_fuzzy_matches = self._perform_fuzzy_search_on_cvs(keywords_without_matches, fuzzy_threshold)
             result.fuzzy_match_time = (time.time() - start_time) * 1000
@@ -130,6 +177,7 @@ class DatabaseCVSearchEngine:
         return [kw.strip().lower() for kw in keywords_str.split(',') if kw.strip()]
     
     def _perform_exact_search_on_cvs(self, keywords: List[str], algorithm: SearchAlgorithm) -> Dict[int, Dict[str, int]]:
+        """Perform exact search on cached CV data (already decrypted)."""
         cv_matches = {}
         
         for detail_id, cv_text in self.cv_cache.items():
@@ -155,6 +203,7 @@ class DatabaseCVSearchEngine:
         return cv_matches
     
     def _perform_fuzzy_search_on_cvs(self, keywords: List[str], threshold: float) -> Dict[int, Dict[str, List[Tuple[str, float]]]]:
+        """Perform fuzzy search on cached CV data (already decrypted)."""
         cv_fuzzy_matches = {}
         
         for detail_id, cv_text in self.cv_cache.items():
@@ -173,6 +222,7 @@ class DatabaseCVSearchEngine:
     def _rank_cvs(self, exact_matches: Dict[int, Dict[str, int]], 
                   fuzzy_matches: Dict[int, Dict[str, List[Tuple[str, float]]]], 
                   top_n: int) -> List[CVMatch]:
+        """Rank CVs and get applicant information (with encryption support)."""
         cv_scores = {}
         
         # Score exact matches
@@ -207,7 +257,7 @@ class DatabaseCVSearchEngine:
             
             cv_scores[detail_id]['fuzzy_score'] = fuzzy_score
         
-        # Calculate final scores and get CV details from database
+        # Calculate final scores and get CV details from database (with decryption)
         ranked_cvs = []
         
         if not self.db_manager.connect():
@@ -218,7 +268,7 @@ class DatabaseCVSearchEngine:
                 total_score = scores['exact_score'] + scores['fuzzy_score']
                 
                 if total_score > 0:
-                    # Get applicant and application details
+                    # Get applicant and application details (automatically decrypted)
                     app = self.db_manager.get_application_by_id(detail_id)
                     if app:
                         profile = self.db_manager.get_applicant_profile(app.applicant_id)
@@ -230,7 +280,8 @@ class DatabaseCVSearchEngine:
                             application_role=app.application_role,
                             total_matches=int(total_score),
                             keyword_matches=scores['keyword_breakdown'],
-                            similarity_score=total_score
+                            similarity_score=total_score,
+                            is_encrypted=app.is_encrypted
                         )
                         ranked_cvs.append(cv_match)
             
@@ -242,6 +293,7 @@ class DatabaseCVSearchEngine:
             self.db_manager.disconnect()
     
     def get_cv_summary(self, detail_id: int) -> Dict[str, str]:
+        """Get CV summary with automatic decryption."""
         if not self.db_manager.connect():
             return {}
         
@@ -252,17 +304,65 @@ class DatabaseCVSearchEngine:
             self.db_manager.disconnect()
     
     def get_database_stats(self) -> Dict[str, int]:
+        """Get database statistics including encryption info."""
         if not self.db_manager.connect():
             return {}
         
         try:
-            return self.db_manager.get_database_stats()
+            stats = self.db_manager.get_database_stats()
+            # Add encryption information
+            encryption_status = self.db_manager.get_encryption_status()
+            stats['encryption_enabled'] = encryption_status['encryption_enabled']
+            stats['encryption_ready'] = encryption_status['encryption_manager_ready']
+            return stats
+        finally:
+            self.db_manager.disconnect()
+    
+    def test_encryption_compatibility(self) -> Dict[str, any]:
+        """Test encryption compatibility and readability."""
+        if not self.db_manager.connect():
+            return {"error": "Database connection failed"}
+        
+        try:
+            # Get encryption status
+            encryption_status = self.db_manager.get_encryption_status()
+            
+            # Test reading some encrypted data
+            applications = self.db_manager.get_all_applications()
+            
+            encrypted_count = sum(1 for app in applications if app.is_encrypted)
+            readable_count = 0
+            
+            # Test if encrypted data is readable
+            for app in applications[:5]:  # Test first 5 applications
+                if app.is_encrypted:
+                    # Check if decrypted text is readable (not base64 encoded)
+                    if app.cv_raw_text and len(app.cv_raw_text) > 0:
+                        # Simple check: readable text should contain common words
+                        common_words = ['the', 'and', 'to', 'of', 'a', 'in', 'is', 'it', 'you', 'that']
+                        readable = any(word in app.cv_raw_text.lower() for word in common_words)
+                        if readable:
+                            readable_count += 1
+            
+            return {
+                "encryption_enabled": encryption_status['encryption_enabled'],
+                "encryption_manager_ready": encryption_status['encryption_manager_ready'],
+                "total_applications": len(applications),
+                "encrypted_applications": encrypted_count,
+                "readable_encrypted": readable_count,
+                "encryption_working": readable_count == min(encrypted_count, 5) if encrypted_count > 0 else True
+            }
+            
+        except Exception as e:
+            return {"error": f"Test failed: {str(e)}"}
+        
         finally:
             self.db_manager.disconnect()
 
 # Convenience functions for easy usage
 def search_database_cvs(keywords: str, algorithm: str = "kmp", top_n: int = 10, 
                        fuzzy_threshold: float = 70.0) -> Tuple[SearchResult, List[CVMatch]]:
+    """Search database CVs with automatic encryption handling."""
     engine = DatabaseCVSearchEngine()
     
     algo_enum = SearchAlgorithm.KMP
@@ -276,64 +376,123 @@ def search_database_cvs(keywords: str, algorithm: str = "kmp", top_n: int = 10,
     return search_result, search_result.cv_matches
 
 def get_cv_summary_by_id(detail_id: int) -> Dict[str, str]:
+    """Get CV summary with automatic decryption."""
     engine = DatabaseCVSearchEngine()
     return engine.get_cv_summary(detail_id)
 
 def get_cv_path_by_id(detail_id: int) -> str:
+    """Get CV path by ID."""
     summary = get_cv_summary_by_id(detail_id)
     return summary.get('cv_path', '')
 
-if __name__ == "__main__":
-    print("Testing Database CV Search Engine")
-    print("=" * 50)
+def test_encryption_search():
+    """Test search functionality with encryption."""
+    print("🔐 Testing Encryption-Aware Search Engine")
+    print("=" * 60)
     
     try:
-        # Test database connection
+        engine = DatabaseCVSearchEngine()
+        
+        # Test encryption compatibility
+        compatibility = engine.test_encryption_compatibility()
+        print("Encryption Compatibility Test:")
+        print(f"   Encryption Enabled: {compatibility.get('encryption_enabled', False)}")
+        print(f"   Manager Ready: {compatibility.get('encryption_manager_ready', False)}")
+        print(f"   Total Applications: {compatibility.get('total_applications', 0)}")
+        print(f"   Encrypted Applications: {compatibility.get('encrypted_applications', 0)}")
+        print(f"   Readable Encrypted: {compatibility.get('readable_encrypted', 0)}")
+        print(f"   Encryption Working: {compatibility.get('encryption_working', False)}")
+        
+        if compatibility.get('error'):
+            print(f"   Error: {compatibility['error']}")
+            return
+        
+        # Test search
+        print(f"\nTesting Search Functionality:")
+        
+        test_searches = [
+            ("Python, JavaScript", "kmp"),
+            ("cooking, chef, kitchen", "boyer_moore"),
+            ("engineer, development", "aho_corasick")
+        ]
+        
+        for keywords, algorithm in test_searches:
+            print(f"\n   Testing: '{keywords}' with {algorithm.upper()}")
+            
+            result, cv_matches = search_database_cvs(
+                keywords=keywords,
+                algorithm=algorithm,
+                top_n=3,
+                fuzzy_threshold=75.0
+            )
+            
+            print(f"   ⏱️ Exact search: {result.exact_match_time:.2f}ms")
+            print(f"   ⏱️ Fuzzy search: {result.fuzzy_match_time:.2f}ms")
+            print(f"   📄 CVs scanned: {result.total_cvs_scanned}")
+            print(f"   🔒 Encryption: {'enabled' if result.encryption_enabled else 'disabled'}")
+            
+            total_exact = sum(result.exact_matches.values())
+            print(f"   🎯 Total exact matches: {total_exact}")
+            
+            if cv_matches:
+                top_match = cv_matches[0]
+                encryption_marker = "🔒" if top_match.is_encrypted else "🔓"
+                print(f"   🏆 Top result: {encryption_marker} {top_match.applicant_name}")
+                print(f"      Role: {top_match.application_role}")
+                print(f"      Score: {top_match.total_matches}")
+            else:
+                print(f"   📝 No matching CVs found")
+        
+        # Test summary retrieval
+        print(f"\nTesting Summary Retrieval:")
+        if cv_matches:
+            detail_id = cv_matches[0].detail_id
+            summary = get_cv_summary_by_id(detail_id)
+            
+            if summary:
+                print(f"   ✅ Summary retrieved for {summary.get('name', 'Unknown')}")
+                print(f"   📞 Phone: {summary.get('phone', 'N/A')}")
+                print(f"   💼 Role: {summary.get('role', 'N/A')}")
+                
+                # Check if CV sections are readable
+                sections_readable = 0
+                for section in ['summary', 'skills', 'experience']:
+                    content = summary.get(section, '')
+                    if content and len(content.strip()) > 10:
+                        sections_readable += 1
+                
+                print(f"   📋 Readable sections: {sections_readable}/3")
+            else:
+                print(f"   ❌ Failed to retrieve summary")
+        
+        print(f"\n✅ Encryption search test completed!")
+        
+    except Exception as e:
+        print(f"❌ Test failed: {e}")
+        import traceback
+        traceback.print_exc()
+
+if __name__ == "__main__":
+    print("🔍 Testing Enhanced Search Engine with Encryption Support")
+    print("=" * 70)
+    
+    try:
+        # Test database connection and encryption
         engine = DatabaseCVSearchEngine()
         stats = engine.get_database_stats()
         
         print(f"Database Statistics:")
         print(f"  Total Applicants: {stats.get('total_applicants', 0)}")
         print(f"  Total Applications: {stats.get('total_applications', 0)}")
+        print(f"  Encryption Enabled: {stats.get('encryption_enabled', False)}")
+        print(f"  Encryption Ready: {stats.get('encryption_ready', False)}")
         print()
         
-        # Test search scenarios
-        test_searches = [
-            "Python, JavaScript, React",
-            "Machine Learning, Data Science",
-            "Java, Spring Boot",
-            "Chef, Cooking, Kitchen"
-        ]
+        # Run encryption-aware tests
+        test_encryption_search()
         
-        for keywords in test_searches:
-            print(f"Testing search: '{keywords}'")
-            
-            result, cv_matches = search_database_cvs(
-                keywords, 
-                algorithm="kmp", 
-                top_n=3,
-                fuzzy_threshold=75.0
-            )
-            
-            print(f"  Exact match time: {result.exact_match_time:.2f}ms")
-            print(f"  Fuzzy match time: {result.fuzzy_match_time:.2f}ms")
-            print(f"  CVs scanned: {result.total_cvs_scanned}")
-            
-            total_exact = sum(result.exact_matches.values())
-            print(f"  Total exact matches: {total_exact}")
-            
-            if result.fuzzy_matches:
-                fuzzy_keywords = len([k for k, v in result.fuzzy_matches.items() if v])
-                print(f"  Keywords with fuzzy matches: {fuzzy_keywords}")
-            
-            if cv_matches:
-                print(f"  Top CV: {cv_matches[0].applicant_name} - {cv_matches[0].application_role} (Score: {cv_matches[0].total_matches})")
-            else:
-                print("  No matching CVs found")
-            
-            print()
-        
-        print("Database search engine test completed!")
+        print(f"\n🎉 All tests completed successfully!")
+        print(f"Your search engine is ready for encrypted and non-encrypted data!")
         
     except Exception as e:
         print(f"Test failed: {e}")

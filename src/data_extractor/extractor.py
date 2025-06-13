@@ -6,6 +6,10 @@ from PyPDF2 import PdfReader
 import mysql.connector
 import getpass 
 import random
+import base64
+from cryptography.fernet import Fernet
+import json
+import hashlib
 
 DB_HOST = "localhost"
 DB_USER = "root"
@@ -33,14 +37,149 @@ if not DB_PASSWORD:
             print("Password verification failed")
             exit(1) 
 
+# Encryption configuration
+ENCRYPTION_KEY_FILE = "ats_encryption.key"
+ENCRYPTION_CONFIG_FILE = "ats_config.json"
+
+class EncryptionManager:
+    def __init__(self):
+        self.key = None
+        self.cipher = None
+        self.encryption_enabled = False
+    
+    def generate_key(self) -> bytes:
+        """Generate a new encryption key."""
+        return Fernet.generate_key()
+    
+    def save_key(self, key: bytes, password: str = None):
+        """Save encryption key to file, optionally password-protected."""
+        if password:
+            # Derive key from password using PBKDF2
+            password_hash = hashlib.pbkdf2_hmac('sha256', 
+                                               password.encode('utf-8'), 
+                                               b'ats_salt_2024', 
+                                               100000)
+            password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
+            encrypted_key = password_cipher.encrypt(key)
+            
+            with open(ENCRYPTION_KEY_FILE, 'wb') as f:
+                f.write(encrypted_key)
+        else:
+            with open(ENCRYPTION_KEY_FILE, 'wb') as f:
+                f.write(key)
+        
+        print(f"Encryption key saved to {ENCRYPTION_KEY_FILE}")
+    
+    def load_key(self, password: str = None) -> bytes:
+        """Load encryption key from file."""
+        if not os.path.exists(ENCRYPTION_KEY_FILE):
+            return None
+        
+        with open(ENCRYPTION_KEY_FILE, 'rb') as f:
+            key_data = f.read()
+        
+        if password:
+            try:
+                password_hash = hashlib.pbkdf2_hmac('sha256', 
+                                                   password.encode('utf-8'), 
+                                                   b'ats_salt_2024', 
+                                                   100000)
+                password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
+                key = password_cipher.decrypt(key_data)
+                return key
+            except Exception as e:
+                print(f"Failed to decrypt key with password: {e}")
+                return None
+        else:
+            return key_data
+    
+    def initialize_encryption(self, password: str = None) -> bool:
+        """Initialize encryption with existing or new key."""
+        # Try to load existing key
+        key = self.load_key(password)
+        
+        if not key:
+            # Generate new key
+            key = self.generate_key()
+            self.save_key(key, password)
+            print("Generated new encryption key")
+        else:
+            print("Loaded existing encryption key")
+        
+        self.key = key
+        self.cipher = Fernet(key)
+        self.encryption_enabled = True
+        return True
+    
+    def encrypt_text(self, text: str) -> str:
+        """Encrypt text and return base64 encoded string."""
+        if not self.encryption_enabled or not text:
+            return text
+        
+        encrypted_data = self.cipher.encrypt(text.encode('utf-8'))
+        return base64.b64encode(encrypted_data).decode('utf-8')
+    
+    def decrypt_text(self, encrypted_text: str) -> str:
+        """Decrypt base64 encoded encrypted text."""
+        if not self.encryption_enabled or not encrypted_text:
+            return encrypted_text
+        
+        try:
+            encrypted_data = base64.b64decode(encrypted_text.encode('utf-8'))
+            decrypted_data = self.cipher.decrypt(encrypted_data)
+            return decrypted_data.decode('utf-8')
+        except Exception as e:
+            print(f"Decryption failed: {e}")
+            return encrypted_text
+
+    def is_encrypted_data(self, text: str) -> bool:
+        """Check if text appears to be encrypted (base64 encoded)."""
+        if not text or len(text) < 10:
+            return False
+        
+        try:
+            # Try to decode as base64
+            decoded = base64.b64decode(text.encode('utf-8'))
+            # Check if it looks like Fernet encrypted data (starts with specific bytes)
+            return len(decoded) > 10 and decoded.startswith(b'\x80')
+        except:
+            return False
+
+def save_encryption_config(encryption_enabled: bool, password_protected: bool = False):
+    """Save encryption configuration."""
+    config = {
+        "encryption_enabled": encryption_enabled,
+        "password_protected": password_protected,
+        "version": "1.0"
+    }
+    
+    with open(ENCRYPTION_CONFIG_FILE, 'w') as f:
+        json.dump(config, f, indent=2)
+
+def load_encryption_config() -> dict:
+    """Load encryption configuration."""
+    if not os.path.exists(ENCRYPTION_CONFIG_FILE):
+        return {"encryption_enabled": False, "password_protected": False}
+    
+    try:
+        with open(ENCRYPTION_CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    except:
+        return {"encryption_enabled": False, "password_protected": False}
+
+# Global encryption manager
+encryption_manager = EncryptionManager()
+
+# Modified table creation with encryption support
 create_applicant_profile_table = """
 CREATE TABLE IF NOT EXISTS ApplicantProfile (
     applicant_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) DEFAULT NULL,
-    last_name VARCHAR(50) DEFAULT NULL,
-    date_of_birth DATE DEFAULT NULL,
-    address VARCHAR(255) DEFAULT NULL,
-    phone_number VARCHAR(20) DEFAULT NULL
+    first_name VARCHAR(255) DEFAULT NULL,
+    last_name VARCHAR(255) DEFAULT NULL,
+    date_of_birth VARCHAR(255) DEFAULT NULL,
+    address TEXT DEFAULT NULL,
+    phone_number VARCHAR(255) DEFAULT NULL,
+    is_encrypted BOOLEAN DEFAULT FALSE
 )
 """
 
@@ -48,7 +187,7 @@ create_application_detail_table = """
 CREATE TABLE IF NOT EXISTS ApplicationDetail (
     detail_id INT AUTO_INCREMENT PRIMARY KEY,
     applicant_id INT NOT NULL,
-    application_role VARCHAR(100) DEFAULT NULL,
+    application_role VARCHAR(255) DEFAULT NULL,
     cv_path TEXT,
     cv_raw_text LONGTEXT,
     summary_section TEXT,
@@ -56,6 +195,7 @@ CREATE TABLE IF NOT EXISTS ApplicationDetail (
     experience_section TEXT,
     education_section TEXT,
     accomplishments_section TEXT,
+    is_encrypted BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (applicant_id) REFERENCES ApplicantProfile(applicant_id)
 )
 """
@@ -268,37 +408,71 @@ def extract_cv_sections_fallback(cv_text):
     
     return sections
 
-def insert_applicant_profile(profile_data):
+def insert_applicant_profile(profile_data, encrypt_data=False):
+    if encrypt_data:
+        # Encrypt sensitive personal data
+        first_name = encryption_manager.encrypt_text(profile_data['first_name'])
+        last_name = encryption_manager.encrypt_text(profile_data['last_name'])
+        date_of_birth = encryption_manager.encrypt_text(profile_data['date_of_birth'])
+        address = encryption_manager.encrypt_text(profile_data['address'])
+        phone_number = encryption_manager.encrypt_text(profile_data['phone_number'])
+    else:
+        first_name = profile_data['first_name']
+        last_name = profile_data['last_name']
+        date_of_birth = profile_data['date_of_birth']
+        address = profile_data['address']
+        phone_number = profile_data['phone_number']
+    
     cursor.execute("""
-        INSERT INTO ApplicantProfile (first_name, last_name, date_of_birth, address, phone_number)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO ApplicantProfile (first_name, last_name, date_of_birth, address, phone_number, is_encrypted)
+        VALUES (%s, %s, %s, %s, %s, %s)
     """, (
-        profile_data['first_name'],
-        profile_data['last_name'],
-        profile_data['date_of_birth'],
-        profile_data['address'],
-        profile_data['phone_number']
+        first_name,
+        last_name,
+        date_of_birth,
+        address,
+        phone_number,
+        encrypt_data
     ))
     return cursor.lastrowid
 
-def insert_application_detail(applicant_id, cv_path, cv_text, sections):
+def insert_application_detail(applicant_id, cv_path, cv_text, sections, encrypt_data=False):
     role = extract_application_role(cv_text, cv_path)
+    
+    if encrypt_data:
+        # Encrypt CV content and sections
+        cv_raw_text = encryption_manager.encrypt_text(cv_text)
+        summary_section = encryption_manager.encrypt_text(sections['summary'])
+        skills_section = encryption_manager.encrypt_text(sections['skills'])
+        experience_section = encryption_manager.encrypt_text(sections['experience'])
+        education_section = encryption_manager.encrypt_text(sections['education'])
+        accomplishments_section = encryption_manager.encrypt_text(sections['accomplishments'])
+        application_role = encryption_manager.encrypt_text(role)
+    else:
+        cv_raw_text = cv_text
+        summary_section = sections['summary']
+        skills_section = sections['skills']
+        experience_section = sections['experience']
+        education_section = sections['education']
+        accomplishments_section = sections['accomplishments']
+        application_role = role
     
     cursor.execute("""
         INSERT INTO ApplicationDetail 
         (applicant_id, application_role, cv_path, cv_raw_text, summary_section, 
-         skills_section, experience_section, education_section, accomplishments_section)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+         skills_section, experience_section, education_section, accomplishments_section, is_encrypted)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (
         applicant_id,
-        role,
+        application_role,
         cv_path,
-        cv_text,
-        sections['summary'],
-        sections['skills'],
-        sections['experience'],
-        sections['education'],
-        sections['accomplishments']
+        cv_raw_text,
+        summary_section,
+        skills_section,
+        experience_section,
+        education_section,
+        accomplishments_section,
+        encrypt_data
     ))
 
 def extract_application_role(cv_text, cv_path):
@@ -368,7 +542,35 @@ def extract_application_role(cv_text, cv_path):
     
     return 'General Application'
 
-def process_folder(base_folder):
+def setup_encryption():
+    """Setup encryption based on user choice."""
+    print("\n=== ENCRYPTION SETUP ===")
+    print("Choose encryption option:")
+    print("1. No encryption (default)")
+    print("2. Encrypt with auto-generated key")
+    
+    choice = input("Enter choice (1-2): ").strip()
+    
+    if choice == "1":
+        print("Proceeding without encryption")
+        save_encryption_config(False, False)
+        return False
+    elif choice == "2":
+        # Initialize encryption with auto-generated key
+        if encryption_manager.initialize_encryption():
+            save_encryption_config(True, False)
+            print("Encryption setup completed successfully!")
+            return True
+        else:
+            print("Encryption setup failed. Proceeding without encryption.")
+            save_encryption_config(False, False)
+            return False
+    else:
+        print("Invalid choice. Proceeding without encryption.")
+        save_encryption_config(False, False)
+        return False
+
+def process_folder(base_folder, use_encryption=False):
     pdf_files = glob.glob(os.path.join(base_folder, "**/*.pdf"), recursive=True)
     
     if not pdf_files:
@@ -378,12 +580,10 @@ def process_folder(base_folder):
     total_files = len(pdf_files)
     print(f"Found {total_files} PDF files to process")
     
-    # CLEAR DATABASE FIRST - removed from here since it's in main now
-    # print("Clearing existing data...")
-    # cursor.execute("DELETE FROM ApplicationDetail")
-    # cursor.execute("DELETE FROM ApplicantProfile")
-    # db.commit()
-    # print("Database cleared")
+    if use_encryption:
+        print("Processing with ENCRYPTION enabled")
+    else:
+        print("Processing WITHOUT encryption")
     
     # create base profiles for one-to-many
     base_profiles = []
@@ -394,7 +594,7 @@ def process_folder(base_folder):
     
     for i in range(num_base_profiles):
         profile_data = generate_fake_profile()
-        applicant_id = insert_applicant_profile(profile_data)
+        applicant_id = insert_applicant_profile(profile_data, use_encryption)
         base_profiles.append({
             'id': applicant_id,
             'application_count': 0
@@ -437,7 +637,7 @@ def process_folder(base_folder):
             applicant_id = selected_profile['id']
             selected_profile['application_count'] += 1
             
-            insert_application_detail(applicant_id, path, cv_text, sections)
+            insert_application_detail(applicant_id, path, cv_text, sections, use_encryption)
             processed += 1
             
             # check if profiles are being created somehow
@@ -472,6 +672,7 @@ def process_folder(base_folder):
     print(f"Profiles in ApplicantProfile table: {total_profiles_in_table}")
     print(f"Unique profiles used in applications: {unique_profiles}")
     print(f"Total applications: {total_applications}")
+    print(f"Encryption used: {'YES' if use_encryption else 'NO'}")
     
     if total_profiles_in_table != num_base_profiles:
         print(f"ERROR: Something created extra profiles! Expected {num_base_profiles}")
@@ -505,14 +706,14 @@ def export_data_to_sql(filename):
             
             f.write("-- Insert ApplicantProfile data\n")
             for i, profile in enumerate(profiles, 1):  # start from 1
-                original_id, first_name, last_name, dob, address, phone = profile
-                dob_val = escape_sql(dob.isoformat() if dob else None)
+                original_id, first_name, last_name, dob, address, phone, is_encrypted = profile
+                dob_val = escape_sql(dob if dob else None)
                 
                 # use sequential IDs starting from 1
                 insert_stmt = (
-                    "INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number) VALUES ("
+                    "INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES ("
                     f"{i}, {escape_sql(first_name)}, {escape_sql(last_name)}, {dob_val}, "
-                    f"{escape_sql(address)}, {escape_sql(phone)});\n"
+                    f"{escape_sql(address)}, {escape_sql(phone)}, {is_encrypted});\n"
                 )
                 f.write(insert_stmt)
             
@@ -525,15 +726,15 @@ def export_data_to_sql(filename):
                 id_mapping[original_id] = i
             
             for i, detail in enumerate(details, 1):  # start from 1
-                detail_id, original_applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments = detail
+                detail_id, original_applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments, is_encrypted = detail
                 new_applicant_id = id_mapping[original_applicant_id]  # maintain one-to-many relationships
                 
                 insert_stmt = (
                     "INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, "
-                    "summary_section, skills_section, experience_section, education_section, accomplishments_section) VALUES ("
+                    "summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES ("
                     f"{i}, {new_applicant_id}, {escape_sql(role)}, {escape_sql(cv_path)}, {escape_sql(cv_raw_text)}, "
                     f"{escape_sql(summary)}, {escape_sql(skills)}, {escape_sql(experience)}, "
-                    f"{escape_sql(education)}, {escape_sql(accomplishments)});\n"
+                    f"{escape_sql(education)}, {escape_sql(accomplishments)}, {is_encrypted});\n"
                 )
                 f.write(insert_stmt)
         
@@ -557,7 +758,29 @@ def test_extraction(pdf_path):
             print("(Not found)")
 
 if __name__ == "__main__":
-    print("=== CV ATS Extraction App ===\n")
+    print("=== CV ATS Extraction App with Encryption Support ===\n")
+    
+    # Check for existing encryption configuration
+    config = load_encryption_config()
+    use_encryption = False
+    
+    if config.get("encryption_enabled"):
+        print("Existing encryption configuration found.")
+        
+        # Try to load existing encryption
+        password = None
+        if config.get("password_protected"):
+            password = getpass.getpass("Enter encryption password: ")
+        
+        if encryption_manager.initialize_encryption(password):
+            use_encryption = True
+            print("Encryption loaded successfully!")
+        else:
+            print("Failed to load encryption. Proceeding without encryption.")
+            use_encryption = False
+    else:
+        # Setup new encryption
+        use_encryption = setup_encryption()
     
     # CLEAR DATABASE FIRST
     print("Clearing existing data...")
@@ -568,10 +791,26 @@ if __name__ == "__main__":
     db.commit()
     print("Database cleared and AUTO_INCREMENT reset")
     
+    # Uncomment to test single file extraction
     # test_extraction("../../data/CHEF/10276858.pdf")
     
-    process_folder("../../data")
-    export_data_to_sql("../../data/ats.sql")
+    # Process all PDFs
+    process_folder("../../data", use_encryption)
+    
+    # Export to SQL file
+    export_filename = "../../data/ats_encrypted.sql" if use_encryption else "../../data/ats.sql"
+    export_data_to_sql(export_filename)
+    
+    print(f"\n=== EXTRACTION COMPLETED ===")
+    print(f"Database: {DB_NAME}")
+    print(f"Encryption: {'ENABLED' if use_encryption else 'DISABLED'}")
+    print(f"Export file: {export_filename}")
+    
+    if use_encryption:
+        print(f"\nEncryption files:")
+        print(f"  Key file: {ENCRYPTION_KEY_FILE}")
+        print(f"  Config file: {ENCRYPTION_CONFIG_FILE}")
+        print("\nIMPORTANT: Keep these files safe! They are required to decrypt your data.")
     
     cursor.close()
     db.close()
