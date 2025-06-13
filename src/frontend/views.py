@@ -24,7 +24,8 @@ def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
 
     section_headers = ["Summary", "Skills", "Experience", "Education", "Accomplishments"]
     for header in section_headers:
-        extracted_text = re.sub(fr"\b{header}\b", f"\n{header}", extracted_text, flags=re.IGNORECASE)
+        pattern = fr"(?i)^{header}\s*$"
+        extracted_text = re.sub(pattern, f"\n{header}", extracted_text, flags=re.MULTILINE)
 
     dialog = ft.AlertDialog(
         title=ft.Text(f"📄 {applicant_name}'s CV (Text View)"),
