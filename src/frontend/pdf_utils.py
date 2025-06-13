@@ -17,7 +17,7 @@ def open_pdf_with_system_viewer(pdf_path: str) -> bool:
         bool: True if successful, False otherwise
     """
     if not pdf_path or not os.path.exists(pdf_path):
-        print(f"❌ PDF file not found: {pdf_path}")
+        print(f"PDF file not found: {pdf_path}")
         return False
     
     try:
@@ -39,11 +39,11 @@ def open_pdf_with_system_viewer(pdf_path: str) -> bool:
             # Fallback - try webbrowser
             webbrowser.open(f'file://{os.path.abspath(pdf_path)}')
         
-        print(f"✅ Opened PDF: {pdf_path}")
+        print(f"Opened PDF: {pdf_path}")
         return True
         
     except Exception as e:
-        print(f"❌ Error opening PDF: {e}")
+        print(f"Error opening PDF: {e}")
         return False
 
 def open_pdf_in_browser(pdf_path: str) -> bool:
@@ -57,7 +57,7 @@ def open_pdf_in_browser(pdf_path: str) -> bool:
         bool: True if successful, False otherwise
     """
     if not pdf_path or not os.path.exists(pdf_path):
-        print(f"❌ PDF file not found: {pdf_path}")
+        print(f"PDF file not found: {pdf_path}")
         return False
     
     try:
@@ -65,11 +65,11 @@ def open_pdf_in_browser(pdf_path: str) -> bool:
         abs_path = os.path.abspath(pdf_path)
         file_url = f'file:///{abs_path.replace(os.sep, "/")}'
         webbrowser.open(file_url)
-        print(f"✅ Opened PDF in browser: {pdf_path}")
+        print(f"Opened PDF in browser: {pdf_path}")
         return True
         
     except Exception as e:
-        print(f"❌ Error opening PDF in browser: {e}")
+        print(f"Error opening PDF in browser: {e}")
         return False
 
 def validate_pdf_path(pdf_path: str) -> tuple[bool, str]:

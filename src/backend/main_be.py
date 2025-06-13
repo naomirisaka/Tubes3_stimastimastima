@@ -172,7 +172,7 @@ def get_summary(detail_id: int) -> Dict:
 
 # Example usage functions for testing
 def demo_search_scenarios():
-    print("🔍 DEMONSTRATING ATS BACKEND SEARCH SCENARIOS")
+    print("DEMONSTRATING ATS BACKEND SEARCH SCENARIOS")
     print("=" * 60)
     
     backend = get_ats_backend()
