@@ -365,6 +365,22 @@ def home_view(page: ft.Page):
 
         # Show loading
         result_column.controls.clear()
+
+        if algo == "BM" and len(keywords) <= 3:
+            warning = ft.Text(
+                "⚠️ Warning: Searching with short keyword (<= 3) using Boyer-Moore may be slow.",
+                size=14,
+                color=ft.Colors.ORANGE_600,
+                text_align=ft.TextAlign.CENTER
+            )
+            result_column.controls.append(
+                ft.Container(
+                    content=warning,
+                    alignment=ft.alignment.center,
+                    padding=10
+                )
+            )
+            
         result_column.controls.append(
             ft.Container(
                 content=ft.Row([
@@ -808,8 +824,8 @@ def home_view(page: ft.Page):
         )
 
         welcome_text = ft.Text(
-            "Welcome to the Smartest CV Finder in the Galaxy 🚀",
-            size=20,
+            "Welcome to StimaStimaStima CV Matcher!",
+            size=24,
             weight=ft.FontWeight.W_600,
             text_align=ft.TextAlign.CENTER
         )
