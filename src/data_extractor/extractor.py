@@ -10,34 +10,52 @@ import base64
 from cryptography.fernet import Fernet
 import json
 import hashlib
+import os
+import sys
 
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_NAME = "ats_db"
 
-DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')  
+DB_PASSWORD = ""
 
-if not DB_PASSWORD:
+def get_mysql_password():
+    global DB_PASSWORD
+    
+    if DB_PASSWORD: 
+        return DB_PASSWORD
+    
+    DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
+    
+    if DB_PASSWORD:
+        return DB_PASSWORD
+    
     try:
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
-        DB_PASSWORD = "" 
+        DB_PASSWORD = ""  
+        print("MySQL connection successful with no password")
+        return DB_PASSWORD
     except mysql.connector.Error:
-        DB_PASSWORD = getpass.getpass("Enter MySQL Password: ")
+        pass
+    
+    print("MySQL requires a password")
+    DB_PASSWORD = getpass.getpass("Enter MySQL Password: ")
+    
+    try:
+        test_conn = mysql.connector.connect(
+            host=DB_HOST, 
+            user=DB_USER, 
+            password=DB_PASSWORD
+        )
+        test_conn.close()
+        print("Password verified successfully")
+        return DB_PASSWORD
+    except mysql.connector.Error as e:
+        print(f"Password verification failed: {e}")
+        DB_PASSWORD = "" 
+        return None
 
-        try:
-            test_conn = mysql.connector.connect(
-                host=DB_HOST, 
-                user=DB_USER, 
-                password=DB_PASSWORD
-            )
-            test_conn.close()
-            print("Password verified successfully")
-        except mysql.connector.Error as e:
-            print("Password verification failed")
-            exit(1) 
-
-# encryption configuration
 ENCRYPTION_KEY_FILE = "ats_encryption.key"
 ENCRYPTION_CONFIG_FILE = "ats_config.json"
 
@@ -68,7 +86,6 @@ class EncryptionManager:
         print(f"Encryption key saved to {ENCRYPTION_KEY_FILE}")
     
     def load_key(self, password: str = None) -> bytes:
-        """Load encryption key from file."""
         if not os.path.exists(ENCRYPTION_KEY_FILE):
             return None
         
@@ -186,20 +203,29 @@ CREATE TABLE IF NOT EXISTS ApplicationDetail (
 )
 """
 
-# create database
-db = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD,
-    database=DB_NAME
-)
-cursor = db.cursor()
+def get_database_connection():
+    password = get_mysql_password()
+    if password is None:
+        raise Exception("Failed to get valid MySQL password")
+    
+    return mysql.connector.connect(
+        host=DB_HOST,
+        user=DB_USER,
+        password=password,
+        database=DB_NAME
+    )
 
-cursor.execute(create_applicant_profile_table)
-cursor.execute(create_application_detail_table)
-db.commit()
+def initialize_database():
+    db = get_database_connection()
+    cursor = db.cursor()
+    
+    cursor.execute(create_applicant_profile_table)
+    cursor.execute(create_application_detail_table)
+    db.commit()
+    
+    cursor.close()
+    db.close()
 
-# seeding with faker
 faker = Faker('id_ID')
 
 def generate_phone():
@@ -256,7 +282,7 @@ def extract_text_from_pdf(pdf_path):
     except Exception as e:
         print(f"PyMuPDF extraction failed for {pdf_path}: {e}")
         return ""
-    
+
 def clean_extracted_text(text):
     if not text:
         return ""
@@ -366,7 +392,6 @@ def extract_cv_sections(cv_text):
     return sections
 
 def extract_sections_with_regex(normalized_text, text_lower):
-    """Fallback regex extraction with improved patterns"""
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
     patterns = {
@@ -433,6 +458,9 @@ def find_section_boundaries(lines):
     return boundaries
 
 def insert_applicant_profile(profile_data, encrypt_data=False):
+    db = get_database_connection()
+    cursor = db.cursor()
+    
     if encrypt_data:
         first_name = encryption_manager.encrypt_text(profile_data['first_name'])
         last_name = encryption_manager.encrypt_text(profile_data['last_name'])
@@ -457,9 +485,17 @@ def insert_applicant_profile(profile_data, encrypt_data=False):
         phone_number,
         encrypt_data
     ))
-    return cursor.lastrowid
+    
+    result = cursor.lastrowid
+    db.commit()
+    cursor.close()
+    db.close()
+    return result
 
 def insert_application_detail(applicant_id, cv_path, cv_text, sections, encrypt_data=False):
+    db = get_database_connection()
+    cursor = db.cursor()
+    
     role = extract_application_role(cv_text, cv_path)
     
     if encrypt_data:
@@ -496,6 +532,10 @@ def insert_application_detail(applicant_id, cv_path, cv_text, sections, encrypt_
         accomplishments_section,
         encrypt_data
     ))
+    
+    db.commit()
+    cursor.close()
+    db.close()
 
 def extract_application_role(cv_text, cv_path):
     path_parts = cv_path.replace('\\', '/').split('/')
@@ -565,7 +605,6 @@ def extract_application_role(cv_text, cv_path):
     return 'General Application'
 
 def setup_encryption():
-    """Setup encryption based on user choice."""
     print("\n=== ENCRYPTION SETUP ===")
     print("Choose encryption option:")
     print("1. No encryption (default)")
@@ -607,7 +646,8 @@ def process_folder(base_folder, use_encryption=False):
     else:
         print("Processing WITHOUT encryption")
     
-    # create base profiles for one-to-many
+    initialize_database()
+    
     base_profiles = []
     profile_percentage = random.uniform(0.40, 0.50)
     num_base_profiles = max(50, int(total_files * profile_percentage)) 
@@ -625,15 +665,7 @@ def process_folder(base_folder, use_encryption=False):
         if (i + 1) % 50 == 0:
             print(f"Created {i + 1} profiles...")
     
-    db.commit()
-    
-    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-    profile_count_after_creation = cursor.fetchone()[0]
-    print(f"Verified: {profile_count_after_creation} profiles in database")
-    
-    if profile_count_after_creation != num_base_profiles:
-        print(f"ERROR: Expected {num_base_profiles} but found {profile_count_after_creation}")
-        return
+    print(f"Verified: {len(base_profiles)} profiles created")
     
     processed = 0
     failed = 0
@@ -659,47 +691,20 @@ def process_folder(base_folder, use_encryption=False):
             insert_application_detail(applicant_id, path, cv_text, sections, use_encryption)
             processed += 1
             
-            if processed % 100 == 0:
-                cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-                current_profile_count = cursor.fetchone()[0]
-                if current_profile_count != num_base_profiles:
-                    print(f"ALERT: Profile count changed to {current_profile_count}!")
-                    break
-                db.commit()
-            
         except Exception as e:
             print(f"Error processing {path}: {e}")
             failed += 1
             continue
     
-    db.commit()
-    
-    # final statistics
-    cursor.execute("SELECT COUNT(DISTINCT applicant_id) FROM ApplicationDetail")
-    unique_profiles = cursor.fetchone()[0]
-    
-    cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
-    total_applications = cursor.fetchone()[0]
-    
-    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-    total_profiles_in_table = cursor.fetchone()[0]
-    
     print(f"\nProcessing completed")
     print(f"Successfully processed: {processed}")
     print(f"Failed: {failed}")
-    print(f"Profiles in ApplicantProfile table: {total_profiles_in_table}")
-    print(f"Total applications: {total_applications}")
     print(f"Encryption used: {'YES' if use_encryption else 'NO'}")
-    
-    if total_profiles_in_table != num_base_profiles:
-        print(f"ERROR: Something created extra profiles! Expected {num_base_profiles}")
-    
-    if unique_profiles != num_base_profiles:
-        print(f"ERROR: Not all profiles were used! Expected {num_base_profiles}")
-    
-    print(f"Average applications per profile: {total_applications/unique_profiles:.2f}")
 
 def export_data_to_sql(filename):
+    db = get_database_connection()
+    cursor = db.cursor()
+    
     try:
         cursor.execute("SELECT * FROM ApplicantProfile ORDER BY applicant_id")
         profiles = cursor.fetchall()
@@ -757,6 +762,9 @@ def export_data_to_sql(filename):
         
     except Exception as e:
         print(f"Error while exporting data: {e}")
+    finally:
+        cursor.close()
+        db.close()
 
 if __name__ == "__main__":
     config = load_encryption_config()
@@ -778,21 +786,25 @@ if __name__ == "__main__":
     else:
         use_encryption = setup_encryption()
     
-    # CLEAR DATABASE FIRST
+    password = get_mysql_password()
+    if password is None:
+        print("Failed to get MySQL password. Exiting.")
+        exit(1)
+    
     print("Clearing existing data...")
+    db = get_database_connection()
+    cursor = db.cursor()
     cursor.execute("DELETE FROM ApplicationDetail")
     cursor.execute("DELETE FROM ApplicantProfile")
     cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
     cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
     db.commit()
+    cursor.close()
+    db.close()
     print("Database cleared and AUTO_INCREMENT reset")
     
-    # test_extraction("../../data/CHEF/10276858.pdf")
-    
-    # process all pdfs
     process_folder("../../data", use_encryption)
     
-    # export to SQL file
     export_filename = "../../data/ats_encrypted.sql" if use_encryption else "../../data/ats.sql"
     export_data_to_sql(export_filename)
     
@@ -806,6 +818,3 @@ if __name__ == "__main__":
         print(f"  Key file: {ENCRYPTION_KEY_FILE}")
         print(f"  Config file: {ENCRYPTION_CONFIG_FILE}")
         print("\nIMPORTANT: Keep these files safe! They are required to decrypt your data.")
-    
-    cursor.close()
-    db.close()

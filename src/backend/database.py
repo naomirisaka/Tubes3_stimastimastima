@@ -51,7 +51,6 @@ class EncryptionManager:
             os.path.join(script_dir, "..", "data_extractor"), 
             os.path.dirname(current_dir),               
             os.path.join(os.path.dirname(current_dir), "data_extractor"),
-
             os.path.join(os.path.dirname(script_dir)),
             os.path.join(os.path.dirname(os.path.dirname(script_dir))),
         ]
@@ -80,7 +79,6 @@ class EncryptionManager:
         try:
             with open(config_path, 'r') as f:
                 config = json.load(f)
-            # print(f"Loaded encryption config from: {config_path}")
             return config
         except Exception as e:
             print(f"Failed to load encryption config: {e}")
@@ -98,7 +96,6 @@ class EncryptionManager:
         try:
             with open(key_path, 'rb') as f:
                 key_data = f.read()
-            # print(f"Loaded encryption key from: {key_path}")
             
             if password:
                 try:
@@ -175,44 +172,98 @@ class EncryptionManager:
             "search_paths": self.search_paths
         }
 
-class DatabaseManager:    
+class DatabaseManager:
+    _instance = None
+    _initialized = False
+    _password = None 
+    
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(DatabaseManager, cls).__new__(cls)
+        return cls._instance
+    
     def __init__(self, host="localhost", user="root", database="ats_db", password=None):
+        if self._initialized:
+            return
+            
+        print("Initializing DatabaseManager (singleton)")
+        
         self.host = host
         self.user = user
         self.database = database
-        self.password = password or os.getenv('MYSQL_PASSWORD', '')
         self.connection = None
         self.encryption_manager = EncryptionManager()
         
-        if not self.password:
-            try:
-                test_conn = mysql.connector.connect(host=self.host, user=self.user)
-                test_conn.close()
-                self.password = ""
-            except:
-                self.password = getpass.getpass("Enter MySQL Password: ")
+        if password:
+            DatabaseManager._password = password
+        elif not DatabaseManager._password:
+            DatabaseManager._password = self._get_mysql_password()
         
         self._initialize_encryption()
+        
+        self._initialized = True
+    
+    def _get_mysql_password(self):
+        env_password = os.getenv('MYSQL_PASSWORD', '')
+        if env_password:
+            print("Using MySQL password from environment variable")
+            return env_password
+        
+        print("Testing MySQL connection...")
+        try:
+            test_conn = mysql.connector.connect(
+                host=self.host, 
+                user=self.user,
+                password=""
+            )
+            test_conn.close()
+            print("MySQL connection successful with no password")
+            return ""
+        except mysql.connector.Error:
+            print("MySQL requires a password")
+            password = getpass.getpass("Enter MySQL Password: ")
+            
+            try:
+                test_conn = mysql.connector.connect(
+                    host=self.host, 
+                    user=self.user, 
+                    password=password
+                )
+                test_conn.close()
+                print("Password verified successfully")
+                return password
+            except mysql.connector.Error as e:
+                print(f"Password verification failed: {e}")
+                return None
     
     def _initialize_encryption(self):
         config = self.encryption_manager.load_encryption_config()
         
         if config.get("encryption_enabled"):
-            password = None
+            encryption_password = None
             if config.get("password_protected"):
-                password = getpass.getpass("Enter encryption password for database access: ")
+                print("\n=== ENCRYPTION SETUP ===")
+                print("Database contains encrypted data.")
+                encryption_password = getpass.getpass("Enter encryption password (for encrypted data): ")
             
-            if not self.encryption_manager.initialize_encryption(password):
+            if not self.encryption_manager.initialize_encryption(encryption_password):
                 print("Warning: Failed to initialize encryption. Encrypted data may not be readable.")
         else:
             self.encryption_manager.encryption_enabled = False
     
     def connect(self):
         try:
+            if self.connection and self.connection.is_connected():
+                return True
+            
+            if DatabaseManager._password is None:
+                print("No valid MySQL password available")
+                return False
+                
             self.connection = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
-                password=self.password,
+                password=DatabaseManager._password,
                 database=self.database
             )
             return True
@@ -432,8 +483,6 @@ class DatabaseManager:
         return stats
     
     def get_cv_texts_for_search(self) -> List[Tuple[int, str]]:
-        """Get CV texts for search (automatically decrypts if needed)."""
-        # Ensure encryption columns exist
         self._ensure_encryption_columns()
         
         query = """
