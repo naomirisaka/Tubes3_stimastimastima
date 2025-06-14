@@ -1,0 +1,5 @@
+# Core dependencies
+flet>=0.21.0
+mysql-connector-python>=8.0.0
+PyPDF2>=3.0.1
+PyMuPDF>=1.23.0 
