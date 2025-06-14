@@ -1,5 +1,5 @@
 {
-  "encryption_enabled": true,
+  "encryption_enabled": false,
   "password_protected": false,
   "version": "1.0"
 }
