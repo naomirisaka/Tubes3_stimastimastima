@@ -1,12 +1,8 @@
 import mysql.connector
 import os
 import getpass
-import json
-import base64
-import hashlib
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
-from cryptography.fernet import Fernet
 
 @dataclass
 class ApplicantProfile:
@@ -33,7 +29,6 @@ class ApplicationDetail:
     is_encrypted: bool = False
 
 class EncryptionManager:
-    """Handles encryption/decryption operations for the database with smart file discovery."""
     
     def __init__(self):
         self.key = None
@@ -44,21 +39,18 @@ class EncryptionManager:
         self.search_paths = self._get_search_paths()
     
     def _get_search_paths(self) -> list:
-        """Get list of directories to search for encryption files."""
         current_dir = os.getcwd()
         script_dir = os.path.dirname(os.path.abspath(__file__))
         
-        # Common search paths
         search_paths = [
-            current_dir,                                    # Current working directory
-            script_dir,                                     # Directory where database.py is located
-            os.path.join(current_dir, "data_extractor"),   # data_extractor subdirectory
-            os.path.join(script_dir, "..", "data_extractor"),  # ../data_extractor from backend
-            os.path.dirname(current_dir),                  # Parent directory
-            os.path.join(os.path.dirname(current_dir), "data_extractor"),  # ../data_extractor from src
+            current_dir,                                   
+            script_dir,                                    
+            os.path.join(current_dir, "data_extractor"), 
+            os.path.join(script_dir, "..", "data_extractor"), 
+            os.path.dirname(current_dir),               
+            os.path.join(os.path.dirname(current_dir), "data_extractor"), 
         ]
         
-        # Remove duplicates and ensure paths exist
         unique_paths = []
         for path in search_paths:
             abs_path = os.path.abspath(path)
@@ -68,7 +60,6 @@ class EncryptionManager:
         return unique_paths
     
     def _find_file(self, filename: str) -> str:
-        """Find a file in the search paths."""
         for path in self.search_paths:
             file_path = os.path.join(path, filename)
             if os.path.exists(file_path):
@@ -76,7 +67,6 @@ class EncryptionManager:
         return None
     
     def load_encryption_config(self) -> dict:
-        """Load encryption configuration from any available location."""
         config_path = self._find_file(self.config_file)
         
         if not config_path:
@@ -86,18 +76,17 @@ class EncryptionManager:
             import json
             with open(config_path, 'r') as f:
                 config = json.load(f)
-            print(f"📁 Loaded encryption config from: {config_path}")
+            # print(f"Loaded encryption config from: {config_path}")
             return config
         except Exception as e:
-            print(f"⚠️ Failed to load encryption config: {e}")
+            print(f"Failed to load encryption config: {e}")
             return {"encryption_enabled": False, "password_protected": False}
     
     def load_key(self, password: str = None) -> bytes:
-        """Load encryption key from any available location."""
         key_path = self._find_file(self.key_file)
         
         if not key_path:
-            print(f"🔍 Searched for {self.key_file} in paths:")
+            print(f"Searched for {self.key_file} in paths:")
             for path in self.search_paths:
                 print(f"   - {path}")
             return None
@@ -105,8 +94,7 @@ class EncryptionManager:
         try:
             with open(key_path, 'rb') as f:
                 key_data = f.read()
-            
-            print(f"🔑 Loaded encryption key from: {key_path}")
+            # print(f"Loaded encryption key from: {key_path}")
             
             if password:
                 try:
@@ -132,19 +120,17 @@ class EncryptionManager:
             return None
     
     def initialize_encryption(self, password: str = None) -> bool:
-        """Initialize encryption with existing key from any location."""
         config = self.load_encryption_config()
         
         if not config.get("encryption_enabled"):
             self.encryption_enabled = False
-            print("🔓 Encryption disabled in config")
+            print("Encryption disabled in config")
             return True
         
-        # Load encryption key
         key = self.load_key(password)
         
         if not key:
-            print("❌ Failed to load encryption key")
+            print("Failed to load encryption key")
             return False
         
         try:
@@ -152,14 +138,13 @@ class EncryptionManager:
             self.key = key
             self.cipher = Fernet(key)
             self.encryption_enabled = True
-            print("✅ Encryption initialized successfully")
+            print("Encryption initialized successfully")
             return True
         except Exception as e:
-            print(f"❌ Failed to initialize encryption: {e}")
+            print(f"Failed to initialize encryption: {e}")
             return False
     
     def decrypt_text(self, encrypted_text: str) -> str:
-        """Decrypt base64 encoded encrypted text."""
         if not self.encryption_enabled or not encrypted_text:
             return encrypted_text
         
@@ -173,21 +158,17 @@ class EncryptionManager:
             return encrypted_text
     
     def is_encrypted_data(self, text: str) -> bool:
-        """Check if text appears to be encrypted (base64 encoded)."""
         if not text or len(text) < 10:
             return False
         
         try:
             import base64
-            # Try to decode as base64
             decoded = base64.b64decode(text.encode('utf-8'))
-            # Check if it looks like Fernet encrypted data (starts with specific bytes)
             return len(decoded) > 10 and decoded.startswith(b'\x80')
         except:
             return False
     
     def get_file_locations(self) -> dict:
-        """Get current file locations for debugging."""
         return {
             "key_file": self._find_file(self.key_file),
             "config_file": self._find_file(self.config_file),
@@ -202,7 +183,6 @@ class DatabaseManager:
         self.connection = None
         self.encryption_manager = EncryptionManager()
         
-        # Auto-detect password if not provided
         if not self.password:
             try:
                 test_conn = mysql.connector.connect(host=self.host, user=self.user)
@@ -211,7 +191,6 @@ class DatabaseManager:
             except:
                 self.password = getpass.getpass("Enter MySQL Password: ")
         
-        # Initialize encryption
         self._initialize_encryption()
     
     def _initialize_encryption(self):
@@ -261,11 +240,9 @@ class DatabaseManager:
             return []
     
     def _decrypt_profile_data(self, row: tuple) -> ApplicantProfile:
-        """Decrypt profile data if necessary."""
         applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted = row
         
         if is_encrypted and self.encryption_manager.encryption_enabled:
-            # Decrypt sensitive data
             first_name = self.encryption_manager.decrypt_text(first_name) if first_name else ""
             last_name = self.encryption_manager.decrypt_text(last_name) if last_name else ""
             date_of_birth = self.encryption_manager.decrypt_text(date_of_birth) if date_of_birth else ""
@@ -283,11 +260,9 @@ class DatabaseManager:
         )
     
     def _decrypt_application_data(self, row: tuple) -> ApplicationDetail:
-        """Decrypt application data if necessary."""
         detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted = row
         
         if is_encrypted and self.encryption_manager.encryption_enabled:
-            # Decrypt CV content
             application_role = self.encryption_manager.decrypt_text(application_role) if application_role else ""
             cv_raw_text = self.encryption_manager.decrypt_text(cv_raw_text) if cv_raw_text else ""
             summary_section = self.encryption_manager.decrypt_text(summary_section) if summary_section else ""
@@ -354,8 +329,6 @@ class DatabaseManager:
         return self._decrypt_profile_data(results[0])
     
     def get_applications_by_role(self, role: str) -> List[ApplicationDetail]:
-        """Get applications by role (works with both encrypted and non-encrypted data)."""
-        # First, get all applications and filter client-side for encrypted data
         query = """
         SELECT detail_id, applicant_id, application_role, cv_path, cv_raw_text,
                summary_section, skills_section, experience_section, 
@@ -368,15 +341,12 @@ class DatabaseManager:
         
         for row in results:
             app = self._decrypt_application_data(row)
-            # Check if role matches (case-insensitive)
             if role.lower() in app.application_role.lower():
                 applications.append(app)
         
         return applications
     
     def search_applications_by_text(self, search_term: str) -> List[ApplicationDetail]:
-        """Search applications by text (works with both encrypted and non-encrypted data)."""
-        # For encrypted data, we need to decrypt and search client-side
         all_applications = self.get_all_applications()
         matching_applications = []
         
@@ -401,22 +371,18 @@ class DatabaseManager:
     def get_database_stats(self) -> Dict[str, int]:
         stats = {}
         
-        # Total applicants
         result = self.execute_query("SELECT COUNT(*) FROM ApplicantProfile")
         stats['total_applicants'] = result[0][0] if result else 0
         
-        # Total applications
         result = self.execute_query("SELECT COUNT(*) FROM ApplicationDetail")
         stats['total_applications'] = result[0][0] if result else 0
         
-        # Encryption status
         result = self.execute_query("SELECT COUNT(*) FROM ApplicationDetail WHERE is_encrypted = TRUE")
         stats['encrypted_applications'] = result[0][0] if result else 0
         
         result = self.execute_query("SELECT COUNT(*) FROM ApplicantProfile WHERE is_encrypted = TRUE")
         stats['encrypted_profiles'] = result[0][0] if result else 0
         
-        # Applications by role (decrypt for accurate stats)
         all_applications = self.get_all_applications()
         role_counts = {}
         for app in all_applications:
@@ -437,7 +403,7 @@ class DatabaseManager:
             detail_id, cv_text, is_encrypted = row
             
             if cv_text and len(cv_text.strip()) > 0:
-                # Decrypt if necessary
+                # decrypt if necessary
                 if is_encrypted and self.encryption_manager.encryption_enabled:
                     cv_text = self.encryption_manager.decrypt_text(cv_text)
                 
@@ -466,11 +432,9 @@ class DatabaseManager:
         }
     
     def is_encryption_enabled(self) -> bool:
-        """Check if encryption is enabled in the database."""
         return self.encryption_manager.encryption_enabled
     
     def get_encryption_status(self) -> Dict[str, any]:
-        """Get detailed encryption status."""
         config = self.encryption_manager.load_encryption_config()
         
         return {
@@ -481,120 +445,7 @@ class DatabaseManager:
             "encryption_manager_ready": self.encryption_manager.encryption_enabled
         }
 
-# Global database manager instance
 db_manager = DatabaseManager()
 
 def get_database_connection():
     return db_manager
-
-def test_database_connection():
-    db = get_database_connection()
-    
-    if not db.connect():
-        print("Failed to connect to database")
-        return False
-    
-    print("Database connection successful!")
-    
-    # Get encryption status
-    encryption_status = db.get_encryption_status()
-    print(f"\nEncryption Status:")
-    print(f"   Enabled: {encryption_status['encryption_enabled']}")
-    print(f"   Password Protected: {encryption_status['password_protected']}")
-    print(f"   Manager Ready: {encryption_status['encryption_manager_ready']}")
-    
-    # Get stats
-    stats = db.get_database_stats()
-    print(f"\nDatabase Statistics:")
-    print(f"   Total Applicants: {stats['total_applicants']}")
-    print(f"   Total Applications: {stats['total_applications']}")
-    print(f"   Encrypted Profiles: {stats['encrypted_profiles']}")
-    print(f"   Encrypted Applications: {stats['encrypted_applications']}")
-    
-    if stats['applications_by_role']:
-        print("   Applications by Role:")
-        for role, count in list(stats['applications_by_role'].items())[:5]:
-            print(f"     - {role}: {count}")
-    
-    # Test getting some applications
-    applications = db.get_all_applications()
-    if applications:
-        print(f"\n📄 Sample Applications (showing first 3):")
-        for app in applications[:3]:
-            encryption_marker = "🔒" if app.is_encrypted else "🔓"
-            print(f"   {encryption_marker} ID: {app.detail_id}, Role: {app.application_role}")
-            print(f"     CV Length: {len(app.cv_raw_text)} characters")
-            if app.skills_section:
-                skills_preview = app.skills_section[:100] + "..." if len(app.skills_section) > 100 else app.skills_section
-                print(f"     Skills: {skills_preview}")
-            print()
-    
-    db.disconnect()
-    return True
-
-def test_encryption_integration():
-    """Test encryption integration with database operations."""
-    print("\n🔐 Testing Encryption Integration")
-    print("=" * 50)
-    
-    db = get_database_connection()
-    
-    if not db.connect():
-        print("Failed to connect to database")
-        return
-    
-    # Test search functionality with encrypted data
-    print("Testing search with encrypted/decrypted data...")
-    
-    # Get some CV texts for search
-    cv_texts = db.get_cv_texts_for_search()
-    print(f"Retrieved {len(cv_texts)} CV texts for search")
-    
-    if cv_texts:
-        # Test search on first few CVs
-        sample_cvs = cv_texts[:3]
-        for detail_id, cv_text in sample_cvs:
-            print(f"\nDetail ID {detail_id}:")
-            print(f"   CV text length: {len(cv_text)} characters")
-            print(f"   First 100 chars: {cv_text[:100]}...")
-            
-            # Check if this CV contains common keywords
-            keywords = ["python", "java", "experience", "skills", "education"]
-            found_keywords = [kw for kw in keywords if kw in cv_text.lower()]
-            print(f"   Found keywords: {found_keywords}")
-    
-    # Test getting application summary
-    if cv_texts:
-        detail_id = cv_texts[0][0]
-        print(f"\nTesting application summary for detail_id {detail_id}:")
-        
-        summary = db.get_application_summary_data(detail_id)
-        if summary:
-            print(f"   Name: {summary.get('name', 'N/A')}")
-            print(f"   Role: {summary.get('role', 'N/A')}")
-            print(f"   Phone: {summary.get('phone', 'N/A')}")
-            
-            # Check if summary sections are readable
-            for section in ['summary', 'skills', 'experience']:
-                content = summary.get(section, '')
-                if content:
-                    preview = content[:50] + "..." if len(content) > 50 else content
-                    print(f"   {section.title()}: {preview}")
-        else:
-            print("   No summary found")
-    
-    db.disconnect()
-    print("\nEncryption integration test completed!")
-
-if __name__ == "__main__":
-    print("🗄️ Testing Enhanced Database Connection with Encryption")
-    print("=" * 60)
-    
-    try:
-        test_database_connection()
-        test_encryption_integration()
-        
-    except Exception as e:
-        print(f"Test failed: {e}")
-        import traceback
-        traceback.print_exc()

@@ -63,21 +63,3 @@ def fuzzy_match_in_file(filepath: str, keyword_string: str, threshold: float = 7
     keywords = parse_keywords(keyword_string)
     
     return fuzzy_search_keywords(text, keywords, threshold)
-
-if __name__ == "__main__":
-    path = "data/schema.sql"
-    input_keywords = "React, Python, JavaScript"
-    
-    results = fuzzy_match_in_file(path, input_keywords, threshold=60.0)
-    
-    for keyword, matches in results.items():
-        print(f"\nKeyword: '{keyword}'")
-        if matches:
-            for word, similarity in matches[:5]:
-                print(f"  - {word}: {similarity:.1f}% similar")
-        else:
-            print("  No similar words found")
-    
-    print(f"\nDirect tests:")
-    print(f"Distance between 'kitten' and 'sitting': {levenshtein_distance('kitten', 'sitting')}")
-    print(f"Similarity between 'python' and 'pyhton': {similarity_percentage('python', 'pyhton'):.1f}%")
