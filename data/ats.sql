@@ -29,212 +29,214 @@ CREATE TABLE IF NOT EXISTS ApplicationDetail (
 );
 
 -- Insert ApplicantProfile data
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (1, 'Balidin', 'Dongoran', '1976-12-09', 'Jalan Jayawijaya No. 509, Ambon, Bali 76579', '084563983840', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (2, 'Tedi', 'Sirait', '1970-04-24', 'Gg. Dipatiukur No. 318, Pariaman, SB 18142', '082571073390', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (3, 'Jindra', 'Puspita', '1982-01-28', 'Jl. Gardujati No. 236, Batu, Sulawesi Tenggara 60038', '087866931698', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (4, 'Gaduh', 'Suartini', '2000-02-02', 'Jalan Kendalsari No. 338, Bontang, DKI Jakarta 10789', '085291156544', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (5, 'Kambali', 'Winarno', '1997-10-04', 'Gg. Medokan Ayu No. 082, Sabang, BE 88425', '088164565235', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (6, 'Galar', 'Prayoga', '1986-12-13', 'Gang Waringin No. 51, Balikpapan, Sulawesi Barat 84090', '083294165628', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (7, 'Jaka', 'Handayani', '1999-09-02', 'Gg. Sukajadi No. 1, Cirebon, SU 68682', '088127706320', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (8, 'Padma', 'Susanti', '1972-09-01', 'Jl. Rungkut Industri No. 5, Bekasi, Kepulauan Riau 16369', '089458111987', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (9, 'Jindra', 'Wahyuni', '1992-04-17', 'Jl. Cihampelas No. 71, Bengkulu, BB 35994', '083347204225', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (10, 'Julia', 'Adriansyah', '1993-02-16', 'Gg. Cikutra Timur No. 2, Solok, KB 00123', '089408221888', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (11, 'Kayla', 'Kusumo', '1984-03-26', 'Jalan Merdeka No. 20, Mojokerto, SG 94928', '086357847608', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (12, 'Umaya', 'Siregar', '2002-10-26', 'Gang R.E Martadinata No. 121, Batam, Kepulauan Bangka Belitung 07464', '082291207803', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (13, 'Wahyu', 'Hardiansyah', '1986-04-25', 'Jl. Jamika No. 77, Tanjungpinang, SG 72733', '083480978448', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (14, 'Harto', 'Nababan', '1987-05-30', 'Jalan R.E Martadinata No. 03, Samarinda, Kepulauan Riau 26981', '081561262719', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (15, 'Olivia', 'Prayoga', '1992-03-06', 'Jl. R.E Martadinata No. 9, Malang, BA 36370', '089902433072', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (16, 'Sabar', 'Pratama', '1990-11-24', 'Gg. Ahmad Dahlan No. 9, Blitar, Riau 78534', '082504282595', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (17, 'Cindy', 'Mandasari', '2001-12-18', 'Gg. Raya Setiabudhi No. 3, Semarang, JI 81451', '085764984486', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (18, 'Gangsa', 'Winarno', '1995-06-28', 'Jl. Gedebage Selatan No. 068, Bontang, Sumatera Utara 44357', '081989294267', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (19, 'Rizki', 'Mandasari', '1967-02-12', 'Jl. Bangka Raya No. 362, Lhokseumawe, KU 63926', '084642392068', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (20, 'Galur', 'Saragih', '1999-02-27', 'Gg. Ir. H. Djuanda No. 139, Bukittinggi, Sumatera Barat 40388', '083390501192', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (21, 'Hardana', 'Nugroho', '1979-04-12', 'Gg. BKR No. 63, Yogyakarta, Maluku 06756', '087990983025', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (22, 'Puji', 'Permata', '1967-04-08', 'Gang Soekarno Hatta No. 0, Kupang, Nusa Tenggara Barat 70231', '080670891553', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (23, 'Prabu', 'Pradipta', '1993-12-19', 'Gg. Otto Iskandardinata No. 781, Ternate, KU 84315', '087218725632', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (24, 'Legawa', 'Maulana', '1978-09-19', 'Gg. Rumah Sakit No. 90, Gorontalo, KT 58191', '081954725249', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (25, 'Bahuwirya', 'Sinaga', '2000-12-03', 'Gg. Peta No. 0, Kediri, Bengkulu 87772', '088208398787', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (26, 'Amelia', 'Maryati', '1983-03-27', 'Gg. Jend. Sudirman No. 45, Dumai, Kalimantan Selatan 56254', '080252741713', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (27, 'Irsad', 'Napitupulu', '1971-05-17', 'Gang KH Amin Jasuta No. 28, Manado, NB 04225', '085122806666', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (28, 'Latika', 'Maryati', '1976-05-30', 'Jalan Gedebage Selatan No. 58, Pekanbaru, SS 94221', '087808305281', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (29, 'Jamil', 'Thamrin', '1990-04-24', 'Gang Kebonjati No. 260, Sawahlunto, Sulawesi Selatan 71884', '083100437277', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (30, 'Aditya', 'Sitompul', '1997-02-16', 'Gang Pelajar Pejuang No. 51, Serang, Jambi 12618', '084991446861', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (31, 'Eka', 'Santoso', '1986-10-06', 'Gg. M.T Haryono No. 889, Bima, YO 73505', '086017657917', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (32, 'Irsad', 'Suwarno', '1993-03-16', 'Gang Moch. Toha No. 9, Bitung, Riau 91913', '085896354096', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (33, 'Salwa', 'Hidayat', '1976-10-21', 'Gg. Cihampelas No. 3, Kotamobagu, Sulawesi Selatan 66652', '089335192694', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (34, 'Adiarja', 'Prayoga', '1988-04-17', 'Gg. Pasteur No. 329, Lubuklinggau, BE 73534', '083089816094', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (35, 'Jais', 'Setiawan', '1994-02-21', 'Gg. Indragiri No. 837, Lhokseumawe, Sulawesi Selatan 16834', '088810213119', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (36, 'Warji', 'Mandala', '2002-06-19', 'Gg. Moch. Ramdan No. 966, Payakumbuh, MU 80651', '087763515547', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (37, 'Yulia', 'Rajata', '1979-07-29', 'Jalan Ciwastra No. 350, Mataram, AC 03279', '087526456474', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (38, 'Queen', 'Sitorus', '1970-04-28', 'Gang Kiaracondong No. 8, Singkawang, JB 89037', '082973087180', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (39, 'Teguh', 'Najmudin', '1989-05-23', 'Jl. Pelajar Pejuang No. 2, Sabang, Maluku Utara 22315', '081297402207', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (40, 'Uchita', 'Simanjuntak', '1968-10-18', 'Jalan Moch. Toha No. 92, Bontang, KT 24281', '088300478228', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (41, 'Mursita', 'Nurdiyanti', '1993-01-06', 'Gang Cihampelas No. 4, Payakumbuh, KU 03625', '082252503713', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (42, 'Pranawa', 'Ardianto', '1987-04-29', 'Jalan Monginsidi No. 2, Surabaya, Kalimantan Selatan 54977', '080229325913', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (43, 'Prabowo', 'Simbolon', '1991-01-29', 'Jalan Ahmad Dahlan No. 704, Tasikmalaya, Lampung 31716', '081476652414', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (44, 'Rachel', 'Mahendra', '1991-06-15', 'Jalan Rungkut Industri No. 390, Mojokerto, Maluku Utara 88971', '084117654382', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (45, 'Ikhsan', 'Susanti', '2002-02-10', 'Gg. Pacuan Kuda No. 59, Banjar, PA 19313', '084065430825', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (46, 'Praba', 'Lailasari', '1986-08-31', 'Jalan Yos Sudarso No. 128, Pagaralam, JT 26814', '081256643383', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (47, 'Raisa', 'Irawan', '1999-09-02', 'Jl. Ahmad Yani No. 3, Pematangsiantar, NT 07251', '084205935452', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (48, 'Xanana', 'Uwais', '1999-07-12', 'Gang Ronggowarsito No. 2, Tanjungpinang, Maluku Utara 69444', '081695247964', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (49, 'Cornelia', 'Yuniar', '1969-07-21', 'Gg. M.H Thamrin No. 573, Cilegon, Maluku Utara 46051', '088578907204', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (50, 'Elma', 'Oktaviani', '1972-08-25', 'Gg. S. Parman No. 827, Lhokseumawe, Sulawesi Utara 20149', '086522830423', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (51, 'Hartana', 'Lestari', '1977-02-06', 'Jl. S. Parman No. 56, Surabaya, JK 98872', '089082457562', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (52, 'Ghaliyati', 'Permadi', '1973-04-22', 'Gang Sadang Serang No. 3, Lhokseumawe, MU 28290', '083979659271', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (53, 'Yahya', 'Mustofa', '1977-02-21', 'Jalan Sukabumi No. 557, Bima, KR 12053', '081787611828', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (54, 'Ibrahim', 'Pratiwi', '1990-03-03', 'Jl. Veteran No. 35, Surakarta, Jawa Tengah 12200', '080764290779', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (55, 'Malik', 'Tamba', '1971-11-04', 'Jalan Lembong No. 85, Lhokseumawe, BB 66709', '088055123224', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (56, 'Dagel', 'Yulianti', '1966-04-25', 'Jl. HOS. Cokroaminoto No. 17, Kota Administrasi Jakarta Pusat, MA 68209', '089104053932', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (57, 'Jasmani', 'Anggriawan', '1969-01-16', 'Gang Cikutra Barat No. 84, Sawahlunto, AC 61816', '087340145427', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (58, 'Empluk', 'Kurniawan', '2002-05-05', 'Gang Gegerkalong Hilir No. 089, Purwokerto, Sulawesi Selatan 56165', '086408801617', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (59, 'Vinsen', 'Sitompul', '1986-03-20', 'Jalan Antapani Lama No. 8, Semarang, DI Yogyakarta 99087', '080863787510', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (60, 'Danang', 'Oktaviani', '1990-05-04', 'Gang Wonoayu No. 155, Jambi, MU 91223', '085778417503', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (61, 'Gada', 'Marpaung', '1988-02-27', 'Jl. Stasiun Wonokromo No. 24, Cimahi, NB 36682', '089357823500', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (62, 'Pangestu', 'Yuliarti', '1990-05-20', 'Gang Ciwastra No. 956, Blitar, Papua 45557', '083353850902', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (63, 'Maida', 'Purwanti', '1968-09-14', 'Jalan Bangka Raya No. 39, Mojokerto, Bali 99642', '083412488729', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (64, 'Hana', 'Tarihoran', '1997-03-02', 'Gang Sadang Serang No. 3, Serang, Bengkulu 82077', '086788042198', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (65, 'Cakrabirawa', 'Sitorus', '1979-08-01', 'Gang Merdeka No. 8, Sungai Penuh, Sumatera Utara 45232', '081437211453', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (66, 'Putri', 'Nurdiyanti', '1967-12-29', 'Gg. Pasir Koja No. 121, Kupang, BE 92249', '089220488443', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (67, 'Nyoman', 'Mulyani', '1992-09-29', 'Gg. Tebet Barat Dalam No. 117, Batam, JT 90617', '084411119520', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (68, 'Bakti', 'Winarno', '1993-10-09', 'Gang Gegerkalong Hilir No. 1, Tomohon, GO 26078', '085429050099', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (69, 'Mulyono', 'Andriani', '1977-05-08', 'Jalan Astana Anyar No. 633, Bandung, Jambi 31818', '088573922361', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (70, 'Carla', 'Hutagalung', '1982-09-11', 'Gg. Cempaka No. 1, Tasikmalaya, JI 66525', '083260218657', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (71, 'Laswi', 'Nugroho', '1983-08-18', 'Gg. Wonoayu No. 48, Makassar, BA 49950', '083734115698', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (72, 'Maria', 'Hassanah', '2001-05-18', 'Gg. Cikutra Barat No. 309, Subulussalam, MU 58288', '084329343196', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (73, 'Pranata', 'Zulkarnain', '1994-08-24', 'Jl. Tubagus Ismail No. 2, Tasikmalaya, YO 49742', '080087711622', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (74, 'Legawa', 'Nasyiah', '1968-04-11', 'Gg. Sadang Serang No. 12, Metro, MA 26478', '083361802157', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (75, 'Baktiono', 'Handayani', '1978-01-01', 'Jl. Pelajar Pejuang No. 596, Surabaya, Nusa Tenggara Barat 40870', '083115026429', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (76, 'Eja', 'Ardianto', '1985-02-12', 'Jalan Asia Afrika No. 4, Ternate, Sumatera Selatan 54299', '084973759443', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (77, 'Cawisadi', 'Laksita', '1969-09-26', 'Gg. Lembong No. 66, Kota Administrasi Jakarta Selatan, SN 57325', '080114216939', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (78, 'Legawa', 'Prasasta', '1966-07-05', 'Gg. Soekarno Hatta No. 474, Bau-Bau, SS 70648', '083196122832', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (79, 'Karna', 'Tamba', '1990-06-10', 'Jalan Setiabudhi No. 5, Pasuruan, NB 81680', '089100997351', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (80, 'Marsudi', 'Utami', '1995-08-06', 'Gang Jend. A. Yani No. 200, Palembang, Jawa Barat 17210', '080957384555', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (81, 'Samiah', 'Latupono', '1979-12-28', 'Gg. Joyoboyo No. 966, Pagaralam, Kepulauan Riau 19797', '085588723077', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (82, 'Garan', 'Manullang', '1982-09-20', 'Gg. Joyoboyo No. 4, Mojokerto, Sulawesi Tengah 84364', '080838782332', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (83, 'Melinda', 'Rahayu', '1992-09-29', 'Gang Soekarno Hatta No. 314, Yogyakarta, Sumatera Utara 52860', '088964720622', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (84, 'Bahuwirya', 'Kusumo', '1994-10-16', 'Gang Yos Sudarso No. 846, Banjar, Maluku 53337', '084590483515', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (85, 'Panca', 'Waluyo', '1982-11-29', 'Gg. Jakarta No. 062, Padang, Nusa Tenggara Timur 13196', '081768579301', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (86, 'Xanana', 'Mandala', '1992-01-14', 'Gang Indragiri No. 5, Medan, Sulawesi Tengah 87482', '081923469338', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (87, 'Pangestu', 'Suryatmi', '1997-03-22', 'Jl. Kapten Muslihat No. 05, Serang, Nusa Tenggara Barat 83092', '082700687187', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (88, 'Yulia', 'Puspita', '1986-11-29', 'Jl. Tubagus Ismail No. 5, Bandung, GO 55577', '085804049619', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (89, 'Wakiman', 'Uwais', '1985-12-31', 'Jl. M.T Haryono No. 963, Lubuklinggau, GO 36038', '080845315763', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (90, 'Embuh', 'Mayasari', '1974-07-22', 'Jl. Jend. Sudirman No. 63, Bekasi, Kepulauan Bangka Belitung 58793', '080654476768', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (91, 'Latif', 'Damanik', '1987-12-10', 'Gg. Ahmad Yani No. 19, Sorong, Kepulauan Riau 98940', '085933098999', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (92, 'Kambali', 'Manullang', '1991-05-13', 'Jalan M.H Thamrin No. 56, Purwokerto, Sulawesi Tenggara 91297', '081438314963', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (93, 'Nurul', 'Usada', '1998-05-05', 'Jl. Moch. Ramdan No. 6, Cimahi, PA 90250', '082250526842', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (94, 'Ina', 'Yuniar', '1979-11-21', 'Gg. Laswi No. 35, Bukittinggi, JA 67207', '086436176779', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (95, 'Garan', 'Zulkarnain', '1999-10-13', 'Jalan Kapten Muslihat No. 78, Lhokseumawe, Bengkulu 47733', '083903811635', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (96, 'Limar', 'Nababan', '1970-01-17', 'Gg. Bangka Raya No. 051, Bontang, JI 84688', '080098640664', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (97, 'Darmanto', 'Andriani', '1984-02-18', 'Gg. Astana Anyar No. 1, Tomohon, SS 12859', '082361199189', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (98, 'Nurul', 'Budiyanto', '2002-09-19', 'Gg. Pasteur No. 28, Surakarta, JK 31906', '089522160470', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (99, 'Rina', 'Usada', '1985-09-18', 'Gang Ir. H. Djuanda No. 063, Sukabumi, JA 13379', '087488196898', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (100, 'Mutia', 'Handayani', '1993-02-10', 'Gg. Rawamangun No. 163, Lubuklinggau, Maluku 67956', '089609076464', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (101, 'Dagel', 'Hutapea', '1965-07-06', 'Jl. Setiabudhi No. 921, Prabumulih, BE 02582', '088896794084', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (102, 'Shania', 'Saefullah', '1971-04-19', 'Gang W.R. Supratman No. 7, Sabang, Kepulauan Riau 70302', '084663001261', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (103, 'Hesti', 'Nurdiyanti', '1992-10-03', 'Jl. PHH. Mustofa No. 3, Pontianak, Banten 53308', '084155584243', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (104, 'Pandu', 'Andriani', '1969-04-09', 'Gg. Cihampelas No. 80, Banjar, Jawa Tengah 20253', '086610661105', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (105, 'Rahmi', 'Mayasari', '1971-10-20', 'Jl. Setiabudhi No. 549, Tual, Nusa Tenggara Timur 21544', '082138837803', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (106, 'Unggul', 'Sirait', '1967-01-09', 'Jl. Ir. H. Djuanda No. 307, Samarinda, DI Yogyakarta 25291', '080131614811', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (107, 'Bahuwarna', 'Santoso', '1992-03-15', 'Jalan Monginsidi No. 954, Sibolga, Kalimantan Utara 75768', '086381514988', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (108, 'Dirja', 'Wibisono', '1992-02-24', 'Gang Pacuan Kuda No. 994, Banjarbaru, Kalimantan Barat 11351', '080980247744', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (109, 'Jaswadi', 'Saragih', '1983-11-16', 'Gang Ahmad Dahlan No. 614, Kediri, PB 37334', '084697871185', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (110, 'Ika', 'Prakasa', '1997-04-17', 'Jalan Monginsidi No. 1, Palopo, Riau 46691', '089727874550', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (111, 'Wage', 'Megantara', '1973-12-27', 'Gg. Pacuan Kuda No. 32, Sungai Penuh, SU 70717', '084099392531', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (112, 'Prima', 'Astuti', '1992-03-10', 'Jl. Suryakencana No. 981, Tidore Kepulauan, SB 34972', '082423819012', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (113, 'Candrakanta', 'Irawan', '1983-07-21', 'Gang Wonoayu No. 291, Semarang, Papua Barat 14006', '086895822920', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (114, 'Wisnu', 'Palastri', '1998-11-05', 'Jl. Rajawali Barat No. 391, Madiun, SU 40905', '089123628664', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (115, 'Winda', 'Haryanto', '1997-07-26', 'Jl. Cikapayang No. 124, Makassar, Papua 33606', '081546571964', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (116, 'Harja', 'Zulkarnain', '1964-11-29', 'Gg. Kendalsari No. 44, Bogor, JT 00526', '081305481409', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (117, 'Cindy', 'Situmorang', '1977-06-15', 'Gg. Medokan Ayu No. 10, Tual, Sulawesi Selatan 07586', '089560719110', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (118, 'Silvia', 'Hastuti', '1970-08-07', 'Jalan W.R. Supratman No. 9, Pagaralam, Bali 63777', '083247709074', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (119, 'Salimah', 'Oktaviani', '1974-01-07', 'Gang Ciumbuleuit No. 13, Samarinda, Aceh 02764', '087967994883', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (120, 'Ian', 'Padmasari', '1964-10-12', 'Gang Ir. H. Djuanda No. 93, Makassar, JB 04648', '084547390603', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (121, 'Cayadi', 'Handayani', '1971-11-12', 'Gg. Medokan Ayu No. 788, Solok, Sulawesi Barat 96558', '088711947760', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (122, 'Ulya', 'Hasanah', '1965-05-10', 'Gang Pasir Koja No. 6, Tarakan, Nusa Tenggara Barat 72740', '085504435351', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (123, 'Ibun', 'Setiawan', '2000-04-16', 'Gg. Erlangga No. 266, Palembang, Kalimantan Tengah 09065', '081517020904', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (124, 'Wisnu', 'Maryati', '1981-08-13', 'Jl. M.H Thamrin No. 687, Kota Administrasi Jakarta Pusat, JI 82604', '081122355375', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (125, 'Wardaya', 'Kusmawati', '2002-02-08', 'Gang Kendalsari No. 6, Jambi, Maluku 46637', '080593358259', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (126, 'Hari', 'Melani', '1967-07-28', 'Gg. Kiaracondong No. 1, Cimahi, Lampung 20076', '085276050817', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (127, 'Aurora', 'Hutagalung', '2001-03-13', 'Gang Moch. Ramdan No. 6, Madiun, DKI Jakarta 50644', '080353850118', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (128, 'Karja', 'Prakasa', '1969-10-13', 'Jalan Ciumbuleuit No. 9, Padangpanjang, KT 80808', '085318867299', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (129, 'Tantri', 'Hidayanto', '1996-01-26', 'Gang Siliwangi No. 75, Tual, Sulawesi Utara 00254', '083273841990', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (130, 'Bagus', 'Kusumo', '1969-09-29', 'Jalan Jamika No. 6, Tanjungbalai, Nusa Tenggara Barat 02745', '081495198738', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (131, 'Hendra', 'Kurniawan', '1964-11-09', 'Jl. Pasir Koja No. 92, Bitung, KT 51177', '080694656109', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (132, 'Kenzie', 'Hutasoit', '1996-09-22', 'Jalan Erlangga No. 4, Tangerang, KB 49285', '083735992068', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (133, 'Sabrina', 'Kurniawan', '1973-11-17', 'Gang Waringin No. 88, Tangerang, Gorontalo 34543', '088619626191', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (134, 'Lidya', 'Wahyuni', '1990-07-19', 'Gg. Dipenogoro No. 986, Batam, ST 42762', '085544515537', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (135, 'Irsad', 'Maryati', '1999-07-28', 'Jl. K.H. Wahid Hasyim No. 11, Padang, Jawa Barat 91425', '089499123335', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (136, 'Cinta', 'Handayani', '1980-08-23', 'Gang Stasiun Wonokromo No. 27, Pagaralam, KI 39991', '086732626036', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (137, 'Darmana', 'Kusumo', '1970-04-07', 'Jalan Jakarta No. 39, Jayapura, Banten 15963', '085839491999', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (138, 'Jati', 'Pangestu', '1978-04-19', 'Gang Suniaraja No. 0, Pagaralam, Lampung 94559', '085009652207', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (139, 'Jefri', 'Hardiansyah', '1979-03-06', 'Gang Yos Sudarso No. 0, Kota Administrasi Jakarta Timur, SU 22809', '089187803179', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (140, 'Prayoga', 'Widodo', '1976-03-13', 'Jl. KH Amin Jasuta No. 7, Padang, KB 08886', '089721005174', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (141, 'Sarah', 'Tampubolon', '1998-04-16', 'Gg. S. Parman No. 43, Bukittinggi, NB 46841', '089434777401', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (142, 'Raisa', 'Rahayu', '1985-11-11', 'Jalan K.H. Wahid Hasyim No. 8, Pagaralam, BT 25281', '087614885645', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (143, 'Purwanto', 'Purnawati', '2003-01-12', 'Gg. M.T Haryono No. 48, Medan, SG 61351', '086325657930', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (144, 'Gasti', 'Gunawan', '1990-08-14', 'Jalan Merdeka No. 8, Medan, KR 72127', '088589389151', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (145, 'Cemani', 'Iswahyudi', '1972-10-07', 'Gg. Pacuan Kuda No. 8, Pariaman, PB 79615', '086237960513', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (146, 'Janet', 'Purnawati', '1968-02-21', 'Gg. M.H Thamrin No. 96, Tomohon, DKI Jakarta 22356', '081349290530', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (147, 'Hani', 'Sitompul', '1993-08-27', 'Gg. Jend. Sudirman No. 13, Banda Aceh, LA 58253', '084051615988', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (148, 'Kusuma', 'Sitompul', '1990-11-24', 'Jalan Pasir Koja No. 981, Surakarta, Kalimantan Timur 69436', '082978719344', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (149, 'Darsirah', 'Laksita', '1995-08-14', 'Jalan Setiabudhi No. 432, Pematangsiantar, Kalimantan Timur 98857', '088266211156', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (150, 'Gandi', 'Nainggolan', '1984-07-04', 'Gang Rumah Sakit No. 6, Kediri, Jawa Barat 69926', '086502849706', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (151, 'Padmi', 'Saputra', '1981-09-08', 'Gang Cempaka No. 9, Kupang, Sumatera Utara 68625', '081880177328', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (152, 'Yosef', 'Mardhiyah', '1964-10-25', 'Jalan Kebonjati No. 77, Sorong, Sumatera Utara 04955', '088141371650', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (153, 'Galiono', 'Rajata', '1990-12-21', 'Gang Ir. H. Djuanda No. 24, Madiun, Riau 76558', '085530014430', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (154, 'Raharja', 'Pangestu', '1964-09-12', 'Jl. Setiabudhi No. 81, Kota Administrasi Jakarta Pusat, NT 31130', '086425361412', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (155, 'Dalima', 'Nasyidah', '1996-04-18', 'Jl. Pasir Koja No. 1, Banjar, Nusa Tenggara Timur 87866', '083272341261', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (156, 'Rendy', 'Marbun', '1994-04-25', 'Gang Cikapayang No. 2, Batam, JB 41025', '087204982254', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (157, 'Dacin', 'Marpaung', '1970-03-07', 'Jalan Pelajar Pejuang No. 6, Tegal, Jawa Barat 91790', '089539995541', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (158, 'Okto', 'Maryati', '1991-05-18', 'Jalan S. Parman No. 5, Sukabumi, NT 79172', '081560125106', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (159, 'Dono', 'Sihombing', '1990-10-05', 'Gang Moch. Ramdan No. 79, Surakarta, Kepulauan Riau 91625', '083135019676', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (160, 'Titin', 'Mulyani', '1964-09-05', 'Gang Stasiun Wonokromo No. 991, Medan, Nusa Tenggara Barat 19518', '082680185296', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (161, 'Heru', 'Laksita', '1998-03-29', 'Gg. H.J Maemunah No. 73, Malang, Maluku Utara 84851', '082127124485', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (162, 'Kenes', 'Palastri', '1984-12-04', 'Jl. Moch. Ramdan No. 167, Tual, MU 96285', '085339981859', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (163, 'Nyoman', 'Sihombing', '1986-05-31', 'Jl. Suryakencana No. 8, Kota Administrasi Jakarta Selatan, SR 81898', '082930664454', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (164, 'Atmaja', 'Hassanah', '1980-06-23', 'Jl. R.E Martadinata No. 3, Payakumbuh, Lampung 96132', '082825223820', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (165, 'Jaga', 'Iswahyudi', '1990-03-16', 'Jalan Erlangga No. 375, Singkawang, Sumatera Utara 58322', '084546576569', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (166, 'Kairav', 'Wibowo', '2001-03-26', 'Gang S. Parman No. 185, Meulaboh, Aceh 32170', '082013297822', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (167, 'Azalea', 'Safitri', '1981-05-30', 'Jl. Sukabumi No. 84, Kediri, JI 53739', '088780937859', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (168, 'Parman', 'Melani', '1975-10-28', 'Jl. Kutisari Selatan No. 859, Serang, Sulawesi Tenggara 84740', '083130287696', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (169, 'Cahyo', 'Mahendra', '1981-01-08', 'Gang Erlangga No. 2, Bitung, SR 60869', '082012540025', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (170, 'Utama', 'Haryanti', '1992-11-07', 'Gg. Asia Afrika No. 556, Kediri, JK 44016', '082194846774', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (171, 'Adhiarja', 'Prabowo', '1998-03-22', 'Gg. Asia Afrika No. 4, Purwokerto, DKI Jakarta 58082', '084500501370', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (172, 'Anom', 'Yolanda', '2000-08-06', 'Gg. Rajawali Barat No. 4, Cirebon, ST 81838', '087465680943', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (173, 'Balangga', 'Manullang', '1986-01-27', 'Jl. Erlangga No. 9, Kotamobagu, GO 16295', '080766160933', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (174, 'Asmianto', 'Damanik', '1992-08-30', 'Gg. Ir. H. Djuanda No. 3, Ternate, PB 16380', '088632731494', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (175, 'Carub', 'Suartini', '1973-04-03', 'Gang Gardujati No. 1, Binjai, Bengkulu 08471', '086423159939', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (176, 'Nadia', 'Pradana', '1972-11-15', 'Jl. Raya Ujungberung No. 383, Kota Administrasi Jakarta Barat, Maluku Utara 02602', '083439002755', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (177, 'Cawisadi', 'Prakasa', '1993-07-18', 'Jalan PHH. Mustofa No. 88, Dumai, KS 41485', '080749518093', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (178, 'Ajiman', 'Maryadi', '1976-08-19', 'Jalan Waringin No. 7, Subulussalam, SU 85202', '087709862539', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (179, 'Darmaji', 'Permadi', '1993-07-01', 'Jl. Peta No. 63, Lhokseumawe, YO 84389', '080187180727', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (180, 'Lidya', 'Narpati', '2003-03-02', 'Jl. Rajawali Barat No. 2, Tangerang, MA 11474', '080534549303', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (181, 'Restu', 'Permata', '1983-09-06', 'Jalan Ciumbuleuit No. 104, Kota Administrasi Jakarta Selatan, Maluku Utara 95493', '083454883580', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (182, 'Darmaji', 'Fujiati', '1982-08-14', 'Jalan Joyoboyo No. 1, Tomohon, DI Yogyakarta 08893', '087022015061', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (183, 'Viktor', 'Hakim', '1985-04-07', 'Gang Jayawijaya No. 5, Tanjungpinang, SU 47001', '089897131609', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (184, 'Balamantri', 'Saputra', '1970-01-29', 'Gang S. Parman No. 226, Blitar, KI 53736', '086560726991', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (185, 'Margana', 'Samosir', '1999-10-28', 'Gang Ciumbuleuit No. 3, Pekalongan, BE 34920', '082583727649', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (186, 'Harsaya', 'Hassanah', '1981-02-27', 'Gang H.J Maemunah No. 74, Tanjungpinang, Kalimantan Selatan 35520', '080128576982', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (187, 'Prasetyo', 'Damanik', '1965-03-31', 'Gg. Cikutra Timur No. 256, Meulaboh, DKI Jakarta 36105', '082516898050', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (188, 'Ilyas', 'Waskita', '1983-03-30', 'Gang Pacuan Kuda No. 9, Tanjungbalai, DI Yogyakarta 62978', '083073662483', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (189, 'Halim', 'Pradipta', '1985-03-01', 'Gang KH Amin Jasuta No. 694, Kota Administrasi Jakarta Timur, JI 14178', '081455089988', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (190, 'Bajragin', 'Napitupulu', '1967-01-19', 'Jl. Kutisari Selatan No. 80, Kota Administrasi Jakarta Barat, Bengkulu 86392', '088068121387', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (191, 'Hamima', 'Maulana', '1990-07-02', 'Gg. Pasir Koja No. 68, Gorontalo, GO 57372', '082161382499', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (192, 'Estiawan', 'Riyanti', '2000-03-22', 'Gg. Ahmad Yani No. 172, Bengkulu, Bali 27257', '088454883333', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (193, 'Dagel', 'Safitri', '1999-08-29', 'Jalan Lembong No. 3, Batu, SG 72294', '087249135703', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (194, 'Widya', 'Widiastuti', '1972-11-10', 'Gang Gegerkalong Hilir No. 26, Sungai Penuh, KR 52093', '086594359139', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (195, 'Galiono', 'Irawan', '1968-06-22', 'Gang Jend. Sudirman No. 4, Pekanbaru, SG 26658', '084315880822', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (196, 'Balijan', 'Samosir', '1978-09-27', 'Jalan Sukajadi No. 542, Yogyakarta, NB 66331', '081413064021', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (197, 'Mahfud', 'Purwanti', '1978-07-01', 'Jl. Sukajadi No. 84, Meulaboh, MU 25228', '080920465327', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (198, 'Karsana', 'Thamrin', '1991-07-21', 'Jl. Jend. A. Yani No. 3, Tomohon, Kepulauan Riau 65844', '085622601378', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (199, 'Harjaya', 'Fujiati', '1977-07-17', 'Gang Ahmad Yani No. 89, Subulussalam, RI 61468', '080158174447', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (200, 'Asmadi', 'Handayani', '1996-12-05', 'Gg. HOS. Cokroaminoto No. 8, Metro, ST 37759', '087074186051', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (201, 'Bahuwirya', 'Mulyani', '1989-05-22', 'Gang Cihampelas No. 9, Sabang, JB 22907', '086042147214', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (202, 'Zalindra', 'Mahendra', '2003-04-26', 'Jl. Rawamangun No. 353, Magelang, KR 79238', '085863693451', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (203, 'Akarsana', 'Prasasta', '1979-09-03', 'Jalan Surapati No. 997, Kota Administrasi Jakarta Utara, SS 11808', '082031625138', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (204, 'Naradi', 'Lazuardi', '1992-10-30', 'Jalan Veteran No. 69, Tangerang Selatan, Papua Barat 44078', '089833251161', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (205, 'Among', 'Aryani', '1987-06-29', 'Jl. Pasirkoja No. 2, Palembang, Papua 21820', '080881667495', 0);
-INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (206, 'Gasti', 'Melani', '1982-05-19', 'Gg. Medokan Ayu No. 55, Kotamobagu, Sulawesi Utara 09492', '087122614554', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (1, 'Almira', 'Siregar', '2002-01-14', 'Jalan Ahmad Dahlan No. 51, Purwokerto, Gorontalo 71198', '084400410220', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (2, 'Azalea', 'Firmansyah', '1976-10-17', 'Jalan Medokan Ayu No. 2, Bima, Kalimantan Tengah 97618', '082261911403', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (3, 'Jaiman', 'Wastuti', '1968-01-13', 'Jl. Raya Ujungberung No. 61, Metro, GO 44600', '081522666049', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (4, 'Hairyanto', 'Iswahyudi', '1988-04-03', 'Gg. R.E Martadinata No. 499, Tanjungpinang, Kalimantan Tengah 84502', '088025626284', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (5, 'Cahyo', 'Lailasari', '1994-05-21', 'Gg. Moch. Ramdan No. 1, Kota Administrasi Jakarta Pusat, Sulawesi Utara 01663', '080237388763', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (6, 'Okta', 'Nurdiyanti', '1983-02-21', 'Jalan Cihampelas No. 4, Madiun, Bengkulu 09698', '087701963907', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (7, 'Bakti', 'Usada', '1985-12-02', 'Jl. Suniaraja No. 76, Jambi, BT 15976', '089692371116', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (8, 'Nadia', 'Sihombing', '1981-08-06', 'Jalan M.H Thamrin No. 660, Pasuruan, JK 49216', '086189408283', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (9, 'Zelaya', 'Thamrin', '2001-05-17', 'Gang Ahmad Yani No. 12, Purwokerto, Nusa Tenggara Barat 20945', '082660714292', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (10, 'Dacin', 'Tamba', '1976-01-05', 'Gang Medokan Ayu No. 8, Subulussalam, Lampung 36422', '082504546576', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (11, 'Nyoman', 'Gunarto', '1989-05-14', 'Gg. BKR No. 44, Banda Aceh, Kepulauan Riau 51834', '080368179489', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (12, 'Lasmanto', 'Kusmawati', '1972-07-03', 'Gang Pasteur No. 127, Kotamobagu, DI Yogyakarta 83025', '082989790035', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (13, 'Bagiya', 'Suryono', '1968-01-06', 'Gang Siliwangi No. 4, Madiun, KS 17770', '080214002807', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (14, 'Ihsan', 'Hakim', '1993-07-16', 'Jalan Pelajar Pejuang No. 30, Malang, LA 57309', '081560608823', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (15, 'Endah', 'Narpati', '1999-08-15', 'Jalan Rajawali Barat No. 438, Sibolga, Sulawesi Selatan 95007', '083212183227', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (16, 'Nova', 'Rajasa', '1983-02-15', 'Gg. Bangka Raya No. 75, Balikpapan, Jawa Timur 22535', '081733786154', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (17, 'Jagaraga', 'Mulyani', '1997-06-26', 'Jl. Rawamangun No. 099, Serang, Sulawesi Tengah 45520', '083970651963', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (18, 'Mila', 'Andriani', '1971-01-03', 'Jalan Asia Afrika No. 5, Sungai Penuh, DI Yogyakarta 22646', '086564474081', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (19, 'Danuja', 'Rajata', '1980-01-01', 'Jl. R.E Martadinata No. 9, Banjarbaru, BA 24354', '083156318514', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (20, 'Amelia', 'Wijaya', '1973-06-05', 'Jalan Wonoayu No. 8, Medan, Bengkulu 00822', '085238389972', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (21, 'Warsa', 'Mulyani', '1982-03-01', 'Jalan Kebonjati No. 854, Langsa, Kalimantan Tengah 56826', '085484636351', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (22, 'Salsabila', 'Saragih', '1971-06-05', 'Jl. W.R. Supratman No. 53, Blitar, MA 10452', '082060021041', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (23, 'Warta', 'Wahyudin', '1996-09-28', 'Gang Erlangga No. 37, Bandung, LA 87965', '080781048628', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (24, 'Lega', 'Wasita', '1999-01-12', 'Gg. Pacuan Kuda No. 383, Manado, RI 50767', '085706431404', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (25, 'Ellis', 'Natsir', '1970-08-26', 'Jl. Lembong No. 1, Bima, PB 37731', '089607806443', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (26, 'Amelia', 'Marbun', '1978-07-15', 'Jalan Sadang Serang No. 9, Tangerang Selatan, KT 79280', '083125470955', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (27, 'Raharja', 'Maulana', '1997-06-16', 'Jl. Tubagus Ismail No. 5, Bandung, RI 69241', '085142649634', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (28, 'Aditya', 'Tampubolon', '1994-07-14', 'Jl. K.H. Wahid Hasyim No. 0, Bau-Bau, SU 81562', '082674122030', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (29, 'Eman', 'Latupono', '1979-03-04', 'Jl. W.R. Supratman No. 3, Tebingtinggi, SG 82968', '089369210821', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (30, 'Ana', 'Kuswandari', '1983-01-04', 'Jl. Raya Setiabudhi No. 9, Tidore Kepulauan, Kalimantan Barat 36090', '089613631362', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (31, 'Ajiman', 'Anggraini', '1997-09-28', 'Jl. Rajiman No. 3, Kupang, ST 14810', '082835430829', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (32, 'Lili', 'Laksita', '1971-05-12', 'Jalan Pacuan Kuda No. 940, Serang, YO 75695', '084781319375', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (33, 'Mahesa', 'Mangunsong', '2000-02-16', 'Jalan Monginsidi No. 8, Padang, Jambi 22520', '089746752140', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (34, 'Farah', 'Rahimah', '2001-12-25', 'Gg. Rajawali Barat No. 8, Binjai, PA 14654', '089203691070', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (35, 'Rahmat', 'Laksita', '1973-06-05', 'Gang Rajiman No. 716, Malang, KR 65170', '086054562848', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (36, 'Gantar', 'Uwais', '1996-12-19', 'Gang S. Parman No. 7, Palopo, Gorontalo 91569', '088305783045', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (37, 'Eva', 'Simbolon', '1993-01-24', 'Gang R.E Martadinata No. 71, Tidore Kepulauan, PB 77280', '087185216892', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (38, 'Kusuma', 'Wahyudin', '1981-08-07', 'Gg. Dr. Djunjunan No. 0, Payakumbuh, Jambi 97664', '086891548104', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (39, 'Jindra', 'Farida', '1970-05-25', 'Jl. Kutai No. 550, Mataram, Sulawesi Tengah 84171', '086901356841', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (40, 'Syahrini', 'Prakasa', '1986-01-06', 'Gang Kiaracondong No. 498, Metro, KR 38873', '081634007632', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (41, 'Devi', 'Kurniawan', '1994-04-09', 'Gang Cikapayang No. 250, Kota Administrasi Jakarta Timur, AC 67327', '088601211590', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (42, 'Jane', 'Hassanah', '1970-03-16', 'Jl. Joyoboyo No. 53, Manado, KU 65494', '086192489441', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (43, 'Ega', 'Prakasa', '2000-02-16', 'Gg. Gegerkalong Hilir No. 287, Banjar, KI 76328', '086615383911', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (44, 'Cahyo', 'Salahudin', '1998-09-25', 'Jl. Dr. Djunjunan No. 8, Langsa, SU 36961', '086608873574', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (45, 'Waluyo', 'Mustofa', '1980-03-09', 'Gg. Raya Setiabudhi No. 805, Surabaya, Kalimantan Tengah 50793', '089751709933', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (46, 'Restu', 'Nasyidah', '1995-05-02', 'Gang Siliwangi No. 214, Sabang, Jawa Barat 23416', '081725574898', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (47, 'Tri', 'Haryanto', '1988-11-07', 'Jalan Kendalsari No. 39, Pangkalpinang, DKI Jakarta 22269', '082770104435', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (48, 'Candra', 'Hastuti', '1968-06-29', 'Jalan K.H. Wahid Hasyim No. 1, Makassar, JB 40385', '086779515206', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (49, 'Darman', 'Latupono', '1988-12-27', 'Gang Monginsidi No. 71, Bekasi, JK 17230', '087695354183', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (50, 'Gambira', 'Simbolon', '1968-07-15', 'Jl. Jamika No. 5, Bima, Lampung 07034', '082397068968', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (51, 'Bakti', 'Suryono', '1965-10-09', 'Jalan Kutai No. 92, Bandung, BB 78588', '087877884688', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (52, 'Queen', 'Kuswoyo', '1968-01-09', 'Gg. Dr. Djunjunan No. 270, Bukittinggi, Kalimantan Tengah 50098', '081523097680', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (53, 'Mustika', 'Nasyidah', '1976-11-15', 'Gang HOS. Cokroaminoto No. 8, Kota Administrasi Jakarta Barat, Bali 14230', '083398014688', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (54, 'Bakianto', 'Aryani', '1969-12-30', 'Jl. Stasiun Wonokromo No. 3, Tangerang Selatan, KR 98376', '080993597874', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (55, 'Cindy', 'Suryatmi', '1990-02-13', 'Jl. Raya Setiabudhi No. 953, Ternate, BT 36700', '084463123871', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (56, 'Daru', 'Mustofa', '1990-09-21', 'Jalan Erlangga No. 0, Jayapura, Maluku Utara 70340', '086430972654', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (57, 'Chelsea', 'Megantara', '2000-09-03', 'Jalan Tubagus Ismail No. 3, Lhokseumawe, RI 78046', '085072771436', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (58, 'Maimunah', 'Maryati', '1968-09-03', 'Gg. Cikutra Barat No. 66, Cilegon, NT 28951', '086117811054', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (59, 'Daniswara', 'Wibisono', '1967-08-03', 'Gg. R.E Martadinata No. 62, Pagaralam, PA 14253', '088862734725', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (60, 'Carla', 'Haryanto', '1985-01-25', 'Gg. Cihampelas No. 98, Meulaboh, Sumatera Utara 40396', '080474737624', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (61, 'Estiono', 'Wahyuni', '1977-09-04', 'Jl. Jakarta No. 9, Kediri, KT 66544', '089500195719', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (62, 'Limar', 'Narpati', '1997-04-22', 'Jalan Indragiri No. 568, Padang Sidempuan, KS 37038', '080144960506', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (63, 'Emong', 'Prayoga', '1984-10-16', 'Gang Gedebage Selatan No. 38, Serang, KT 55283', '089430944281', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (64, 'Jane', 'Haryanto', '1995-01-21', 'Gg. S. Parman No. 3, Banjarmasin, SS 43675', '087183674803', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (65, 'Faizah', 'Latupono', '1998-01-30', 'Jl. Gegerkalong Hilir No. 119, Kota Administrasi Jakarta Selatan, DKI Jakarta 33710', '086790435406', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (66, 'Puti', 'Hutasoit', '1976-11-04', 'Gang Jend. A. Yani No. 16, Palopo, DI Yogyakarta 56965', '081254712528', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (67, 'Irma', 'Halimah', '1969-01-03', 'Gang Yos Sudarso No. 34, Prabumulih, Jawa Tengah 14098', '080066607037', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (68, 'Marsudi', 'Farida', '1977-09-20', 'Jalan M.H Thamrin No. 35, Balikpapan, Lampung 42690', '082249931333', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (69, 'Virman', 'Usada', '1981-10-02', 'Gg. Jamika No. 75, Mojokerto, Nusa Tenggara Timur 01707', '088580556316', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (70, 'Hilda', 'Kusumo', '1971-06-19', 'Jalan Stasiun Wonokromo No. 95, Ternate, Kalimantan Tengah 80624', '082361724668', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (71, 'Atma', 'Kusmawati', '1984-08-20', 'Jalan Erlangga No. 86, Tegal, RI 65211', '080002520231', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (72, 'Balijan', 'Prasasta', '1993-11-08', 'Gg. Medokan Ayu No. 2, Magelang, MU 54596', '089068057642', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (73, 'Malik', 'Maryati', '1988-09-30', 'Jl. Moch. Toha No. 552, Tasikmalaya, Sumatera Utara 41597', '084384758256', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (74, 'Sakura', 'Usada', '1988-06-25', 'Jalan Monginsidi No. 296, Pekalongan, AC 97678', '083255345825', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (75, 'Jaiman', 'Hutasoit', '1981-08-02', 'Gang Suniaraja No. 62, Lubuklinggau, GO 10101', '082217281916', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (76, 'Gambira', 'Prasetyo', '1978-07-13', 'Jl. Yos Sudarso No. 60, Kota Administrasi Jakarta Pusat, Aceh 22185', '082234738826', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (77, 'Gangsa', 'Nugroho', '1982-04-02', 'Jalan Rungkut Industri No. 0, Tangerang Selatan, GO 68653', '082066535243', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (78, 'Ikhsan', 'Prabowo', '1994-11-08', 'Jalan Suryakencana No. 86, Makassar, KS 60184', '080219727870', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (79, 'Ganjaran', 'Permadi', '1972-01-03', 'Gang BKR No. 14, Kotamobagu, Kalimantan Selatan 79455', '080710069225', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (80, 'Emas', 'Fujiati', '1967-02-21', 'Jl. H.J Maemunah No. 2, Magelang, Maluku 78429', '088660400061', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (81, 'Kusuma', 'Novitasari', '1984-07-22', 'Jl. Moch. Ramdan No. 080, Payakumbuh, YO 45217', '086099999107', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (82, 'Ilsa', 'Saptono', '1983-03-24', 'Gg. Kutisari Selatan No. 9, Banda Aceh, Kalimantan Barat 80618', '081888460163', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (83, 'Malik', 'Permata', '1973-01-20', 'Gang Jakarta No. 10, Padangpanjang, AC 75846', '084877593550', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (84, 'Gaduh', 'Safitri', '1983-08-24', 'Jl. R.E Martadinata No. 636, Binjai, Nusa Tenggara Barat 05258', '085376544636', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (85, 'Maimunah', 'Winarno', '2000-04-22', 'Gg. Ir. H. Djuanda No. 21, Medan, Sulawesi Tenggara 24462', '082324805259', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (86, 'Daniswara', 'Prabowo', '1973-06-01', 'Jalan Kutai No. 02, Semarang, Papua 68361', '082885050209', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (87, 'Cakrabirawa', 'Widiastuti', '1990-11-02', 'Gang Suniaraja No. 4, Tangerang, Jambi 06831', '089073123429', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (88, 'Heru', 'Suwarno', '1968-08-22', 'Gang Cikutra Timur No. 674, Tasikmalaya, Sulawesi Tenggara 33361', '080733449947', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (89, 'Omar', 'Salahudin', '1989-08-29', 'Jalan Ciwastra No. 6, Sukabumi, MU 83010', '088208298655', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (90, 'Rendy', 'Utami', '1998-06-10', 'Jalan Ahmad Yani No. 785, Kotamobagu, MA 25932', '084842653468', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (91, 'Zahra', 'Hastuti', '1969-07-17', 'Jl. Gardujati No. 888, Banjarmasin, NT 79454', '084926392433', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (92, 'Carub', 'Wahyuni', '1970-12-18', 'Jl. Rawamangun No. 390, Semarang, GO 65357', '082620605451', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (93, 'Rahman', 'Saptono', '1968-06-01', 'Jl. Suniaraja No. 006, Salatiga, Bali 08999', '086253358316', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (94, 'Lulut', 'Kurniawan', '1998-12-08', 'Gg. Astana Anyar No. 992, Purwokerto, Nusa Tenggara Timur 52073', '084255988582', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (95, 'Ika', 'Permadi', '2003-05-27', 'Jalan Gardujati No. 40, Kota Administrasi Jakarta Pusat, Sulawesi Utara 57447', '083928686576', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (96, 'Ibrani', 'Rahayu', '1995-01-03', 'Jalan Pasir Koja No. 14, Tidore Kepulauan, JK 05572', '085366387786', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (97, 'Balangga', 'Fujiati', '1974-05-08', 'Gang Asia Afrika No. 583, Bandar Lampung, SU 40900', '089282559715', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (98, 'Almira', 'Melani', '1989-04-09', 'Jalan Wonoayu No. 05, Medan, NB 44894', '083347101287', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (99, 'Cawuk', 'Suartini', '1992-04-28', 'Gang Jakarta No. 4, Pariaman, YO 44479', '088558512992', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (100, 'Dono', 'Samosir', '1996-08-30', 'Gg. Bangka Raya No. 7, Jambi, Bali 41369', '082739170541', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (101, 'Samsul', 'Namaga', '1990-09-04', 'Jl. Medokan Ayu No. 963, Kota Administrasi Jakarta Timur, Sumatera Selatan 98940', '089688809187', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (102, 'Ayu', 'Nurdiyanti', '1988-04-05', 'Gang Jayawijaya No. 3, Langsa, Jawa Tengah 31132', '081509131417', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (103, 'Ega', 'Widodo', '1990-08-21', 'Gang Pasirkoja No. 721, Padangpanjang, Nusa Tenggara Timur 71177', '084164841646', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (104, 'Mutia', 'Pradana', '1971-05-24', 'Gg. Tebet Barat Dalam No. 73, Kota Administrasi Jakarta Timur, Kalimantan Tengah 59120', '083865287953', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (105, 'Edward', 'Kusmawati', '1979-03-01', 'Gg. Laswi No. 159, Bandar Lampung, KU 62753', '089539219607', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (106, 'Mahdi', 'Mardhiyah', '1972-11-05', 'Gang Sukabumi No. 131, Palembang, Jawa Tengah 36942', '085176631251', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (107, 'Sarah', 'Susanti', '2002-08-09', 'Jalan Tubagus Ismail No. 09, Bandung, SR 16620', '086407723835', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (108, 'Gada', 'Lazuardi', '1985-09-07', 'Gg. Kiaracondong No. 44, Kota Administrasi Jakarta Utara, Kepulauan Bangka Belitung 23493', '088131594732', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (109, 'Karya', 'Kuswandari', '1984-08-04', 'Gang Monginsidi No. 2, Tanjungbalai, JB 03210', '088055104890', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (110, 'Nasim', 'Hariyah', '1989-11-28', 'Gg. Sentot Alibasa No. 966, Cimahi, RI 98385', '082528565695', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (111, 'Shakila', 'Hidayat', '1974-10-30', 'Jl. Veteran No. 5, Sabang, PB 65325', '081888225241', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (112, 'Hartana', 'Megantara', '1964-10-06', 'Gg. Sadang Serang No. 42, Samarinda, JA 13478', '083822356644', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (113, 'Dadi', 'Samosir', '1987-04-25', 'Gg. Otto Iskandardinata No. 78, Bandar Lampung, Maluku 96873', '089305339556', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (114, 'Cornelia', 'Habibi', '1985-03-02', 'Gg. Gedebage Selatan No. 43, Sabang, Sulawesi Utara 43892', '081279177319', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (115, 'Luhung', 'Suryono', '1974-08-03', 'Jl. M.T Haryono No. 25, Pagaralam, SR 65012', '089923878022', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (116, 'Erik', 'Yuniar', '1999-03-06', 'Jl. Pelajar Pejuang No. 387, Padang Sidempuan, SR 10159', '083669066576', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (117, 'Hilda', 'Namaga', '1965-05-22', 'Gg. Moch. Ramdan No. 82, Mojokerto, Kalimantan Timur 29323', '087034150469', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (118, 'Silvia', 'Firgantoro', '1965-10-20', 'Gang Tebet Barat Dalam No. 28, Padang, NB 14465', '085044302234', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (119, 'Adikara', 'Pangestu', '1974-06-25', 'Jalan Cikapayang No. 9, Purwokerto, KU 01681', '080182089641', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (120, 'Tania', 'Damanik', '1999-03-26', 'Jalan Moch. Toha No. 942, Pagaralam, JA 93990', '084283116734', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (121, 'Reksa', 'Safitri', '1970-06-23', 'Gang HOS. Cokroaminoto No. 6, Padang, SG 16647', '080209306263', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (122, 'Teddy', 'Hutapea', '1968-10-14', 'Jl. Tebet Barat Dalam No. 6, Cirebon, ST 78265', '081008188064', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (123, 'Bagas', 'Anggriawan', '1966-01-28', 'Jl. HOS. Cokroaminoto No. 8, Sawahlunto, BE 40314', '087849502416', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (124, 'Mahdi', 'Mangunsong', '1968-10-12', 'Jalan Raya Setiabudhi No. 6, Tanjungpinang, Jawa Tengah 29948', '087060236023', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (125, 'Bagya', 'Latupono', '1982-11-26', 'Jl. KH Amin Jasuta No. 79, Kota Administrasi Jakarta Timur, NT 73334', '082943535836', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (126, 'Rahmi', 'Waskita', '1980-09-14', 'Jalan Lembong No. 8, Kota Administrasi Jakarta Selatan, SB 27434', '086826964985', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (127, 'Vanya', 'Andriani', '1985-05-18', 'Gg. M.H Thamrin No. 57, Bogor, Jawa Barat 85543', '084897929355', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (128, 'Harimurti', 'Lazuardi', '1990-01-15', 'Gg. Tubagus Ismail No. 2, Padangpanjang, PB 49824', '085877828933', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (129, 'Ridwan', 'Sudiati', '1994-05-11', 'Gg. HOS. Cokroaminoto No. 104, Pematangsiantar, NT 95242', '088569954779', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (130, 'Daliman', 'Wibowo', '1992-12-19', 'Jalan Cihampelas No. 41, Malang, Bali 74773', '085694761497', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (131, 'Hana', 'Yulianti', '1988-11-22', 'Gang Jend. Sudirman No. 50, Langsa, BE 77594', '081076781078', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (132, 'Jabal', 'Mandasari', '1971-02-28', 'Gang Rawamangun No. 467, Malang, JA 72528', '081245748363', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (133, 'Genta', 'Wacana', '1994-10-09', 'Gang Sentot Alibasa No. 66, Palangkaraya, Sumatera Barat 81582', '089976244070', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (134, 'Umi', 'Gunarto', '1976-09-17', 'Gang Astana Anyar No. 0, Pariaman, Sulawesi Selatan 28480', '086238005178', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (135, 'Niyaga', 'Sihombing', '1972-05-04', 'Jalan Ahmad Dahlan No. 826, Kendari, MU 67715', '086037003275', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (136, 'Karen', 'Prastuti', '1992-12-22', 'Gang Sukabumi No. 27, Kota Administrasi Jakarta Selatan, BA 10060', '080553427745', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (137, 'Kayla', 'Simanjuntak', '1966-12-12', 'Gang Sadang Serang No. 4, Sawahlunto, MA 24286', '081183318931', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (138, 'Amelia', 'Megantara', '1973-10-02', 'Jl. Kebonjati No. 8, Magelang, Maluku Utara 88510', '084690894029', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (139, 'Leo', 'Laksmiwati', '1964-11-27', 'Gg. W.R. Supratman No. 7, Tidore Kepulauan, PB 51463', '086748210948', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (140, 'Ciaobella', 'Wibisono', '1985-10-14', 'Jl. Rajawali Timur No. 9, Palembang, BA 51444', '088755077071', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (141, 'Ophelia', 'Wijaya', '1991-08-11', 'Gg. Pacuan Kuda No. 631, Subulussalam, KI 80314', '089327535595', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (142, 'Rika', 'Kurniawan', '1988-01-08', 'Jalan Jend. Sudirman No. 336, Kotamobagu, PA 95630', '085408329256', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (143, 'Baktianto', 'Budiyanto', '1977-10-10', 'Jl. Asia Afrika No. 73, Sibolga, BE 19823', '081353136134', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (144, 'Garang', 'Nurdiyanti', '1969-09-16', 'Gang Veteran No. 519, Serang, NB 40614', '082686332634', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (145, 'Ratna', 'Suartini', '1967-10-08', 'Jl. Suryakencana No. 5, Depok, JK 40770', '084770624945', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (146, 'Makara', 'Ramadan', '1993-01-12', 'Jl. Setiabudhi No. 17, Bukittinggi, PA 06975', '084063749459', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (147, 'Kajen', 'Rahayu', '1965-11-29', 'Jl. KH Amin Jasuta No. 8, Purwokerto, SG 05379', '080326450236', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (148, 'Cager', 'Marbun', '1981-08-11', 'Gang Ciumbuleuit No. 979, Pekanbaru, Nusa Tenggara Barat 97258', '080066914629', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (149, 'Harsanto', 'Anggriawan', '1976-11-13', 'Jl. Rajiman No. 467, Palembang, SU 81305', '083469060956', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (150, 'Balijan', 'Susanti', '1998-09-30', 'Jalan Soekarno Hatta No. 4, Banjar, DKI Jakarta 64547', '089475534348', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (151, 'Umaya', 'Nababan', '2002-04-07', 'Gang KH Amin Jasuta No. 15, Cilegon, Sumatera Utara 89521', '085770185154', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (152, 'Bakiono', 'Nurdiyanti', '2000-02-23', 'Jl. PHH. Mustofa No. 81, Kota Administrasi Jakarta Barat, ST 10509', '085730131184', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (153, 'Jaya', 'Kurniawan', '1972-09-30', 'Gang R.E Martadinata No. 513, Sibolga, BB 63925', '082836172677', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (154, 'Jumari', 'Winarno', '1982-09-15', 'Jalan Jayawijaya No. 868, Tebingtinggi, SB 89575', '088413898852', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (155, 'Gaduh', 'Halimah', '1970-09-14', 'Jl. Monginsidi No. 34, Subulussalam, Jawa Barat 20391', '088409113751', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (156, 'Kawaya', 'Damanik', '1992-03-30', 'Jl. Kutai No. 28, Tebingtinggi, Sulawesi Barat 42072', '084918166869', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (157, 'Siska', 'Astuti', '1965-05-14', 'Jalan S. Parman No. 716, Padang, KS 91451', '089507046156', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (158, 'Winda', 'Sinaga', '1997-07-13', 'Gang Cempaka No. 60, Kediri, YO 90265', '083289148069', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (159, 'Wakiman', 'Waskita', '1999-12-18', 'Jl. W.R. Supratman No. 9, Serang, Gorontalo 36689', '080872304286', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (160, 'Jaka', 'Iswahyudi', '1971-11-14', 'Jl. Rajiman No. 0, Cimahi, BT 83137', '080160232263', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (161, 'Elon', 'Prasetyo', '1992-10-22', 'Jl. Raya Setiabudhi No. 39, Kota Administrasi Jakarta Selatan, Jawa Barat 04154', '082391034113', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (162, 'Niyaga', 'Tarihoran', '1983-12-12', 'Jalan Kiaracondong No. 11, Kendari, Papua Barat 74110', '082001234345', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (163, 'Ifa', 'Najmudin', '1996-03-13', 'Gg. Kutisari Selatan No. 20, Bukittinggi, NB 05639', '089766970166', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (164, 'Usman', 'Widodo', '1989-07-24', 'Gang Rajawali Timur No. 88, Padang Sidempuan, Kepulauan Riau 96853', '084813021961', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (165, 'Dono', 'Mayasari', '1980-10-02', 'Gg. Cikutra Timur No. 5, Surabaya, KU 77290', '080253706500', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (166, 'Tomi', 'Firgantoro', '1990-10-17', 'Gg. Soekarno Hatta No. 1, Tegal, Kalimantan Timur 34328', '080506285389', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (167, 'Darimin', 'Budiyanto', '2000-04-13', 'Gang KH Amin Jasuta No. 020, Pagaralam, DKI Jakarta 88363', '086626971551', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (168, 'Laksana', 'Puspita', '2002-06-10', 'Jl. Otto Iskandardinata No. 035, Banda Aceh, Riau 87232', '088751872608', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (169, 'Jarwadi', 'Wacana', '1972-11-08', 'Jl. Ciumbuleuit No. 766, Malang, Kalimantan Tengah 39899', '085487312676', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (170, 'Ulva', 'Kuswoyo', '1970-09-21', 'Jl. Suniaraja No. 803, Meulaboh, KT 96327', '087449768627', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (171, 'Ismail', 'Purwanti', '1995-11-12', 'Gang Laswi No. 4, Pangkalpinang, SN 78934', '087191292971', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (172, 'Garang', 'Budiyanto', '1967-05-20', 'Jl. Sadang Serang No. 3, Kendari, Gorontalo 39460', '084043847074', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (173, 'Nyoman', 'Wibowo', '1970-05-21', 'Gang Dr. Djunjunan No. 678, Kendari, Bengkulu 41021', '085937292593', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (174, 'Mulyanto', 'Pradipta', '1970-06-02', 'Gg. Merdeka No. 288, Cilegon, SN 09305', '082316238351', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (175, 'Febi', 'Yuniar', '1971-08-20', 'Gg. Stasiun Wonokromo No. 1, Pagaralam, Kalimantan Tengah 22504', '087958078759', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (176, 'Arsipatra', 'Lestari', '1976-10-23', 'Jl. PHH. Mustofa No. 9, Kota Administrasi Jakarta Pusat, Bali 45541', '087983009847', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (177, 'Azalea', 'Sitompul', '1994-07-23', 'Gg. R.E Martadinata No. 89, Payakumbuh, Kepulauan Riau 92117', '087418763523', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (178, 'Lamar', 'Laksmiwati', '1989-10-21', 'Gang Cikutra Timur No. 3, Gorontalo, LA 37632', '089920619657', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (179, 'Bakti', 'Sirait', '1965-04-22', 'Gg. Dipenogoro No. 09, Sabang, SB 45978', '080670785038', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (180, 'Prima', 'Wahyuni', '1972-08-08', 'Jl. Jamika No. 9, Probolinggo, Papua Barat 04057', '084420540217', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (181, 'Candrakanta', 'Megantara', '1992-04-20', 'Gang H.J Maemunah No. 169, Probolinggo, Bengkulu 04702', '088574428547', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (182, 'Baktiono', 'Jailani', '1989-05-16', 'Jalan Waringin No. 8, Probolinggo, Aceh 49612', '084763123023', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (183, 'Labuh', 'Sihotang', '1996-11-21', 'Jl. Jend. Sudirman No. 70, Lubuklinggau, Maluku 77631', '089889528378', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (184, 'Johan', 'Pudjiastuti', '1988-11-16', 'Gg. Tubagus Ismail No. 622, Solok, Kalimantan Timur 62898', '086093620033', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (185, 'Jumadi', 'Iswahyudi', '1984-06-04', 'Jalan W.R. Supratman No. 349, Bandung, Papua 41125', '089509957159', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (186, 'Citra', 'Kurniawan', '1978-11-17', 'Jl. Kutai No. 71, Ambon, Papua Barat 68368', '088059141619', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (187, 'Panca', 'Maryati', '1975-05-03', 'Jalan Tebet Barat Dalam No. 5, Malang, KU 41559', '086567218646', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (188, 'Umi', 'Hutasoit', '1996-05-17', 'Gg. M.T Haryono No. 620, Sibolga, KU 62636', '085666773206', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (189, 'Estiawan', 'Prakasa', '1987-08-11', 'Gang Erlangga No. 57, Balikpapan, SS 18307', '082483049843', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (190, 'Vero', 'Nasyidah', '1989-02-04', 'Gang H.J Maemunah No. 108, Palopo, Jambi 55950', '080410963330', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (191, 'Purwadi', 'Wulandari', '1989-08-05', 'Jalan Moch. Toha No. 33, Batam, RI 94822', '082882384820', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (192, 'Cawuk', 'Natsir', '1994-05-24', 'Gg. Kebonjati No. 9, Batu, GO 61988', '086547939857', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (193, 'Kunthara', 'Utami', '1999-11-03', 'Jalan Moch. Toha No. 616, Surabaya, Aceh 22069', '086214219847', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (194, 'Usyi', 'Adriansyah', '1973-03-30', 'Gang Suniaraja No. 57, Kota Administrasi Jakarta Barat, Sulawesi Tenggara 41133', '080063369061', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (195, 'Icha', 'Budiyanto', '1980-11-07', 'Jl. Kutai No. 7, Yogyakarta, Kalimantan Barat 90218', '084881251871', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (196, 'Kadir', 'Haryanti', '1981-02-14', 'Gang Suryakencana No. 2, Lhokseumawe, ST 50737', '080200458878', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (197, 'Ilyas', 'Widodo', '2003-01-06', 'Gg. Cikutra Barat No. 38, Makassar, Jawa Tengah 08387', '083940841227', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (198, 'Kamila', 'Yulianti', '1994-12-28', 'Jl. Sukabumi No. 76, Kota Administrasi Jakarta Pusat, Nusa Tenggara Timur 63717', '080844579876', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (199, 'Setya', 'Mandala', '1986-09-07', 'Jalan Yos Sudarso No. 6, Padang Sidempuan, KU 16059', '081194350980', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (200, 'Galuh', 'Zulkarnain', '1979-11-18', 'Gg. Pelajar Pejuang No. 1, Kota Administrasi Jakarta Barat, SB 45283', '087713205872', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (201, 'Jayeng', 'Ramadan', '1975-08-09', 'Gg. Tebet Barat Dalam No. 72, Palu, JK 38614', '084054538653', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (202, 'Ratih', 'Astuti', '1997-05-21', 'Gang Ir. H. Djuanda No. 63, Ternate, KS 57111', '087282749768', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (203, 'Almira', 'Santoso', '1972-04-07', 'Gang Tebet Barat Dalam No. 839, Singkawang, KT 63504', '082545468066', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (204, 'Umaya', 'Handayani', '1998-06-27', 'Gang Ronggowarsito No. 2, Gorontalo, KI 69954', '086086095827', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (205, 'Daruna', 'Yulianti', '1972-05-12', 'Jalan Moch. Toha No. 92, Bukittinggi, BT 84668', '086134804364', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (206, 'Ilsa', 'Astuti', '1971-08-29', 'Jalan Raya Setiabudhi No. 6, Jayapura, KI 30726', '089457414401', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (207, 'Harjaya', 'Anggraini', '1976-10-25', 'Jalan Kapten Muslihat No. 83, Sawahlunto, SN 57324', '081111787290', 0);
+INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES (208, 'Dinda', 'Uwais', '1995-01-06', 'Jl. Cikutra Barat No. 07, Cimahi, JA 57177', '084699997041', 0);
 
 -- Insert ApplicationDetail data
 INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (1, 1, 'Accountant', '../../data\\ACCOUNTANT\\10554236.pdf', 'ACCOUNTANT
@@ -1383,7 +1385,8 @@ Additional Information
 Excellent multitasking, analytical thinking, time management, negotiation, communication, organization and leadership skills
 Skills
 MS Office: Database, Macros, V-look up, Pivot tables, Outlook
-Company Platforms: Business Objects, Workbench, Eagle, Pega, Lombardi, DRAS.', '', 'MS Office: Database, Macros, V-look up, Pivot tables, Outlook
+Company Platforms: Business Objects, Workbench, Eagle, Pega, Lombardi, DRAS.', 'Accomplished and results oriented Investment professional with strong leadership and interpersonal skills who adds energy and value to an
+organization''s quest for excellence.', 'MS Office: Database, Macros, V-look up, Pivot tables, Outlook
 Company Platforms: Business Objects, Workbench, Eagle, Pega, Lombardi, DRAS.', 'Company Name, City, State Investment Accountant 10/2012 to 11/2015
 Reconciled mutual fund accounts with the custody Identified and Resolved differences in Custody and Accounting Cash, Currency and
 Positions using Eagle, IAX, Business Objects, Lombardi and Workbench Reports Communicated and Collaborated with other areas in the
@@ -2097,7 +2100,17 @@ USM - GRAPHIC DESIGN, REAL ESTATE and NVCC-ARCHITECTURAL DRAFTING
 Skills
 Accounting, Accounting Systems, AIA, AS400, Billings, Bluebeam,Bonds, Budgets, Business Management, Clerical, Construction Management,
 Contracts, Special Events, Filing, Imaging, Insurance, JD Edwards, Microsoft, Office, Negotiations, Payroll, Coding, Project Management,
-Property Management, Proposals, Â RFI, SAP, Scheduling, Taxes, Trade Shows,Â', '', 'Accounting, Accounting Systems, AIA, AS400, Billings, Bluebeam,Bonds, Budgets, Business Management, Clerical, Construction Management,
+Property Management, Proposals, Â RFI, SAP, Scheduling, Taxes, Trade Shows,Â', 'Dedicated and focused professional who excels at prioritizing, completing multiple tasks simultaneously and following through to achieve project
+goals. Seeking a role of increased responsibility and authority.
+Highlights
+Project coordination
+Forward-thinking mindset
+Microsoft Office proficiency
+Business writing
+Results-oriented
+Self-directed
+Strong interpersonal skills
+Organized and detail-oriented', 'Accounting, Accounting Systems, AIA, AS400, Billings, Bluebeam,Bonds, Budgets, Business Management, Clerical, Construction Management,
 Contracts, Special Events, Filing, Imaging, Insurance, JD Edwards, Microsoft, Office, Negotiations, Payroll, Coding, Project Management,
 Property Management, Proposals, Â RFI, SAP, Scheduling, Taxes, Trade Shows,Â', 'PROJECT ACCOUNTANT
 February 2003 to Current Company Name - City , State ?
@@ -3254,7 +3267,9 @@ numerous CPA firm clients, A/P and A/R processing for clients, bank reconciliati
 entries, preparation of monthly financial statements (balance sheet, statement of cash flows, income statement), and providing year-end
 information for income tax returns â—​ Over 20 years experience in office management including; processing payroll and associated employment
 tax deposits, completing construction draws for lenders, processing A/R and A/P, maintaining subcontractor files and 1099 processing, bank and
-account reconciliations, maintainin', 'A/p, A/r, Automated Payroll, Cpa, Excel, General Ledger, Office Management, Outlook, Payroll, Payroll Processing, Powerpoint, Accounting,
+account reconciliations, maintaining general ledger and preparing monthly financial statements â—​ Knowledge of most computer programs
+(Word, Excel, Outlook, Power Point, Google Drive) â—​ Experience with many computer accounting programs (Quick Books, Peachtree,
+Timberline, AS400)', 'A/p, A/r, Automated Payroll, Cpa, Excel, General Ledger, Office Management, Outlook, Payroll, Payroll Processing, Powerpoint, Accounting,
 Bookkeeping, Office Manager, Accounts For, Bookkeeper, Cash, Financial Statements, Process Payroll, Reconciliations, Tax Returns, Balance
 Sheet, Bank Reconciliations, Clients, G/l, Its, Job Costing, Journal, Quickbooks, Business Management, Clerical, Training, Account
 Reconciliations, Accountant, Accounts And, And Account, As400, Audit, Balance Sheets, Contracts, Inventory, Invoice, Office Administration,
@@ -4089,7 +4104,13 @@ Schedule Adherence Coaching, Hiring, Employee Onboarding and Termination.
 Customer Care, Front-Line Underwriting, Needs Analysis, Cross Selling,
 Up Selling, Endorsing Policies, Billing Analysis, Collaboration, Project Management.
 Proficient with MS Windows, MS Office, Applied Epic, Vertafore Sagitta / Benefit Point, CC Pulse,
-Verint Impact 360, Verba, Kronos, My Time, Docu Sign, Taleo, Cisco', 'account management, Agency, benefits, Billing, Cisco, Coach, Coaching, com, Counseling, Client, client relations, customer relations, Customer
+Verint Impact 360, Verba, Kronos, My Time, Docu Sign, Taleo, Cisco Enterprise/Finesse/Admin/Report Server, Sales Force Service
+Cloud and more.
+Running reports, analyzing and organizing data in Excel using pivot tables.
+Experience with products and services of a multitude of insurance carriers, including but not limited to American Modern, Chubb,
+Dairyland, Foremost, Kemper, RLI, Mapfre,
+Met Life, Mutual of Enumclaw, Personal Umbrella.com, Progressive, Safeco, Travelers, Premera Blue Cross, Regence Blue Shield, United
+Healthcare, Aetna, Cigna, Kaiser Permanente, Group Health, Symetra, Unum, Delta Dental, Willamette Dental and VSP.', 'account management, Agency, benefits, Billing, Cisco, Coach, Coaching, com, Counseling, Client, client relations, customer relations, Customer
 Service, Customer Care, direction, Hiring, HR, Insurance, Kronos, Law, Letters, meetings, mentoring, Excel, MS Office, Share Point, MS
 Windows, Needs Analysis, Enterprise, Newsletter, organizing, peak, performance reviews, pivot tables, Policies, Problem Solving, improve
 processes, Project Management, quality, quality assurance, Research, Selling, sales support, Scheduling, Supervising, technical support, Employee
@@ -5736,7 +5757,35 @@ Operations at Blue Cross Blue Shield where I provided accurate, prompt and court
 information. Received positive feedback from members, agents and management regarding work performance.
 Highlights
 Exceptional communication skills
-Fili', 'Accounting, Accounts To, Basis, Billing, Customer Inquiries, Customer Service, Inventory, Invoices, Invoicing, Payments, Receptionist, Retail
+Filing and data archiving
+Creative problem solver
+Professional phone etiquette
+MS Windows proficient
+Customer service-oriented
+Quick learner
+Flexible
+Proficient in cash management
+Works well under pressure
+Credit card processing
+Appointment setting
+Advanced clerical knowledge
+High level of accuracy
+Strong account analysis skills
+MS Office expert Self-sufficient
+Committed to maintaining data integrity
+Excellent time management skills
+Independent worker Detail-oriented
+Computer proficient
+Expertise in invoice and payment transactions Power Point knowledge People Soft expert
+CES System
+Claims Experience
+SEIN
+SEIU
+FIPS
+PIRS
+Aclaims
+Ebill
+Call Center', 'Accounting, Accounts To, Basis, Billing, Customer Inquiries, Customer Service, Inventory, Invoices, Invoicing, Payments, Receptionist, Retail
 Sales, Scheduling, Shipping, The Accounting, Account Analysis, Archiving, Cash, Cash Management, Clerical, Credit, Credit Card, Customer
 Service Representative, Data Archiving, Data Integrity, Detail-oriented, Etiquette, Filing, Forecasting, Invoice, Ms Office, Operations, Peoplesoft,
 Phone Etiquette, Powerpoint, Problem Solver, Time Management, CES, Claims, PIRS, FIPS, Ebill, Aclaims, RMIM, RMIH, SEIU', 'Customer Service Advocate II
@@ -6561,7 +6610,30 @@ working with and assisting students even after my departure from the school, I a
 I have had the opportunity of supervising the Guidance & Counseling Unit over the past sixteen years and watched it grow from forty- two (42)
 counselors in 1999 to one hundred and thirty two (132) in 2015, posted in ninety-four schools on fourteen islands and cays throughout the
 country. During my leadership, we collaborated with the College of The Bahamas and Kent State University and established a Master''s of
-Education Degree Program in Sc', 'Brief Counseling, Resistance and Prevention Program (RAPP) certified trainer, Group and Individual counseling.', '10/2007 to Current
+Education Degree Program in School Counseling from 2001 to 2011. Eighty- nine (89) persons obtained the Masters Degree, and the unit has the
+largest amount of employees with this Degree in the Ministry of Education. I realized in order for the unit to move forward, ongoing training was a
+requirement for all officers, which kept them informed about the latest techniques and strengthened areas of concern. We also established a crisis
+team that assists with grief and disaster counseling.
+The needs of students were being met but those of the employees were not and after visiting the school district in Dallas Texas, I learned about the
+Employee Assistance Program, and implemented it at the Ministry of Education on a smaller scale. This proved to be very successful but the need
+for expansion was necessary. Upon the retirement of Mrs. Pansy Hamilton Brown, Iris Strachan, and Clevette Gibson took the reins and took
+EAP to the next level. The demands on the officers made me realize that the service needed to be made available to all government employees and
+the idea to expand the service was decided. I enjoyed my role as Senior Education Officer and if given the opportunity would like to be a part of
+taking EAP to the next level.
+Core Qualifications
+Experienced in individual and group counseling
+Sound knowledge of Erik Erikson developmental
+stages from birth to death
+outstanding planning and organizational skills
+Exceptional communication skills and outstanding leadership qualities
+Flexible, enthusiastic and enjoys working with people
+Solution focus
+Unique knack in identifying and improving counselors and clients potential
+Skilled in MS Office and researching on the Internet
+effective listener and Critical thinker skills
+Outstanding interpersonal and rapport building skills .
+Skilled in collecting and compiling information through interaction with
+colleagues, parents and students', 'Brief Counseling, Resistance and Prevention Program (RAPP) certified trainer, Group and Individual counseling.', '10/2007 to Current
 Co-chair person of the Annual Careers Month & National Careers Fair
 The purpose of the activities during the month of October is to launch career information to all students in the school system, which continues
 throughout the school year.
@@ -6921,7 +6993,15 @@ Management: Leads others, makes decisions, takes charge or initiative, can teach
 Organizational: Punctual, multi-task, meets deadlines, sets goals, manages projects
 Computer: Mastery of Microsoft Office Programs (Excel, Word, Power Point, Outlook), Ability to
 work with several operating systems
-Atten', 'Public Speaking, Student Involvement, and Organizational', 'Administration Office Assistant 06/2010 to 08/2010 Company Name, City, State
+Attention to Detail: Produces work that is neat and attractive, ensures that tasks are all done
+Flexible: Willing to try new things, able to work on schedule, interested in improving efficiency on any task
+Calm under pressure
+Decisive
+Curriculum development
+Organizational development knowledge
+Member of Portland Helping
+Hands and Family Homeless
+Shelter', 'Public Speaking, Student Involvement, and Organizational', 'Administration Office Assistant 06/2010 to 08/2010 Company Name, City, State
 (Summer Job) Worked with the Director of the Cultural Affairs department in filing papers, answering phone calls, assisting on historic
 preservation projects, working with clients, and educating young students about the importance of preserving the island''s culture and language. 2.
 Department of Public Safety (Rota, M.P., 96951, Songsong Village, District 3, CNMI)
@@ -8690,7 +8770,8 @@ Prospecting, Sales, Sales In, Sales Manager, Fleet Management, Assistant Directo
 Promotional, Staffing, Strategic Direction, Training, Budget, Account Executive, Documentation, Quotations, Shipping, Award, Business
 Development, Commercial Real Estate, Event Planning, Human Resources, In Sales, Northern Telecom, Peachtree, Property Management, Real
 Estate, Real Estate Lending, Sales Representative, Telecom, Training Programs, Induction, Mba, Finance, Risk Management, Advertising,
-Associate', '', 'Trade Show, Buyer, Buying/procurement, Market Research, Marketing, Accounts Through, Cold Calling, Commodities, Credit, Import/export,
+Associate', 'Creative Marketing Professional with an MBA seeking a new challenge after many years as a stay at home mom; broad-based background in
+highly competitive and dynamic organizations. Recognized as a decisive leader and excellent team player.', 'Trade Show, Buyer, Buying/procurement, Market Research, Marketing, Accounts Through, Cold Calling, Commodities, Credit, Import/export,
 Prospecting, Sales, Sales In, Sales Manager, Fleet Management, Assistant Director, Liaison, Trading, Database, Games, Maintenance,
 Promotional, Staffing, Strategic Direction, Training, Budget, Account Executive, Documentation, Quotations, Shipping, Award, Business
 Development, Commercial Real Estate, Event Planning, Human Resources, In Sales, Northern Telecom, Peachtree, Property Management, Real
@@ -8937,7 +9018,11 @@ Microsoft Office Suite, various SIGINT Geospatial Analyst/Signal Analysis/SIGDEV
 applications, and databases. Experienced in analytic research and development techniques along with management of analysis databases, and
 products. Excellent oral and written communication skills, regular displays of high levels of professionalism and problem-solving skills. Bloomberg
 certified as of 2014. Highly adaptive to changing environments, a self-starter and people motivator with a broad set of analytical and technical
-skills. Proficient in Go', 'accounts payable, accounts receivable, Analyst, Banking, Basic, Bloomberg, CISCO, CITRIX, Coach, CPR, customer service skills, Databases,
+skills. Proficient in Governmental Health Care programs and regulations; eg. Medicare Advantage.
+Highlights
+RT-RG suite, Belleview, Metrics, Anchory, Globalreach, SEDB, SIGNAV, NSAnet, Target Profiler, MS Office Suite, Arc Map, Arc GIS,
+Google Earth, Analyst Notebook, Dishfire, JWICS, Bloomberg, Archtics, Ticketmaster, Mar X, Continuum, FACETS, MEDCO, Med
+Informatics, Care Advance, Verint, Cisco, CITRIX', 'accounts payable, accounts receivable, Analyst, Banking, Basic, Bloomberg, CISCO, CITRIX, Coach, CPR, customer service skills, Databases,
 Financial, First Aid, general management, HOGAN, Instructor, Insurance, leadership, TEAM building, marketing strategies, Mentor, all Microsoft,
 MS Office Suite, Office, Network, payroll, policies, problem-solving, radio, reporting, research, Retail, Sales, Securities, Strategic, Vision', 'Company Name, City, State Assistant Banking Center Manager I 03/2016 to Current
 Knowledgeable in all aspects of running Retail Banking Center Building Operations; Audit policies and procedures, general management,
@@ -9388,7 +9473,14 @@ Apparel Sales Leader
 December 2006 to March 2011 Company Name ï¼​ City , State
 Assisted the store management team with general supervision in the store in accordance with company policies and procedures.
 Implemented merchandise presentation standards and signage of the apparel department to meet company standards.
-Maximized profits by supporting company standards of selling and customer ser', 'Master at executing and enhancing Game-plans
+Maximized profits by supporting company standards of selling and customer service.
+Educated new staff on merchandising and selling standards of Dick''s Sporting Goods.
+Nike Brand Coordinator
+October 2005 to December 2006 Company Name ï¼​ City , State
+Encompassed the Nike brand image, ensuring the highest standards of visual presentation at all times.
+Introduced new product lines by highlighting features and benefits.
+Coached and inspired store associates to maintain the Nike retail presence.
+Increased profitability of sales on an average of 4% yearly.', 'Master at executing and enhancing Game-plans
 Proficient in opening and closing store procedures, including cash office execution.', '', 'High School Diploma : General Studies , 2000 Mount Everett Regional High School ï¼​ City , State , USA
 Professional Recognitions
 Shrink Defender of the Month Â
@@ -10101,7 +10193,9 @@ Resourceful
 Dedicated team player
 Strong interpersonal skills
 Proofreading
-Skills Summary â—', 'Customer Service, Receptionist, Retail Sales, Account Reconciliation, Accounts Payable, Customer Service Representative, Dispatching,
+Skills Summary â—† Project Management â—† Report Preparation â—† Written Correspondence â—† General Office
+Skills â—† Computer Savvy â—† Customer Service â—† Scheduling â—† Distribution â—† Communication â—†
+Accounting/Bookkeeping â—† Front-Office Operations â—† Bi-Lingual Spanish', 'Customer Service, Receptionist, Retail Sales, Account Reconciliation, Accounts Payable, Customer Service Representative, Dispatching,
 Inventory, Logistics, Operations, Accounting, Budgeting, Color Codes, Csc, Customer Inquiries, Customer Service Manager, Edi, Excel,
 Invoicing, Liaison, Maintenance, Order Processing, Quality Control, Sales, Service Center, Shipping, Transmissions, Accounting/bookkeeping, Bi,
 Bi-lingual, Bookkeeping, Business Intelligence, Correspondence, Project Management, Retail, Retail Marketing, Scheduling', 'Company Name October 2009 to Current Branch Administrator
@@ -11309,7 +11403,24 @@ Additional Information
 N.Y.S. Permanent License for Social Studies 7-12
 N.Y.S. Professional License for Literacy Specialist k-12
 Mississippi License in Social Studies 7-12
-Mississippi License in Literacy K-12Â', '', 'Enthusiastic people person.
+Mississippi License in Literacy K-12Â', 'Motivated, enthusiastic educational leader with 15+ years'' experience fostering a cohesive student learning atmosphere conducive to learning.
+Â My Â core qualifications include being a licensed reading specialist in multiple states, strong classroom management, public speaking skills, CPR
+Certified and F.E.M.A. Â certified for emergency management situations.
+Skill Highlights
+Leadership/communication skills
+Self-motivated
+CPR Certified
+Classroom management
+Crisis management
+Patient
+Core Accomplishments
+Helped my low functioning readers move from Pre-K level reading to 5th and 6th grade reading levels.
+Facilitated small reading and writing groups, and phonics groups for grades 6 through 12 .
+Managed classes of up to 45.
+Chaperoned multiple field trips and after-school activities.
+Designed Â weekly lesson plans focused on age and level-appropriate material.
+Designed curriculum based upon student needs.
+Helped myÂ students reach their IEP goals.', 'Enthusiastic people person.
 Goal Oriented.
 Self-motivated.
 Team Player.
@@ -13267,7 +13378,23 @@ relations, recruitment, workers compensation and benefits, employee record-keepi
 procedures. A dedicated professional with an excellent written and oral communication skills and the ability to communicate effectively with all
 levels of the organization. Great research and policy analytical skills, very independent and self-motivated professional with excellent customer
 service, organizational, Project Management and time management skills, as well as the ability to grow positive relationships with clients, staff and
-colleagues. Excellent ability to manage a high volume of work by balancing competing deadlines and priorities effectively within a variety of', 'Databases, Hr, Compensation, Appraisal, Automated Payroll, Benefits, Benefits Administration, Correspondence, Employee Benefits, Hr
+colleagues. Excellent ability to manage a high volume of work by balancing competing deadlines and priorities effectively within a variety of diverse
+tasks. Proficient user of Microsoft applications.[Job Title] focused on developing efficient processes using knowledge of recruiting, employee
+relations, training and development and auditing.
+Highlights
+New employee orientations
+Staff training and development
+Microsoft Office Suite expert
+Quickbooks
+Human resources audits
+Maintains confidentiality
+HRMS
+HR policies and procedures expertise
+National Human Resources Association
+Human resources management
+People-oriented
+Organized
+Exceptional communicator', 'Databases, Hr, Compensation, Appraisal, Automated Payroll, Benefits, Benefits Administration, Correspondence, Employee Benefits, Hr
 Generalist, New Hire Orientation, Payroll, Payroll Processing, Performance Appraisal, Personnel Records, Recruiting, Terminations, Increase,
 Access, Client Relations, Filing, Finance, Liaison, Marketing, Office Manager, Pricing, Customer Service, Receptionist, Retail Sales, Accounts
 And, Problem Resolution, Product Sales, Sales, Sales And, Satisfaction, Training, Ada, Employee Engagement, Employee Relations, Flsa, Fmla,
@@ -13993,7 +14120,11 @@ Master of Arts : Organizational Management 2003 University of Phoenix , City , S
 Teacher Certification : Education 2002 Southwest Texas State University , City , State , USA
 Bachelor of Science : Health Care & Business Administration 2001 Wayland Baptist University , City , State , USA
 Computer Skills
-Dreamweaver, Illustrator, Photoshop, Acrobat Pro, Photoshop Elements, Final Cut Pro, MS office, Mac OSX, Mac IOS', '', 'Online Staff Training
+Dreamweaver, Illustrator, Photoshop, Acrobat Pro, Photoshop Elements, Final Cut Pro, MS office, Mac OSX, Mac IOS', 'Results-oriented and resourceful education professional with proven ability to effectively develop and implement educational strategies, policy and
+practices that improve student learning outcomes and benefit all stakeholders. Strengths in strategic planning, policy development, budget
+management, process evaluation, program development and grant management. Excellent at building relationships and managing by influence.
+Comprehensive analytical, strategic thinking and rapid problem-solving skills. Proven leader, approachable teacher and accountable team player.
+Tech savvy, highly proficient with Microsoft Office Suite and website development tools. Certified Lean Six Sigma Black Belt.', 'Online Staff Training
 Employee Management
 Instructional Strategies
 Conflict Resolution
@@ -14518,32 +14649,7 @@ Skills
 Basis, Databases, Metrics, Operations, Training, Accounts Payable, Audit, Audits, Database, Excel, Governance, Microsoft Office, Ms Office,
 Planview, Powerpoint, Business Intelligence, Leads, Oracle, Associate, Administrative Support, Data Sources, Microsoft Sharepoint, Posting,
 Process Improvement, Security, Sharepoint, Excel 2003, Microsoft Excel, Outlook, Outlook 2003, Microsoft Powerpoint, Powerpoint 2003,
-Word, Word 2003', 'Creative and Innovative professional driven to launch a career in teaching. Brings valuable experience from the legal and clinical research fields.
-Summary of Skills
-Excellent research skills
-Detail oriented
-Meticulous attention to detail
-Excel spreadsheets
-Strong problem solver
-Human resource laws knowledge
-Microsoft Word, Excel, Power Point
-Database management
-Strong communicator
-Report analysis
-Employee training and development Business process improvement
-Professional and mature
-Articulate and well-spoken
-Strong problem solver
-Works well under pressure
-Data collection and analysis
-Analytical thinker
-Creative problem solver
-Performance metrics specialist
-Strong work ethic
-Good written communication
-Exceptional communication skills
-Strong presentation skills
-Strong research skills', 'Basis, Databases, Metrics, Operations, Training, Accounts Payable, Audit, Audits, Database, Excel, Governance, Microsoft Office, Ms Office,
+Word, Word 2003', 'Creative and Innovative professional driven to launch a career in teaching. Brings valuable experience from the legal and clinical research fields.', 'Basis, Databases, Metrics, Operations, Training, Accounts Payable, Audit, Audits, Database, Excel, Governance, Microsoft Office, Ms Office,
 Planview, Powerpoint, Business Intelligence, Leads, Oracle, Associate, Administrative Support, Data Sources, Microsoft Sharepoint, Posting,
 Process Improvement, Security, Sharepoint, Excel 2003, Microsoft Excel, Outlook, Outlook 2003, Microsoft Powerpoint, Powerpoint 2003,
 Word, Word 2003', 'Company Name December 2012 to Current Clinical and Data Operations Support Analyst
@@ -15377,7 +15483,8 @@ Skills
 America Online, AOL, Auto Repair, Branding, budget, business development, com, content, contract negotiations, contracts, credit, Database,
 delivery, Dell, financial, focus, government, Internet Development, Internet Service Provider, leadership, marketing plans, marketing, market,
 Marketing Manager, marketing materials, MBA, Money, office, multimedia, multi-media, pricing, product development, project management,
-publications, receiving, retail, RFP, sales, sales/development, sales reporting, Shell, stories, strategy development, telemarketing, web site, writer, zip', '', 'America Online, AOL, Auto Repair, Branding, budget, business development, com, content, contract negotiations, contracts, credit, Database,
+publications, receiving, retail, RFP, sales, sales/development, sales reporting, Shell, stories, strategy development, telemarketing, web site, writer, zip', 'Forward thinker with expertise in marketing, partner acquisition, contract negotiation, communications, project management, collaboration and
+consensus building, combined with a Master''s Degree in Business Administration.', 'America Online, AOL, Auto Repair, Branding, budget, business development, com, content, contract negotiations, contracts, credit, Database,
 delivery, Dell, financial, focus, government, Internet Development, Internet Service Provider, leadership, marketing plans, marketing, market,
 Marketing Manager, marketing materials, MBA, Money, office, multimedia, multi-media, pricing, product development, project management,
 publications, receiving, retail, RFP, sales, sales/development, sales reporting, Shell, stories, strategy development, telemarketing, web site, writer, zip', '02/1999 to Current
@@ -16346,7 +16453,9 @@ AWARDS & CERTIFICATIONS Received 3 Excellence Awards in recognition of leadershi
 the "Contractor of the Year Award" and the "BIG 50" Award for co-owned company. B/Coach Systems LLC, Coach2 Training Program
 Professional Affiliations
 National Organization Development Network (ODN) New Jersey Organizational Development (NJOD) Northern New Jersey American Society
-for Training & Development (ATD)', '', 'Book, Budget, Coach, coaching, CA, consulting, client, customer service, decision-making, decision making, delivery, designing, functional,
+for Training & Development (ATD)', 'Proven business leader with extensive consulting experience. Award winning Executive Coach with over 15 years of experience as an internal and
+external Organization Development Consultant. Pragmatic, critical and creative thinker who works with leaders to meet business challenges while
+increasing individual and organizational development. Exceptional ability to identify obstacles and implement processes that achieve targeted results.', 'Book, Budget, Coach, coaching, CA, consulting, client, customer service, decision-making, decision making, delivery, designing, functional,
 leadership, Team development, Director, managing, meetings, processes, quality, sales, strategic thinking, systems thinking, teamwork
 Additional Information
 AWARDS & CERTIFICATIONS Received 3 Excellence Awards in recognition of leadership initiative for healthcare executives. Awarded
@@ -18206,7 +18315,30 @@ Additional Information
 Active Do D Secret Security ClearanceÂ
 Commendations Meritorious Unity Commendation Medal USN Commendation National Defense Service Medal X2 Armed Forces
 Expeditionary Medal Global War On Terrorism Service Medal Iraq Campaign Med W Campaign Star Army Service Ribbon Overseas
-Service Ribbon Mechanic Driver Badge Good Conduct Medal X2', '', 'A+ Certified, Active Directory, Backup Hardware, Computer Troubleshooting, Client Support, DHCP, File Servers, IP Configuration, Power
+Service Ribbon Mechanic Driver Badge Good Conduct Medal X2', 'To obtain a challenging, rewarding position in a professional and structured environment, where I can utilize my vast military experience, work ethic
+and training to become an integral contributor to a growing and productive organization. Skills Proven excellence with budgets, schedules,
+coordination, supervision, training, management, and maintenance of projects and programs at all levels, effectively interpreting and communicating
+requirements across functional organizations. In depth knowledge of OSHA, NAVOSH, and the handling, storage and disposition of Government
+Owned Property, and capable of providing effective employee training on all related topics. Verbal, interpersonal skills: able to facilitate
+cooperation among team members. Managerial skills with time management and delegation with the initiative to take on tasks and resolve problems
+immediately. Deeply instilled discipline, work ethic, customer astuteness, and conceptual thinking. A fast learner who will be an immediate asset to
+any workplace. Windows Server 2008 - planning, deploying, configuring, and maintaining AD infrastructure, environment, and objects.
+Core Qualifications
+Installation, Configuring, and Management of Windows 7
+Active Directory Windows Server 2008 R2
+Administration of Active Directory
+Managing Windows Server 2008 R2 Components
+IP Addressing & Name Resolution
+Network Components of Windows Server 2008 R2
+Windows Server 2008 R2 MCSE 70-640, MCSE 70-642 and MCSE 70-646 Key Differences between Server 2003 and Server 2008.
+Windows 7 Domain Integration & Client Support. DHCP, WINS, RRAS, IPSEC, TCP/IP, & Computer Troubleshooting.
+Installing and supporting Windows 7 and Windows Server 2008 in virtual environment.
+IP and IP Routing; IPsec; DHCP; Remote Access. Installing, configuring, managing, and maintaining hardware.
+Configuring Domain Name Resolution, Network Connectivity; Installing and Deploying Windows Server 2008.
+Windows Server 2008 AD DS; Domain Controllers; Sites and Replication; Domains and Forests.
+Windows Server 2008 AD Group Policy; Managing Files; Backup; Managing Printers; File Servers
+Monitoring Computers; Patch Management and Security; Certificate Services and Server Virtualization
+In depth knowledge of the following: Network protocols and devices; TCP/IP including Sub netting and CIDR notation.', 'A+ Certified, Active Directory, Backup Hardware, Computer Troubleshooting, Client Support, DHCP, File Servers, IP Configuration, Power
 Point, Excel, Word, Access, MCSE, Windows 7, Â Network Security,Routing, TCP/IP Protocol.Â
 Additional Information
 Active Do D Secret Security ClearanceÂ
@@ -18321,7 +18453,28 @@ and administrating systems and networks. Tenacious hard worker, self-directed an
 adaptable to a quick changing technical environment.
 Highlights
 My SQL, Postgre SQL, SQLite, No SQL, Level DB
-Programming Languages: C, C++, Perl, PHP', '.NET, API, automate, backup, Bash, C, C++, credit, critical thinking, CSS, Database, designing, ecommerce, Engineer, XML, Google Analytics,
+Programming Languages: C, C++, Perl, PHP, Python, Go, Java Script, Bash, SQL, Visual Basic, .NET
+Other Languages: CSS, HTML, XML, Markdown, Regular expression, SASS
+Operating Systems: Linux, Unix
+Tools: Netbeans, Vim, Visual Studio, MS Visio, MS Access, Wordpress, Git, Google Analytics, Docker, Microsoft Office package
+Strengths include:
+Full life software life cycle development expert
+Programming and designing
+Software testing / Troubleshooting / Advance critical thinking
+Database & Object oriented development
+Website design & development & software engineering
+Object oriented development
+Work History_______________________________________________________
+Full Stack Engineer
+Logon Tutor LLC - Cincinnati, OH
+Design and implement an ecommerce website (in PHP) using MVC and OOP
+Integrate 3rd party tools in PHP using XML API such as Authorized.net (for charging credit cards), an online whiteboard, and Paypal
+Create an admin page (in PHP) that tracks user''s browsing history, incomplete registrations, user''s clicks from custom links, and user''s communication exchange
+Write command line scripts in Bash to automate system administration tasks such as database backup and website deployment
+Mar. 2012 - Present
+Project Manager
+Seeketh.org Senior Project - Cincinnati, OH
+Managed a team of students in the implementation of an information retrieval system (in PHP) that searched the bible using natural language processing', '.NET, API, automate, backup, Bash, C, C++, credit, critical thinking, CSS, Database, designing, ecommerce, Engineer, XML, Google Analytics,
 HTML, PHP, Java Script, Linux, MS Access, Excel, exchange, Microsoft Office package, MVC, My SQL, natural language processing, No SQL,
 Object oriented, OOP, Operating Systems, page, Perl, Postgre SQL, Programming, Python, scripts, script, software engineering, Software testing,
 SQL, system administration, Troubleshooting, Unix, Visio, Visual Basic, Visual Studio, Website design & development, website', 'Software Engineering Co-op 03/2010 to 12/2010 Company Name, City, State
@@ -18848,7 +19001,8 @@ years. Collateral Duty Quality Assurance Representative for Aviation Egress and 
 Representative 1 year. Quality Assurance Safety Observer for CADS/PADS 6 years. F/A-18 E/F Low Power Engine/APU Turn Operator
 Qualified F/A-18 Super Hornet Plane Captain. Assuming responsibilities of Daily/Turnaround inspections, servicing and operation of twelve 65
 million dollar aircraft, ensuring all are in full mission capable status. Diligently showing expertise in emergency procedures and ground safety for 31
-fighter pilots/', 'book, C, Configuration Management, counseling, CPR, documentation, First Aid, instruction, instructor, interpretation, Leadership, Logistics,
+fighter pilots/aircrew and 245 maintenance personnel. Aviation Gas Free Engineer/Confined Space Entry Supervisor and Safety Observer.
+Excellent communication, team building and leadership abilities.', 'book, C, Configuration Management, counseling, CPR, documentation, First Aid, instruction, instructor, interpretation, Leadership, Logistics,
 Managing, Navy, Naval, personnel, pick, quality, quality assurance, QA, Safety, teamwork, Troubleshooting', 'Aviation Maintenance Egress Leading Petty Officer Leading Petty Officer
 October 2001 to Current Company Name
 Meritorious Unit Commendation.
@@ -19752,7 +19906,13 @@ Consumer Loan Platforms.
 Credit and Debt Management experience.
 Created a CRM platform with the banks Baker Hill Commercial
 Software.
-Implemented new software systems', 'accounting, accounts payable, Banking, business development, cash management, Commercial Lending, communication skills, credit, credit
+Implemented new software systems with Mortgage Bot and
+Decision Pro.
+Effectively grew Commercial Loan balances 5-10% each of the past five years.
+Established a robust outbound calling plan for the banks sales force.
+Designed and implemented an Incentive Compensation Plan
+(ICP) for the sales force.
+Active member of local financing agency''s Board of Directors (GSBDC and NYBDC)', 'accounting, accounts payable, Banking, business development, cash management, Commercial Lending, communication skills, credit, credit
 analysis, CRM, client expense reports, finance, HR, insurance, Leadership, market management, new business development, Real Estate, Retail,
 sales, sales and management, Tax return preparation, WORD , EXCEL and Power Point knowledgeable.', 'Senior Lending Officer - VP Executive Officer 11/2009 to Current Company Name, City, State
 Responsible for the Management and Development of six(6) Commercial Lending Officers whose roles and responsibilities include the
@@ -20061,7 +20221,19 @@ Skills
 Sales, Market Research, Sales Staff, Sales Team, The Sales, And Sales, Clients, Regional Sales, Sales Director, Solutions, Wealth Management,
 Class, Client Relations, Closing, Closing Sales, Coaching, Comprehensive Large Array Data Stewardship System, Confident, Credit, Customer
 Service, Detail Oriented, Exceed, Journal, Leads, Problem Solver, Receptionist, Retail Sales, Self Motivated, Territory, The Sale, Sales Activities,
-Series 6, Series 7', '', 'Sales, Market Research, Sales Staff, Sales Team, The Sales, And Sales, Clients, Regional Sales, Sales Director, Solutions, Wealth Management,
+Series 6, Series 7', '* Exceptional follow-through abilities and detail oriented; able to plan and foresee strategies from concept to successful completion * Versatile;
+proven ability to manage multiple projects * Able to build lasting rapport; posses strong interpersonal skills; able to work effectively with
+individuals on all levels, effective motivator of self and others * Capable speaker and communicator, with refined skills in presentations, education,
+and client relations building * A resource person, problem solver, trouble shooter and a creative turnaround banker * Self-assured, confident,
+dependable and responsible in pursuing and closing sales; thrive in challenging situations requiring the ability to learn new skills Associate with an
+organization that will benefit from my initiatives, capabilities and contributions, ultimately qualifying for advancement and increased decision-making responsibilities:
+Core Accomplishments
+Developing business within emerging and highly competitive business market; outstanding presentation, leadership qualifications
+Responsible of managing a team of 24 relationship managers for delivering personalized financial strategies to affluent clientele through
+banking and borrowing needs, as well as, investments services. My responsibility and accountability is to manage a team that service a
+portfolio of affluent households with investable assets of $500, 000 up to $2,000,000 . The primary objective of this trusted advisor is to
+grow client assets, retain and acquire new clients through being the single point of contact for all banking needs.. This role will require a
+holistic delivery of outstanding service and sales solutions to meet clients'' financial needs and goals', 'Sales, Market Research, Sales Staff, Sales Team, The Sales, And Sales, Clients, Regional Sales, Sales Director, Solutions, Wealth Management,
 Class, Client Relations, Closing, Closing Sales, Coaching, Comprehensive Large Array Data Stewardship System, Confident, Credit, Customer
 Service, Detail Oriented, Exceed, Journal, Leads, Problem Solver, Receptionist, Retail Sales, Self Motivated, Territory, The Sale, Sales Activities,
 Series 6, Series 7', 'Company Name September 2014 to Current SVP, Regional Sales Director Wealth Management
@@ -20974,7 +21146,9 @@ Skills
 Accounting,Â banking,Â budgets,Â business development,Â business plans,Â capital markets, cash flow analysis,Â COGNOS,Â consulting,
 contract negotiations,Â corporate finance, credit,Â debt and equity financing, Essbase,Â finance,Â financial planning & analysis, foreign
 exchange,Â Hyperion,Â JD Edwards,Â Lotus 1-2-3,Â market analysis, marketing strategies,Â marketing and sales, mergers and acquisitions,
-access, Excel, Microsoft Office applications,Â Oracle,Â project management, public speaking, recruitment,Â sales,Â strategic planning', '', 'Accounting,Â banking,Â budgets,Â business development,Â business plans,Â capital markets, cash flow analysis,Â COGNOS,Â consulting,
+access, Excel, Microsoft Office applications,Â Oracle,Â project management, public speaking, recruitment,Â sales,Â strategic planning', 'Executive Banker with experience in all facets of banking: growth strategy (retail and commercial); operations; business development; and sales and
+marketing, all with an entrepreneurial spirit. A macro-level thinker with a proven track record for structuring and negotiating sound, credit-worthy
+business and building strong teams, able to meet company-wide financial goals.', 'Accounting,Â banking,Â budgets,Â business development,Â business plans,Â capital markets, cash flow analysis,Â COGNOS,Â consulting,
 contract negotiations,Â corporate finance, credit,Â debt and equity financing, Essbase,Â finance,Â financial planning & analysis, foreign
 exchange,Â Hyperion,Â JD Edwards,Â Lotus 1-2-3,Â market analysis, marketing strategies,Â marketing and sales, mergers and acquisitions,
 access, Excel, Microsoft Office applications,Â Oracle,Â project management, public speaking, recruitment,Â sales,Â strategic planning', 'July 2015 to
@@ -21886,7 +22060,26 @@ troubleshooting, network, Networking, OSPF, policies, printer, Protocols, RIP, R
 support, Phones, TELNET, Terminal Server, Troubleshooting, Vista, WAN, Windows Server
 Additional Information
 Marital status : Married. Hobbies : Playing Cricket Permanent Address : Village:- Jhinna , Post:- Abhana , Disit:- Damoh , (M.P.) Pin Code
-:- 470662 Declaration I here by declare that whatever information I have given above is correct according to the best of my knowledge.', '', 'Active Directory, Backup, CCNA, CISCO, Cisco Certified, Computer Hardware, Hardware, Client, customer satisfaction, Dec, DHCP, DNS,
+:- 470662 Declaration I here by declare that whatever information I have given above is correct according to the best of my knowledge.', 'Seeking assignments in Hardware Network Servers Technical Support with an organization to deliver results by leveraging strong exposure in IT
+Operations. Cisco certified Network Associates with nearly 6 year & 3 months of experience in Site & Networking Operations, Installation,
+Configuration, Technical Support/Troubleshooting, Incident Management as well as Client Servicing. Server 2k3, 2k8 & Ubuntu server
+configuration, Network Configuration, implementation of DHCP Server, File server, DNS server and Network Monitoring tools. An effective
+communicator with excellent skills in building relationships Possess, strong analytical, problem solving and organizational abilities. Assembling and
+disassembling PC, motherboard, hard disk drives, and working with local and network printer, configure cable UTP,STP, coaxial Key Highlights
+Manage the data server and data security. Successfully performed configuration of NAS Server, AD Server, Child Domain, Cisco Router,
+Firewalls, Network Printers, Provided expertise in installation and management of IT infrastructure for Cisco routers, switches, Servers and Thin
+client, Systems, Network Cables, Network Printers,Softwares etc. Delivered a successful up gradation of Enterprise Domain server from
+windows 2003 to 2008. Received appreciation from Client''s Top Management for providing value addition to the project by automating certain
+tasks and saving time and resources.
+Skill Highlights
+Configuration and managing VMware workstation server and creating virtual systems.
+Windows XP, Vista, Windows7 and Windows 8
+Working in Microsoft office 2003 and 2007.
+Working in Kingsoft Office, Libre Office
+Working in thunderbird mail, outlook mail PME mail.
+Local and external network monitoring.
+Computer Hardware Assembling, Dissembling, configuration and maintenance of computers and Troubleshooting of PC and printer''s problem.
+Other Software Knowledge of ERP, Time desk , CCTV, PPC, Tally. ESS and CHS etc.', 'Active Directory, Backup, CCNA, CISCO, Cisco Certified, Computer Hardware, Hardware, Client, customer satisfaction, Dec, DHCP, DNS,
 EIGRP, English, ERP, Firewalls, FTP, GUI, Hindi, IP, LAN, Managing, access, Microsoft Certified Professional, MCP, mail, Microsoft office,
 Office, outlook, Windows 8, Windows, Windows7, Windows XP, migration, ESS, Network Associates, Network Printers, network and
 troubleshooting, network, Networking, OSPF, policies, printer, Protocols, RIP, Routers, Routing, SAP, SAP Basis, Servers, Switches, technical
@@ -22033,7 +22226,14 @@ consulting, Contact Management, customer relationship management, CRM, Client, C
 care, DELL, direct marketing, entrepreneur, senior management, financial, financial management, FP&A, gross profit, Human Resource
 Management, Human Resource, Human Resources, inside sales, insurance, legal, Logic, management consulting, market, network, organizational,
 process re-engineering, processes, quality assurance, recruiting, selling, sales, sales support, staffing, strategy, strategic, strategic planning, technical
-support, telecommunications, vendor relations', '', 'account management, a P, B2 B, Behavioral Health, business development, business operations, business planning, business process, Call Center,
+support, telecommunications, vendor relations', 'High performing Customer Relationship Management / BPO executive with proven experience managing high growth/complex operations serving
+diverse industries to include wireless, technology, insurance, healthcare and consumer services. A change agent with a well-documented history of
+growing assets and expanding client relationships by setting effective strategic direction, building a platform for consistent operational execution and
+proactively developing talent, processes and a culture of continuous improvement. Professional Strengths Executive & General Management *
+Strategic Planning Operations (Multi-Channel Contact Center, etc.) * Business Development P&L Management * Account Management Talent
+and Organizational Development * Cross-Functional Leadership Selected Achievements As Senior Vice President of Operations at ASURION,
+proactively reengineered operations, enabling revenue to grow from $400 million to $2 billion in two years, while improving margins, customer
+satisfaction and subscriber retention.', 'account management, a P, B2 B, Behavioral Health, business development, business operations, business planning, business process, Call Center,
 consulting, Contact Management, customer relationship management, CRM, Client, Clients, customer satisfaction, customer service, customer
 care, DELL, direct marketing, entrepreneur, senior management, financial, financial management, FP&A, gross profit, Human Resource
 Management, Human Resource, Human Resources, inside sales, insurance, legal, Logic, management consulting, market, network, organizational,
@@ -23143,7 +23343,39 @@ Personal Information
 Married
 Skills
 Program Management,Service Management,Client Relationship Management,Sales and Solutioning, Transition Management,Performance
-Management,Managing P&L', '', 'Program Management,Service Management,Client Relationship Management,Sales and Solutioning, Transition Management,Performance
+Management,Managing P&L', 'Strong Service Delivery & Operations Management experience with significant exposure to the entire value chain with key contributions in
+Operations framework set-up and service delivery. Onshore account manager for BPO engagements, with the responsibility of overseeing delivery
+across BPO engagements in multiple delivery locations and various work streams, as well as responsibility for business development with new
+and existing clients within BPO.A diverse career graph with rich experience in Strategy Planning, Service Delivery, Delivery Management,
+Business Analysis, & Leadership 15 solid years of experience in Operations and Service Delivery Extensive hands on expertise in Bid
+Management, Solution Architect, Transition Expertise in handling Transition planning and support. Adept at implementing transition project
+plans according to client and business specifications Achievements in managing Projects resulting in dollar benefits to the company, with initiatives
+involving re-engineering of business processes, operations and enterprise applications Excellent analytical, organizational, interpersonal skills,
+Identification and negotiation for Business and Technology requirements Committed to efficient and accurate management of information systems in
+a fast-paced, deadline-driven environment.Proven ability to translate Business needs into technology requirements that supports the company''s
+Business objectives, and to successfully manage all phases of Projects from needs analysis and requirements definition to Line of Business, Support
+Function, implementation, and training Results oriented professional, recognized for taking on major initiatives, and adapting to rapidly changing
+environment and resolving mission-critical issues to ensure bottom-line success
+Skill Highlights
+Client Relationship Management
+Delivery Management
+Client engagement structuring and management
+Exceptional people skills, internal and external
+Account planning and management
+Financial management
+Sales and solutioning
+Account strategy management
+Transition Management
+Quality management
+Core Accomplishments
+Revenue Growth: Enabled business growth by creating a successful solution which helped contract extension of 35 M USD and additional upsell of
+10 M USD in FY''14-15
+Delivery Management: Managed the contract with the financial estimated and have exceeded the operating margins year on year. Was promoted
+as a Business Account Lead due to exceptionable delivery management.
+Client Value Creation: Managed multiple lean projects and applied leading industry practices to bring 5 M USD positive P&L impact to the client.
+Process improvement further resulted in revenue increase for Accenture through increase in productivity
+Escalation Management: Established strong relationship with the client during a major escalation and actively participated in claims settlement
+process which helped in client retentions and improved relationships', 'Program Management,Service Management,Client Relationship Management,Sales and Solutioning, Transition Management,Performance
 Management,Managing P&L', 'Business Account Lead
 February 2014 Company Name - City , State
 As a Business Account Lead managed both the client relationship for the outsourcing contract and client service management and delivery against the contract.
@@ -23756,7 +23988,9 @@ Automated Tests and executing the same. Proven experience in testing GIS applica
 Insurance domains. Experience in User Acceptance Testing, System Integration Testing, Performance Testing, Decision Table Testing and
 Regression Testing. Good experience with developing and maintaining the test documentation. Self motivated with strong passion for delivering
 quality software. Strong Project Management skills with flexibility and willingness to work on a variety of projects while demonstrating ability to
-multi-task and prioritize', 'Testing, Cases, Test Cases, Functional Testing, Integration, Integration Testing, Integrator, Android, Android Sdk, Ios, Mapping, Safari, Software
+multi-task and prioritize effectively. Excellent verbal and communication skills. Excellent Risk Mangagement skills with proven ability to meet the
+tight deadlines. ISTQB certified tester. To pursue a challenging career in the field of Software Testing and Quality Assurance and providing the
+need of the company in the best possible way and enhance my technical, logical and problem solving skills.', 'Testing, Cases, Test Cases, Functional Testing, Integration, Integration Testing, Integrator, Android, Android Sdk, Ios, Mapping, Safari, Software
 Testing, Statistics, Test Plans, Topo, Writing Functional, Engineer, Test Engineer, Writing Test, Writing Test Cases, Access, C#, Ms Sql Server,
 Sql, Sql Server, Sql Server 2005, Windows Xp, Process Improvement, Retail, Retail Marketing, System Testing, Acceptance Testing, C++,
 Documentation, Gis, Html, Java, Javascript, Linux, Microsoft Office, Microsoft Project, Ms Office, Performance Testing, Regression Testing,
@@ -24172,7 +24406,8 @@ and skills which include an in-depth understanding of Business Processes and Str
 industry, excellent understanding of Offshore Client requirements, professional education and valuable experience gained mostly while working in
 last couple of organisation.
 Highlights
-Service Now, Microsoft Lync, MSN. *VPN: Cisco client, Cisco SSL, Check point Secure client. *Operatin', 'a Level 2, analyst, Arts, AS/400, bridges, C, call centre, CCNA, Cisco, closing, coach, Computer Hardware, Hardware, credit, Client,
+Service Now, Microsoft Lync, MSN. *VPN: Cisco client, Cisco SSL, Check point Secure client. *Operating System: XP, Windows 7. *Office
+Tools: MS Office 2007 & 2010', 'a Level 2, analyst, Arts, AS/400, bridges, C, call centre, CCNA, Cisco, closing, coach, Computer Hardware, Hardware, credit, Client,
 Desktops, Documentation, Engineer, English, Event Management, filing, GUI, Hindi, ids, maintaining inventory, inventory, ITIL, ITIL v,
 Knowledge Management, LAN, Laptops, LEADERSHIP, Logging, Managing, access, Microsoft exchange, mail, MS Office, Office, Windows 7,
 Win, Win 7, win 2000, win 95, 98, NT, MSN, Enterprise, Network, networking, Operating System, ORACLE, printer, Punjabi, sales, San,
@@ -24870,7 +25105,33 @@ on personal levels. Strong problem solving skills, and able to adapt to rapidly 
 ethics and morals. Creating a great win/win situation with the client and investor or funding source. Following up with clients to ensure satisfaction
 and answer any questions they may have. Prospecting through referrals and other creative approaches. Setting and achieving targeted contract
 goals as needed. Have superior knowledge in negotiations to effectively help clients and investors make sound decisions. Contact high profile
-investors to spark interest in client offerings using investor database, negotiating fees and price offerings between investors', 'acquisitions, audio, Bachelors, business development, contracts, client, clients, databases, financial, notes, meetings, money, Negotiating,
+investors to spark interest in client offerings using investor database, negotiating fees and price offerings between investors and clients. CAR
+SALES November 2013 Understands automobiles by studying characteristics, capabilities, and features; comparing and contrasting competitive
+models; inspecting automobiles. Develops buyers by maintaining rapport with previous customers; suggesting trade-ins; meeting prospects at
+community activities; greeting drop-ins; responding to inquiries; recommending sales campaigns and promotions. Qualifies buyers by understanding
+buyer''s requirements and interests; matching requirements and interests to various models; building rapport. Demonstrates automobiles by
+explaining characteristics, capabilities, and features; taking drives; explaining warranties and services. Closes sales by overcoming objections;
+asking for sales; negotiating price; completing sales or purchase contracts; explaining provisions; explaining and offering warranties, services, and
+financing; collects payment; delivers automobile. Provides sales management information by completing reports. Updates job knowledge by
+participating in educational opportunities; reading professional publications. Enhances dealership reputation by accepting ownership for
+accomplishing new and different requests; exploring opportunities to add value to job accomplishments. Ability to Work Well in a Team
+Atmosphere Ability to multitask in a fast paced environment Team player that can help others, and learn from others as needed. Strong problem-
+solving, analytical, and quantitative skills. Good oral and written communication skills, able to express ideas and information in a clear and concise
+manner. Professional presence to interact with executive management and investors. Ability to balance multiple projects simultaneously with key
+dates and deadlines. Ability to work effectively with diverse personalities. Resourceful, reliable, get-things-done kind of person. Willing to take
+responsibility, be held accountable, and really own the position. Possession of Current Valid California Drivers License, insurance, reliable transportation
+Core Qualifications
+Client-focused
+Results-oriented
+Quick learner
+Contract negotiation/review/drafting
+File/records maintenance
+Microsoft Office
+Goal-oriented
+Excellent negotiating tactics
+Business negotiation
+Cold Calling
+Sales Force', 'acquisitions, audio, Bachelors, business development, contracts, client, clients, databases, financial, notes, meetings, money, Negotiating,
 negotiator, Oct, progress, Psychology, real estate, settlements, sound, structured
 Additional Information
 MEDALS U.S. Army Good Conduct Medal U.S. Marine Corp Good Conduct Medal National Defense Service Medal U.S. Army Good
@@ -25489,7 +25750,23 @@ Education
 Bachelor of Business Administration (BBA) : Finance and Economics 1996 Augusta State University, Hull College of Business , City , State
 Skills
 Business Development, Complex Sales Strategy, Public Policy, Enterprise Software, Software as a Service (Saa S), Infrastructure as a Service
-(Iaa S), Technical Analysis, Financial Analysis, Budget, Public Sector, Telecommunications, Sales Reporting, Public Speaking, Public Presentations', '', 'Business Development, Complex Sales Strategy, Public Policy, Enterprise Software, Software as a Service (Saa S), Infrastructure as a Service
+(Iaa S), Technical Analysis, Financial Analysis, Budget, Public Sector, Telecommunications, Sales Reporting, Public Speaking, Public Presentations', 'Results- driven and highly skilled Account Manager and Sales Leader with 10+ years of experience developing and executing plans that cover all
+aspects of the sales cycle.Â Provide strategic support to customers by leveraging trends in technology, analytical analysis, and solutions to the
+challenges of their business.Â Creates effective strategies to keep the pipeline accurate, moving, and exceeding goals.
+Skill Highlights
+Strategic account development
+Strong interpersonal skills
+Team building expertise
+Proven sales track record
+Relationship selling
+Strong deal closer
+Skilled multi-tasker
+Analytical problem solver
+Core Accomplishments
+Created strategies to develop and expand customer sales, which resulted in a 67% increase in annual sales.
+Increased territory penetration 25% from 19 to 25 States.
+Managed a portfolio of accounts totaling $10,500,000 in annual sales and $32,000,000 in total contract value.
+Generated a pipeline of more than $150,000,000 in net new opportunities in 12 months.', 'Business Development, Complex Sales Strategy, Public Policy, Enterprise Software, Software as a Service (Saa S), Infrastructure as a Service
 (Iaa S), Technical Analysis, Financial Analysis, Budget, Public Sector, Telecommunications, Sales Reporting, Public Speaking, Public Presentations', 'Company Name, City, State Director of Business Development 07/2013 to Current
 Worked closely with other company executives to identify new business opportunities, securing contracts for enterprise government
 software, Software as a Service (Saa S), Infrastructure as a Service (Iaa S), and Managed Service solutions.
@@ -25770,7 +26047,25 @@ Skills
 budget, business development, Call Center, coaching, communication skills, consultant, credit, Customer Service, decision making, direction,
 documentation, Equity, senior management, external audits, Financial, funds, Government, hiring, human resource, Leadership, law, Legal,
 managing, mediation, meetings, Office, operations management, performance reviews, Pick, policies, Project management, quality, quality control,
-recording, Relationship management, securities, scripting, strategy, strategic, phone, Underwriting, Vendor management, website', '', 'budget, business development, Call Center, coaching, communication skills, consultant, credit, Customer Service, decision making, direction,
+recording, Relationship management, securities, scripting, strategy, strategic, phone, Underwriting, Vendor management, website', 'Ambitious leader who creates strategic alliances with organization leaders to effectively align with and support key business initiatives. Builds and
+retains high performance teams by hiring, developing and motivating skilled professionals.
+Skill Highlights
+Call center/dialer operations
+Underwriting
+Strategic planning
+Operational Risk
+Multi-unit operations management
+Change implementation/project management
+Relationship and vendor management
+Core Accomplishments
+Operations Management: Managed multi-sites and units (150 FTE) Handled multiple functions related to customer care, collections, loss
+mitigation, risk, foreclosure, and underwriting
+Staff Development: Launched well-received program of professional development courses for all staff.
+Mentored and coached employees resulting in a 12% increase in productivity.
+Project Management: Created policies and procedures for external vendors.
+Initiated audit checklist for vendors resulting in 80% decrease in their average turn times and increasing overall quality by 40% in one year.
+Partnered with law firms, judges, NY City Mayors office, NY City Bar, GSE and housing counseling attorney to institute Continued
+Learning Education seminar for all court systems in NYC area.', 'budget, business development, Call Center, coaching, communication skills, consultant, credit, Customer Service, decision making, direction,
 documentation, Equity, senior management, external audits, Financial, funds, Government, hiring, human resource, Leadership, law, Legal,
 managing, mediation, meetings, Office, operations management, performance reviews, Pick, policies, Project management, quality, quality control,
 recording, Relationship management, securities, scripting, strategy, strategic, phone, Underwriting, Vendor management, website', 'Company Name, City, State Business Development Manager, VP 12/2014 to Current
@@ -26236,7 +26531,17 @@ supervisory, organizational and staff management skills. I am experienced in all
 have extremely strong media identification, planning and negotiation skills-with a solid history of success in targeting primary demographics. I
 possess exemplary project management, budgetary and analytic skills and bring a rare mix of right-brain creativity and left-brain organizational
 skills to the table, and am currently seeking a challenging position within my field of proven expertise. Extremely adept at multi-tasking-with the
-ability to effectively juggle multiple projects and deadlines Experience in developing metrics and methodologies to assess', 'academic, acquisitions, ad, ads, advertising, ad copy, agency, B2 B, brand management, branding, broadcast, budget, cable, catalogs, closing,
+ability to effectively juggle multiple projects and deadlines Experience in developing metrics and methodologies to assess campaign effectiveness
+and ROI statistics Strong media identification, negotiation, planning, campaign creation, production and assessment skills Highly-experienced in all
+phases of print production, including: design, negotiation, press checks, pre-press and print operations Highly-experienced in all phases of media
+planning, budgeting, negotiation, trafficking and assessment Highly-experienced in all phases of television and radio campaign production and
+development Experienced in forging and strengthening high-value business relationships Building and creating cross-functional teams within a
+supportive environment to maximize efficiencies Development of co-op advertising/marketing initiatives within non-competing industries Experience
+in preparing and delivering statistical and consumer trend reports to C-level company executives Extensive background art directing photo shoots-
+both in-studio and on-location Extremely battle-tested in crisis management and creative problem solving Microsoft Office (Word, Excel,
+Power Point, etc.) Highly-experienced in Page Maker, In Design, Quark XPress, as well as all other layout/design programs Highly-experienced in
+Photoshop - as well as most other graphics programs Exemplary staff motivation/development/management skills Experience on both sides of the
+media negotiation table (client/media) Highly-developed interpersonal and presentation skills / superior writing and editing skills Strong work ethic', 'academic, acquisitions, ad, ads, advertising, ad copy, agency, B2 B, brand management, branding, broadcast, budget, cable, catalogs, closing,
 com, competitive, concept, content, contracts, corporate communications, CRM, client, clients, designing, direct mail, e-commerce, editing, edit,
 film, fund-raising, graphic design, graphics, image, insurance, legal, logistics, marketing strategies, marketing, market, marketing / communications,
 marketing materials, materials, media planning and placement, mail, negotiating, newsletters, newspaper, photography, POS, presentations, press
@@ -27049,7 +27354,24 @@ Skills
 Business Development, Superb Customer Service, Cold Calling,Â Relationship Building, Marketing, Market Research, Various CRM software
 products including Salesforce, Salespoint, ZOHO, and Outlook,Â DevelopingÂ Marketing Materials, Complaint Resolution, Business-to-
 business, Cabinets, Sales, Directing Large Teams, Motivating Team Members, Identifying and Capturing New Markets, Public Speaking, Problem
-Solving, Critical Thinking, Leadership,Â Performance Analysis, and Budget Development and Forecasting', '', 'Business Development, Superb Customer Service, Cold Calling,Â Relationship Building, Marketing, Market Research, Various CRM software
+Solving, Critical Thinking, Leadership,Â Performance Analysis, and Budget Development and Forecasting', 'My goal is to use my unique collection of expertise, experience, and skills gained from my seventeen years as a construction business development
+and marketing representative, five years managing a sales force, six years helping my father run his historic home remodeling business, and my
+college education to reach my full potential as an account executive by helping Visio Financial Services achieve steady, long-term, sustainable
+growth by building productive relationships with customers, co-workers, company leadership, and other stakeholders.
+Core Accomplishments
+Sales and Marketing
+Increased income 112% in 12 months in Austin
+Increased market share from 20% to 70% in downtown Atlanta construction market in 12 months
+Designed and executed branding plan to change the image of the organization, resulting in significant market share increase in each of 23 major U.S. cities
+Investigated markets and target customer issues to create messaging strategy
+Market Research
+Defined industry segments and identified opportunities in 23 major U.S. cities
+Discovered new opportunities in mature markets and developed and led the implementation of
+plans to capture significant market share
+Account Management
+Managed various sized accounts and grew business by providing superb customer service
+Successfully grew account sizes in 23 major U.S. markets
+Trained local staff to continue the example of growing accounts through excellent client service', 'Business Development, Superb Customer Service, Cold Calling,Â Relationship Building, Marketing, Market Research, Various CRM software
 products including Salesforce, Salespoint, ZOHO, and Outlook,Â DevelopingÂ Marketing Materials, Complaint Resolution, Business-to-
 business, Cabinets, Sales, Directing Large Teams, Motivating Team Members, Identifying and Capturing New Markets, Public Speaking, Problem
 Solving, Critical Thinking, Leadership,Â Performance Analysis, and Budget Development and Forecasting', 'Director of Business Development 04/2005 to 04/2015 Company Name, City, State
@@ -27162,7 +27484,8 @@ Expertise in building effective strategies that substantially increase revenue w
 directs a team of 52 employees sustaining $45 MM in annual revenue. A demonstrated record of success marked by a history of stellar revenue
 growth and operational excellence with roles with market-leading corporations; credited with introducing best practices, training, and other process
 improvements to bolster the effectiveness of sales teams. An effective communicator who leverages an unwavering commitment to excellence to
-build and execute innovative sales strategies, consistently deliveri', 'Account Management, ads, advertising, automotive, budget, business development, closing, Competitive, CRM, clients, customer service, Driving,
+build and execute innovative sales strategies, consistently delivering positive results in challenging and highly competitive industries. Award winning
+Sales Operations Manager; Strategic Fixed and Variable Operations Director.', 'Account Management, ads, advertising, automotive, budget, business development, closing, Competitive, CRM, clients, customer service, Driving,
 finance, financing, focus, hiring, inventory, leadership, Managing, marketing strategies, marketing, Mentoring, Online Marketing, personnel,
 positioning, product management, Profit, Sales, Strategy, television, translating, vision, website', 'BUSINESS DEVELOPMENT DIRECTOR
 January 2010 to Current Company Name ï¼​ City , State
@@ -28485,7 +28808,13 @@ his cooking career, though he only has minimal school training Charles has learn
 The Norwegian Cruise Line''s Pride Of America Executive Chef Frank D. Chef David Lilllis, and Chef Alan) These great chefs have taught Charles
 various skills in the kitchen including learning of the mother sauces, knife skills, and even new kitchen terminology. Charles Has also worked with
 Iron Chef Michael Symon on a couple different occasions and has learned various techniques with smoking meats, using herbs and spices, as well
-as manage cooking time and work different items all at once. WIth an Associates degree in Business Management and a strong understa', 'Kitchen Management
+as manage cooking time and work different items all at once. WIth an Associates degree in Business Management and a strong understanding of
+business concepts, Charles can combine the knowledge of business management and culinary to become a very outstanding chef, and has done so
+thus far in his career in the culinary field. Able to deliver quality dishes in a timely matter. Superior culinary art skills and techniques. Willingness to
+learn while retaining a positive attitude, and ability to understand guests want and needs. Charles has the drive, passion, and heart to be a great
+chef. Core Qualifications Knowledge of Mother Sauces, Produce orders, Knife Skills, Menu organization, Kitchen Management skills, Employee
+management, Scheduling management, very fast learner. Learned new skills and knowledge with each company I worked for, and learned how to
+better serve our guests wants and needs therefore I would base most of my menus off that.', 'Kitchen Management
 Knife SKills
 Mother Sauce Knowledgeable
 Ability to Adapt to any situation
@@ -28618,7 +28947,21 @@ Skills
 Flexible temperament, able to accomodate changes of plans and special requests smoothly. Proficient cooking for specialty diets including various
 allergy and food sensitivities,Â gluten free, vegan, raw, paleo, specific carbohydrate diet (SCD), Gut and Psychology Diet (GAPS), Kosher, Halal,
 & Heritage diets. Proven ability to manage daily demands of planning menus, shopping and preparing meals for multiple households with changing
-plans and schedules. Â Professional, respectful communication skills, eager to learn and able to teach.', '', 'Flexible temperament, able to accomodate changes of plans and special requests smoothly. Proficient cooking for specialty diets including various
+plans and schedules. Â Professional, respectful communication skills, eager to learn and able to teach.', 'Accomplished personal chef, committed to culinary excellence, quality ingredients and personalized service seeking to add his extensive culinary
+skill and knowledge of nutrition and health to best serve the needs of every person he cooks for.
+Skill Highlights
+Classically trained chef proficient in all facets of food production
+Attention to detail, cleanliness and diligence to prevent any
+possibility of cross contamination
+Extensive knowledge of nutrition and various specialty diets
+Proven ability to manage daily culinary operations for multiple
+households with changing needs and demands
+Expertise with various forms of protocol and table service
+appropriate to a multitude of settings
+Able to shop and manage acquisition of specialty foods and
+foods which are maximally nutrient dense
+Communicates effectively, and values discretion and privacy
+Wine and liquor inventory and management', 'Flexible temperament, able to accomodate changes of plans and special requests smoothly. Proficient cooking for specialty diets including various
 allergy and food sensitivities,Â gluten free, vegan, raw, paleo, specific carbohydrate diet (SCD), Gut and Psychology Diet (GAPS), Kosher, Halal,
 & Heritage diets. Proven ability to manage daily demands of planning menus, shopping and preparing meals for multiple households with changing
 plans and schedules. Â Professional, respectful communication skills, eager to learn and able to teach.', '10/2004 to 07/2016
@@ -28671,7 +29014,7 @@ Food anthropology and Charcuterie Study in Spain Worked with accomplished chefs 
 historical context and high end presentation.
 Nutrition Dietetics West Virginia Wesleyan ï¼​ City , State , USA 3 years studying nutrition dietetics. Â Won awards for public speaking and
 community education for nutrition. Â Taught nutrition to children and families in area head start programs', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (207, 1, 'Chef', '../../data\\CHEF\\11209758.pdf', 'DFW PERSONAL CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (207, 207, 'Chef', '../../data\\CHEF\\11209758.pdf', 'DFW PERSONAL CHEF
 Experience
 DFW Personal Chef City , State
 Devise and execute growth plans entailing market penetration and expansion, product development and diversification,.
@@ -28750,7 +29093,7 @@ English, French and Arabic
 Highlights
 Microsoft Word, Excel (spreadsheets, pivot tables, formulas, formatting), Power Point, Access, Outlook Google Data Analytics, Search Engine
 Optimization (SEO) and Web Metrics Social media tools Hootsuite and Hashtagify Cloud Management and Security Salesforce Customer
-Relationship Management Quick Books 42 CPE Credits, Mastering Quick Book', 'administrative, ads, Arabic, business development, contracts, Customer Relationship Management, Client, clients, customer satisfaction, energy
+Relationship Management Quick Books 42 CPE Credits, Mastering Quick Books level 3 Certified', 'administrative, ads, Arabic, business development, contracts, Customer Relationship Management, Client, clients, customer satisfaction, energy
 efficient, English, food safety, French, hiring, inventory management, inventory, marketing, market, mentor, Access, Excel (spreadsheets, Outlook,
 Power Point, 98, Microsoft Word, networking, payroll processing, pivot tables, policies, pricing, product development, producing, profit,
 purchasing, quality, Quick Books, safety, selling, sales, Search Engine Optimization, servers, shipping, staffing, strategic, tax, tax returns, training programs', 'DFW Personal Chef City , State
@@ -28802,7 +29145,7 @@ solution based complaints resolution, location averaged a 90% score in customer 
 surpassed all performance goals and retained lowest employee turnover rate, YOY Orchestrated a customer feedback report card, valuable
 comments steered improvements to service speed, staff performance and food quality Awarded with Manager of the Year Award, five straight years.', 'Bachelor of Science : Business Management Saint Joseph University
 Business Management Magna Cum Laude', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (208, 2, 'Chef', '../../data\\CHEF\\11432686.pdf', 'CATEGORY BRAND MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (208, 208, 'Chef', '../../data\\CHEF\\11432686.pdf', 'CATEGORY BRAND MANAGER
 Summary
 A creative marketing professional with 20 years demonstrated experience in project management, marketing communications, sales support,
 strategy, research, and product development. Multi-faceted background includes food manufacturing, consumer packaged goods (CPG), furniture
@@ -29015,7 +29358,7 @@ Graduate Level Courses, Marketing, Illinois Institute of Technology, Chicago, IL
 B.A , Organizational/Corporate Communications Journalism 1992 Northern IL University ï¼​ City , State Organizational/Corporate
 Communications Journalism American Management Association, 2016 and 2017; Communicating Up, Down and Across the Organization;
 Critical Thinking; Fundamental Sales Techniques, Project Management Success, The Power of Persuasion', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (209, 3, 'Chef', '../../data\\CHEF\\11444536.pdf', 'CO-OWNER/EXECUTIVE CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (209, 1, 'Chef', '../../data\\CHEF\\11444536.pdf', 'CO-OWNER/EXECUTIVE CHEF
 Career Focus
 Performance driven administrative professional with extensive experience in purchasing and operations in support of top organizational objectives.
 Fourteen years'' experience in purchasing, including project management of multi-sites with a diversified background in the food service industry,
@@ -29084,7 +29427,10 @@ Education
 Bachelor of Arts : Culinary Management September, 2012 LE CORDON BLEU COLLEGE OF CULINARY ARTS City , State Culinary
 Management
 Skills
-Food-TrakÂ :Â Birch Street :Â WordÂ : ExcelÂ Â', '', 'Food-TrakÂ :Â Birch Street :Â WordÂ : ExcelÂ Â', 'Co-owner/Executive Chef 03/2010 to 01/2017
+Food-TrakÂ :Â Birch Street :Â WordÂ : ExcelÂ Â', 'Performance driven administrative professional with extensive experience in purchasing and operations in support of top organizational objectives.
+Fourteen years'' experience in purchasing, including project management of multi-sites with a diversified background in the food service industry,
+purchasing and construction. Intellectual as well as innovative and skilled at executing multi-projects in the most cost effective, time efficient, safe &
+quality producing manner. Recognized for the application of impressive research and forecasting skills that discover untapped profits and elusive resources.', 'Food-TrakÂ :Â Birch Street :Â WordÂ : ExcelÂ Â', 'Co-owner/Executive Chef 03/2010 to 01/2017
 Company Name, City, State
 Successfully manage a cafÃ© style restaurant, increasing sales through quality food, exceptional service and value.
 Plan menus, estimate food and beverage costs, purchase and maintain adequate inventory to meet needs.
@@ -29128,7 +29474,7 @@ Outsourced through various insurance companies during catastrophe situations.
 Handled approximately 100-200 claims directly with the insured.
 This involves the ability to deal with people in high stress and anxiety situations using time management skills efficiently.', 'Bachelor of Arts : Culinary Management September, 2012 LE CORDON BLEU COLLEGE OF CULINARY ARTS City , State Culinary
 Management', 'Earned â€œTop Performerâ€​ award in 2016', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (210, 4, 'Chef', '../../data\\CHEF\\12155206.pdf', 'KINDERGARTEN TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (210, 2, 'Chef', '../../data\\CHEF\\12155206.pdf', 'KINDERGARTEN TEACHER
 Professional Summary
 Energetic, results-oriented team-player eager to bring strong administrative skills to a growing company in need of top-level support.
 High-performing Administrative Assistant with extensive experience working with a diverse client base and delivering results.
@@ -29253,7 +29599,7 @@ MEDIC ALERT COMMUNITY AMBASSADOR,Â Â 2005-2010
 Â Â Â Â â€‹Organized & distributed Medic Alert collateral to surrounding medicalÂ community.
 CHARLOTTE AVENUE ELEMENTARY SCHOOL CLASSROOM & PTO VOLUNTEERÂ 1996-2008
 Â Room mom,Â Reading & math groups,Â chaperone,Â baker, Hospitality & Garden Club, Ski & Chess Club', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (211, 5, 'Chef', '../../data\\CHEF\\12254068.pdf', 'HEALTH CARE ADMINISTRATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (211, 3, 'Chef', '../../data\\CHEF\\12254068.pdf', 'HEALTH CARE ADMINISTRATOR
 Interests
 As a hobby, creating memorable events for military functions, wedding and party planning. Developed training program for 2 and 3 session cake
 decorating classes for both adults and children. Love to camp, Kayak and travel.
@@ -29395,7 +29741,7 @@ Provided encouragement and support for those new to business.
 Provided inspiration to develop different sales strategies in a new market.
 Developed advertising campaigns and flyer/mailings.
 Introduced The Pampered Chef.', 'Bachelor of Science : Risk and Benefits Management , 1985 The University of Alabama', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (212, 6, 'Chef', '../../data\\CHEF\\12420359.pdf', 'PASTRY SOUS CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (212, 4, 'Chef', '../../data\\CHEF\\12420359.pdf', 'PASTRY SOUS CHEF
 Summary
 Service oriented professional looking for opportunities in pastry arts. Seeking to advance development of skills and learn more aspects of pastry
 arts and confections. Diploma from the Le Cordon Bleu program and vast experience utilizing business degree in a corporate environment.
@@ -29530,7 +29876,7 @@ Diploma : Patisserie and Baking Program California School of Culinary Arts GPA: 
 Pastry Arts Patisserie and Baking Program Graduated President''s List in the Le Cordon Bleu programs for Pastry Arts
 1993
 Bachelor of Arts : Economics Wheaton College ï¼​ City , State GPA: Cum Laude- Dean''s List Economics Cum Laude- Dean''s List', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (213, 7, 'Chef', '../../data\\CHEF\\12717345.pdf', 'EXECUTIVE CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (213, 5, 'Chef', '../../data\\CHEF\\12717345.pdf', 'EXECUTIVE CHEF
 Summary
 Dedicated, hardworking restaurant management professional with extensive daily planning and operations experience. Skilled in menu planning
 using seasonal ingredients and a passion with cooking from scratch. Skilled in staff training and development. Previously managed more than 20
@@ -29669,7 +30015,7 @@ Planned and prepared food for parties, holiday meals, luncheons, special functio
 Featured in Plate Magazine
 Guest Chef at the Northern New England Home and Garden Show Meet the Chef Series
 Taught Cooking Matters Classes', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (214, 8, 'Chef', '../../data\\CHEF\\13095891.pdf', 'EXECUTIVE CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (214, 6, 'Chef', '../../data\\CHEF\\13095891.pdf', 'EXECUTIVE CHEF
 Executive Profile
 Award winning executive chef with comprehensive experience in kitchen, banquets, and a-la-carte operations, for hotels, resorts and restaurants.
 Culinary innovator known for producing top quality, creative products contributing to revenue growth. Proven ability to lead successful multi-
@@ -29757,7 +30103,33 @@ Education
 Associate of Arts : Culinary Arts 1982 Saint Augustine Culinary School City , State
 City
 Skills
-budget, Concept, cooking, clients, International Sales, inventory control, office, newspaper, purchasing, San, television, articles', '', 'budget, Concept, cooking, clients, International Sales, inventory control, office, newspaper, purchasing, San, television, articles', 'Executive Chef 06/2003 to 01/2015 Company Name, City, State
+budget, Concept, cooking, clients, International Sales, inventory control, office, newspaper, purchasing, San, television, articles', 'Award winning executive chef with comprehensive experience in kitchen, banquets, and a-la-carte operations, for hotels, resorts and restaurants.
+Culinary innovator known for producing top quality, creative products contributing to revenue growth. Proven ability to lead successful multi-
+outlets, fine dining and high volume operations. Expertise Multi-Outlet/High Volume Operations * Budgeting/P&L Management Staff
+Training/Leadership/Supervision * Sanitation and Quality Control Creative Menu Development & Research * Service & Marketing Experience
+Price Structuring and Cost Containment * Inventory/Purchasing Team Building * Guest Relations
+Skill Highlights
+Leadership/communication skills
+Product development
+Menu Development
+New product delivery
+Budgeting expertise
+Employee relations
+Self-motivated
+Customer-oriented
+Staff Training
+Staff Retention
+Team Building
+Staff Motivation
+Cost Controlling
+Core Accomplishments
+Project Management: Â
+Initiated Inventory control system, Food Trac which resulted in cost savings
+Human Resources: Â
+Spearheaded new CIA Culinary Training program which increased retention.
+Operations Management: Â
+Managed Food Safety Program.
+Handled all functions related to Food and Beverage.', 'budget, Concept, cooking, clients, International Sales, inventory control, office, newspaper, purchasing, San, television, articles', 'Executive Chef 06/2003 to 01/2015 Company Name, City, State
 559.935.0717 Flagship Restaurant to promote Harris Ranch Agricultural products; Food and Beverage Revenue 13 million, 500,000 plus guest per year.
 Concept: "Gate to Plate and Farm to Table" Seasonal Menu Changes based off local farm product and new beef items.
 Three Restaurants, Banquet Facility, and Off Site Cater-Out.
@@ -29812,7 +30184,7 @@ Casa Marina, Key West Florida.
 Executive Sous Chef 01/1983 to 01/1985 Company Name, City, State
 Executive Banquet Chef 01/1981 to 01/1983 Company Name, City, State', 'Associate of Arts : Culinary Arts 1982 Saint Augustine Culinary School City , State
 City', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (215, 9, 'Chef', '../../data\\CHEF\\13212436.pdf', 'PERSONAL/ PRIVATE CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (215, 7, 'Chef', '../../data\\CHEF\\13212436.pdf', 'PERSONAL/ PRIVATE CHEF
 Professional Summary
 EXECUTIVE CHEF __________________________________________ With more than 29 years of expertise at the forefront of restaurant
 operations and menu development, I bring an innovative approach to restaurant''s, catered events and hospitality services â€“ one that focuses on
@@ -30028,7 +30400,7 @@ new catering menus, as well as multipletailored menus to client specifications.'
 California Culinary Academy - City , State
 High School Diploma : 1993
 Mary Star of the Sea High School - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (216, 10, 'Chef', '../../data\\CHEF\\13264154.pdf', 'CHEF INSTRUCTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (216, 8, 'Chef', '../../data\\CHEF\\13264154.pdf', 'CHEF INSTRUCTOR
 Professional Summary
 Pastry chef/baker/cake decorator with 5 year history creating beautiful specialty cakes for events. Wide range of skills includes custom breads,
 cookies, pies and tarts. Highly organized and supportive team player. Abundant knowledge in seasonality of ingredients as well as a passion for
@@ -30181,7 +30553,7 @@ Food Preparation, Kitchen Management, Patisserie and Confectionery, Internationa
 2005
 High School Diploma Chesterton High School ï¼​ City , State
 Culinary Arts Vocational Senior year.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (217, 11, 'Chef', '../../data\\CHEF\\13411858.pdf', 'PAMPERED CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (217, 9, 'Chef', '../../data\\CHEF\\13411858.pdf', 'PAMPERED CHEF
 Summary
 Adept at organizing and facilitating management and team building training programs as well as staff and customer appreciation activities that
 have created exceptional team camaraderie, customer loyalty, and company growth!
@@ -30299,7 +30671,18 @@ games to create a fun, learning-centered environment.
 My live cooking shows and workshop presentations
 were selected and made available on our corporate
 website''s Online Training Center.
-Committe', 'Enthusiastic people person
+Committee''s served: Consultant Awards &
+Incentives Committee, Product Development
+Committee, and Recipe Advisory Committee
+21 years of sales, corporate training, and team building with Pampered
+Chef , a Berkshire-Hathaway Company.
+Proficient in organizing group events and staff training activities with clear
+objectives and outcome goals.Â
+Experienced in creating and presenting training workshops to groups from 1
+to 3,000 in product knowledge, sales techniques, customer service, smart
+business practices, and team building.Â
+Featured consultant on Pampered Chef''s 2014 nationwide Training DVD.
+Enthusiastic, approachable, and easy-to-learn from.', 'Enthusiastic people person
 Strong public speaking skills
 Motivational and inspirational
 Goal-setting, goal-achieving
@@ -30365,7 +30748,7 @@ another local dance studio.
 At 19, I completed, and graduated from, the National Fire Academy in San Diego, CA.
 Was 1 of 7 to be awarded my high school''s "Valiant V". Selected by the school staff, this award recognizes above-and-beyond
 participation and service to both the high school and community.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (218, 12, 'Chef', '../../data\\CHEF\\14569498.pdf', 'CHEF OWNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (218, 10, 'Chef', '../../data\\CHEF\\14569498.pdf', 'CHEF OWNER
 Executive Profile
 A combination of specialized training and professional experience results in excellent qualifications as an EXECUTIVE CHEF, SOUS CHEF
 AND CHEF. Highly skilled in a variety of cuisines, including: Italian, Peruvian, Mexican and Fusion. Possess outstanding interpersonal,
@@ -30422,7 +30805,30 @@ Education
 Los Angeles Culinary Instituted ï¼​ City , State , u.s.a Associate of Arts : Culinary Arts
 Courses in Hospitality and Restaurant Management
 Additional Information
-Open to Negotiation', '', '', '01/2010 - 09/2012
+Open to Negotiation', 'A combination of specialized training and professional experience results in excellent qualifications as an EXECUTIVE CHEF, SOUS CHEF
+AND CHEF. Highly skilled in a variety of cuisines, including: Italian, Peruvian, Mexican and Fusion. Possess outstanding interpersonal,
+communication and training skills. Excel in creating quality cuisine within budgetary cost controls. Flexible, with the ability to achieve in both first-
+class fine dining and high volume operations. Develop and motive a highly productive team. Received professional training from five Certified
+Master
+Skill Highlights
+Small business development
+Leadership/communication skills
+Product development
+Business operations organization
+Budgeting expertise
+Negotiations expert
+Employee relations
+Self-motivated
+Customer-oriented
+Fluent in [spanish Communicates effectively
+Event planning
+Listening skills
+Exceptional multi-tasker
+Hospitality expertise
+Core Accomplishments
+Reduced number of guest complaints by <80> percent.
+Successfully managed a kitchen staff of 40+ employees during high volume dinner services for more than 500 diners each night.Expanded [menu
+items] line to include Increased sales by 50% by rolling out a revamped social media marketing initiative., which nearly doubled sales in one year.', '', '01/2010 - 09/2012
 Company Name ï¼​ City , State Chef Owner
 Management of all financial and personnel records.
 Recruit, interview and train staff while ensuring health and safety standards.
@@ -30451,7 +30857,7 @@ Los Angeles Culinary Instituted ï¼​ City , State , u.s.a Associate of Arts :
 Courses in Hospitality and Restaurant Management
 Additional Information
 Open to Negotiation', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (219, 13, 'Chef', '../../data\\CHEF\\14663897.pdf', 'CHEF
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (219, 11, 'Chef', '../../data\\CHEF\\14663897.pdf', 'CHEF
 Credentials
 National Registry of Food Safety Professionals Certified Food Safety Manager
 National Registry of Food Safety Professionals Test Administrator/Proctor
@@ -30667,7 +31073,7 @@ multiple kitchens or restaurants in an establishment such as a restaurant chain,
 Restaurant / Kitchen & Bar Manager Aug 2009 to Aug 2012
 Company Name ï¼​ City , State', 'High School Diploma Jun 1991 Newington High School ï¼​ City , State', 'Voted Best Restaurant 2013
 Multiple "Best Of" accolades', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (220, 14, 'Construction', '../../data\\CONSTRUCTION\\10041713.pdf', 'SR. ESTIMATOR-BAS CONSTRUCTION SALES
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (220, 12, 'Construction', '../../data\\CONSTRUCTION\\10041713.pdf', 'SR. ESTIMATOR-BAS CONSTRUCTION SALES
 Summary
 9+ years of professional working experience in energy solution consulting and performance contracting, HVAC estimating & designing in buildings
 & industrial sector. Experience of 3 years in project development, presenting and managing the implementation of innovative energy business
@@ -30741,7 +31147,7 @@ exceeds $30 million. Excellent working relationships within the different busine
 systems and other automations used in industry. Actively Involved in Networking Chapter in Boston area like National Association of Women In
 Construction, Mass Building Congress, American Society for Precision Engineering Obtain a challenging position that will allow me to utilize my
 educational attainment and professional experience in Energy Engineering, Project Engineering, Building Energy Systems, Energy Conservation,
-Renewa', 'Sales, Proposals, Solutions, Commercial Buildings, Million, Sales And, Contracts, Ecms, Energy Conservation, Energy Solutions, Industrial
+Renewable Energy and Energy Management of residential, commercial, healthcare, data center and industrial facilities.', 'Sales, Proposals, Solutions, Commercial Buildings, Million, Sales And, Contracts, Ecms, Energy Conservation, Energy Solutions, Industrial
 Facilities, Retail, Retail Marketing, Retrofit, Technical Assistance, Instrumentation, Long-term Disability, Ltd, Engineer, Hvac, Collection,
 Maintenance, Marketing, Networking, Project Engineer, Project Planning, Real Time, Scada, Testing, Estimating, Estimation, Estimator,
 Operations, Pricing, Sales Team, Takeoffs, Fire Protection, Front End, Quotations, Relationship Building, Sales Activities, Sales Engineer,
@@ -30782,7 +31188,7 @@ Instrumentation Engineering, -Degree Received: December 31, 2006 Maharishi Marke
 Affiliations
 Actively Involved in Networking Chapter in Boston area like National Association of Women In Construction, Mass Building Congress, American
 Society for Precision Engineering', 'Energy Management Professional Certified by Schneider University.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (221, 15, 'Construction', '../../data\\CONSTRUCTION\\10100240.pdf', 'CARPENTER APPRENTICE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (221, 13, 'Construction', '../../data\\CONSTRUCTION\\10100240.pdf', 'CARPENTER APPRENTICE
 Professional Summary
 Former construction and carpentry worker committed to high-quality workmanship and safe environments. Over 4 years of hands-on experience
 working with remodeling projects in residential and commercial construction. Dedicated work ethic and exceptional attendance record. I am
@@ -30906,7 +31312,7 @@ Gathered waste and trash from job sites for placement in refuse containers to ke
 Buffalo High School - City , State
 CSHO (Certified Safety & Health Official) , 01/2020
 TEEX - City', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (222, 16, 'Construction', '../../data\\CONSTRUCTION\\10149490.pdf', 'NEW CONSTRUCTION / AFE MAINTENANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (222, 14, 'Construction', '../../data\\CONSTRUCTION\\10149490.pdf', 'NEW CONSTRUCTION / AFE MAINTENANCE MANAGER
 Summary
 23 years in the Industry, with 18 years of Management / Supervisory experience in Shutdowns, T/A''s, and Project related work. Safety statistics
 for all projects are always at the highest level.Â Proven track record as Manager / Supervisor managing a variety of construction teams and
@@ -31045,7 +31451,33 @@ in="" many="" areas="" of="" construction="" have="" given="" me="" the="" knowl
 the="" safety="" manager="" for="" the="" plant.="" recognized="" strong="" team="" leadership="" skills="" and="" relationships="" with=""
 contract="" groups,="" both="" union/non-union="" trades.="" my="" integrity,="" reputation="" and="" credibility="" as="" a="" leader=""
 areÂ whatÂ our="" plant="" needs="" to="" influence="" safety="" processes="" and="" programs="" for="" the="" betterment="" of="" our=""
-workforce.=""', 'Site Safety /Â Safety Standards, Site Assessments, Liaison, Operations, Environmental Compliance, Mentoring, Site Assessments, Budget
+workforce.="" i="" am="" a="" proven="" liaison="" between="" plant="" work="" groups.="" results-oriented="" manager="" that="" works=""
+efficiently="" and="" effectively="" to="" complete="" projects="" safely,="" on="" time="" and="" within="" budget.="" analytical="" nature=""
+and="" skills="" of="" predicting="" and="" vetting="" construction="" projects="" benefits="" the="" safety="" manager="" position="" i="" am=""
+applying="" for.="" self-starter="" with="" a="" positive,="" can-do="" attitude="" who="" is="" driven="" to="" learn,="" improve="" and=""
+succeed="" and="" "move="" the="">
+Highlights
+Safety Plans /
+Programs
+Strong
+Interpersonal skills
+Safety Standards / Procedures
+Good
+Communication skills
+Excellent written/verbal skills
+Credible Leader, with the highest level of Integrity
+Strong Team work, discipline, accountability, competitiveness, and pride
+MS Proficient
+Strong
+Leadership abilities
+Excellent
+Execution abilities
+Resource allocation
+Budget / Cost control
+Volunteerism/ Executing Crew Projects: Our crew was big on Adopt-A-Family, Giving tree and community
+involvement projects. Some of the community projects were Fisher House, Omega Boys and Girls Club, Loma
+Vista Farms, Cruise for a Cause as well as Hooked on A Cause to name a few. New Projects this year are
+working with the Solano County Food Bank.', 'Site Safety /Â Safety Standards, Site Assessments, Liaison, Operations, Environmental Compliance, Mentoring, Site Assessments, Budget
 /Â Forecasts, Construction Schedules / Integration, Contracts, Cost Control, QA/QC, Emergency Response, Leadership Skills, Proactive
 Problem Solving, Self Motivated, Team Building, Team Player, Excellent Written skills, Industrial Maintenance.', 'Company Name, City, State New Construction / AFE Maintenance Manager 02/2015 to Current
 Effectively directs the Safety and Health program / processes in our work group.
@@ -31115,7 +31547,7 @@ Rope 1 Rescue Qualified
 Certified Qualified Individual in the area of Oil Spill Response.
 Certified Qualified Individual (Oil Spill Response) Experienced with On Land / Water Division Leader, Situation Control Leader, Planning
 Section Deputy, planning Section Chief Positions', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (223, 17, 'Construction', '../../data\\CONSTRUCTION\\10176013.pdf', 'CONSTRUCTION ESTIMATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (223, 15, 'Construction', '../../data\\CONSTRUCTION\\10176013.pdf', 'CONSTRUCTION ESTIMATOR
 Summary
 Energetic Construction Manager consistently involved in all facets of building construction. Specialty in commercial structures and municipal bridges.
 Proactive Project Manager experienced in managing a variety of construction teams and projects. Successful in creating effective
@@ -31243,7 +31675,7 @@ Results-oriented Construction Manager specializing in industrial and commercial 
 code, seismic retrofitting and construction planning.
 Dependable and self motivated professional with 6+ years'' progressively responsible experience in the construction estimation field. Track
 record of identifying labor, material, and time requirements by studying proposals, specifications, construction plans, and associated
-documents. Possess thorough understanding of fundamental construction', 'In depth knowledge of residential construction materials, methods, and systems
+documents. Possess thorough understanding of fundamental construction principles.', 'In depth knowledge of residential construction materials, methods, and systems
 Highly skilled in obtaining bids from suppliers, negotiating prices, calculating cost factors and prepares estimates
 Highly skilled in problem solving, and time and resource management
 Proficient in MS Office, Auto CAD, and Plan Swift e stimating software
@@ -31348,7 +31780,7 @@ Gathered, distributed and maintained all the materials for marketing plans.', '2
 Gettysburg College ï¼​ City , State , US Bachelor of Arts : Business Management
 Coursework in Economics
 Coursework in Computer Science', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (224, 18, 'Construction', '../../data\\CONSTRUCTION\\10281555.pdf', 'CONSTRUCTION SITE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (224, 16, 'Construction', '../../data\\CONSTRUCTION\\10281555.pdf', 'CONSTRUCTION SITE MANAGER
 Summary
 supervising and overseeing the direction of the project (or a package), ensuring that the client''s specifications and requirements are met, reviewing
 progress and liaising with quantity surveyors to monitor costs
@@ -31508,7 +31940,7 @@ Associate of Arts : Criminal Justice Tallahassee Community College ï¼​ City 
 Associate of Science : Graphic Design Academy of Art University ï¼​ City , State
 Activities and Honors
 Class', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (225, 19, 'Construction', '../../data\\CONSTRUCTION\\10734870.pdf', 'CONSTRUCTION
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (225, 17, 'Construction', '../../data\\CONSTRUCTION\\10734870.pdf', 'CONSTRUCTION
 Summary
 The purpose of submitting my resume to your company is to obtain a position with the opportunity to utilize my training and skills in the technician
 industry. I am experienced in warehouse and technician field -wiring 508 A UL soft starters, hard starters while assuring a high level of excellent
@@ -31610,7 +32042,25 @@ customer service and satisfaction with maximum productivity; and maintaining a c
 in Microsoft Office Applications including Word, Excel, CCTV and Power Point; I am also competent in customer service satisfaction for installing
 direct TV and having the ability to gain knowledge of certain products and being able to sell them to the public. I have solid leadership and
 communication skills. I am also a positive person willing to take on different tasks and eager to learn. These skills are exemplified in my previous
-employment with Sprecher + Schuh. As a Wire-man and a Warehouse worker my duties ranged from being able to sale product', 'basic, Benefits, Billing, clients, excellent customer service, customer service, Forklift, hammer, HVAC, Inspect, inventory, Team lead, Multi-
+employment with Sprecher + Schuh. As a Wire-man and a Warehouse worker my duties ranged from being able to sale products to answering
+inquires or repair and wiring enclosures. By applying for this position will allow me to expand professionally and develop and learn new skills. I am
+a team player-I enjoy being a positive outlet for my fellow co-workers and contributed to the success of others. I would like to thank you all, for
+your time and consideration. Enclosed is a copy of my resume containing my contact information and my work history. Thanks to all again.
+Sincerely, Edgardo M. Dubose To secure a position that will utilize my training and skills in the manufacturing industry to contribute to the success
+of the organization. Managing employees and projects Â· Competent in Microsoft Applications-Word, Excel, Power Point Â· Maintain solid
+communication skills-oral and written Â· Ability t remain focus and productive daily while managing repetitive tasks Â· Knowledge of chemical
+labeling and mixing Â· Quality control Â· Manufacturing work place Â· Operating sit-down Forklift
+Highlights
+Immaculate Customer ServiceÂ
+Driver Safety Test Certificate
+Certified to work with Autistic Individuals
+Security Certification- Levels 1, 2, 3
+Forklift and Pallet Jack Certificate
+Ebiz, Management, professional
+Team lead training
+Hvac, Emergency
+Life crisis building evacuation skills
+Chemicals Understanding and reaction', 'basic, Benefits, Billing, clients, excellent customer service, customer service, Forklift, hammer, HVAC, Inspect, inventory, Team lead, Multi-
 tasking, Pallet Jack, cameras, power tools, reading, Read, Safety, schematics, shipping, Soldering, tape measure, answer phones, phone, TV', '01/2014 to 01/2015
 Construction Company Name ï¼​ City , State
 Construction of houses.
@@ -31675,7 +32125,7 @@ Maintain clean, working and livable environment for patients.
 Resolved customer service inquires regarding: Billing and payments schedules and Benefits.
 Authorization for treatments and medicine.', 'Fire Science BAKERSFIELD COLLEGE ï¼​ City , State Fire Science
 HOUSTON COMMUNITY COLLEGE ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (226, 20, 'Construction', '../../data\\CONSTRUCTION\\10820510.pdf', 'QA / QC MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (226, 18, 'Construction', '../../data\\CONSTRUCTION\\10820510.pdf', 'QA / QC MANAGER
 Summary
 QA / QC Manager Qualification Highlights Current Certifications Job 21 years'' experience in the Oil and Gas Industry, Specializing in
 Repair/Maintenance and New Construction of Above Ground storage tanks, with 6 years in the QA / QC field.
@@ -31742,7 +32192,7 @@ CBI, Tanco, ATV, Bay Tank and Vessel, Cust-O-Fab, Inserv to name a few of the mo
 Both New Tank and Repair.
 SMAW, FCAW, GMAW, and SAW.
 Proficient in the use of a gouge as well.', 'AWS Certified CWI (Certificate # 08110741) API Certified TES (Certificate # 32697) API Certified 653 (Certificate # 42276) ASNT Level III (Certificate # 245052)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (227, 21, 'Construction', '../../data\\CONSTRUCTION\\11393213.pdf', 'CONSTRUCTION LABORER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (227, 19, 'Construction', '../../data\\CONSTRUCTION\\11393213.pdf', 'CONSTRUCTION LABORER
 Professional Summary
 Reliable Construction worker offering expertise gained over 7 year career in diverse labor roles. Versed in completing physically-challenging jobs
 and working long hours under all types of weather conditions. Familiar with commercial construction with history of quickly learning new
@@ -31866,7 +32316,7 @@ Inventoried supplies and materials for installations and repairs, documented cha
 Central High School - City
 Associate of Science : Construction Management , Expected in 06/2024
 Liberty University - City , State', 'First Aid/CPR Certified', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (228, 22, 'Construction', '../../data\\CONSTRUCTION\\11650031.pdf', 'HYDROBLASTING TECHNICIAN 1
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (228, 20, 'Construction', '../../data\\CONSTRUCTION\\11650031.pdf', 'HYDROBLASTING TECHNICIAN 1
 Career Objective
 An enthusiastic, team oriented and polished professional seeking employment with a company that values a proactive attitude and solid ambition. I
 am seeking a rewarding career allowing me to contribute to the growth of the company by increasing productivity and ensuring employer''s key objectives are met.
@@ -31904,7 +32354,14 @@ Knowledge-First Empowerment Academy August 2016 High School Diploma : General Ed
 Certifications
 Basic Plus Safety - July 2016
 TWIC - April 2012
-NCCER - June 2010', '', '', 'Company Name June 2014 to Current Hydroblasting Technician 1
+NCCER - June 2010', '', 'Carpentry
+Building Maintenance
+Environmental Coordination
+Adherence with all Safety Regulations
+Excellent Leadership skills
+Customer Service Oriented
+Efficient Time Management
+Effective Problem Solving', 'Company Name June 2014 to Current Hydroblasting Technician 1
 City , State
 Properly operates hoses on vacuum trucks; hydroblasting guns; and manipulate controls on robotic equipment. Prepare jobsite for hydro
 blasting. Monitor hydroblasting operations.
@@ -31925,7 +32382,7 @@ Uses various hand and power tools to repair faucets, plumbing and lighting fixtu
 Respond quickly to emergency situations and customer concerns.', 'Knowledge-First Empowerment Academy August 2016 High School Diploma : General Education', 'Basic Plus Safety - July 2016
 TWIC - April 2012
 NCCER - June 2010', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (229, 23, 'Construction', '../../data\\CONSTRUCTION\\12212468.pdf', 'ASSISTANT PROJECT MANAGER/DESIGN BUILD CONSTRUCTION COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (229, 21, 'Construction', '../../data\\CONSTRUCTION\\12212468.pdf', 'ASSISTANT PROJECT MANAGER/DESIGN BUILD CONSTRUCTION COORDINATOR
 Summary
 Highly motivated Civil Engineer with 16 years of experience working for one of North America''s largest and most respected construction and
 engineering organizations with revenues of more than $11 billion and consistently ranking among the top five contractors by Engineering News-
@@ -32044,7 +32501,15 @@ performance. My career experience ranges from construction design coordinator on
 engineering and project management for self-performing heavy civil construction work ranging from $545 million to $3.1 million dollars. Excellent
 communicator skilled in construction means and methods, cost controls, scheduling, claims analysis and contract administration.
 As the Field Engineer and Project Controls Manager on one of the largest design-build project in Maryland she manages approximately 1,000
-WBS activities on', 'bridges, contracts, delivery, direction, Engineer, framing, HVAC, lighting, managing, materials, access, 3.1, Network Installation, painting,
+WBS activities on a P6 schedule. Even after a six month delay in the award of the project the project will be substantially complete on the original
+completion date. Clara coordinates on a daily basis, incoming and outgoing correspondence, a cost loaded CPM, RFIs, modifications, change
+orders, and unforeseen field conditions that required redesign and schedule modifications to adhere to a hard completion date.
+Highlights
+Hard Dollar Estimating Training
+Expedition
+Centric
+Viewpoint
+Constructware', 'bridges, contracts, delivery, direction, Engineer, framing, HVAC, lighting, managing, materials, access, 3.1, Network Installation, painting,
 plumbing, procurement, project plans, quality, quality control, safety, sound, supervising, supervision, Transportation, Type III, Type II, utilities', '09/2013 to Current
 Assistant Project Manager/Design Build Construction Coordinator Company Name ï¼​ City , State
 06/2011 to 09/2013
@@ -32130,7 +32595,7 @@ Responsible for the development and execution of a dirt flow impact analysis res
 Developed a successful plan to rephase the bridge construction on a highly traveled weather-damaged interstate so that the traffic could be
 shifted onto the new construction prior to the winter season.
 Project controls Manager for all document control and as-built deliverables for over 200 miles of Fiber Optic Network Installation.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (230, 24, 'Construction', '../../data\\CONSTRUCTION\\12491898.pdf', 'Work History
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (230, 22, 'Construction', '../../data\\CONSTRUCTION\\12491898.pdf', 'Work History
 Company Name
 CONSTRUCTION LABORER
 Accomplishments
@@ -32371,7 +32836,11 @@ collaborative and flexible approach to reaching mutually beneficial resolutions.
 Experienced Patient Care Coordinator proficient in directing patient care programs that are both high-quality and efficient.
 Hardworking Patient Care Coordinator bringing [ Number ] years'' experience in the field. Expertise includes administration and program management.
 Motivated [ Job title ] knowledgeable about healthcare management, hospital practices and regulatory compliance. Talent for overseeing multiple
-areas without sacrificing quality or service. Hardworking professional and passionate pat', 'Organizational skills
+areas without sacrificing quality or service. Hardworking professional and passionate patient advocate.
+Compassionate Certified Nursing Assistant adept at bathing, grooming and feeding elderly and disabled patients. Familiar with advanced medical terminology and procedures.
+Level-headed health professional who remains calm and effective in extremely difficult and stressful situations. Strong belief in importance of
+companionship and support in patient care.
+Motivated CNA with a highly effective communication style. Efficient worker who demonstrates strong time management and prioritization skills.', 'Organizational skills
 Team leadership
 Problem solving
 Claims processing
@@ -32431,7 +32900,7 @@ Houston Community College - Coleman College for Health Sciences - City , State
 certifications : heavy equipment operator, OSHA 10, NCCER, Construction site safety, Core Curriculum, Core Curriculum:Introductory Craft skills , 2017
 Houston Launch Pad - City , State', 'Licensed/Certified Home Health Aide
 Certified Nurses Aide', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (231, 25, 'Construction', '../../data\\CONSTRUCTION\\12654876.pdf', 'SENIOR FACILITIES AND CONSTRUCTION PROJECT MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (231, 23, 'Construction', '../../data\\CONSTRUCTION\\12654876.pdf', 'SENIOR FACILITIES AND CONSTRUCTION PROJECT MANAGER
 Summary
 Thirty years experience as Manager and Director of Facilities, Project and Construction Management in various challenging environments; twenty
 two in Higher Education. *Successful at managing Facilities, Ops & Systems, M&O and Capital Budgets, Assets, Staffing and Bargaining
@@ -32521,7 +32990,13 @@ construction & maintenance managers, grounds and horticulture, custodial staff, 
 office managers, sustainability staff and business managers. *Developed and maintained high standards of discretion, integrity, communication,
 leadership, life safety & building code compliance, staff, student and faculty safety training and OSHA compliance *Proven team building skills,
 quality personnel acquisition, effective success at administering progressive discipline in union environments, able to create positive organizational
-change', 'accounts payable, Administrative, arts, budget management, budgeting, budget, building codes, capital expenditures, consulting, Delivery, electrical
+change where required and as directed. Professional Development and Skills *Facilities Management Professional, FMP and Certified Project
+Manager *Facilities and Technology Management *Electrical Engineering Technology *Construction Management *Licensed Master Electrician
+*Certified Advanced Fire and Security Alarm Designer *Certified in Fiber Optics and Network Connectivity *Supervision, Effective
+Communication and Team Building Certifications *Technical Strengths Include; Electrical, Fire & Security, Fire Suppression Systems, Life Safety
+Systems, HVAC Mechanical Systems, Boilers, Infrastructure Management, Sustainability and Energy Management, Auto CAD, GIS Arc View,
+MS Office & Project, Computerized Maintenance Management Programs. *Certified in Code Compliance (Structural, Gas, Fire, Electrical,
+Plumbing, Energy, Life Safety, NFPA and Building Codes) *Property inspection, analysis, acquisition, development, planning, zoning and construction management.', 'accounts payable, Administrative, arts, budget management, budgeting, budget, building codes, capital expenditures, consulting, Delivery, electrical
 systems, energy management, special events, Facilities Management, HVAC, Leadership, access, office, Natural Gas, Negotiations, personnel,
 Plan Development, plumbing, Police, procurement, project design, renovation, renovations, repairs, Safety, strategy, supervision, technical
 support, Telephone, Water Treatment', '08/2015 to Current
@@ -32584,7 +33059,7 @@ Engineering Technology
 FMP - Facilities Management Professional - International Facilities Management Association at Boston University
 1982
 Electricity-Electrical Construction and Maintenance - Mohawk Valley Community College', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (232, 26, 'Construction', '../../data\\CONSTRUCTION\\12666174.pdf', 'REGIONAL SCHEDULE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (232, 24, 'Construction', '../../data\\CONSTRUCTION\\12666174.pdf', 'REGIONAL SCHEDULE MANAGER
 Summary
 Mr. Ginder has been working in the heavy civil construction industry for nearly 20 years. He has been working primarily as a Primavera scheduler
 since 2006. The range of the projects vary between less than $5 million railroad projects to over $1.3 billion light rail projects. The type of
@@ -32805,7 +33280,7 @@ of Highways Managed a three-person survey crew on this project located 10 miles 
 Project Cost: $5 Million.', 'B.S.E : Civil Engineering , 1991 Colorado School of Mines Civil Engineering', 'Prepared a proposal schedule for a design build project with Mn DOT that was key for Ames successful proposal. Instrumental in developing the
 schedules for various design phases and work packages for the first Contract Manager General Contractor (CMGC) project with Mn DOT.
 Prepared numerous schedules with cost loaded resource data to support the Full Funding Grant Agreement for a $1.3 billion light rail project.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (233, 27, 'Construction', '../../data\\CONSTRUCTION\\12693146.pdf', 'SUPERINTENDANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (233, 25, 'Construction', '../../data\\CONSTRUCTION\\12693146.pdf', 'SUPERINTENDANT
 Summary
 Energetic Construction Manager consistently involved in all facets of construction. Specialty in commercial interior renovation and some residential
 experience, as well as experience with permits.Â
@@ -32960,7 +33435,7 @@ some concrete work. Also with my skills as a designer, I was able to produce num
 owner in order to be able to meet deadlines for the construction management team. as a supervisor Â I have Â managed over $3 milion dollars in
 project forÂ interior renovation, while supervising a team of subcontractors in various trades, Â filing documentation, running plans as needed in
 order to achieve a fluent and progressive project.Â', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (234, 28, 'Construction', '../../data\\CONSTRUCTION\\12695537.pdf', 'UTILITY ENGINEER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (234, 26, 'Construction', '../../data\\CONSTRUCTION\\12695537.pdf', 'UTILITY ENGINEER
 Profile
 Detail oriented and motivated Chemical Engineer with strong research, analytical and problem solving skills seeks a position in the industry. Team
 player with proven strengths in customer relationship management, leadership, and communications skills. Demonstrated ability to multitask, and
@@ -33048,7 +33523,7 @@ Member of American Institute of Chemical Engineers, (AICh E) Member of Omega Chi
 Engineers President- Chemistry Club, Fall 2011 Secretary- Physics Club, Spring 2011', 'Inorganic Chemistry Organic Chemistry Materials Science Nanomaterials Unit Operations Fluid Mechanics Thermodynamics Transport
 Phenomenon Process Control Reaction Engineering Separation Operations Calculus I, II, III Linear Algebra Differential Equations Engineering
 Economics', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (235, 29, 'Construction', '../../data\\CONSTRUCTION\\12826414.pdf', 'DIRECTOR OF PIPELINE OPERATIONS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (235, 27, 'Construction', '../../data\\CONSTRUCTION\\12826414.pdf', 'DIRECTOR OF PIPELINE OPERATIONS
 Executive Profile
 Innovative executive operations director with solid experience managing all levels of multiple projects including budgeting and administration
 Skill Highlights
@@ -33174,7 +33649,33 @@ Project Management
 Operational Restructure and Change
 Quality Management
 Departmental Operations Management
-Eagle Scout', '', 'Project Management
+Eagle Scout', 'Innovative executive operations director with solid experience managing all levels of multiple projects including budgeting and administration
+Skill Highlights
+Project Management and Planning
+Leadership/Communication skills
+Business Operations Organization
+Budget Administration
+Negotiations
+Public Relations
+Quality Control
+Project Development
+Change Implementation
+Project Estimating
+New Business Development
+Report Matrix Development
+Customer-Oriented
+Operations Management
+Core Accomplishments
+Project Management: Â
+Initiated several capital expansion projects which resulted in achieving projects being completed on time and under budget.
+Operations Management: Â
+Managed pipeline operations including field operations and engineering.
+Handled all functions related to new customer interconnects.
+Instituted new processes for operational management.
+Staff Development: Â
+Reorganized, hired and mentored staff to manage projects.
+Launched well-received program of professional development for newly created departments for non-union and union staff.
+Mentored and coached employees resulting in a significant increase in productivity.', 'Project Management
 Operational Restructure and Change
 Quality Management
 Departmental Operations Management
@@ -33267,7 +33768,7 @@ Cambridge College Master of Education : Integrated Studies and Management
 Master of Education (M.Ed.), Integrated Studies and Management - Cambridge College 1998
 1986
 Porter and Chester Institute Design Technology Architectural and Civil Design Technology - Porter and Chester Institute 1985-1986', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (236, 30, 'Construction', '../../data\\CONSTRUCTION\\12839152.pdf', 'CONSTRUCTION MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (236, 28, 'Construction', '../../data\\CONSTRUCTION\\12839152.pdf', 'CONSTRUCTION MANAGER
 Professional Summary
 Motivated Construction Manager highly effective at finding the best methods possible to complete exceptional construction projects. Strong
 knowledge ofÂ building construction andÂ civil engineering principles and concepts. I collaborate successfully with staff and contractors to
@@ -33434,7 +33935,7 @@ Studied the Project Scheduling and Budget.', 'Directed the installation of twin 
 Managed the construction budget of more than $14 million dollar.
 Received a letter of praise from the Commissioner of Transportation.
 Received an award as the most outstanding student in the industrial arts department.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (237, 31, 'Construction', '../../data\\CONSTRUCTION\\12890045.pdf', 'CONSTRUCTION PROJECT COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (237, 29, 'Construction', '../../data\\CONSTRUCTION\\12890045.pdf', 'CONSTRUCTION PROJECT COORDINATOR
 Summary
 I am seeking a competitive and challenging environment where I can serve your organization and establish an enjoyable career for
 myself.Advanced knowledge of SBS programs Natural leader and skilled mediator who excels at bringing out the best in all employees.Innovative
@@ -33573,7 +34074,7 @@ Certificate , OSHA 30-Hour Construction 2015 Click Safety - City
 OSHA course on construction safety from Electrical Hazard Safety to Fall Protection.
 Select One , Insurance 2013 CPMI Professional Development
 Property & Casualty Insurance', '', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (238, 32, 'Construction', '../../data\\CONSTRUCTION\\13907230.pdf', 'GENERAL CONSTRUCTION INTERN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (238, 30, 'Construction', '../../data\\CONSTRUCTION\\13907230.pdf', 'GENERAL CONSTRUCTION INTERN
 Objective
 Dedicated studentÂ with excellent technical, analytical and communication skills, in search of an organization that gives me a platform to develop
 new skills. While also utilizing my present knowledge as a Science Construction Management student.
@@ -33635,7 +34136,7 @@ Developed floor plan that illustrates egress in case of emergency
 Generated spreadsheet that showcased business expenses and monthly revenue', 'Eastern Washington University City , State Bachelor of Science : Construction Management
 Minor in Spanish
 Colegio Delibes City , State , Spain 2015', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (239, 33, 'Construction', '../../data\\CONSTRUCTION\\14585273.pdf', 'CONSTRUCTION SERVICES PROJECT MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (239, 31, 'Construction', '../../data\\CONSTRUCTION\\14585273.pdf', 'CONSTRUCTION SERVICES PROJECT MANAGER
 Summary
 Dedicated Â Property/ Facilities Specialist Â with more thanÂ 10 years overseeing a diversified portfolio of commercial properties totaling over 1
 million square feet and residential properties with a combined total of over 1,000 units. Successful and experienced manager poficientÂ in
@@ -33762,7 +34263,7 @@ License', 'Decreased operating costs by [Number] % by implementing new cost cont
 rental income for [Year] . Developed annual budgets, including determining short and long-term goals to support the overall profit and growth
 objectives. Managed a portfolio consisting of approximately [Number] sites comprising approximately [Number] square feet. Trained and
 mentored [Number] new employees each year.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (240, 34, 'Consultant', '../../data\\CONSULTANT\\10332998.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (240, 32, 'Consultant', '../../data\\CONSULTANT\\10332998.pdf', 'CONSULTANT
 Professional Summary
 Astute and innovative attorney with strong ability to develop and implement effective litigation case strategies and write persuasive motions. Proven
 ability to resolve complex cases in clients'' favor.Â Meticulous, conscientious, tenacious, organized, analytical, and able to thrive in dynamic environments.Â Â
@@ -33931,7 +34432,7 @@ Fordham Immigration Rights Clinic - City , State
 The Honorable Cornelius Blackshear - City , State
 Bachelor of Arts : Criminal Justice May 2000 John Jay College of Criminal Justice - City , State
 GPA: Magna Cum Laude Dean''s List Recipient Bar Admissions Criminal Justice Magna Cum Laude Dean''s List Recipient Bar Admissions', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (241, 35, 'Consultant', '../../data\\CONSULTANT\\10984392.pdf', 'PROCESS CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (241, 33, 'Consultant', '../../data\\CONSULTANT\\10984392.pdf', 'PROCESS CONSULTANT
 Professional Summary
 Experienced operations manager and entrepreneur who built 4.5 million dollar company without start up capital or outside investment. Supremely
 organized with ability to identify and solve challenges in growth environment, performing at peak when boundaries are in constant state of change.
@@ -34068,7 +34569,7 @@ German (Professional working proficiency)
 Personality
 Analyst, idealist, goal setter, personal development, political junkie, CNBC, humor, neat, spontaneous, visual, Apple, forward thinker, bold,
 confidence, fitness, investments, optimism, cool design, service, travel, humility, curiosity', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (242, 36, 'Consultant', '../../data\\CONSULTANT\\11020140.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (242, 34, 'Consultant', '../../data\\CONSULTANT\\11020140.pdf', 'CONSULTANT
 Professional Profile
 Highly motivated and self-driven Systems Analyst with vast experience in various environments and technologies in support of multiple departments
 across the enterprise. Expertise in Software Development Lifecycle (SDLC) and Computer Systems Validation (CSV). Looking for an
@@ -34176,7 +34677,7 @@ and locations.
 The application was originally written in assembly language and later converted to C.
 Provided general system and network administration support.', 'M.S : Computer Science Data Communications , 1996 Villanova University ï¼​ City , State Computer Science Data Communications
 B.A : Computer Science , 1985 La Salle University ï¼​ City , State Computer Science', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (243, 37, 'Consultant', '../../data\\CONSULTANT\\11333660.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (243, 35, 'Consultant', '../../data\\CONSULTANT\\11333660.pdf', 'CONSULTANT
 Summary
 Military veteran and Ph D with a breadth of professional experience. Proven expertise in long- and short-term projects with tight deadlines and changing requirements.
 Highlights
@@ -34301,7 +34802,7 @@ Case" Paper presented to the International Studies Association, San Franciso 201
 2001).
 Honor graduate, South Dakota Law Enforcement Training 911 Dispatcher class (December 2006).
 Publication - CASS 2009: "Voices: Postgraduate Perspectives on Interdisciplinarity".', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (244, 38, 'Consultant', '../../data\\CONSULTANT\\11415967.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (244, 36, 'Consultant', '../../data\\CONSULTANT\\11415967.pdf', 'CONSULTANT
 Professional Summary
 Highly motivated female with over 3years management experience and exceptional people skills, looking to join a growing organization as part of the executive team.
 Core Qualifications
@@ -34444,7 +34945,7 @@ Professional Affiliations
 European Energy Institutes
 Additional Information
 Personal Interest: Travelling, cooking, dancing, singing, and shopping.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (245, 39, 'Consultant', '../../data\\CONSULTANT\\11835339.pdf', 'CONSULTANT TO OWNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (245, 37, 'Consultant', '../../data\\CONSULTANT\\11835339.pdf', 'CONSULTANT TO OWNER
 Education
 Florida International University 1984 Bachelors Degree : Hospitality Management City , State
 Executive Experience
@@ -34609,7 +35110,7 @@ locations around the Eastern Shore of Virginia.
 Personally catered private Backstage Banquets for Jimmy Buffett, his band and crew, for 25 years, at different concert venues in several states.
 Invited by Senator John Warner, to help cater the first Virginia Christmas tree lighting ceremony at the Russell Senate Office Building in
 Washington D.C., in 2005.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (246, 40, 'Consultant', '../../data\\CONSULTANT\\12251115.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (246, 38, 'Consultant', '../../data\\CONSULTANT\\12251115.pdf', 'CONSULTANT
 Executive Profile
 Over 5 years experience in the marijuana industry. Managing and assisting in building up a marijuana business to a multi million dollar, multi
 company operation. Solid management experience and strong knowledge in operations of Dispensary (Retail), OPC (Grow), and MIP
@@ -34646,7 +35147,19 @@ Bachelor of Science , Nursing University of North Carolina ï¼​ City , State 
 Associate of Science , Paramedicine) Paramedic/EMT Gaston Technical College ï¼​ City , State Paramedicine) Paramedic/EMT
 Skills
 Advertising, consultant, training employees, Staff training, fast, Hiring, HR, Inspecting, inventory, Managing, marketing, Excel, Operations
-management, packaging, pain management, Payroll, pricing, Quickbooks, sales, scheduling, Staff management', '', 'Advertising, consultant, training employees, Staff training, fast, Hiring, HR, Inspecting, inventory, Managing, marketing, Excel, Operations
+management, packaging, pain management, Payroll, pricing, Quickbooks, sales, scheduling, Staff management', 'Over 5 years experience in the marijuana industry. Managing and assisting in building up a marijuana business to a multi million dollar, multi
+company operation. Solid management experience and strong knowledge in operations of Dispensary (Retail), OPC (Grow), and MIP
+(Manufacturing). CO State industry (Key badge) since 8/2011 (M03625)
+Skill Highlights
+Personal and professional integrity Extensive knowledge of marijuana Staff management and HR experience strains, marijuana products Staff
+training and development Extensive knowledge of extracting and experience concentrates (especially Co2 Payroll experience extracting)
+Operations management experience Experience operating Co2 extraction (Dispensary, Grow, MIP) equipment Compliance, licensing knowledge
+and METRC and MJFreeway experience all experience facilities, (Dispensary, Grow, MIP) Marketing skills and experience Quickbooks and
+Excel experience
+Core Accomplishments
+Options Medical Center and Boulder Organic Food Group Pam Michon 720 308 5282 Bookkeeper/ CFO: Options Medical Center and
+Boulder Organic Food Group Dave Charnick 720 985 3176 Professional Industry Consultant Tyrone Krantz 720 216 4714 Territory
+Manager: Hemp Temp.', 'Advertising, consultant, training employees, Staff training, fast, Hiring, HR, Inspecting, inventory, Managing, marketing, Excel, Operations
 management, packaging, pain management, Payroll, pricing, Quickbooks, sales, scheduling, Staff management', 'Consultant Feb 2015 to Current
 Company Name ï¼​ City , State
 Independent industry operations consultant with private groups.
@@ -34664,7 +35177,7 @@ Owner/ Holistic Healer Jan 2001 to Jun 2010
 Company Name ï¼​ City , State
 Managing private practice working with patients one on one in a therapeutic environment using various modalities for pain management and healing.', 'Bachelor of Science , Nursing University of North Carolina ï¼​ City , State Nursing
 Associate of Science , Paramedicine) Paramedic/EMT Gaston Technical College ï¼​ City , State Paramedicine) Paramedic/EMT', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (247, 41, 'Consultant', '../../data\\CONSULTANT\\12374933.pdf', 'IT CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (247, 39, 'Consultant', '../../data\\CONSULTANT\\12374933.pdf', 'IT CONSULTANT
 Professional Summary
 Support Engineer with Public Trust Clearance and 10 years of Information Technology experience in installing, maintaining, and repairing
 hardware, software, and networks. Work well independently, or in a group setting providing all facets of server, computer and network support.
@@ -34809,7 +35322,7 @@ Networks: Windows 8.1, Windows 8, Windows 7, Vista, Windows XP, 2000, 98, Window
 DHCP, FTP, VPN; OS X Lion and Mavericks Applications /Software Tools: Microsoft Office 2010, 2007 & 2003, Visio, Adobe Acrobat,
 Photoshop, Lotus Notes, Symantec Ghost, Symantec PC Anywhere, Dameware, Mc Afee Antivirus, Image X, Trend, Putty, Web EX, Westlaw,
 Parallels Desktop, Microsoft Virtual Server 2005, VM Infrastructure Client, Juniper & Cisco VPN Medical Applications: Casetrakker,
-e Clinical Works Databases: Access a', 'Deployment, Maintenance, Active Directory, Testing, Workstations, Access, Technical Support, Printers, Blackberry, Windows Server 2003,
+e Clinical Works Databases: Access and My SQL Ticketing Systems: Service Manager, Remedy, Heat, Altiris, Jira', 'Deployment, Maintenance, Active Directory, Testing, Workstations, Access, Technical Support, Printers, Blackberry, Windows Server 2003,
 Cases, Documentation, Test Cases, Backups, Lan, Lan/wan, Integration, Integrator, Backup Exec, Citrix, Exchange, Ghost, Hardware
 Installation, Networking, Production Environment, Remote Access, Symantec, Tcp, Tcp/ip, Veritas, Veritas Backup Exec, Vms, Vpn, Wan
 Troubleshooting, Security, Accounts And, Accounts In, Application Support, Change Management, Configuration Management, Databases,
@@ -34927,7 +35440,7 @@ Maintained configuration management, IT procurement and maintenance renewal docu
 Microsoft Visio to provide for presentations', 'New Horizons Computer Learning Center, Atlanta, GA Comp Tia A+ and Network Sunset Learning Center Red Hat System Administration I (RH124)
 Languages
 Fluent in Spanish.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (248, 42, 'Consultant', '../../data\\CONSULTANT\\12526702.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (248, 40, 'Consultant', '../../data\\CONSULTANT\\12526702.pdf', 'CONSULTANT
 Profile
 Skilled professional with 15 years of experience in electrical and quality engineering for numerous engineering and quality control processes.
 Expertise in creating detailed test plans and test cases for optimal quality control. Solid background in various testing methodologies for both client-
@@ -35082,7 +35595,7 @@ Organization and Management 2011 Capella University City , State , USA Organizat
 Affiliations
 Member, IEEE Computer Society
 Member, NEU Alumni Association', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (249, 43, 'Consultant', '../../data\\CONSULTANT\\12897903.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (249, 41, 'Consultant', '../../data\\CONSULTANT\\12897903.pdf', 'CONSULTANT
 Highlights
 Employee handbook development
 Event management
@@ -35180,7 +35693,7 @@ Company Name ï¼​ City , State Worked quickly and efficiently, with minimal o
 payroll journal entries by developing and implementing a payroll reconciliation tool. Accurately processed data, validation and transmission for
 weekly, semi-monthly and sale payrolls. Prepared and filed sales and use tax returns, telecommunications tax returns, gross receipts returns,
 franchise tax returns, annual reports and other miscellaneous filings.', '', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (250, 44, 'Consultant', '../../data\\CONSULTANT\\12955994.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (250, 42, 'Consultant', '../../data\\CONSULTANT\\12955994.pdf', 'CONSULTANT
 Summary
 Versatile Management Professional trained in Insurance, Healthcare, Project Management, and Operational Leadership who thrives in dynamic,
 challenging and fast-paced professional environments. Assertive and enthusiastic, with extensive knowledge of risk management and business
@@ -35363,7 +35876,7 @@ Designation/Certification : Certified Insurance Counselor (CIC)
 License : Property and Casualty & Life/Health/Annuities Insurance Agent State
 Bachelors Program : Insurance and Risk Management Indiana State University
 Focus In: Political Science and Criminology', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (251, 45, 'Consultant', '../../data\\CONSULTANT\\13215696.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (251, 43, 'Consultant', '../../data\\CONSULTANT\\13215696.pdf', 'CONSULTANT
 Career Overview
 Experienced self-starter who is highly customer service-oriented, organized and possesses strong time management skills. Qualified Customer
 Service Rep with 13 years in a detail-oriented customer service and call center environments; offering a record of successful job performance
@@ -35600,7 +36113,7 @@ Researched, calmed and rapidly resolved client conflicts to prevent loss of key 
 Customer Interface Â
 Greeted customers upon entrance and handled all cash and credit transactions.
 Assisted customers over the phone regarding store operations, product, promotions and orders.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (252, 46, 'Consultant', '../../data\\CONSULTANT\\13313917.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (252, 44, 'Consultant', '../../data\\CONSULTANT\\13313917.pdf', 'CONSULTANT
 Executive Profile
 Innovative professional with more than 15 years of experience poised to bring talent and vision to a respected organization that values hard work, dedication, and results.
 Demonstrated expertise in launching start-up companies, organizing them for long-term success, and driving continuous growth and
@@ -35664,7 +36177,16 @@ attention to detail, Automation, Basic, budgets, budget, business development, d
 consulting, content, negotiating contracts, CRM, client, Economics, ERP, Finance, financial, financial planning, focus, French, In Design, industry
 research, insurance, leadership, logistics, marketing, market, mergers and acquisitions, back-office, Microsoft Office Suite, modeling, enterprise,
 operations management, Portuguese, product development, project management, quality, Quickbooks, real estate, reception, sales, search engine
-optimization, Securities, Fluent in Spanish, SPSS, statistical analysis, strategy, strategic, unique, website', '', 'attention to detail, Automation, Basic, budgets, budget, business development, developing business, business planning, business plans, C,
+optimization, Securities, Fluent in Spanish, SPSS, statistical analysis, strategy, strategic, unique, website', 'Innovative professional with more than 15 years of experience poised to bring talent and vision to a respected organization that values hard work, dedication, and results.
+Demonstrated expertise in launching start-up companies, organizing them for long-term success, and driving continuous growth and
+prosperity through strategic business plans.
+Specialist in developing forecasting models and scenarios, examining strategic performance, spotting market opportunities, identifying
+business threats, developing creative action plans and corporate strategy.
+Proficient in driving revenue growth, increasing sales, slashing costs, attracting new customers, maximizing profits, and achieving corporate
+objectives and operational excellence.
+Uniquely gifted in leading teams, inspiring cross-functional collaboration, and building productive relationships with colleagues, clients, and business partners.
+Skill Highlights
+Microsoft Office Suite * In Design * Quickbooks Experience with SPSS and various CRM, ERP, and Marketing Automation Systems', 'attention to detail, Automation, Basic, budgets, budget, business development, developing business, business planning, business plans, C,
 consulting, content, negotiating contracts, CRM, client, Economics, ERP, Finance, financial, financial planning, focus, French, In Design, industry
 research, insurance, leadership, logistics, marketing, market, mergers and acquisitions, back-office, Microsoft Office Suite, modeling, enterprise,
 operations management, Portuguese, product development, project management, quality, Quickbooks, real estate, reception, sales, search engine
@@ -35712,7 +36234,7 @@ Finance and Economics Program
 Certificate in European Studies London School of Economics - City , United Kingdom
 Languages
 Fluent in Spanish * Proficient in French * Basic Portuguese Continued.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (253, 47, 'Consultant', '../../data\\CONSULTANT\\13454871.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (253, 45, 'Consultant', '../../data\\CONSULTANT\\13454871.pdf', 'CONSULTANT
 Career Overview
 More than 6 years of experience in Manufacturing & Distributions environments, including 4 years in Oracle manufacturing and Distributions applications.
 Implemented 5 full cycle oracle implementation projects, Experienced in customizing, developing and configuring Oracle Applications in the
@@ -35834,7 +36356,7 @@ Operational Management
 Implemented one of a kind E-Signature process for quality documentation in large scale manufacturing, reducing costs and gaps in process.
 Generating MM$ business impact.
 Transitioned a large group of developers and consumers to Microsoft''s products and platform as a microsoft student partner for 3 years.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (254, 48, 'Consultant', '../../data\\CONSULTANT\\13569152.pdf', 'OWNER/PRINCIPLE CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (254, 46, 'Consultant', '../../data\\CONSULTANT\\13569152.pdf', 'OWNER/PRINCIPLE CONSULTANT
 Executive Profile
 Education and project management consultant with a career path that emphasizes strategy and development. Throughout my career, my passion
 has been supporting high-level influencer''s in educational and youth-serving non-profit organizations in both strategic and tactical decision-making. I
@@ -35908,7 +36430,29 @@ Computer Skills
 MS Office Suite
 MS Project
 Adobe CS
-Share Point', '', '', 'Owner/Principle Consultant May 2013 to Current
+Share Point', 'Education and project management consultant with a career path that emphasizes strategy and development. Throughout my career, my passion
+has been supporting high-level influencer''s in educational and youth-serving non-profit organizations in both strategic and tactical decision-making. I
+have worked in high-performance and high impact educational organizations for 15 years. I am an effective motivator and results oriented leader
+with a passion for excellence and working with diverse individuals. I have superior cross-functional and remote team communication skills, and am
+committed to follow through on all challenges for ultimate organization success.
+Skill Highlights
+Project Management
+Social Entrepreneurship
+Service Quality Improvement
+Budgeting
+Change Management
+Facilitation, Training, and Instructional Design
+Hard-worker
+Fast Learner
+Business and Strategic Planning
+Cultural Competency
+Knowledge Management Systems Design and Implementation
+Core Accomplishments
+US Army Veteran. Logistics and Supply Specialist. Honorably Discharged.
+Scrum Agile Expert Certified. Understands Agile philosophy and practices including Scrum, Kanban, DSDM, Crystal, XP, and FDD;
+Has a working knowledge of the various Agile and Lean project management methodologies; Has ability to compare and choose which
+methodology would be appropriate in a given situation.
+PMP. Application in process.', '', 'Owner/Principle Consultant May 2013 to Current
 Company Name ï¼​ City , State
 Manages a portfolio of higher education, youth and family-serving non-profit clients.
 Provides development, IT strategy and knowledge management systems consultation, advice and implementation.
@@ -35955,7 +36499,7 @@ MS Office Suite
 MS Project
 Adobe CS
 Share Point', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (255, 49, 'Consultant', '../../data\\CONSULTANT\\13586069.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (255, 47, 'Consultant', '../../data\\CONSULTANT\\13586069.pdf', 'CONSULTANT
 Education and Training
 Master of Health Administration 2015 University of Missouri ï¼​ City , State
 Master of Science , Health Informatics and Bioinformatics 2015 University of Missouri ï¼​ City , State Health Informatics and Bioinformatics
@@ -36081,7 +36625,7 @@ HIMSS leads efforts to optimize health engagements and care outcomes using infor
 American College of Healthcare Executives (ACHE) 2014 to Present American College of Healthcare Executives is an international
 professional society of more than 40,000 healthcare executives who lead hospitals, healthcare systems and other healthcare organizations.
 Willing to relocate: Anywhere', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (256, 50, 'Consultant', '../../data\\CONSULTANT\\14346702.pdf', 'JEWELRY CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (256, 48, 'Consultant', '../../data\\CONSULTANT\\14346702.pdf', 'JEWELRY CONSULTANT
 Summary
 As you will see on my resume, I have the required experience, education, and training you seek in a candidate. In addition, I am a military spouse
 and have a vast understanding of government regulations, policies, and procedures. I am very competent in managing an organizations financial
@@ -36186,7 +36730,7 @@ Taught children how to redirect negative behavior through feelings identificatio
 Interests
 Otero County Animal Control Shelter, Volunteer, Alamogordo, NM 2014 - 2015 Schertz Animal Shelter, Volunteer, Cibolo, TX 2006 - 2014
 Future Farmers of America, Member/Volunteer, Cibolo, TX 2009 - 2012 Thespian Club, Member, Cibolo, TX 2008 - 2011', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (257, 51, 'Consultant', '../../data\\CONSULTANT\\14517953.pdf', 'CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (257, 49, 'Consultant', '../../data\\CONSULTANT\\14517953.pdf', 'CONSULTANT
 Summary
 [job title] with more than [number] years of experience planning, developing and implementing [program or process] .Experienced manager with
 excellent client and project management skills. Action-oriented with strong ability to communicate effectively with technology, executive, and
@@ -36263,7 +36807,21 @@ Resourceful, Responsible, Results-oriented, Seasoned, Self-directed, Service-dri
 qualified, Adaptable, Ambitious, Analytical, Articulate, Award-winning, Business-savvy, Client-focused, Committed, Conscientious, Consistent,
 Creative, Customer-focused, Customer-service focused, Deadline-driven, Deadline-oriented, Dedicated, Dependable, Detail-oriented,
 Disciplined, Driven, Dynamic, Effective, Energetic, Experience, Expert, Flexible, Focused, Gifted, Hands-on, Hardworking, Highly motivated,
-High-performing, In', 'accounting, ADP, automate, benefits, consulting, costing, Crystal Report, client, clients, financial modeling, financial reports, forecasting, foreign
+High-performing, Innovative, Mature, Meticulous, Motivated, Multi-task-oriented, Organized, Outstanding, Performance driven, Personable,
+Positive, Pragmatic, Proactive, Productive, Proficient, Reliable, Accomplished Highly qualified, detail-oriented and hardworking [Job Title] with
+more than [Number] years of experience. Proficient in research, writing, case management and client relations. Expert computing and technology
+skills including competence in multiple software applications, website design (HTML), CMS and hosting, networking issues and social media.
+Highlights
+Cost Benefit Analysis (CBAs)
+Account reconciliations
+Organized
+Unsurpassed work ethic
+Results-oriented skills
+Productivity improvement
+Microsoft Office Suite expert
+Work flow planning
+Detail-oriented
+Superb time management', 'accounting, ADP, automate, benefits, consulting, costing, Crystal Report, client, clients, financial modeling, financial reports, forecasting, foreign
 exchange, Novell Group Wise 5.5, information systems, insurance, Microsoft Internet Explorer, investments, market, materials, Microsoft Access
 2000, Microsoft Excel 2000, Exchange, Microsoft Outlook Express, Microsoft Power Point 2000, Windows 95, Windows NT, Microsoft Word
 2000, Netscape Navigator, Operating Systems, policies, reporting, Securities, spreadsheets, tax, treasury, Writer', 'Consultant
@@ -36305,7 +36863,7 @@ Allocated insurance claims to plant locations.', 'Master of Business Administrat
 Bachelor of Business Administration : Finance , 1991 University of Toledo - City , State GPA: GPA: 3.2 Dean''s List
 Select One : 1987 St. Ursula Academy - City , State GPA: GPA: 3.7 Graduated with highest honors and in top 10% of class *National Honor
 Society', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (258, 52, 'Consultant', '../../data\\CONSULTANT\\14593060.pdf', 'IT CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (258, 50, 'Consultant', '../../data\\CONSULTANT\\14593060.pdf', 'IT CONSULTANT
 Professional Profile
 Accomplished Senior IT Engineer with demonstrated ability to analyze business requirements and create effective technical solutions applicable to
 diverse industries. Serves as strategic partner to senior management, identifying business requirements, aligning IT assets with company goals and
@@ -36475,7 +37033,7 @@ Provides training to new employees.', 'Master of Science : Master of Information
 Bachelor of Science : Electrical Engineering Electrical Engineering
 Cisco Certified Network Associate (CCNA) Microsoft Certified professional (MCP) Certified Novell Engineer (CNE) Netware 6 Certified
 Professional Coder (CPC) Certified Professional Coder-Hospital (CPC-H)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (259, 53, 'Consultant', '../../data\\CONSULTANT\\15083600.pdf', 'PRINCIPAL CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (259, 51, 'Consultant', '../../data\\CONSULTANT\\15083600.pdf', 'PRINCIPAL CONSULTANT
 Professional Summary
 Financial/Business Analyst with over fifteen years of experience in the financial sector. Proven problem solver specializing in operational workflow
 designing and streamlining. Deliverer of best practices as Subject Matter Expert in Front, Middle, and Back Office workflows. Innovative thinker
@@ -36590,7 +37148,7 @@ Achievements: Earned a Presidential Award for a policy adjustment recommendation
 Earned a Performance Plus Award for preparing and delivering segments on Reserve Requirements seminars.
 Increased the accuracy of data transmitted to the Bo G by creating analytical models that track the flow and trend of depositary data.', 'MBA , International Finance 1997 St. John''s University ï¼​ City , State , USA International Finance
 Accounting 1983 Long Island University ï¼​ City , State , USA Accounting', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (260, 54, 'Designer', '../../data\\DESIGNER\\10466583.pdf', 'FLORAL DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (260, 52, 'Designer', '../../data\\DESIGNER\\10466583.pdf', 'FLORAL DESIGNER
 Summary
 Personable Customer Service Associate dedicated to providing the highest level of customer service. Outgoing, and efficient with the capacity to multi-task.
 Highlights
@@ -36655,7 +37213,7 @@ Company Name, City, State Manager/Floral designer
 Opened and closed the store, which included counting cash drawers and making bank deposits.Maintained visually appealing and effective
 displays for the entire store. Answered customers'' questions and addressed problems and complaints in person and via phone. Helped customers
 select products that best fit their personal needs, as well as design floral arrangements for the cooler display and for outgoing orders.', 'Northwestern College City , State , Dupage Medical Assistant', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (261, 55, 'Designer', '../../data\\DESIGNER\\10748989.pdf', 'LIGHTING DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (261, 53, 'Designer', '../../data\\DESIGNER\\10748989.pdf', 'LIGHTING DESIGNER
 Professional Summary
 Computer savvy and proficient with design tools for Architecture and Electro-Mechanical Design [Job Title] who continually searches for new
 inspiration and stays savvy on current design trends. Proficient in Adobe In Design, Sketch Up and Rhino. [Job Title] whose multi-faceted specialty
@@ -36833,7 +37391,7 @@ Architecture coursework
 Officer of Architectural Club
 Construction Materials & Methods Building Codes Solar Technology Civil Engineering Construction Estimating Project Management : -
 Drafting Certificate : Electrical and Mechanical 1980 Island Drafting & Technical Institute - City , State', 'Lighting Design for Rex Hospital and Duke Stadium Press Tower', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (262, 56, 'Designer', '../../data\\DESIGNER\\10751444.pdf', 'PRODUCT DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (262, 54, 'Designer', '../../data\\DESIGNER\\10751444.pdf', 'PRODUCT DESIGNER
 Professional Summary
 4-5 years engineering experience and 1-2 years working experience. Able to work independently and under pressure, detail oriented, excellent
 problem solver, Innovator. Efficient Mechanical Engineer leveraging a strong technical background in bringing products from the laboratory to
@@ -37044,7 +37602,7 @@ GPA: Magna Cum Laude Magna Cum Laude', 'Listed in the dean''s list for three sem
 booklet Â· In the process of receiving the Professional Development Certificate Â· NCSU Chinese basketball team player.
 Math and physics club member Â· Control and Mechanical Team member of NCSU Eco CAR2 Â· Took the global training class at NC
 State University Â· CUSA member (Chinese undergraduate student association).', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (263, 57, 'Designer', '../../data\\DESIGNER\\11155153.pdf', 'MECHANICAL DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (263, 55, 'Designer', '../../data\\DESIGNER\\11155153.pdf', 'MECHANICAL DESIGNER
 Summary
 Im offering over twenty-eight (28) years of extensive working knowledge of the principles, theories and concepts in the design-engineering field.
 A self-motivated, assertive individual, who learns quickly, accepts new challenges, works well independently and also in team environments; lives
@@ -37415,7 +37973,7 @@ President''s List (4.0 GPA) two semesters, Dean''s List, Academic Scholarship, H
 Honor Society while attending South Plains College. Maintained a 4.0 GPA at National College.
 Received Spot Award, Honored with You Make a Difference, and two Letters of Commendation during employment at Honeywell
 Defense Avionics Div', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (264, 58, 'Designer', '../../data\\DESIGNER\\11722421.pdf', 'TECHNICAL DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (264, 56, 'Designer', '../../data\\DESIGNER\\11722421.pdf', 'TECHNICAL DESIGNER
 Summary
 SPECIAL QUALIFICATIONS: Textile Engineering Knitting and Garment Manufacturing Textile Printing and Finishing Yarn and Fabric Dyeing
 Spinning and Weaving Textile Construction and Embroidery Textile Testing
@@ -37544,7 +38102,7 @@ Knitting and Garment Construction, Fabric Construction (Woven and Knits), Fabric
 Pvt. Ltd., Maharashtra, India Spinning, Weaving and Garment Construction Trained in manufacturing the yarn, utilizing that yarn to fabricate fabric,
 lastly utilizes that fabric to design a garment. Paper on Technical Textiles. This paper presents different type of technical textiles, their
 manufacturing, finishing, and end uses.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (265, 59, 'Designer', '../../data\\DESIGNER\\11807040.pdf', 'FORMS DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (265, 57, 'Designer', '../../data\\DESIGNER\\11807040.pdf', 'FORMS DESIGNER
 Professional Summary
 Professionally trained [job title] with experience ensuring high standards of culturally competent care for wide variety of patients with diverse
 needs. Responsible [job title] with excellent communication skills demonstrated by [number] years of experience in healthcare.
@@ -37809,7 +38367,7 @@ GPA: Sigma Theta Tau International Honor Society of Nursing Rosanne Krcek-Frank 
 Affiliations
 American Nurses Association (ANA) Member', 'Registered Nurse in [State] , License number [number] , [year]
 Advanced Cardiac Life Support (ACLS) Certification [year to present]', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (266, 60, 'Designer', '../../data\\DESIGNER\\11919526.pdf', 'E-LEARNING DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (266, 58, 'Designer', '../../data\\DESIGNER\\11919526.pdf', 'E-LEARNING DESIGNER
 Career Overview
 Highly skilled and experienced educator with a strong background in information technology. Adept at addressing the needs of a variety of learners
 and administrators. Strongly knowledgeable about all approaches to distance learning.
@@ -37989,7 +38547,7 @@ Association for Talent Development e Learning Brothers
 IBM Technical Certification Board
 IBM Customer Advisory BoardÂ
 Instructional Design Central', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (267, 61, 'Designer', '../../data\\DESIGNER\\11958994.pdf', 'SALON DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (267, 59, 'Designer', '../../data\\DESIGNER\\11958994.pdf', 'SALON DESIGNER
 Career Overview
 Committed and motivated with exceptional customer service and decision making skills.
 Strong work ethic, professional demeanor and great initiative.
@@ -38106,7 +38664,7 @@ self- maintenance for healthy hair.Cleaned and maintained the entire salon.', 'C
 Associate of Arts : General Education , Aug 2006 SAINT PETERSBURG COLLEGE ï¼​ City , State , United States General Education
 Languages
 Bilingual, Greek and English, oral and written.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (268, 62, 'Designer', '../../data\\DESIGNER\\12415691.pdf', 'INFORMATION DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (268, 60, 'Designer', '../../data\\DESIGNER\\12415691.pdf', 'INFORMATION DESIGNER
 Summary of Qualifications
 Strong leadership, project management, System Administration and technical skills to meet the efficiency and optimization needs. Has 3+ years of
 professional experience in managing, developing and maintaining software systems, web applications, and database systems. Experience in
@@ -38184,7 +38742,7 @@ Developed the interface on both sides and also showcasing the activities going o
 Accountable for testing and debugging in Linux environment Accomplished the project within time constraint', '2012 Cameron University ï¼​ City , State Bachelor of Science Computer Science and Mathematics GPA : 3.7
 Workshops : Oracle Database 11g Administration (2013), Banner Database Administration (2013), Red Hat Enterprise Linux 7 System
 Administration (2015)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (269, 63, 'Designer', '../../data\\DESIGNER\\12547982.pdf', 'SENIOR INTERIOR DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (269, 61, 'Designer', '../../data\\DESIGNER\\12547982.pdf', 'SENIOR INTERIOR DESIGNER
 Professional Summary
 Interior Designer with diverse experiences working on commercial projects throughout the United States utilizing Auto CAD. Design experiences
 include commercial, facility planning, education, government, healthcare, retail and residential. Proven abilities to work on projects independently
@@ -38399,7 +38957,7 @@ Affiliations
 Former Member: Certified Interior Designer - Maryland (CID) International Interior Design Association (IIDA) - Board member as Past-
 President 1998 to 1999, President 1996 to 1998, President Elect 1995 to 1996, Treasurer/Secretary 1994 to 1995 Nature Conservancy
 National Trust for Historic Preservation', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (270, 64, 'Designer', '../../data\\DESIGNER\\12674307.pdf', 'SET DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (270, 62, 'Designer', '../../data\\DESIGNER\\12674307.pdf', 'SET DESIGNER
 Summary
 Visual Merchandiser Â committed to staying current on market trends and consumer interests. Collaborates withÂ management to create the best
 product plans and boost sales revenue, while delivering exceptionalÂ customer experience. Â Â
@@ -38474,7 +39032,7 @@ professional development through intentional programmingÂ
 Served in a weekly on-duty rotation and responded to student crisis situationsÂ
 Maintain a constructive and positive attitude that fosters personal and professional growth that enhances the quality of life in the residence
 halls for all residents', 'Bachelor of Arts , Interior Design May 2011 Cazenovia College - City , State GPA: GPA: 3.5', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (271, 65, 'Designer', '../../data\\DESIGNER\\13014900.pdf', 'PRODUCT AND WEB DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (271, 63, 'Designer', '../../data\\DESIGNER\\13014900.pdf', 'PRODUCT AND WEB DESIGNER
 Summary
 My career of 34 years includes the graphic art field, fine arts, and elementary art teacher. My personal evolution and vision helps me to know that I
 possess truth, talent and ability that is unique and highly creative.
@@ -38654,7 +39212,73 @@ provide graphic expressions that convey the best message whether it be print or 
 of knowledge in the arts fields, hands on, and I intend to use this knowledge for future endeavors as freelance designer.
 My Offerings ~ I focus on using my creative energy and experience as a Graphic Artist skilled in a variety of designs, logos and marketing
 packages designed to strengthen business competence..
-I am a visual designer with an aptitude for experimental', 'Am proficient with graphics programs such as Adobe Photoshop, In Design, Illustrator plus word programs such as Microsoft Word and Excel.
+I am a visual designer with an aptitude for experimental projects.
+My design skills are unique ~ I utilize the basic elements of design: color, line, shape, space, texture and value to help with the overall creation of
+any art projects or instruction. My training, experience, and education in art enables me to have a vast resource of ideas to share. And very
+importantly, other''s ideas inspire me to go beyond and create things that clients envisioned.
+Workshops ~ I am interested in Teaching groups or private lessons, sharing creatively and working with other artists to create meaningful art.
+~ Past and current students and clientele are primarily those listed here:
+Art collectors, art galleries, art enthusiasts, parents of students, adults or children who may seek creative art instruction in a wide variety of
+mediums from an enthusiastic artist/teacher
+Organizations or individuals who may be seeking a career creative artist to assist in projects requiring their ideas becoming fine finished art.
+Set design, backgrounds for theatre productions large or small Elementary/Secondary/Adult students who are interested in improving motor skills,
+experiment with various materials, learn the history of art, and apply art to life, possibly in a career involving some of these skills.
+The Overview ~~~ My freelance business is based in Cody, Wyoming, but not limited to the area. I am proficient in graphics programs including
+Adobe Photoshop, In Design, Dreamweaver, Illustrator, Microsoft Word, Excel. have worked for most of my career at a distance and utilize all of
+the modern technology that makes it possible and simple to do this. SHedrick Art & Design on Facebook. Brochure, business cards, and other
+collateral Networking with Arts Councils, Galleries, Grant possibilities, and other interests Client referrals available
+Background & Experience ~~~ Product design and development of varieties of gifts, toys, socks, dolls, jewelry, snowglobes and more. Approx
+20 years with one company. Very large E Commerce Website development and some HTML. Web maintenance. 3 years. Elementary art
+instructor with the Art on a Cart program in Cody, Wyoming, 7years. Each year my 300 students are exposed to all elements of art, art history, as
+many mediums and techniques as the budget will allow. Self employed freelance artist/illustrator/graphic designer for over 30 years working in a
+variety of mediums. Much Photoshop CS5.
+Studied with several professional artists privately, and taught art lessons to children through the Cody Parks and Recreation in the summers.
+Created an organization called Raise Your Hand for Art to promote awareness of the need for art in the elementary age child''s growth and how it
+actually helps them with their academic studies Invested entire career to date in the field of art.
+Currently Registered name and business licensed in the state of Wyoming, formerly in California Completed substitute certification program, and
+update regularly Joined several professional associations and memberships Completed hundreds of paintings and graphic works for satisfied clients.
+Highly creative and multi-talented Graphic Designer with more than 30 years in product development and print design.
+Highlights
+Dedicated art professional with over 30 years of hands on experience.
+Proficient in Adobe Photoshop, In Design, Illustrator, Microsoft Word, Excel. Some knowledge of Dreamweaver
+Adept researcher and visionary, excellent at working with others'' ideas
+Some HTML knowledge
+Microsoft Office Suite knowledge
+Self disciplined, work well on own from home office.
+Advanced typography knowledge
+Corporate design - logos and branding
+Prompt, positive, self-disciplined
+Strong design sense
+Conceptual thinker
+Design strategist
+Experience with brochure and newsletter formatting
+Logo and business card photography and layout
+Photo enhancing
+Website enhancement
+Stationery and letterhead
+Creative and artistic thinker
+Self-motivated professional
+Resourceful researcher
+Quick learner
+Menu design using Adobe In Design
+Project proposals
+Able to work on more than one project at once
+Professional Associations
+Substitute Teaching certification permit 2004-2011 enabled me to teach in Wyoming Public School system. Designed and implemented Art on a
+Cart program for Park County School District.
+Indimension, Inc., Asheville, NC
+Pat O''Hara Brewing Co, Cody, WY
+Park County School District, Cody, WY
+Park County Arts Council, Cody, WY
+Cody Country Art League, Cody, WY
+Wildwood Furniture, Cody, WY
+Gold Coast Marketing, Ventura, CA
+Irma Hotel, Cody, WY
+Fine Art Collectors:
+Jerry Russell & Gretchen Stark, Wapiti, WY
+Jeri Gillett, Belfry, MT
+Ty & Jamie Barhaug, Powell, WY
+Dorothea Hartley, Oakview, CA', 'Am proficient with graphics programs such as Adobe Photoshop, In Design, Illustrator plus word programs such as Microsoft Word and Excel.
 Highly skilled at product development from the envisioning, researching, making visual, and creating actual product.
 Working with other''s ideas, and especially enjoy creating my own ideas into visuals.
 Have great organizational skills needed for freelance self employment
@@ -38745,7 +39369,7 @@ I find everything an opportunity to be solve problems, and am always coming up w
 Love gardening and growing things, healthful creative cooking
 Love cats, horses, and my dog
 Love the ocean and warm climate', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (272, 66, 'Designer', '../../data\\DESIGNER\\13518263.pdf', 'INTERIOR DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (272, 64, 'Designer', '../../data\\DESIGNER\\13518263.pdf', 'INTERIOR DESIGNER
 Summary
 Successful Design Consultant with over 26 years of experience. Who manages large-scale interior and exterior projects from low to high-end
 residential homes. Capable Interior Designer equipped with a can-do attitude who leverages the valuable design insight gained from past creations.
@@ -38820,7 +39444,7 @@ High School Diploma : General Education Calvin Coolidge High School - City , Sta
 Managed and supervised large-scale remodeling of.
 interior and exterior projects.
 Including average to high-end residential homes and historical homes .', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (273, 67, 'Designer', '../../data\\DESIGNER\\13557622.pdf', 'VR DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (273, 65, 'Designer', '../../data\\DESIGNER\\13557622.pdf', 'VR DESIGNER
 Summary
 A Game Designer with exceptional modeling and prioritization skills looking for a career in an organization that would enhance and further skillset.
 Experience
@@ -38861,7 +39485,7 @@ City , State', '2014
 Advanced Modeling, Advanced Animation, Level and World Building. Having a passion for weed and its comsumers and excellents in people
 skills Able to distinguish Cannabis strains, such as Sativa vs. Indica vs. Hybrid : Fine Art and Game Design Animation/FX Artist Sanford Brown
 ï¼​ City , State Fine Art and Game Design Animation/FX Artist', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (274, 68, 'Designer', '../../data\\DESIGNER\\13774329.pdf', 'MECHANICAL DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (274, 66, 'Designer', '../../data\\DESIGNER\\13774329.pdf', 'MECHANICAL DESIGNER
 Summary
 I am a current Mechanical Designer for I.A.S. I am extremely versatile, reliable and efficient with 15+ years'' experience supporting managers,
 business owners and executives in high paced environments in a wide variety of professional positions. Diversified skills include client relations,
@@ -39040,7 +39664,7 @@ Associate''s degree : Biological Science Zoology NDSU ï¼​ City , State Biolo
 Interests
 Big Brother Big Sister Mentor/Volunteer, February 2014 - September 2016 For Luv of Dogs Foster home/ food donations, 2013 - 2017 Grove
 lake Lutheran Church Children Services and Outings, 2015-2017', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (275, 69, 'Designer', '../../data\\DESIGNER\\13998435.pdf', 'PRINCIPLE DESIGNER / OWNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (275, 67, 'Designer', '../../data\\DESIGNER\\13998435.pdf', 'PRINCIPLE DESIGNER / OWNER
 Professional Summary
 Interior Designer with a distinct understanding of spatial theory who harbors an exceptional design instinct and is uniquely attuned to the importance
 of materiality, lighting, composition and the overall design process.
@@ -39197,7 +39821,7 @@ Approach.', 'Lighting Designer and Project Manager for David A Mintz Inc., a for
 Robinson-May, Fashion Valley Mall and Foley''s, Scottsdale Fashion Square Mall. Assisted in the development and design of various Hecht''s,
 Kaufmann''s, Strawbridge''s, and Lord and Taylor department store lighting, while simultaneously completing and meeting all deadlines for several large-scale successful projects.
 Successfully completing graduate school by I writing thesis underlining the theoretical concept of spatial theory.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (276, 70, 'Designer', '../../data\\DESIGNER\\14014749.pdf', 'GRAPHIC DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (276, 68, 'Designer', '../../data\\DESIGNER\\14014749.pdf', 'GRAPHIC DESIGNER
 Summary
 I am a hardworking and multi-talented individual who loves to design, play sports, and learn. I am always up for a challenge and look forward to
 always striving to become better.
@@ -39386,7 +40010,7 @@ Convoy of Hope
 Las Vegas, NV 2014, 2015
 Convoy of HopeÂ is a faith-based, nonprofit organization with a driving passion to feed the world through children''s feeding initiatives,
 community outreaches and disaster response.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (277, 71, 'Designer', '../../data\\DESIGNER\\14528265.pdf', 'PROJECT MANAGER/CAD DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (277, 69, 'Designer', '../../data\\DESIGNER\\14528265.pdf', 'PROJECT MANAGER/CAD DESIGNER
 Experience
 05/2015 to Current
 Project Manager/CAD Designer Company Name
@@ -39457,7 +40081,7 @@ Entry Level Welder Certificate *Basic/Entry/Advanced Welder Certificate *Advance
 *SMAW Structural Welding Certificate *Semi-Automatic Welding Certificate
 Interests
 Mechanical Engineering and Design *3 D Printing and all Computer-aided manufacturing processes', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (278, 72, 'Designer', '../../data\\DESIGNER\\14724186.pdf', 'INTERIOR DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (278, 70, 'Designer', '../../data\\DESIGNER\\14724186.pdf', 'INTERIOR DESIGNER
 Professional Summary
 Hands on and highly motivated Interior Designer involved in all stages of design from concept inception and development to installation. Results-
 oriented Design Professional who works with the design team to provide seamless, cutting edge and creative designs within strict time frames.
@@ -39518,7 +40142,7 @@ Procurement
 Budget Preparation.
 Sales and Customer Service.
 Colorist and Paint Specialist', 'High School Diploma : Shadle Park High School City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (279, 73, 'Designer', '../../data\\DESIGNER\\14743911.pdf', 'TECHNICAL TRAINER/ INSTRUCTIONAL DESIGNER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (279, 71, 'Designer', '../../data\\DESIGNER\\14743911.pdf', 'TECHNICAL TRAINER/ INSTRUCTIONAL DESIGNER
 Professional Summary
 Enthusiastic, hard working, former military trainer and course delvoper who has designed and taught course for use in the United States Air Force and JCM Global.
 Qualifications
@@ -39635,7 +40259,7 @@ Responsibilities Ensure EW pod production outpaced the need of the aircraft; rev
 documented all work related actions; train personnel on maintenance and troubleshooting; Brief the Shop Chief on status and repairs
 Accomplishments Worked with Subject Matter Experts to set up the first test stand for new pods; First military person certified to work on newest
 EW pod. Skills Used Adult learning Theory, Microsoft Office Suite, Leadership and Management, Public Speaking', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (280, 74, 'Digital Media', '../../data\\DIGITAL-MEDIA\\10005171.pdf', 'MEDIA ACTIVITIES SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (280, 72, 'Digital Media', '../../data\\DIGITAL-MEDIA\\10005171.pdf', 'MEDIA ACTIVITIES SPECIALIST
 Summary
 Multi-Tasking Media Relations Results-oriented
 Strategic Initiatives Event Planning Writer & Editor
@@ -39792,7 +40416,7 @@ Silver Paragon Award in 2011 from NCMPR for The Power of Achievement in the Elec
 Wrote and produced 2010 NCMPR District level winners, Online Orientation in the Online Services category won the Gold Medallion ; The
 Early College Video in the College Promotional Video category won the Silver Medallion ; the five commercial series, Thanks , won the
 Bronze Medallion in the Video Advertisement/PSA Series category', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (281, 75, 'Digital Media', '../../data\\DIGITAL-MEDIA\\10515955.pdf', 'DIGITAL MEDIA SALES CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (281, 73, 'Digital Media', '../../data\\DIGITAL-MEDIA\\10515955.pdf', 'DIGITAL MEDIA SALES CONSULTANT
 Summary
 Dedicated and highly seasoned advertising employee with over 19 years of inside and outside newspaper sales experience in both the print and
 digital realms. My goal is to be an asset to The Augusta Chronicle and to utilize my abilities and experience to further my personal growth.
@@ -40001,7 +40625,7 @@ Advertising Salesperson of the Month, September 2010 - The Augusta Chronicle
 Advertising Salesperson of the Month, January 2005 - The Savannah Morning News
 Employee of the Month, March 2003- The Savannah Morning News
 Advertising Employee of First Quarter 2000- The Fayetteville Observer', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (282, 76, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11005406.pdf', 'SPRINT ISP MANAGEMENT TO THE VENDOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (282, 74, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11005406.pdf', 'SPRINT ISP MANAGEMENT TO THE VENDOR
 Qualifications
 Windows 95-XP-Windows 7/8.8,1/10
 Windows NT/2000/2003/2008/2012
@@ -40159,7 +40783,7 @@ TCP/IP
 DNS
 SSL Cert Mgmt
 Wireless B/G/AC Gb', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (283, 77, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11270462.pdf', 'SOCIAL MEDIA MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (283, 75, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11270462.pdf', 'SOCIAL MEDIA MANAGER
 Summary
 Seeking an employment position in the Marketing or Public Relations field.
 Highlights
@@ -40278,7 +40902,7 @@ a campaign based on objectives, creating a new branded image and evaluating the 
 chose our campaign as the winning group proposal
 Professional Affiliations
 THE ANDRÃ‰ COMEAUX CAMPAIGN , Lafayette, LA', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (284, 78, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11677012.pdf', 'SOCIAL MEDIA MARKETING MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (284, 76, 'Digital Media', '../../data\\DIGITAL-MEDIA\\11677012.pdf', 'SOCIAL MEDIA MARKETING MANAGER
 Summary
 Recent graduate with excellent research, time management, and problem solving skills. Ability to function at a high level in a fast-paced
 environment. Passionate about travel and international education.Â
@@ -40357,7 +40981,7 @@ December 2014 Institute for the International Education of Students (IES Abroad)
 Semester Study Abroad
 Languages
 Limited working proficiency of Italian language. Elementary proficiency of Spanish language.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (285, 79, 'Digital Media', '../../data\\DIGITAL-MEDIA\\12085736.pdf', 'DIGITAL ADVERTISING CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (285, 77, 'Digital Media', '../../data\\DIGITAL-MEDIA\\12085736.pdf', 'DIGITAL ADVERTISING CONSULTANT
 Experience
 Digital Advertising Consultant , 07/2013 to 12/2017
 Company Name â€“ City , State
@@ -40474,7 +41098,7 @@ Handled organization computerized shipping and receiving of goods.
 Performed verification of on-line purchase, authentication of credit card as well as other payment methods.', 'Bachelors of Science : Computer Science Eastern Shore , May 2007
 University of Maryland
 Computer Science Eastern Shore', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (286, 80, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13328680.pdf', 'DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (286, 78, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13328680.pdf', 'DIRECTOR
 Professional Summary
 Skills
 Clients, Strategic
@@ -40698,7 +41322,7 @@ B.S : Business Administration , 05/1994
 Boston College - City , State', 'CERTIFICATIONS Google Ad Words Certified Google Analytics Certified Facebook Certified Planning Professional.
 Languages
 English Native or Bilingual Portuguese Native or Bilingual Spanish', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (287, 81, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13343786.pdf', 'SR. LEAVE OF ADMINISTRATIVE SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (287, 79, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13343786.pdf', 'SR. LEAVE OF ADMINISTRATIVE SPECIALIST
 Professional Summary
 HR Coordinator who bringsÂ 10 years developing efficient payroll and benefits processes within corporate human resources settings. Adept at
 learning new industry laws and standards, as well as incorporating relevant best practices into new planning and coordination.
@@ -40860,7 +41484,7 @@ B.S : Human Resources Management 12 2012 Capella University - Human Resources Ma
 Affiliations
 Benefits and Compensation Certification - Cornell University - November 2006 Affiliations Society for Human Resource Management (SHRM)
 CEB Human Resources Network', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (288, 82, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13503650.pdf', 'MEDIA ADMINISTRATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (288, 80, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13503650.pdf', 'MEDIA ADMINISTRATOR
 Professional Summary
 Articulate Executive Assistant driven to succeed and bring value to any task. Strategic planning and client relationship management expert. Creative
 professional with extensive project experience from concept to development. Talents include customer service, excellent listening skills and communication skills.
@@ -40995,7 +41619,7 @@ Board Member, Community Action Plan for Emergency Preparedness 2014 - Present
 Interests
 Writer - Preparing for publication 2015
 Volunteer - Community activities - Community Harvest', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (289, 83, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13837784.pdf', 'DIGITAL MEDIA BUYER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (289, 81, 'Digital Media', '../../data\\DIGITAL-MEDIA\\13837784.pdf', 'DIGITAL MEDIA BUYER
 Professional Summary
 Versatile digital marketerÂ bringing
 Highlights
@@ -41086,7 +41710,7 @@ Communicated directly with client services team and clients regarding account ma
 Company Name, City, State Sales Associate 06/2014 to 10/2015
 Created and managed social media accounts across multiple platforms.
 Helped increase brand awareness and advertised product promotions to current customers.', 'Bachelor of Arts : Communication Business University of Missouri , City , State Communication Business', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (290, 84, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14036515.pdf', 'MONITOR TECH
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (290, 82, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14036515.pdf', 'MONITOR TECH
 Summary
 Knowledge of modern office methods and procedures, filing, telephone techniques, and office equipment. Ability to speak clearly and concisely.
 Ability to perform duties with speed and accuracy without immediate and constant supervision. Ability to use good judgment in recognizing scope
@@ -41211,7 +41835,7 @@ Complete and mail bills, contracts, policies, invoices, or checks.', 'High Schoo
 Reports generation and analysis
 Computer proficient
 Microsoft Office', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (291, 85, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14209965.pdf', 'CONTRACT SENIOR ASSOCIATE MEDIA PLANNER AT SAPIENTNITRO
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (291, 83, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14209965.pdf', 'CONTRACT SENIOR ASSOCIATE MEDIA PLANNER AT SAPIENTNITRO
 Summary
 To obtain a mid-level leadership position in media that will utilize my strong analytical, negotiation and creative- thinking skills.
 Experience
@@ -41370,7 +41994,7 @@ December 2010 Bachelors of Arts : Seton Hall University - Communications City , 
 Emphasis in Public Relations
 Marketing, Public Relations and Journalism coursework
 Member of PRSSA, Member of Alpha Phi Sorority: Director of Marketing, 2008-2009 and Vice President of Marketing, 2009-2010', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (292, 86, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14556869.pdf', 'DIGITAL MARKETING INTERN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (292, 84, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14556869.pdf', 'DIGITAL MARKETING INTERN
 Education
 2015
 Bachelor of Arts : Psychology, Corporate Strategy Vanderbilt University ï¼​ City , State
@@ -41495,7 +42119,7 @@ Prairie State Achievement Award
 Won "Battle of the Bands" competition for Chicagoland high school musicians 2009, 2010
 Hold school record for Northside College Preparatory High School Track & Field events: "Middle Distance Medley" 2010, "Throwers
 Relay" 2010', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (293, 87, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14761906.pdf', 'SUBSTITUTE TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (293, 85, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14761906.pdf', 'SUBSTITUTE TEACHER
 Summary
 Enthusiastic artists who loves both traditional art and digital art! Â Before moving to Richmond I spent two years working as a digital media
 specialist, creatingÂ brochures , video and physical colleges. Â Currently I''m working as a substitute for Chesterfield County Schools, myÂ
@@ -41577,7 +42201,28 @@ Company Name ï¼​ City , State
 Work in schools across Chesterfield County in a verity of subjects and grades. Â My favorites subjects to teach are Art, Library and
 History.
 Following the teachers lesson plans I lead the students through activities, providing guidance and additional explanations where needed.
-Comfortable with unexpected school situations. Â I''m quick on my feet and calm which I belie', 'Traditional Art Media: Black and White Photography, Oil Painting, Sculpture, Print Media
+Comfortable with unexpected school situations. Â I''m quick on my feet and calm which I believe is the key to keeping students calm.
+Digital Media Specialist and Administrative Assistant Jul 2013 to Jun 2015
+Company Name ï¼​ City , State
+Met and worked with grieving families to create personalized memorial packages for their loved one.
+I used a variety of programs including Photoshop, Illustrator, In Design, Publisher and funeral stationary software.
+Created large collage boards for every family who provided us with photos. Â It was not abnormal to create 15 or more boards a week.
+I provided support to community outreach programs; small college boards for hospice patients, billboards for charity events and designing
+pamphlets or other printed materials for special events including Cape Fear''s Purple Heart dinner.
+Was in charge of teaching coworkers how to use new software as well as troubleshooting computer and printer problems for the office.
+Summer Counselor Jun 2009 to Sep 2009
+Company Name ï¼​ City , State
+Helped to plan and execute activities.
+Dealt with minor cuts and scrapes as well as defusing tempers before fights could start and writing up incident reports after accidents or fights occurred.
+This job included conflict resolution, working with children whose parent(s) were in the military and a handful that have a parent overseas, as
+well as working with handicap/special needs children.
+Additional Experience
+Room Attendant Mar 2012 to Jul 2013
+Company Name ï¼​ City , State
+Seasonal Shoe Associate Nov 2011 to Feb 2012
+Company Name ï¼​ City , State
+Shoe Associate Oct 2009 to Nov 2011
+Company Name ï¼​ City , State', 'Traditional Art Media: Black and White Photography, Oil Painting, Sculpture, Print Media
 Digital Art Programs: Photoshop, Illustrator, In Design
 Digital Animation: Maya, Flash, After Effects', '', 'Bachelor of Arts , Dual Major: Art and Visual Technology & Anthropology 2009 George Mason University ï¼​ City , State
 Started off as an Anthropology major with a minor in photography but soon found I loved my art classes just as much. Â At first glance they seem
@@ -41597,7 +42242,7 @@ Advanced Degree 2004 West Springfield High School ï¼​ City , State
 Internship 2004 Fairfax Archaeology ï¼​ City , State
 Compiled information about artifacts from previous digs as well as properly labeling them and storing them in bags to prepare them for storage.
 In the field work included measuring and marking test pits, shifting through dirt, digging test pits and keeping field data', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (294, 88, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14771530.pdf', 'DIGITAL PRODUCER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (294, 86, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14771530.pdf', 'DIGITAL PRODUCER
 Summary
 Personable Project Manager Â successful at building strong professional relationships. Manages large and complex projects while maintaining high
 team morale and energy. Skilled mentor and mediator who excels at bringing out the best in team members.
@@ -41696,7 +42341,7 @@ Tracked invoices and created check requests.
 Production Intern Company Name ï¼​ City , State', 'May 2011
 Bachelor of Science : Business Administration and Computer Information Systems Lewis University ï¼​ City , State Business Administration and
 Computer Information Systems', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (295, 89, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14945250.pdf', 'DIGITAL MEDIA CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (295, 87, 'Digital Media', '../../data\\DIGITAL-MEDIA\\14945250.pdf', 'DIGITAL MEDIA CONSULTANT
 Summary
 Dynamic and results-driven Outside Sales and Territory Manager with over 15 years of successful new business development, competitive market
 share expansion, and customer relationship development. Creative,goal oriented and motivated team leader who develops strong working
@@ -41855,7 +42500,7 @@ Bachelor''s Degree : Marketing 2002 University of South Carolina City , State , 
 Concentration: Sport & Hospitality Marketing', '2004,05, President''s Club award recipient.
 2013 Top five Digital Solutions Media Consultant while working at the NY Daily News.
 Started a successful magazine publishing company in 2004 with distribution spanning as far as Japan. Generated $500,000 in advertising revenue.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (296, 90, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15226699.pdf', 'OPERATIONS TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (296, 88, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15226699.pdf', 'OPERATIONS TECHNICIAN
 Summary
 To obtain and solidify a career-oriented position, learn valuable skills and processes, and contribute the best of my abilities for the goals,
 objectives, and growth of the organization.
@@ -41976,7 +42621,7 @@ Central High School
 City , State , United States General Studies
 High School Diploma GPA: Recipient of Robert C. Byrd Scholarship. GPA: 3.65 Dean''s List Standing) Art A.P. award, Scholarship to Art
 Institute of Chicago.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (297, 91, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15353911.pdf', 'LEAD ARTIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (297, 89, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15353911.pdf', 'LEAD ARTIST
 Summary
 I''m a fast-learning and enthusiastic animator seeking professional experience. I have over 7 years of formal art training, both digital and traditional.
 I''m skilled at design and character animation.
@@ -42031,7 +42676,7 @@ Project based learning
 Published a small comic book with peers
 Presented designs to Karten Design
 Placed first with my team in the Junior Qualcomm Tricorder X-Prize Design competition', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (298, 92, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15484097.pdf', '25 LIVE FUNCTIONAL ADMINISTRATOR/SUPERVISOR OF I.T. HELP DESK
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (298, 90, 'Digital Media', '../../data\\DIGITAL-MEDIA\\15484097.pdf', '25 LIVE FUNCTIONAL ADMINISTRATOR/SUPERVISOR OF I.T. HELP DESK
 Professional Summary
 Experienced R25/ 25 Live Â AdministratorÂ committed to maintaining cutting edge technical skills and up-to-date industry knowledge.
 Skills
@@ -42160,7 +42805,7 @@ Top 15 % of class
 Emphasis in [Name of Emphasis]
 Emphasis in Social Science
 Top [Number] % of class', 'Microsoft Certified Professional (MCP)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (299, 93, 'Digital Media', '../../data\\DIGITAL-MEDIA\\16276121.pdf', 'DIGITAL MARKETING ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (299, 91, 'Digital Media', '../../data\\DIGITAL-MEDIA\\16276121.pdf', 'DIGITAL MARKETING ASSOCIATE
 Summary
 Dynamic and highly enthusiastic individual with keen business acumen seeking a position in Marketing and Advertising to apply advanced customer
 service skills and uncommon creative mindset to bring a positive initiative to your business operations and an upward curve to your company
@@ -42207,7 +42852,10 @@ subscription-based businesses Well versed in all aspects of marketing campaigns 
 organized individual with strong knowledge of business organization and processes as well as management techniques who constantly strives for
 self-development and education welcoming every opportunity to expand intellectual, cultural, and professional horizons Highly competitive team
 player and multitasker seeking to positively contribute to overall team performance and the achievement of all established corporate objectives
-Efficient commu', 'Advertising, agency, com, draw, client, clients, e-commerce, senior management, Google Analytics, managing, marketing, market, meetings, online
+Efficient communicator with an uncommon ability to relate to people and provide excellent customer service Responsible professional with strong
+analytical skills and a proven ability to produce a range of solutions as well as work under stress still delivering good results Account Management
+Brand Development Sales Promotion Multi-Media Marketing Campaign Planning & Execution CRM & Profit Maximization Strategic Media
+Placement Market Analysis Customer Service Advertising', 'Advertising, agency, com, draw, client, clients, e-commerce, senior management, Google Analytics, managing, marketing, market, meetings, online
 marketing, page, progress, proposals, scheduling, social media platforms
 Additional Information
 PERSONAL SUMMARY', '05/2016 to 11/2016
@@ -42232,7 +42880,7 @@ relationships Attended meetings with clients as well as created briefings for ot
 senior managers Contributed to campaign development as well as monitored and chased work progress.
 Personal Information
 PERSONAL SUMMARY', '', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (300, 94, 'Engineering', '../../data\\ENGINEERING\\10030015.pdf', 'ENGINEERING LAB TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (300, 92, 'Engineering', '../../data\\ENGINEERING\\10030015.pdf', 'ENGINEERING LAB TECHNICIAN
 Career Focus
 My main objective in seeking employment with Triumph Actuation Systems Inc. is to work in a professional atmosphere where I can utilize my
 skills and continue to gain experience in the aerospace industry to advance in my career.
@@ -42268,7 +42916,8 @@ Education and Training
 Associates , Applied Science Electronics Engineering 2011 Forsyth Technical Community College ï¼​ City , State Applied Science Electronics
 Engineering
 Associates , Applied Science, Munitions Systems Technology 2007 Community College of the Air Force ï¼​ City , State Applied Science,
-Munitions Systems Technology', '', 'Dasy Lab, Labview, Mechanical, Electrical, Lean/5 S, Hydraulic Testing, Test Stand Fabrication', 'Engineering Lab Technician Oct 2016 to Current
+Munitions Systems Technology', 'My main objective in seeking employment with Triumph Actuation Systems Inc. is to work in a professional atmosphere where I can utilize my
+skills and continue to gain experience in the aerospace industry to advance in my career.', 'Dasy Lab, Labview, Mechanical, Electrical, Lean/5 S, Hydraulic Testing, Test Stand Fabrication', 'Engineering Lab Technician Oct 2016 to Current
 Company Name ï¼​ City , State
 Responsible for testing various seat structures to meet specific certification requirements. Â
 Maintain and calibrate test instruments to ensure testing capabilities are maintained.
@@ -42296,7 +42945,7 @@ Train newly assigned personnel at Line Delivery section on transporting, loading
 Engineering
 Associates , Applied Science, Munitions Systems Technology 2007 Community College of the Air Force ï¼​ City , State Applied Science,
 Munitions Systems Technology', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (301, 95, 'Engineering', '../../data\\ENGINEERING\\10219099.pdf', 'EQUIPMENT ENGINEERING TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (301, 93, 'Engineering', '../../data\\ENGINEERING\\10219099.pdf', 'EQUIPMENT ENGINEERING TECHNICIAN
 Professional Summary
 SkilledÂ Maintenance MechanicÂ Technician with superb problem solving and multi-tasking skills. Self-directed and motivated worker. To obtain
 a position where Teamwork, Integrity and Proffesionalism are a high standard in the Company''s Mission Statement. All while engaing in new
@@ -42479,7 +43128,7 @@ Technical Diploma : San Francisco Police Academy - City , State', 'Writes DSN''s
 Completes memo receivers for parts with no PO reference or those returned for repair.
 Coordinates efficient flow of materials and analyzes required capacity in processes with involved departments to ensure a smooth and timely operation.
 Extensive use in all Microsoft Office applications and the following software: WDS, LSS, CAVS II.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (302, 96, 'Engineering', '../../data\\ENGINEERING\\10624813.pdf', 'ENGINEERING OPERATIONS DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (302, 94, 'Engineering', '../../data\\ENGINEERING\\10624813.pdf', 'ENGINEERING OPERATIONS DIRECTOR
 Executive Profile
 Senior Software Executive Senior Software Executive who is a key contributor to strategic planning and product development. Highly skilled at
 creating and implementing key software improvements and process changes by uncovering major process limitations, maximizing profitability,
@@ -42553,7 +43202,25 @@ B. S : Computer Science , 1988 Union College ï¼​ City , State Computer Scien
 Skills
 3 D, Agile, AJAX, approach, B2 B, budget, C, C++, competitive, CSS, database, delivery, e-commerce, Expert Systems, funds, hiring, HTML,
 PHP, image, inspection, Java, Java Script, Marketing, Mongo DB, enterprise, Network, Networks, Neural, Oracle, PL/SQL, PCI, Perl, Product
-Development, profit, prototyping, Public safety, Python, real-time 3, receiving 6, requirement, Sales, SOAP, SQL, strategic, upgrades, upgrade, valuation, VC', '', '3 D, Agile, AJAX, approach, B2 B, budget, C, C++, competitive, CSS, database, delivery, e-commerce, Expert Systems, funds, hiring, HTML,
+Development, profit, prototyping, Public safety, Python, real-time 3, receiving 6, requirement, Sales, SOAP, SQL, strategic, upgrades, upgrade, valuation, VC', 'Senior Software Executive Senior Software Executive who is a key contributor to strategic planning and product development. Highly skilled at
+creating and implementing key software improvements and process changes by uncovering major process limitations, maximizing profitability,
+scalability, and competition in the global marketplace. Accomplishments (over last 15 years +) Reported directly to C-level executives and Board
+members, successfully bridging the gap between the business and Engineering, implementing strategic plans and ensuring that the engineering teams
+are aligned to business goals. Agile expert and evangelist, running software development teams for over 17 years and specifically agile software
+development for more that 13 years. Reorganized and transitioned many teams and companies to become smooth running agile groups, drastically
+reducing delivery issues, making the work very transparent, empowering team members to become self-directed and accountable to their
+commitments. Skilled at managing entire software development process and employees including QA, Project Management, Technical Support, on
+and offshore teams, contractors, subsidiaries, and merger/acquisitions. Successfully on-boarded the engineers and technology from an acquired
+company and quickly merged their intellectual property (IP) into the main product line. Advocate for strong Engineering Best Practices, including
+design & code reviews, paired programming, unit tests and continuous integration testing through automation. Including, establishing leading and
+trailing engineering metrics, which provide strong indicators of product quality and delivery schedule. Managed globally distributed teams ranging
+from 15-60 people, with P&L responsibilities between $2 M - $6 M. Teams have been located in US, Germany, Hungary, Russia, China, and
+Argentina. Consistently an early adopter of critical trends in methodologies and practices, which transform and refine processes to increase the
+delivery of business value.
+Skill Highlights
+Technology Â· Java Â· Amazon AWS Â· Hibernate Â· PHP Â· EC2 Â· Elastic Search Â· C++ Â· JSMVC Â· JUnit Â· C Â· HTML Â·
+Selenium Â· Can JS Â· CSS Â· Aurora Â· PL/SQL Â· Bootstrap Â· Jenkins Â· Oracle Â· Python Â· Phabricator Â· My/SQL Â· AJAX Â·
+Git Hub Â· Java Script Â· Camel Â· Jira Â· REST and SOAP services Â· Mongo DB Â· Perl', '3 D, Agile, AJAX, approach, B2 B, budget, C, C++, competitive, CSS, database, delivery, e-commerce, Expert Systems, funds, hiring, HTML,
 PHP, image, inspection, Java, Java Script, Marketing, Mongo DB, enterprise, Network, Networks, Neural, Oracle, PL/SQL, PCI, Perl, Product
 Development, profit, prototyping, Public safety, Python, real-time 3, receiving 6, requirement, Sales, SOAP, SQL, strategic, upgrades, upgrade, valuation, VC', 'Engineering Operations Director
 January 2014 to Current Company Name ï¼​ City , State
@@ -42602,7 +43269,7 @@ January 1989 to January 1993 Company Name ï¼​ City , State', 'Postgraduate c
 M. S : Computer Science , 1989 Union College ï¼​ City , State Computer Science Masters Project: A Netless Neural Network - presented on
 August 16, 1989 at International Conference on Expert Systems and Neural Networks - Theory & Applications
 B. S : Computer Science , 1988 Union College ï¼​ City , State Computer Science', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (303, 97, 'Engineering', '../../data\\ENGINEERING\\10712803.pdf', 'ENGINEERING SERVICES MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (303, 95, 'Engineering', '../../data\\ENGINEERING\\10712803.pdf', 'ENGINEERING SERVICES MANAGER
 Executive Profile
 A results driven Controls Engineer and Project Manager with over 20 years of experience in manufacturing. Skilled in Industrial Automation and
 Process Engineering with a strong mechanical design background. Proven ability to lead and motivate high performance teams. History of building
@@ -42700,7 +43367,14 @@ safety, Hammer, HVAC, instruction, inventory management, inventory control, Labo
 schedules, manufacturing processes, materials, Mechanical, Microsoft Access, 2000, Microsoft NT server, Microsoft Windows NT Server,
 microwave, NEC, network, networks, Novell, Personnel, PLC programming, PLC, plumbing, Power distribution, process control, process
 engineering, Programming, quality, quality control, radio, Record keeping, repairs, repairing, Safety, safety codes, SCADA, Siemens PLC,
-staffing, supervising, Supervision, surveys, technical support, phones, transmission, troubleshooting, UHF, utilities, validation, VHF, View, Water quality, Wonderware, written', '', 'accounting, Apple computers, asset management, automation, basic, blueprints, budgets, budget, C, CA, hardware, concept, contracts, client,
+staffing, supervising, Supervision, surveys, technical support, phones, transmission, troubleshooting, UHF, utilities, validation, VHF, View, Water quality, Wonderware, written', 'A results driven Controls Engineer and Project Manager with over 20 years of experience in manufacturing. Skilled in Industrial Automation and
+Process Engineering with a strong mechanical design background. Proven ability to lead and motivate high performance teams. History of building
+systems with improved functionality and productivity, consistently meeting critical requirements.
+Skill Highlights
+Proficient in process engineering and applying process needs to
+available technology to improve production availability and uptime.
+Proficient in process engineering and applying process needs to
+available technology to improve production runablility and uptime.', 'accounting, Apple computers, asset management, automation, basic, blueprints, budgets, budget, C, CA, hardware, concept, contracts, client,
 database, DC, delivery, design and construction, directing, Electrical systems, electronics, equipment installation, filling, Fire protection, Food
 safety, Hammer, HVAC, instruction, inventory management, inventory control, Labor relations, layout, logic, Logistics, machinery, maintenance
 schedules, manufacturing processes, materials, Mechanical, Microsoft Access, 2000, Microsoft NT server, Microsoft Windows NT Server,
@@ -42784,7 +43458,7 @@ Coursework in Business Management
 1985 High School Diploma : Elk Creek High School City , State
 Select One : Better Process Control School City , State , USA
 Level 1 : NEEC Building Operator', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (304, 98, 'Engineering', '../../data\\ENGINEERING\\10985403.pdf', 'MECHANICAL ENGINEERING INTERN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (304, 96, 'Engineering', '../../data\\ENGINEERING\\10985403.pdf', 'MECHANICAL ENGINEERING INTERN
 Summary
 CAD | CAM | Finite Element Analysis | Mechanical Design | Product Design and Development
 Skills
@@ -42853,7 +43527,7 @@ Software. (License # 00296190)
 Publications
 Parekh R., Chaudhary R., Ingle A. (Ph D), "Reliability of Dissimilar Metal Joints using Fusion Welding: A Review" presented at the International
 Conference on Machine learning, Electrical and Mechanical Engineering (ICMLEME''2014), Dubai (UAE)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (305, 99, 'Engineering', '../../data\\ENGINEERING\\11890896.pdf', 'SENIOR ENGINEERING MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (305, 97, 'Engineering', '../../data\\ENGINEERING\\11890896.pdf', 'SENIOR ENGINEERING MANAGER
 Summary
 Personable, patient and adaptable Math tutor with 3 years of experience tutoring K-12 and college students in Mathematics. Highly reliable and
 approachable person with 8 years of professional experience in people management, leadership, documentation, multi-tasking, innovation and
@@ -42974,7 +43648,7 @@ presentations for colleagues using Microsoft Power Point and Google Docs.
 Training Â
 Provided SQL programming trainings to corporate team members in a classroom setting to enhance their knowledge of SQL which allowed
 them to significantly improve data analysis.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (306, 100, 'Engineering', '../../data\\ENGINEERING\\11981094.pdf', 'SOFTWARE ENGINEERING MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (306, 98, 'Engineering', '../../data\\ENGINEERING\\11981094.pdf', 'SOFTWARE ENGINEERING MANAGER
 Summary
 Experienced software engineer, and hands-on engineering manager with 20+ years of product development experience in broadcast media, and
 10+ years of experience in leading development teams (20+ engineers), hiring (10+ offers, 40+ interviews), HR personnel procedures,
@@ -43091,7 +43765,7 @@ DPS acquired Star Media; Leitch acquired DPS in 2000).
 Star Media, technology startup, created video editing software Velocity for post-production space, and developed projects include Project
 media management tools, Render Bank, and video effects.', 'M.S : Computer Science Illinois Institute of Technology ï¼​ City , State Computer Science
 B.E : Electronics and Communication Engineering National Institute of Technology ï¼​ City India Electronics and Communication Engineering', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (307, 101, 'Engineering', '../../data\\ENGINEERING\\12011623.pdf', 'ENGINEERING AND QUALITY TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (307, 99, 'Engineering', '../../data\\ENGINEERING\\12011623.pdf', 'ENGINEERING AND QUALITY TECHNICIAN
 Career Overview
 A highly experienced skilled graduate with Analytics degree with a very good experience in SAS, Web scraping, SQL, Predictive modelling and
 data visualization. Excellent ability in identifying data requirements for analysis, data cleaning, munging and model building; Ensures the organization
@@ -43212,7 +43886,7 @@ April 2010
 Master of Science : Environmental Science and Technology UNESCO-IHE ï¼​ City The Netherlands Environmental Science and Technology
 July 2004
 Bachelor of Science : Resource Management Debub University Ethiopia Resource Management', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (308, 102, 'Engineering', '../../data\\ENGINEERING\\12022566.pdf', 'ENGINEERING INTERN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (308, 100, 'Engineering', '../../data\\ENGINEERING\\12022566.pdf', 'ENGINEERING INTERN
 Summary
 Candidate with a fifteen months experience in production supervising and manufacturing seeking opportunity in field of Quality, Supply Chain and
 Manufacturing
@@ -43315,7 +43989,7 @@ forecasting techniques over EFC''S subjective forecasting technique Lean Approac
 May2014 Studied and Analyzed the case related to manufacturing industry Toyota Mapped A3 after analyzing the current issues, and
 suggested improvements and implemented corrective measurements Applied same approach in healthcare industry and brainstormed
 benefits Identified challenges and suggested methods in streamline current process.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (309, 103, 'Engineering', '../../data\\ENGINEERING\\12472574.pdf', 'QA ENGINEERING TEAM LEAD
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (309, 101, 'Engineering', '../../data\\ENGINEERING\\12472574.pdf', 'QA ENGINEERING TEAM LEAD
 Career Overview
 Eight years of progressive technical experience in quality assurance engineering of computer software in windows environment Strong practical and
 theoretical knowledge of software quality assurance tools and techniques. Proven ability to develop system test strategy and methodology full-scale
@@ -43579,7 +44253,7 @@ into TRACKER bug tracking database and verified that Drs/bugs was close/fixed. W
 performance, regression, volume and stress testing. Developed and performed automated test cases using QA Partner 4.0 in Windows NT
 environment. Wrote "The Findings Document" - a summary document of QA Team analyses, findings, suggestions and/or concerns found during
 the testing cycle on the project', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (310, 104, 'Engineering', '../../data\\ENGINEERING\\12488356.pdf', 'SENIOR ENGINEERING PROGRAM MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (310, 102, 'Engineering', '../../data\\ENGINEERING\\12488356.pdf', 'SENIOR ENGINEERING PROGRAM MANAGER
 Summary
 Accomplished senior program management professional with a successful broad-based career defining and guiding the implementation of industry
 best practices, standards, processes, and tools to strengthen organizations and drive competitive growth. Extensive expertise in leading and
@@ -43746,7 +44420,7 @@ OAUG Conference Proceedings : "Redesigning the Order Fulfillment Process in Orde
 Implementation
 Professional Affiliations
 Industry Advisory Board Member, Drucker School of Management - 2015 to Present', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (311, 105, 'Engineering', '../../data\\ENGINEERING\\12518008.pdf', 'ENGINEERING MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (311, 103, 'Engineering', '../../data\\ENGINEERING\\12518008.pdf', 'ENGINEERING MANAGER
 Professional Summary
 Experienced product development Engineer and manager able to collaborate with cross functional team as well as customers and sales to bring
 brand new offerings to new markets. Skilled at managing cross functional team for continuous improvements and meeting project deadlines.
@@ -43924,7 +44598,7 @@ Experienced in using Injection Molding Machine to Create and Test Prototypes.
 Found cheaper and more responsible vendor for MRI related testing.', 'Bachelor of Science : Mechanical Engineering , 05/2013
 Temple University - City , State
 Certifications Management Leadership Certification and Six Sigma Greenbelt certification', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (312, 106, 'Engineering', '../../data\\ENGINEERING\\12748557.pdf', 'REGIONAL ENGINEERING MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (312, 104, 'Engineering', '../../data\\ENGINEERING\\12748557.pdf', 'REGIONAL ENGINEERING MANAGER
 Engineering Director
 Innovative, solution-driven engineering director with over 25 years'' experience deliveringÂ high-profile ITS/SCADA projects for the
 Transportation and Water/Waste Water industries. Â Expertise includes; technical solution architecting and cost estimating, mission critical
@@ -44056,7 +44730,7 @@ Team leadership / c ross-team collaboration
 Engineering cost estimating
 Engineering resource management and forecastingÂ
 Process improvement â€‹â€‹', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (313, 107, 'Engineering', '../../data\\ENGINEERING\\13149176.pdf', 'ENGINEERING TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (313, 105, 'Engineering', '../../data\\ENGINEERING\\13149176.pdf', 'ENGINEERING TECHNICIAN
 Professional Summary
 Seeking a Position of Engineering Technician. SUMMARY of Qualifications. Fifteen years of R&D lab support. Troubleshoot and debug system
 to component level. Ten years of test lab setup and test equipment configuration. Over ten years of quality analyst/Inspections. PC board rework
@@ -44235,7 +44909,7 @@ San Jose State University - City , State
 Electronics Engineering Technology
 A.S : Computer Science Mission College - City , State
 Computer Science', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (314, 108, 'Engineering', '../../data\\ENGINEERING\\13264796.pdf', 'DIRECTOR OF ENGINEERING
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (314, 106, 'Engineering', '../../data\\ENGINEERING\\13264796.pdf', 'DIRECTOR OF ENGINEERING
 Experience
 Director of Engineering , 04/2018 to 05/2018
 Company Name â€“ City , State
@@ -44504,7 +45178,20 @@ Presenting
 Pricing
 Procurement
 Product development
-Bud', 'Net, photo, agile, analyst, Apple, automation, banking, budgets, business plan, closing, com, consulting, content, contracts, credit, encryption,
+Budgets
+Product management
+Product marketing
+Program management
+Quality assurance
+Sales
+E-commerce
+Strategy
+Supply chain
+Venture capital
+Project Scheduling
+Team Structure Management
+Client relationship management
+Project Planning Oversight', 'Net, photo, agile, analyst, Apple, automation, banking, budgets, business plan, closing, com, consulting, content, contracts, credit, encryption,
 client, customer satisfaction, data migration, database administration, driving, e-commerce, features, financial, hiring, imaging, information
 technology, insurance, interpretation, inventory, managing, market planning, marketing, market, marketing and sales, messaging, office, new
 product development, developer, order management, camera, policies, presenting, pricing, procurement, product development, Product manager,
@@ -44632,7 +45319,7 @@ May 2015.
 Distinction Exploratory Data Analysis.
 August 2015.
 Distinction.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (315, 109, 'Engineering', '../../data\\ENGINEERING\\14049846.pdf', 'ENGINEERING INTERN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (315, 107, 'Engineering', '../../data\\ENGINEERING\\14049846.pdf', 'ENGINEERING INTERN
 Summary
 looking for an opportunity as an engineer or related position which offers key participation, team-oriented tasks, immediate challenges and career
 opportunities in a reputed organization which will help me deliver my best and upgrade my skills in engineering and meet the demands of the
@@ -44757,7 +45444,7 @@ Education and Training current
 Master of Science : Engineering Management Oklahoma Christian University ï¼​ City , State Engineering Management GPA: 3.6/4
 2016
 Bachelor of Technology : Chemical Engineering Sastra University, Tanjore Tamil Nadu Chemical Engineering GPA: 6.97/10', '', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (316, 110, 'Engineering', '../../data\\ENGINEERING\\14206561.pdf', 'ENGINEERING TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (316, 108, 'Engineering', '../../data\\ENGINEERING\\14206561.pdf', 'ENGINEERING TECHNICIAN
 Highlights
 PC Operating Systems, Microsoft Office, Outlook, Internet
 Experience
@@ -44850,7 +45537,7 @@ Assisted in implementing production software in a high volume manufacturing envi
 Coordinate product transition and support team.', 'Business Administration 2019 University of Phoenix Texas Business Administration
 Professional Affiliations
 Information Systems Security Association (ISSA)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (317, 111, 'Engineering', '../../data\\ENGINEERING\\14554542.pdf', 'ENGINEERING TECHNICIAN V
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (317, 109, 'Engineering', '../../data\\ENGINEERING\\14554542.pdf', 'ENGINEERING TECHNICIAN V
 Experience
 04/2014 to 07/2015
 Engineering Technician V Company Name ï¼​ City , State
@@ -45115,7 +45802,7 @@ Roshto supported commercial, industrial, and residential electrical installation
 Diploma Norview High School Virginia Apprenticeship Council Electrical Apprenticeship
 Additional Information
 Location: Virginia Beach, VA Security Clearance: TOP SECRET', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (318, 112, 'Engineering', '../../data\\ENGINEERING\\15139979.pdf', 'ENGINEERING ASSISTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (318, 110, 'Engineering', '../../data\\ENGINEERING\\15139979.pdf', 'ENGINEERING ASSISTANT
 Summary
 Knowledgeable Engineering Superintendent well-versed in supporting projects and managing related documentation. First-rate multitasker,
 problem-solver and organizer with methodical and thorough approach. Proficient in power Points and Word Documents.
@@ -45464,7 +46151,7 @@ NAVY COURSE: G-651-0613, : MACHINERY CONTROL SYSTEM NAVY COURSE: G-651-0613, MAC
 SYSTEM ï¼​ City
 02/2019
 NAVY COURSE: J-500-0029, : Marine Maintenance And Ship Repair 3-M System Coordinator/Inspector ï¼​ City', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (319, 113, 'Engineering', '../../data\\ENGINEERING\\15601399.pdf', 'SELF-SUSTAINING ENGINEERING TECHNICIAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (319, 111, 'Engineering', '../../data\\ENGINEERING\\15601399.pdf', 'SELF-SUSTAINING ENGINEERING TECHNICIAN
 Summary
 Versatile Self Sustaining Engineering Fabrication Technician adept at managing projects and resolving issues as well as hardware troubleshooting.
 Highly effective at working independently and as part of a team. Recently worked in Diffusion Furnace while making 300mm Wafers. Previously
@@ -45521,7 +46208,7 @@ Troubleshooting and repair of 100 modems per night on average.
 Helped run other areas of the fabrication line when needed.', '2000
 Bachelor of Science : Electronic Engineering Electronics Engineering Field ITT Techinical Institute ï¼​ City , State GPA: GPA: 8 Electronic
 Engineering Electronics Engineering Field', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (320, 114, 'Finance', '../../data\\FINANCE\\10549585.pdf', 'FINANCE MANAGER/ OPERATIONS MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (320, 112, 'Finance', '../../data\\FINANCE\\10549585.pdf', 'FINANCE MANAGER/ OPERATIONS MANAGER
 Career Overview
 To obtain a full time position in Management Information Systems with emphasis on business analysis where I can demonstrate excellent
 leadership, business and team work skills to produce effective results.
@@ -45663,7 +46350,7 @@ Managed all clients network LAN/WAN hardware including routers, switches, load b
 Network Support Â
 Acted as first point of contact for all major technical issues, including power outages, system failures and disaster recovery.
 Oversaw infrastructure of three offices and acted as support for help-desk technicians and IT Department.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (321, 115, 'Finance', '../../data\\FINANCE\\11441764.pdf', 'FINANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (321, 113, 'Finance', '../../data\\FINANCE\\11441764.pdf', 'FINANCE MANAGER
 Summary
 Pro-active, results-oriented, deadline driven with broad experience in all aspects of accounting and financial management. Solid planning and
 organizational skills in coordinating all aspects of each project from inception through completion. Sees the big picture and plans appropriate
@@ -45747,7 +46434,25 @@ professionals while maximizing their potential and production. Ascertains needs 
 and looks for areas of improvement while following through with development and direction. Clearly and effectively communicates direction,
 commits people to action with timelines, and transforms complex information into easily understood formats.
 Highlights
-Comprehensive experience', 'account reconciliation, accounting, accounts receivable, go live, streamline, ADP, AS400, BA, balance sheet, billing, budget preparation, budget,
+Comprehensive experience in
+Organizational Re-
+Engineering
+Inventory
+Control/Purchasing
+Reporting/Process
+Improvement Financial
+Management/Analysis
+Quarterly/Year-End Audit
+Budget & Forecasting
+Preparation/Administration
+General
+Accounting/HR/Payroll
+Staff Management
+Business Analysis
+GAAP/JSOX/ISO/SOX
+SAP, Dynamics AX, AS400, SBT, IFRS, JD Edwards, MAS90, Great Plains and Quickbooks. Access, SAS
+and SQL. MS Office including Excel 2010, 2007 and 2003. Ulti Pro, ADP, Report Smith, E-Time Heavy,
+Time Saver, EZLabor and Easy Pay.', 'account reconciliation, accounting, accounts receivable, go live, streamline, ADP, AS400, BA, balance sheet, billing, budget preparation, budget,
 Business process, closing, contracts, controller, credit, documentation, financials, financial, financial reporting, forecasting, Great Plains, HR,
 inventory, JD Edwards, logistics, MAS90, meetings, Access, Excel, MS Office, payroll, personnel, policies, processes, procurement, purchasing,
 Quickbooks, sales, SAP, Sarbanes Oxley, SAS, SBT, SQL, Supply Chain, trend, written, annual reports, year-end', 'Finance Manager , 12/2011 to 05/2014 Company Name ï¼​ City , State
@@ -45790,7 +46495,7 @@ Maintained accurate inventory for over 180 line items.
 Helped prepare over $500,000 worth of equipment and supplies from de-commissioned ships for warehouse turn-in.', 'Bachelor of Science : Accounting , 2006 University of Phoenix ï¼​ City , State
 Master of Business Administration : Business , 2010 UNIVERSITY OF PHOENIX ï¼​ City , State
 Also attended Wright State University, Sinclair Community College and Columbus State prior to finishing BA', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (322, 116, 'Finance', '../../data\\FINANCE\\11490673.pdf', 'FINANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (322, 114, 'Finance', '../../data\\FINANCE\\11490673.pdf', 'FINANCE MANAGER
 Executive Profile
 Financial Lead with company oversight, committed to strategic management and quality performance. Partner with organization leaders to
 effectively align with and support key initiatives. Builds and retains high performance teams by hiring, developing and motivating skilled professionals.
@@ -45850,7 +46555,17 @@ Skills
 Accounting, accounts payable, accounts receivable, administrative, A/P, approach, balance sheet, bank reconciliation, budgets, cash flow,
 contracts, customer service, Database, financials, financial, financial statement preparation, preparation of financial statements, FSA, hiring, Human
 Resource Management, human resource, Inventory, inventory levels, inventory control, Director, management reporting, marketing, medical billing,
-Payroll, performance management, policies, pricing, product management, reporting, research, sales, sales reporting, tax, variance analysis', '', 'Accounting, accounts payable, accounts receivable, administrative, A/P, approach, balance sheet, bank reconciliation, budgets, cash flow,
+Payroll, performance management, policies, pricing, product management, reporting, research, sales, sales reporting, tax, variance analysis', 'Financial Lead with company oversight, committed to strategic management and quality performance. Partner with organization leaders to
+effectively align with and support key initiatives. Builds and retains high performance teams by hiring, developing and motivating skilled professionals.
+Skill Highlights
+Business development
+Performance management
+Customer-oriented
+Team Training and Development
+Highly Analytical
+Budgeting and forecasting expertise
+Accounting and Finance Lead
+Leadership/communication skills', 'Accounting, accounts payable, accounts receivable, administrative, A/P, approach, balance sheet, bank reconciliation, budgets, cash flow,
 contracts, customer service, Database, financials, financial, financial statement preparation, preparation of financial statements, FSA, hiring, Human
 Resource Management, human resource, Inventory, inventory levels, inventory control, Director, management reporting, marketing, medical billing,
 Payroll, performance management, policies, pricing, product management, reporting, research, sales, sales reporting, tax, variance analysis', 'Finance Manager
@@ -45893,7 +46608,7 @@ methods; reviewed and created company policies for time and attendance.', 'Bache
 Cum Laude
 Accounting Certificate George Mason University
 Accounting Honors Society 2010', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (323, 117, 'Finance', '../../data\\FINANCE\\11877150.pdf', 'FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (323, 115, 'Finance', '../../data\\FINANCE\\11877150.pdf', 'FINANCE
 Professional Summary
 A versatile, highly motivated, adaptable, and responsible accounting graduate. Possessing highly analytical skill and ability to manage and complete
 projects to the highest standards. Now wish to transition solid background in accounting and finance towards business and property consultancy,
@@ -45978,7 +46693,7 @@ Don Bosco 2 Senior High School - City , State', 'Instansi / Perusahaan : Wall St
 kursus inggris 2. Tahun : 2012 Instansi / Perusahaan : KAP A.K Rahman Posisi : Junior Auditor (Magang) Penghasilan Terakhir : - Job Deskripsi :
 Membantu membuat dan memeriksa laporan keuangan klien 3. Tahun : 2013 - Sekarang Instansi / Perusahaan : PT. Mitra Manunggal Mahardika
 Posisi : Finance Penghasilan Terakhir : Rp 4.500.000', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (324, 118, 'Finance', '../../data\\FINANCE\\12071138.pdf', 'DIRECTOR OF FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (324, 116, 'Finance', '../../data\\FINANCE\\12071138.pdf', 'DIRECTOR OF FINANCE
 Professional Summary
 Progressive financial and managerial experience in not-for-profit and for-profit organizations. Primary financial contact with Board of Directors
 presenting financial and statistical reports to members with varying degrees of financial knowledge. Accountable for financial management of $15 M
@@ -46102,7 +46817,8 @@ not-for-profit health center with responsibility of financial reporting, investm
 Management, staff supervision and coaching, and financial systems. Comprehensive expertise with non-profit organizations with multiple programs
 and cost centers. Experienced with fund accounting and reporting requirements based on government regulations, contractual language, and donor
 restrictions. Preparation and explanation of net assets summarized by unrestricted, temporarily restricted, and permanently restricted. Prepare
-reporting and summarization of ongoing Capital Campaign. Extensive experience with relevant financial software applications including', 'Accounting, computerized accounting, general accounting, accounts payable, accounts receivable, trial balance, banking, benefits, billing, budgets,
+reporting and summarization of ongoing Capital Campaign. Extensive experience with relevant financial software applications including conversions
+and upgrades. Currently working with Blackbaud Financial Edge and Raiser''s Edge.', 'Accounting, computerized accounting, general accounting, accounts payable, accounts receivable, trial balance, banking, benefits, billing, budgets,
 Budget, Cancer, cash management, closing, coaching, contracts, Client, customer service, decision making, documentation, Senior Management,
 filing, Finance, Financial, financial analysis, financial audits, financial statements, Prepare financial statements, funds, general ledger, grants, Human
 Resource, Insurance, interpretation, investments, legal, Director, meetings, mentoring, Excel, Microsoft Office, Office, negotiating, operating
@@ -46113,7 +46829,7 @@ Proficient with various computerized accounting software, Microsoft Office, and 
 Business Administration
 B.S : Office Administration Accounting SOUTHERN NEW HAMPSHIRE UNIVERSITY (New Hampshire College) GPA: with Honors with
 Honors Office Administration Accounting', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (325, 119, 'Finance', '../../data\\FINANCE\\12858898.pdf', 'FINANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (325, 117, 'Finance', '../../data\\FINANCE\\12858898.pdf', 'FINANCE MANAGER
 Summary
 Skilled Finance Leader experienced in budgeting, strategic planning, product analysis, cost allocation, sales plan design and adminstration.
 Highlights
@@ -46232,7 +46948,7 @@ Identified and implemented changes to allocation model for un-invested cash bala
 Managed analysts that provided daily finance support', 'B.S. : Accounting B.S Bemidji State University Bemidji State University May 1992 Accounting B.S. GPA 3.9
 MBA : Finance & Strategic Management Carlson School of Management, University of Minnesota Carlson School of Management, University of
 Minnesota July 2001 MBA - Finance & Strategic Management GPA 3.9', 'CPA RFC', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (326, 120, 'Finance', '../../data\\FINANCE\\14106638.pdf', 'VICE PRESIDENT, CORPORATE FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (326, 118, 'Finance', '../../data\\FINANCE\\14106638.pdf', 'VICE PRESIDENT, CORPORATE FINANCE
 Summary
 AccomplishedÂ healthcareÂ finance executive with a demonstrated ability to deliver mission-critical results in complex and rapidly changing environments.
 Skills
@@ -46407,7 +47123,7 @@ American Institute of Certified Public AccountantsÂ
 Ohio Society of Certified Public Accountants
 Speaker for Healthcare Financial Management Association and American Healthcare Lawyers Association â€‹
 Â â€‹', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (327, 121, 'Finance', '../../data\\FINANCE\\14181049.pdf', 'DIRECTOR FINANCE AND FP&A
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (327, 119, 'Finance', '../../data\\FINANCE\\14181049.pdf', 'DIRECTOR FINANCE AND FP&A
 Executive Profile
 I''m a senior finance leader who thrives when working closely with the executive team in removing obstacles to directing the company beyond
 targeted growth. Early in my career I learned the value of looking beyond how things are currently done in order to continually search for how we
@@ -46547,7 +47263,64 @@ Forecasting, Functional, government, Hyperion, inventory, Lawson, Team Building,
 Access, MS Excel, MS Power Point, MS Word, Minitab, modeling, Monarch, Enterprise, network, networking, Networks, next, Operations
 Management, Oracle, Payroll, People Soft, pricing, process design, processes, Process Improvement, improve product, producing, Project
 Management, Proposal, Quick Books, real-time, reporting, Rf P, Sage, sales, SAP, SQL, Strategic, Sun, Supply Chain, tax laws, Tax,
-Telecommunications, Word Perfect', '', '3 Com, 4 D, Accounting, Acc Pac, Acquisitions, billing system, billing systems, Budget, Business Objects, closing, consulting, contract review,
+Telecommunications, Word Perfect', 'I''m a senior finance leader who thrives when working closely with the executive team in removing obstacles to directing the company beyond
+targeted growth. Early in my career I learned the value of looking beyond how things are currently done in order to continually search for how we
+can do things better. Working in cooperation with senior leadership throughout the organization, my finance teams are built with this focus and the
+results are enhanced analytics and dynamic reporting tools.
+Skill Highlights * Leadership Forecasting
+Accounting
+Financial Analysis / Reporting
+Strategic Financial Planning Operations Management
+Data Development
+Process Improvement
+Functional Integration
+Budget Creation
+Tool / System Development
+Team Building / Management
+System Integrations
+Cost Control
+Mergers & Acquisitions
+Project Management
+Turnarounds/Restructurings
+International Hyperion Essbase * Hyperion Enterprise
+Hyperion Retrieve
+MS Access
+MS Excel
+MS Power Point
+MS Word
+File Maker
+Minitab
+Storm
+Word Perfect
+4 D
+FAS 1000
+Strategen
+Acc Pac
+BOSS
+Business Objects
+Daly & Wolcott
+Great Plain Dynamics
+Lawson
+Mac Pac
+One Globe
+Oracle *
+People Soft
+Quick Books
+SAP
+Magnitude
+TMS n SIMMS
+Monarch
+Razorsight
+Sage
+SQL
+Strategen
+Small business development
+Project management
+Leadership/communication skills
+Business operations organization
+Budgeting expertise
+Self-motivated
+Customer-oriented', '3 Com, 4 D, Accounting, Acc Pac, Acquisitions, billing system, billing systems, Budget, Business Objects, closing, consulting, contract review,
 Controller, cost analysis, Cost Control, costing, clients, data warehouse, database, driving, equity, ERP, Essbase, Excel and VBA, Executive
 management, senior management, File Maker, finance, Financial, Financial Planning, financial reporting, Financial Analysis / Reporting, focus,
 Forecasting, Functional, government, Hyperion, inventory, Lawson, Team Building, Leadership, Legal, regulatory compliance, Mergers, MS
@@ -46623,7 +47396,7 @@ With the focus on closing the books and producing standard reporting, meaningful
 In order to provide the leadership team with better tools I established a database solution mapping each individual billing system to my data
 warehouse with an export into Lawson that allowed for a timely and accurate close in less than five days.', 'Master of Business Administration : Finance , 2016 University of Massachusetts ï¼​ City , State Finance
 Bachelor of Science : Accounting Michigan State University ï¼​ City , State Accounting', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (328, 122, 'Finance', '../../data\\FINANCE\\14408510.pdf', 'FINANCE COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (328, 120, 'Finance', '../../data\\FINANCE\\14408510.pdf', 'FINANCE COORDINATOR
 Highlights
 Microsoft Excel, Word, Access, Power Point, MS Outlook, SAP, Marketing Funds System, Siebel, AS400/Mainframe, Baan ERP, Share Point,
 Salesforce.com, SAP CRM
@@ -46727,7 +47500,7 @@ Participated in the development, testing and documenting of department reconcili
 Oversaw department records retention/retrieval system; received "What Outstanding Work" (WOW) award for initiative and independent effort.
 Received "Shooting Star" award for individual contribution to team''s overall successful accomplishments.', '2016
 Columbia Southern University City , State B.S : Business Administration/Finance Business Administration/Finance', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (329, 123, 'Finance', '../../data\\FINANCE\\14413148.pdf', 'FINANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (329, 121, 'Finance', '../../data\\FINANCE\\14413148.pdf', 'FINANCE MANAGER
 Summary
 Assist an organization that can benefit from my extensive experience in Accounting, training auditing, contract bid preparation and negotiations.
 Over forty years experience in accounting including Controllerships, Accounts Payable, Payroll, Government Contracting, Auditing, Cost
@@ -46858,7 +47631,7 @@ The committee recommendations are now part of the current regulations.
 Developed computer models, using Excel, to provide plant bidding models and corporate home office allocations to plants.
 Train Government Contracting Plant Controllers in contract accounting and bid processing.
 American Legion Fernley Post 37 Adjutant for 3 years.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (330, 124, 'Finance', '../../data\\FINANCE\\14722634.pdf', 'FINANCE DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (330, 122, 'Finance', '../../data\\FINANCE\\14722634.pdf', 'FINANCE DIRECTOR
 Summary
 Remarkably astute and analytical professional with over 12 years of hands-on experience in diverse accounting and finance management, human
 resources, facilities administration, and policy interpretation and implementation. Versatile with excellent ability to work independently or as part of
@@ -46993,7 +47766,7 @@ Review and make adjustments on income tax bill for refund accounts.', '2004
 BA : Business Eastern CT State University Business
 2007
 MST/Taxation University of Hartford', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (331, 125, 'Finance', '../../data\\FINANCE\\15011085.pdf', 'DIRECTOR OF FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (331, 123, 'Finance', '../../data\\FINANCE\\15011085.pdf', 'DIRECTOR OF FINANCE
 Summary
 Senior Finance leader with 12+ years of professional experience heavily focused in financial analytics and accounting practices. Professional
 presence with a solid work ethic and customer service oriented. Team player who is comfortable working with all levels of management and staff.
@@ -47392,7 +48165,7 @@ corporate retirement accounts, reporting on a monthly and daily basis Prepare da
 Bachelor of Science : ACCOUNTING 2003 Southeastern Oklahoma State University , City , State
 Participated in the VITA program
 Accounting Club MemberÂ', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (332, 126, 'Finance', '../../data\\FINANCE\\15224503.pdf', 'SENIOR MANAGER -NATIONAL SALES FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (332, 124, 'Finance', '../../data\\FINANCE\\15224503.pdf', 'SENIOR MANAGER -NATIONAL SALES FINANCE
 Executive Profile
 Ambitious [Job Title] who creates strategic alliances with organization leaders to effectively align with and support key business initiatives. Builds
 and retains high performance teams by hiring, developing and motivating skilled professionals.
@@ -47461,7 +48234,11 @@ Compensation, Sales, Balance Sheet, General Ledger, Audit, National Sales, Accou
 Litigation, Month End Close, Reconciliations, Sales Revenue, Variance Analysis, Gl, Sarbanes Oxley, Sarbanes-oxley (sox), Loans, Adjustments,
 And Sales, Arrangements, Journal, Retail, Retail Marketing, Sales Assistant, Accounting, Account For, Front End, Maintenance, Reconciliation,
 Finance, Security, Sox, Accounts And, Accounts For, Mapping, Payments, Payroll, Payroll Accounting, Posting, Systems Support, Tax
-Accounting, Topo, Web Based, Deferred Compensation, Access, Excel, Ms Word, Powerpoint, Word, Series 6, Series 7', '', 'Compensation, Sales, Balance Sheet, General Ledger, Audit, National Sales, Account Executive, Accountant, Executive Compensation,
+Accounting, Topo, Web Based, Deferred Compensation, Access, Excel, Ms Word, Powerpoint, Word, Series 6, Series 7', 'Ambitious [Job Title] who creates strategic alliances with organization leaders to effectively align with and support key business initiatives. Builds
+and retains high performance teams by hiring, developing and motivating skilled professionals.
+Skill Highlights
+Skills Office software: MS Word, Excel, Power Point, Access Systems: Solar, Business Objects, PC Links General Ledger, FCI, FC Links,
+FEC, CORE, SAM', 'Compensation, Sales, Balance Sheet, General Ledger, Audit, National Sales, Account Executive, Accountant, Executive Compensation,
 Litigation, Month End Close, Reconciliations, Sales Revenue, Variance Analysis, Gl, Sarbanes Oxley, Sarbanes-oxley (sox), Loans, Adjustments,
 And Sales, Arrangements, Journal, Retail, Retail Marketing, Sales Assistant, Accounting, Account For, Front End, Maintenance, Reconciliation,
 Finance, Security, Sox, Accounts And, Accounts For, Mapping, Payments, Payroll, Payroll Accounting, Posting, Systems Support, Tax
@@ -47517,7 +48294,7 @@ Was responsible for calculation of Branch Manager Incentive Compensation (MIC)
 Monthly analysis of general ledger entries to identify and resolve variances from preceding months
 Administered the organization of a complete procedures manual for the department', 'Business Administration : Accounting Pace University ï¼​ City , State , US Pace University, New York, NY Majored in Accounting / GPA: 3.60
 Degree: Business Administration, Dec ''98 Series 7 and Series 63', 'Series 7 and Series 63', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (333, 127, 'Finance', '../../data\\FINANCE\\15717923.pdf', 'SENIOR EXECUTIVE - FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (333, 125, 'Finance', '../../data\\FINANCE\\15717923.pdf', 'SENIOR EXECUTIVE - FINANCE
 Profile
 To be part of an Esteemed Organization, that gives immense opportunities for growth and innovation thereby rendering satisfaction to self and to
 the employer by way of performance. Should see myself in a responsible position with massive work efficiency, which will increase the image of
@@ -47662,7 +48439,7 @@ Developed payment tracker for on time vendor payments to Foreign and Local vendo
 Developed GL guidelines and circulated to regional offices
 Developed Manual BRS format to simplify month end close activities
 Mass Upload JV to simplify month end close activities.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (334, 128, 'Finance', '../../data\\FINANCE\\15792052.pdf', 'STUDENT FINANCE CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (334, 126, 'Finance', '../../data\\FINANCE\\15792052.pdf', 'STUDENT FINANCE CONSULTANT
 Summary
 Customer service oriented individual with relevant work experience and integrity looking to further my career within the accounting industry. Over
 four years of work experience within student finance. Excellent communication skills including listening, telephone, written, and interpersonal. In-
@@ -47765,7 +48542,7 @@ before they become inactive
 Researched and resolved billing problems that had previously been missed.
 ********** audits
 Maintained accurate student account files and spreadsheets without error', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (335, 129, 'Finance', '../../data\\FINANCE\\15891494.pdf', 'FINANCE OFFICER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (335, 127, 'Finance', '../../data\\FINANCE\\15891494.pdf', 'FINANCE OFFICER
 Summary
 Profile: An experience Accountant and data base worker who has developed a strong accounting background working with Data Base and
 Accounting packages for over four years. Team oriented individual with good interpersonal skill and a demonstrated ability to accurately evaluate
@@ -47916,7 +48693,7 @@ Bachelor of Science GPA: Graduated with honors. Honours in Accounting and Financ
 Interests
 Volunteer, Lunch Box . Treasurer/sectary, Student Government and I was also a very active member of student sports club.', 'Achieved 25% cost reduction by eliminating redundant processes.
 Formally recognized for excellence achieved in financial analysis, budgeting and forecasting.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (336, 130, 'Finance', '../../data\\FINANCE\\16426777.pdf', 'FINANCE DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (336, 128, 'Finance', '../../data\\FINANCE\\16426777.pdf', 'FINANCE DIRECTOR
 Experience
 Finance Director 04/2014 to Current Company Name, City, State
 Merck Global Capital Investment Planning & Reporting.
@@ -48071,7 +48848,7 @@ Business GPA: GPA: 3.73 Finance GPA: 3.73
 Bachelor of Arts : Chemistry Mathematics and Chinese May 1998 NEW YORK UNIVERSITY GPA: GPA: 3.93 UNCF - Merck
 Undergraduate Science Research Scholarship for Minorities GPA: 3.93 Chemistry Mathematics and Chinese UNCF - Merck Undergraduate
 Science Research Scholarship for Minorities', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (337, 131, 'Finance', '../../data\\FINANCE\\16449850.pdf', 'DIRECTOR OF FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (337, 129, 'Finance', '../../data\\FINANCE\\16449850.pdf', 'DIRECTOR OF FINANCE
 Professional Summary
 Senior financial hospitality executive with over twenty years of managerial expertise, a proven and passionate leader in achieving goals. Big picture
 focus on the essentials to a profitable operation: Customer Service Excellence, Cultivating Employee Loyalty, and Financial Accountability with the
@@ -48209,7 +48986,7 @@ Properties worked; Marriott Casa Marina, Marriott Sawgrass, Marriott Boca Raton,
 Marriott Portugal, Sheraton Arlington, and several other properties.', 'Associate of Arts : Finance , MDCC - City , State
 Finance
 Florida Atlantic University - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (338, 132, 'Finance', '../../data\\FINANCE\\17392859.pdf', 'DIRECTOR OF FINANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (338, 130, 'Finance', '../../data\\FINANCE\\17392859.pdf', 'DIRECTOR OF FINANCE
 Professional Summary
 Seeking a position in financial/general accounting. Highly meticulous and reliable Finance Director with an outstanding client service record. Adept
 multitasker able to handle a number of cash management projects with professionalism and accuracy. Strong research skills in optimizing current
@@ -48358,7 +49135,7 @@ Utilized a variety of databases and applications to complete shareholders reques
 Results oriented and hands on skill in research and analysis, business operations and customer/client support.', 'MBA : Accounting , 2011 Johnson & Wales University ï¼​ City , State
 Accounting
 Bachelor of Science : Accounting , 2009 Johnson & Wales University ï¼​ City , State Accounting', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (339, 133, 'Finance', '../../data\\FINANCE\\17775916.pdf', 'FINANCE MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (339, 131, 'Finance', '../../data\\FINANCE\\17775916.pdf', 'FINANCE MANAGER
 Professional Summary
 To attain a responsible position in an organization of repute where I can utilize my accounting expertise to prepare fair and accurate financial
 documents for the organization.
@@ -48507,7 +49284,7 @@ A city based garments manufacturing firm.
 Functional Role: Finalisation of Accounts.', 'Bachelor of Commerce : 2004 Calcutta University ï¼​ City', 'Current Organization : RICOH India Limited Current Designation : Branch Finance Manager Current Location : Kochi Software Use :
 Advance ERP Total Experience : 9 years Highest Qualification : Bachelor of Commerce [Honors] Notice Period : 30 Days Date of Birth : 2
 April 1983 Phone : 09643890956 (NCR).', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (340, 134, 'Fitness', '../../data\\FITNESS\\10235429.pdf', 'FITNESS INSTRUCTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (340, 132, 'Fitness', '../../data\\FITNESS\\10235429.pdf', 'FITNESS INSTRUCTOR
 Professional Summary
 Dynamic, entrepreneurial sales executive with a record of achievement and success driving sales growth in highly competitive markets. Solid
 background securing key clients and increasing product distribution to grow market share. Steadfast in building new business, securing customer
@@ -48658,7 +49435,7 @@ Volunteering
 Blue Dog Rescue
 Best Friends Animal Sanctuary', '2013 Certified Bar Method Fitness Instructor, 2012 Certified Power Yoga and Yoga Sculpt Instructor, 2002 Court of Masters Sommelier -Level
 One Certification', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (341, 135, 'Fitness', '../../data\\FITNESS\\10268614.pdf', 'FITNESS ATTENDANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (341, 133, 'Fitness', '../../data\\FITNESS\\10268614.pdf', 'FITNESS ATTENDANT
 Summary
 Highly-motivated Nutritionist with a masters degree seeking a career position in the healthcare field. Goal-oriented and high-achieving professional
 with advanced knowledge and skills in nutrition. Hi ghly effective at evaluating the nutritional needs of both adults and children with various
@@ -48797,7 +49574,7 @@ Conference on Updates in Nutritional Management of Diabetics and Elderly. Jordan
 Today scientific comprehensive health (natural right of every human being). Jordan, February 2012
 Completed Creating Smarter Lunchrooms an online program by Cornell University. USA, January 2014
 Women''s Leadership Conference, University of New Haven. USA, October 2014', 'First Aid/ CPR/AED (current)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (342, 136, 'Fitness', '../../data\\FITNESS\\10333051.pdf', 'RN/RN TEAM LEAD
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (342, 134, 'Fitness', '../../data\\FITNESS\\10333051.pdf', 'RN/RN TEAM LEAD
 Executive Profile
 I am a self-motivated and patient focused nurse executive with a strong history of progressive leadership. I have worked in health care for the past
 12 years and in nursing for the past 9. I have been honored to quickly and progressively build upon my experiences to assume key leadership
@@ -48876,7 +49653,18 @@ Skills
 Asc, Qa, Emr, Pharmacy, Infection Control, Metrics, Risk Management, Satisfaction, Staffing, Trading, Training, Auditing, Instrumentation,
 Integration, Integrator, Medical Device, Operations, Process Improvement, Quality Assurance, Rn, Icu, Critical Care, Icp, Titration, Radiation
 Safety, Rn/, Scheduling, Team Lead, Cpr, Instructor, Million, Increase, Medical Assistant, Cardiac, Cardiovascular, Model-view-presenter, Mvp,
-Healthcare, Acls, Award', '', 'Asc, Qa, Emr, Pharmacy, Infection Control, Metrics, Risk Management, Satisfaction, Staffing, Trading, Training, Auditing, Instrumentation,
+Healthcare, Acls, Award', 'I am a self-motivated and patient focused nurse executive with a strong history of progressive leadership. I have worked in health care for the past
+12 years and in nursing for the past 9. I have been honored to quickly and progressively build upon my experiences to assume key leadership
+positions. These opportunities have allowed me to lead the charge on increased facility efficiency and cost savings, while ensuring stellar quality
+programming with a focus on infection control, risk management, and quality improvement. Under my direction, organizational improvements in
+those areas have flourished while experiencing record surgical volume and implementation of new and innovative procedures. Change under
+pressure has been staple in my professional life, and an aspect that has quickly molded me in to a quick-witted yet careful professional; always
+putting the patient first, but never losing sight of strategic goals to ensure organizational success.
+Skill Highlights
+Core Accomplishments
+CEO Service Award, 2009
+Spree Award Winner, 2011
+Member of Sigma Theta Tau International - Nursing Honor Society', 'Asc, Qa, Emr, Pharmacy, Infection Control, Metrics, Risk Management, Satisfaction, Staffing, Trading, Training, Auditing, Instrumentation,
 Integration, Integrator, Medical Device, Operations, Process Improvement, Quality Assurance, Rn, Icu, Critical Care, Icp, Titration, Radiation
 Safety, Rn/, Scheduling, Team Lead, Cpr, Instructor, Million, Increase, Medical Assistant, Cardiac, Cardiovascular, Model-view-presenter, Mvp,
 Healthcare, Acls, Award', 'RN/RN Team Lead
@@ -48935,7 +49723,7 @@ Certifications/Awards/Memberships â–ª RN licenses in AZ, PA, FL, MO â–ª 
 Service Award, 2009', 'Licensed Healthcare Risk Manager RN CPR BLS ACLS
 Affiliations
 of the enterprise team for improvement, integration, and training of the EMR system', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (343, 137, 'Fitness', '../../data\\FITNESS\\10428916.pdf', 'RECREATION & SPORTS COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (343, 135, 'Fitness', '../../data\\FITNESS\\10428916.pdf', 'RECREATION & SPORTS COORDINATOR
 Objective
 To gain a Recreation Supervisor position so that I can provide support to professional and part time staff. I am looking for the opportunity to guide
 day to day operations of high quality, community recreation facilities. I hope to provide the type of support and management conducive to a healthy
@@ -49011,7 +49799,7 @@ annual program and more than doubled their participation rate from the two previ
 Member of Center for Disease Control and Prevention Wellness on Worksite committee.
 2012-Only intern hired to become part of the Progressive Exercise Specialist team based off of performance, professionalism, and
 dedication shown during internship.', 'Bachelor of Science : Kinesiology 2012 East Carolina University , City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (344, 138, 'Fitness', '../../data\\FITNESS\\10568350.pdf', 'MANAGER / FITNESS INSTRUCTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (344, 136, 'Fitness', '../../data\\FITNESS\\10568350.pdf', 'MANAGER / FITNESS INSTRUCTOR
 Summary
 Enthusiastic customer service/telesales representative with in-depth knowledge of sales, account management and training. Results-driven Manager
 with proven ability to establish rapport with clients. A very hands-on, hardworking, and highly motivated individual. Results-driven specialist who
@@ -49097,7 +49885,21 @@ problems. Talented Customer Service Associate skilled at balancing customer need
 term relationships with customers while achieving all individual sales goals. Customer Service Representative who maintains a high level of
 professionalism, patience and efficiency to minimize customer dissatisfaction and increase customer loyalty.
 Highlights
-Adaptive team pla', 'balance, clients, fast, safety, sales, statistics', 'Manager / Fitness Instructor
+Adaptive team player
+Self-motivated
+Excellent communication skills
+Natural leader
+Thrives under pressure
+Fast learning
+Customer friendly
+Coordination skills
+High customer service standards
+Dedicated to process improvement
+Strong problem solving ability
+Strong organizational skills
+Active listening skills
+Seasoned in conflict resolution
+Energetic work attitude', 'balance, clients, fast, safety, sales, statistics', 'Manager / Fitness Instructor
 January 2014 to Current Company Name ï¼​ City , State
 Cultivated positive relationships with participants by interacting with them during group fitness classes.
 Explained the use of exercise equipment to all participants, prioritizing safety at all times.
@@ -49146,7 +49948,7 @@ Delivered exceptional, friendly and fast service.
 Participated in bar incentives and contests to drive sales and promote the venue.
 Maintained a positive working relationship with fellow staff and management.
 Displayed friendly, outgoing and energetic behavior to create a warm, fun atmosphere for guests.', 'High School Diploma : 2011 Eagan High School ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (345, 139, 'Fitness', '../../data\\FITNESS\\10816645.pdf', 'GROUP FITNESS COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (345, 137, 'Fitness', '../../data\\FITNESS\\10816645.pdf', 'GROUP FITNESS COORDINATOR
 Professional Summary
 Highly motivated, wellness professional seeking an opportunity to advance my career with a position providing the community with programs and
 services to further their knowledge and involvement in wellness activities. Ability to design, develop, implement, and evaluate health and wellness
@@ -49203,7 +50005,7 @@ Advised members on items related to fitness, exercise principles, and wellness.
 Kept and maintained up-to-date trends in the fitness industry.
 Encouraged members to reach their fitness and wellness goals.', 'Bachelor''s Degree : Psychology/ Government December 2011 University of Tampa Psychology/ Government Healthy Lifestyle Principles
 Foundations of Strength and Conditioning CPR, First Aid, AED Les Mills Bodypump Guardian ad Litem volunteer and advocacy training', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (346, 140, 'Fitness', '../../data\\FITNESS\\10969918.pdf', 'CONCIERGE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (346, 138, 'Fitness', '../../data\\FITNESS\\10969918.pdf', 'CONCIERGE
 Professional Summary
 I am looking for a job where I can put my positive strengths and abilities to good use. I am an efficient and cheerful worker who relates to people
 with compassion and understanding. I am discreet, trustworthy, and dedicated. Authorized to work in the US for any employer.
@@ -49338,7 +50140,7 @@ Electronic medical records
 Vital signs and patient monitoring
 Privacy/Hippa regulations
 Patient advocacy and support', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (347, 141, 'Fitness', '../../data\\FITNESS\\11130200.pdf', 'MOVER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (347, 139, 'Fitness', '../../data\\FITNESS\\11130200.pdf', 'MOVER
 Summary
 Extremely motivated and dependable Laborer with years of extensive experience in general maintenance and construction tasks ranging from
 demolitions to site clearing and debris removal. Proven physical stamina with a demonstrated ability to work without supervision. A fun and friendly
@@ -49477,7 +50279,7 @@ Teach and demonstrate use of gymnastic and training equipment such as trampoline
 Evaluate individuals'' abilities, needs, and physical conditions, and develop suitable training programs to meet any special requirements.
 Plan physical education programs to promote development of participants'' physical attributes and social skills.', '2000
 Northern High School High School Diploma', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (348, 142, 'Fitness', '../../data\\FITNESS\\11332602.pdf', 'GENERAL MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (348, 140, 'Fitness', '../../data\\FITNESS\\11332602.pdf', 'GENERAL MANAGER
 Summary
 I have strong marketing, and sales skills, with a Costumer Service background combined with over 10 years of Management. I am skilled with
 learning new concepts, I work well under pressure and communicate ideas clearly, and effectively. Demonstrated achiever of being responsible,
@@ -49632,7 +50434,7 @@ Organized Basketball and Racquetball Leagues throughout North Jersey La Fitness 
 Analyzed all statistics, data, and systems of the sports programs.
 Implemented first company racquetball league program in North Jersey and Staten Island Â· Increased company league programs by 35% in first semester.', 'Johnson C. Smith University 1996 Bachelor Of Science : Business Administration City , State
 Business Administration concentration in Marketing, and Sales Management.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (349, 143, 'Fitness', '../../data\\FITNESS\\11522068.pdf', 'GROUP FITNESS INSTRUCTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (349, 141, 'Fitness', '../../data\\FITNESS\\11522068.pdf', 'GROUP FITNESS INSTRUCTOR
 Executive Summary
 To obtain a position as an experienced Training and Development professional with strong leadership and relationship-building skills.
 Core Qualifications
@@ -49677,7 +50479,7 @@ Served with my sisters in a Christian Sorority serving Texas Tech and our commun
 5/2013 Collin College Full time student taking my basic courses. Texas Tech
 Languages
 Speak and read basic Spanish', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (350, 144, 'Fitness', '../../data\\FITNESS\\12019284.pdf', 'FITNESS DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (350, 142, 'Fitness', '../../data\\FITNESS\\12019284.pdf', 'FITNESS DIRECTOR
 Professional Profile
 Dedicated business professional with over seven years of experience in marketing and customer service in the fitness industry; marketing and selling
 fitness services while providing exceptional customer service.
@@ -49778,7 +50580,7 @@ Student Athletic Advisory Committee at Seattle Pacific University
 Additional Information
 Other Activities *Volunteer for Northwest Association for Blind Athletes *4-year member of Seattle Pacific University Women''s Soccer
 Team *3-year member of Student Athletic Advisory Committee at Seattle Pacific University', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (351, 145, 'Fitness', '../../data\\FITNESS\\12092347.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (351, 143, 'Fitness', '../../data\\FITNESS\\12092347.pdf', 'SALES ASSOCIATE
 Professional Summary
 Jack of all trades who enjoys daily challenges and seeks opportunity to learn and improve skills Skills & Abilities Management Punctual,
 possessing outstanding time management skills Thorough understanding of fundamental retail store operations Sales Regularly assisted customers in
@@ -49836,9 +50638,46 @@ multiple professionalism and communications courses Possesses the ability to cal
 respect Critical thinker with exceptional problem solving abilities Leadership Has received years of quality leadership and learned the best
 techniques to lead and supervise from the best (and worst)leaders Experience general labor/apprentice | obx fire tech | nov2014-dec2014 Listen
 to customer complaint about fire truck Simulate operating conditions that caused the complaint to recreate the complaint issue Diagnose actual
-pro', 'army, automotive, basic, cash register, com, contracts, delivery, electronics, hand tools, mark, weapons, oct, receiving, sales, Troubleshoot', '', 'high school diploma : 2009
+problems and use hand or power tools to alleviate issues Maintain good customer relations Leave work area and trucks in as clean or cleaner
+conditions than found grill closer | mcdonalds | sep2014-nov2014 Use provided equipment to cook meat Prepare sandwiches as ordered Maintain
+cleanliness of work area Close and clean area as the store closed general labor | southern scapes landscaping | jun2014-aug2014 Operate hand
+and power tools in accordance with job requirements Dig and plumb irrigation lines for various irrigation needs as per plans Drive to and from
+jobsite with or without 8 ton trailer with bobcat and/or excavator Read and interpret plans Lay sod, plant, and irrigate various plants in accordance
+with job plans general labor | soundside recycling | mar2014-may2014 Assist in sorting recyclable metals by type, and sort out trash from
+recyclables Maintain clean working areas meat slicer/morning prep. | firehouse subs | dec2013-jan2014 Assist franchisee in preparing the store for
+opening Slice, weigh, and prepare meat as per SOP Assist in assembly and preparation of finished product and present to customer upon
+completion Assist in maintaining store cleanliness Head of training | KKG safety investigations | oct2013-nov2013 Responsible for individual
+training, supervision, and development of 4 operators Responsible for ensuring that standards are met to provide the company with disciplined,
+physically and morally fit operators, competent in core tasks Participate in all fieldwork sales associate | 7eleven | sep2013 Operate cash register
+Experience sales associate
+April 2009 to July 2009 Company Name
+Reference invoice to ensure delivery of all products ordered by manager and mark any discrepancies on invoice Maintain cleanliness of
+store Stock products in flex-space shelving Prepare store for first shift associates receiving associate | walmart | jul2013-sep2013 Assist in
+unloading one or more trucks ranging in size from 1200-1800 pieces per truck Palletize freight by department Maintain accountability of
+ammunition, age restricted products, and electronics merchandise valued over $100 Distribute pallets to respective departments by 2200 for
+night shift to stock Assist night shift in stocking if time permitted Make plastic and cardboard bales if needed Maintain cleanliness and
+orderliness of backroom garden center sales associate | walmart | may2013-jul2013 Stock shelves as needed, depending on backstock
+Operate cash register Maintain health of plants Assemble grills and patio furniture as needed for display Assist customers in locating and
+selecting products overnight maintenance | walmart | mar2013-may2013 Conduct initial sweep of store with 2-3 other maintenance
+associates Clean bathrooms Use scrubbing machine to scrub floors, fix any problems encountered Use propane powered buffer to buff
+floor once dry after scrubbing Strip old floor wax and apply new wax as needed Maintain general cleanliness of store infantryman | u.s.
+army | mar2009-oct2012 Operate and maintain weapons, such as rifles, machine guns, and hand grenades Operate and maintain field
+communications equipment Maintain accountability and positive control of $100,000.00 worth of equipment, weapons, ammunition, etc.
+Participate in basic reconnaissance operations Locate, construct, and camouflage infantry positions and equipment Assess need for and
+direct supporting fire Maintain cleanliness of facility Assist in conducting programs Operate cash register Sell and fill out contracts by hand
+Maintain accountability of accessories (ping-pong paddles, tennis rackets, etc.) by means of sign out/in sheet.
+cashier
+August 2007 to October 2007
+Take orders
+January 2006 to May 2009
+Prepare food Operate cash register Deliver food to customer Wash dishes Cook food student | currituck county high school auto shop | aug
+Obtain working knowledge of automotive electronics, brakes, and fluid systems and tire removal, balancing, rotation, etc.
+in a classroom setting and apply in a hands on setting Troubleshoot vehicle problems by using on board diagnostics (OBDII) port and
+diagnostic scan tool Locate and follow repair instructions based on diagnostic trouble code (DTC) on www.shopkey5.com Use various
+hand tools as needed to repair vehicle issues Maintain record and cost of service on work order sheets Use hydraulic lifts or jacks, jack
+stands and creepers as needed Maintain accountability and functionality of tools.', 'army, automotive, basic, cash register, com, contracts, delivery, electronics, hand tools, mark, weapons, oct, receiving, sales, Troubleshoot', '', 'high school diploma : 2009
 high school : Automotive Skills General Education Automotive Skills General Education Career Management Class', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (352, 146, 'Fitness', '../../data\\FITNESS\\12695799.pdf', 'OPERATIONS ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (352, 144, 'Fitness', '../../data\\FITNESS\\12695799.pdf', 'OPERATIONS ASSOCIATE
 Lisa Phinney
 Skills
 Licensed Notary
@@ -49959,7 +50798,7 @@ comes along with dance fitness.
 Created a following of fitness students who have become lifelong friends and through the power of joy, self -expression and sharing a passion for life.', 'B.S : Multidisciplinary Studies/Environmental Science , 08.1991 Ã¢â‚¬â€œ 05.1994
 University of Massachusetts - City
 Multidisciplinary Studies/Environmental Science Cum Laude', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (353, 147, 'Fitness', '../../data\\FITNESS\\12791244.pdf', 'PHYSICAL THERAPY AIDE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (353, 145, 'Fitness', '../../data\\FITNESS\\12791244.pdf', 'PHYSICAL THERAPY AIDE
 Summary
 Experienced Physical Therapist Technician in patient aide and well-being. A quick learner capable of handling a fast-paced setting as well as
 stressful environment. A facility will benefit from my responsible, reliable and dedicated team player approach as well as the ability to work
@@ -50052,7 +50891,7 @@ Proven ability to answer customer questions and give information regarding the b
 Worked closely with Accounting Department assisting with loss mitigation.', 'Bachelor of Science : Allied Health 2020 Ashworth College
 Certificate Physical Therapy Aide : Allied Health 2017 Norwalk Community College City , State , USA
 Associate of Science : Marketing Management Bronx Community College City , State , USA', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (354, 148, 'Fitness', '../../data\\FITNESS\\12923795.pdf', 'VICE PRESIDENT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (354, 146, 'Fitness', '../../data\\FITNESS\\12923795.pdf', 'VICE PRESIDENT
 Executive Profile
 Manufacturing and Operations Executive proficient in the design and development of Lean operations, processes and systems for an innovative
 LED products manufacturer operating in 28 countries. Expert at constructing new facilities, integrating acquired facilities, installing process
@@ -50154,7 +50993,36 @@ PREMIER, automation, B2 B, budget, Call Center, Consulting, Contracts, CRM, cust
 customer support, delivery, product development, Extranet, Financial, focus, government, International Sales, Latin, Team Building, Leadership,
 marketing, market, 2000, Works, network, Oracle, Oracle CRM, Order Management, philosophy, Presentation Skills, processes, profit, Project
 Leader, quality, quality control, real-time, reporting, sales, Six Sigma, Service Level Agreements, strategic, Strategic planning, technical support,
-Web Portal', '', 'PREMIER, automation, B2 B, budget, Call Center, Consulting, Contracts, CRM, customer satisfaction, customer services, Customer Service,
+Web Portal', 'Manufacturing and Operations Executive proficient in the design and development of Lean operations, processes and systems for an innovative
+LED products manufacturer operating in 28 countries. Expert at constructing new facilities, integrating acquired facilities, installing process
+improvements, building high-performance teams, and automating operations to improve yield. An experienced customer service executive with a
+proven record of establishing and managing first-rate highly profitable service organizations. Competencies Hard Skills Soft Skills
+Strategic/Operational Business & Financial Planning Quick and fervent learner Multi-Site Operations & Productivity Enhancement Team building
+and motivation International Sourcing & Supply Chain Management Foresighted and fastidious tactician Call center implementation &
+Management High emotional IQ and adept communication skills CRM implementations Calm and decisive under pressure Customer,
+Vendor/Supplier & OEM Relationships Technically and environmentally adaptable Budgeting (Operating/Capital) & Pricing Strategies Expert at
+negotiation Costing, Margin/Profit Improvement & ROI Experienced public speaker Extensive technical acumen Rigorous work ethic & acute
+problem-solver Senior staff training and development Thought leadership
+Skill Highlights
+Strategic operational business and financial planning
+Multi-site operations and productivity enhancements
+International sourcing and supply chain management
+Call Center implementation and mangement
+CRM Implementations
+Customer, Vendor/supplier & OEM Relationships
+Budgeting (Operating/capital) & pricing strategies
+Costing,margin/profit Improvements & ROI
+Extensive technical acumen
+Senior staff training and development
+Quick and fervent learner
+Â Team building and motivation
+Foresighted and Fastidious tactician
+Â High emotional IQ and adept communication skills
+Calm and decisive under pressure
+Technically and environmentally adaptable expert at negotiations
+Experienced public speaker
+Rigorous work ethics & acute problem solver
+Thought leadership', 'PREMIER, automation, B2 B, budget, Call Center, Consulting, Contracts, CRM, customer satisfaction, customer services, Customer Service,
 customer support, delivery, product development, Extranet, Financial, focus, government, International Sales, Latin, Team Building, Leadership,
 marketing, market, 2000, Works, network, Oracle, Oracle CRM, Order Management, philosophy, Presentation Skills, processes, profit, Project
 Leader, quality, quality control, real-time, reporting, sales, Six Sigma, Service Level Agreements, strategic, Strategic planning, technical support,
@@ -50220,7 +51088,7 @@ Presentation Skills, Wilson Consulting Group 1998 MBTI, Team Building - Sandra H
 implementation 1994 Project Leader @ A.B. Dick - Automated Dispatch 1993 World Class Lessons in ledership Seminar 1998*2000 BVA,
 advanced training 2001, 2006 Lean Six Sigma Champion Training 2004 Disney Institute, "Loyalty Disney Style" Seminar 1999 Service CRM
 implementation Business Project Leader 2005', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (355, 149, 'Fitness', '../../data\\FITNESS\\12938389.pdf', 'O
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (355, 147, 'Fitness', '../../data\\FITNESS\\12938389.pdf', 'O
 SITE LEAD/PROCESS ANALYST
 Summary
 I am seeking a position that challenges my current experience and grants the opportunity to make a measurable impact. Much of my experience is
@@ -50432,7 +51300,7 @@ Established strong relationships to gain support and effectively achieve results
 Earned excellent marks on performance reviews, with citations for excellence in areas including: work, accuracy and quality, ability to learn
 and master new concepts, positive work ethic, and commitment to providing unsurpassed service.
 All qualities that will further keep Work with fellow colleagues.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (356, 150, 'Fitness', '../../data\\FITNESS\\13037145.pdf', 'SOCIAL MEDIA AGENT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (356, 148, 'Fitness', '../../data\\FITNESS\\13037145.pdf', 'SOCIAL MEDIA AGENT
 Summary
 College prepared student with over three years of front line customer service experience, excellent communication skills, with strong work ethic.
 Looking for opportunities in Corporate America to develop as a career professional where training, coaching, and mentoring opportunities are
@@ -50507,7 +51375,7 @@ Winfreee Academy Charter School
 Berkner High School
 Languages
 Bilingual: Spoken and written form English and Spanish', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (357, 151, 'Fitness', '../../data\\FITNESS\\13367322.pdf', 'BARTENDER (ON CALL)
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (357, 149, 'Fitness', '../../data\\FITNESS\\13367322.pdf', 'BARTENDER (ON CALL)
 Summary
 Hardworking and reliable Fitness Specialist with strong ability in multitasking. Offering Basics, monitoring and providing positive energy. Highly
 organized, proactive and punctual with team-oriented mentality. Enthusiastic individual with superior skills in working in both team-based and
@@ -50728,7 +51596,7 @@ Zumba Personal Dance Instructor
 Vertimax Certified
 Personal Trainer
 ACCU-Check Aviva Blood Glucose Meter System Certified CPR & First Aid Certified', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (358, 152, 'Fitness', '../../data\\FITNESS\\13675377.pdf', 'MEDICAL SCRIBE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (358, 150, 'Fitness', '../../data\\FITNESS\\13675377.pdf', 'MEDICAL SCRIBE
 Professional Summary
 To obtain a position in patient care and research that will allow continual growth of personal knowledge, in a progressive environment that
 facilitates improvements in the physical health and well being of others, and my community.
@@ -50855,7 +51723,7 @@ Built and maintained my own client base of 120+ client sessions and $5000.00+ in
 Integrative Physiology Continuing Education - Metropolitan State University of Denver Skills: Proficient in data base management Entry level
 laboratory skills Blood draws and centrifuge use Electronic Health Records Professional Development: EMT-B License, IV& EKG- Front Range
 Community College, Personal Trainer Certification- American College of Sports Medicine', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (359, 153, 'Fitness', '../../data\\FITNESS\\14107571.pdf', 'FLIGHT ATTENDANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (359, 151, 'Fitness', '../../data\\FITNESS\\14107571.pdf', 'FLIGHT ATTENDANT
 Summary
 Former police detective with 22 years of experience. Specialized in investigating organized crime, money laundering, financial fraud, bank fraud
 and tax fraud cases. Well experienced in traditional and digital/web based investigations.Â SWAT/firearms/driving/defensive tactics trainer experience.
@@ -51026,7 +51894,7 @@ Pioneered the use of asset forfeiture in fraud investigations, seizing over $50,
 Developed a training program that increased liquor enforcement by 500%.Â
 Implemented a GIS case tracking system.Â
 Sustained a 100% conviction rate for assigned fraud cases.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (360, 154, 'Healthcare', '../../data\\HEALTHCARE\\10062724.pdf', 'BEHAVIORAL HEALTHCARE HELP LINE AND PSYCHIATRIC EMERGENCY TEAM SUPERVISOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (360, 152, 'Healthcare', '../../data\\HEALTHCARE\\10062724.pdf', 'BEHAVIORAL HEALTHCARE HELP LINE AND PSYCHIATRIC EMERGENCY TEAM SUPERVISOR
 Professional Overview
 Seasoned Licensed Clinical Social Worker dedicated to providing high quality, compassionate, and effective care in role of psychotherapist, educator, and manager.
 License
@@ -51302,7 +52170,7 @@ Implemented new work processesÂ which increased efficiencies and productivity
 Computer Skills
 Proficient: Epic, Word, Lotus, Interqual, NICE, Symposium, Foundations, AZZ cardfile
 Familiar: Excel, Power Point, Visio', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (361, 155, 'Healthcare', '../../data\\HEALTHCARE\\10076271.pdf', 'CHIEF EXECUTIVE OFFICER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (361, 153, 'Healthcare', '../../data\\HEALTHCARE\\10076271.pdf', 'CHIEF EXECUTIVE OFFICER
 Summary
 Award-winning executive and marketing professional experienced in high-volume, multi-unit, retail and business operations in the pharmaceutical,
 financial services, and food and beverage industries. Demonstrated expertise in brand development, territory management, sales operations,
@@ -51439,7 +52307,7 @@ Launched aggressive growth plans that helped increase customer base from 0 to 15
 Created strategies to develop and expand existing customer sales, which resulted in a 200% sales growth in less than 12 months.
 Grew a targeted newsletter subscriber list from 0 to 6,000 members in just 12 months.
 Earned the Winner''s Circle Award in 2008.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (362, 156, 'Healthcare', '../../data\\HEALTHCARE\\10251432.pdf', 'CORPORATE ADMINISTRATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (362, 154, 'Healthcare', '../../data\\HEALTHCARE\\10251432.pdf', 'CORPORATE ADMINISTRATOR
 Summary
 Successful administrative professional with 15 years of experience.
 Skills
@@ -51579,7 +52447,7 @@ Supervised part-time assistant.', 'Completed 45 credits in various courses inclu
 ï¼​ City , State
 High School Diploma Kuna High School ï¼​ City , State Graduated with Highest Honors 3.97 Received Ambassador Award in Business
 Professionals of America.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (363, 157, 'Healthcare', '../../data\\HEALTHCARE\\10466208.pdf', 'PHARMACEUTICAL SALES REPRESENTATIVE, WOMEN''S HEALTHCARE SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (363, 155, 'Healthcare', '../../data\\HEALTHCARE\\10466208.pdf', 'PHARMACEUTICAL SALES REPRESENTATIVE, WOMEN''S HEALTHCARE SPECIALIST
 Professional Summary
 Skills
 DOCUMENTATION
@@ -51731,7 +52599,7 @@ Visited customer locations to determine needs, set up contracts and provide trai
 Heidelberg College - City , State', 'PROVEN ADMINISTRATIVE HIGHLY ORGANIZED LEADERSHIP SUPPORT EVENT PLANNING ENTREPRENEURIAL
 CONFLICT PUBLIC SPEAKING MINDSET RESOLUTION PROJECT STAFFING TEAM LEADERSHIP REPORTING AND SELF
 DIRECTED DOCUMENTATION OUTBOUND CALLING PROSPECTING', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (364, 158, 'Healthcare', '../../data\\HEALTHCARE\\10480456.pdf', 'DIRECTOR, NEW PRODUCT RESEARCH AND R&D LIAISON, GLOBAL ORAL HEALTHCARE R&D, CONSUMER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (364, 156, 'Healthcare', '../../data\\HEALTHCARE\\10480456.pdf', 'DIRECTOR, NEW PRODUCT RESEARCH AND R&D LIAISON, GLOBAL ORAL HEALTHCARE R&D, CONSUMER
 HEALTHCARE R&D
 Skill Highlights
 SKILL SET * Growth strategies/new opportunity identification and development * Scientific strategy/best practice/scientific excellence
@@ -51973,7 +52841,7 @@ Additional Information
 Buch, Robert M., Gambogi, Robert J, Veleda, Jose L., Dissolvable Tooth Whitening Strip, 20070178055 A1, Smith Kline Beecham, Corp.,
 March 31, 2005. Buch, Robert M., Couzis, Alexander, Wetterer, Sean M., Compositions and Methods for Preventing Dental Stain,
 20060223865 A1, Smith Kline Beecham, Corp., March 10, 2004.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (365, 159, 'Healthcare', '../../data\\HEALTHCARE\\10568183.pdf', 'MEDICAL SUPPORT ASSISTANT (OA) GS-5 STEP 2
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (365, 157, 'Healthcare', '../../data\\HEALTHCARE\\10568183.pdf', 'MEDICAL SUPPORT ASSISTANT (OA) GS-5 STEP 2
 Summary
 Committed and motivated medical support assistant with exceptional customer service and decision making skills. Strong work ethic, professional
 demeanor and great initiative. Proficient at quickly learning new procedures and taking ownership of diverse projects.
@@ -52194,7 +53062,7 @@ Melissa Arnold (*) Â Â Â Â 910-574-3862
 Tomeka Haddock (*)Â Â 252-367-776
 Stephanie Williams(*) 910-489-3215
 (*) indicates professional reference', 'Certificate of Acheivement', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (366, 160, 'Healthcare', '../../data\\HEALTHCARE\\11378657.pdf', 'HEALTHCARE RECRUITER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (366, 158, 'Healthcare', '../../data\\HEALTHCARE\\11378657.pdf', 'HEALTHCARE RECRUITER
 Professional Summary
 A highly ambitious, customer service oriented business professional, with experience in human resources, customer service and administrative
 support. Expertise in client development and needs assessments.
@@ -52307,7 +53175,7 @@ Conducted benefits administration for a total of 1500 benefit-eligible employees
 Responsible for the analysis and processing of all carrier invoices for benefit programs, handled resolution of inquiries regarding
 administration of various benefit plans, and created roll out program for annual Open Enrollment Communications.', 'DIPLOMA : Liberal Arts Saint Leo University , City , State Earned 42 credit hours - general studies Liberal Arts
 Princess Anne High School , City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (367, 161, 'Healthcare', '../../data\\HEALTHCARE\\11605833.pdf', 'NC AIR GUARD HEALTH SERVICES MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (367, 159, 'Healthcare', '../../data\\HEALTHCARE\\11605833.pdf', 'NC AIR GUARD HEALTH SERVICES MANAGER
 Career Overview
 A Highly Skilled and Attentive individual seeking a position that provides opportunities for professional growth and development. Extremely
 motivated individual that will provide prompt, friendly, and professional service at all times. Leadership and Team Building
@@ -52461,7 +53329,7 @@ Applies special handling procedures for controlled medical items, gases, preciou
 refrigerated or frozen materials.
 Provides and maintains medical kits and sets.
 Delivers supplies and equipment to supported activities.', 'University of Mount Olive 2014 Bachelors of Science and Business : Health Care Management', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (368, 162, 'Healthcare', '../../data\\HEALTHCARE\\11653906.pdf', 'SENIOR DIRECTOR OF BUSINESS OPERATIONS - HEALTHCARE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (368, 160, 'Healthcare', '../../data\\HEALTHCARE\\11653906.pdf', 'SENIOR DIRECTOR OF BUSINESS OPERATIONS - HEALTHCARE
 Executive Profile
 Operations Executive with solid experience demonstrating strong leadership to achieve overall corporate goals and objectives in fast-paced, high growth organizations.
 Skill Highlights
@@ -52523,7 +53391,16 @@ MBA : Business Administration University of Massachusetts at Lowell -Manning Sch
 Bachelor of Arts : Sociology University of Massachusetts at Lowell , City , State , USA
 Skills
 Salesforce.com, Oracle, Clarity PPM Tool, Micro Soft Office, various other systems
-Strategic Management - Harvard Extension', '', 'Salesforce.com, Oracle, Clarity PPM Tool, Micro Soft Office, various other systems
+Strategic Management - Harvard Extension', 'Operations Executive with solid experience demonstrating strong leadership to achieve overall corporate goals and objectives in fast-paced, high growth organizations.
+Skill Highlights
+Strategic Planning
+Budgeting
+Multi-million dollar P&L Management
+Operations Management
+Budgeting expertise
+Leadership/communication skills
+Professional Services Management
+Total quality management', 'Salesforce.com, Oracle, Clarity PPM Tool, Micro Soft Office, various other systems
 Strategic Management - Harvard Extension', 'Company Name, City, State Senior Director of Business Operations - Healthcare 09/2011 to Current
 Accountable for managing business operations for Nuance Healthcare a $1 B division of Nuance
 Oversee forecasting for the Healthcare division by tracking pipeline to bookings and revenue, accuracy rate within 5% on a quarterly basis
@@ -52569,7 +53446,7 @@ with country distributors, and collaborated with country counsel on various labo
 Collected $10 M worth of outstanding accounts receivable in Latin America during a difficult economic time in the region
 Selected to the 2001 "Achiever''s Club", Comverse''s highest level of recognition, and received Comverse Sales All Star Award 2002 - 2004', 'MBA : Business Administration University of Massachusetts at Lowell -Manning School of Business , City , State , USA
 Bachelor of Arts : Sociology University of Massachusetts at Lowell , City , State , USA', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (369, 163, 'Healthcare', '../../data\\HEALTHCARE\\11704150.pdf', 'AIRCRAFT HYDRAULICS JOURNYMAN
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (369, 161, 'Healthcare', '../../data\\HEALTHCARE\\11704150.pdf', 'AIRCRAFT HYDRAULICS JOURNYMAN
 Summary
 Seeking a position as a Stocker/Receiver for Paris Walmart Super Center.
 Adaptive team player with the ability to take and follow orders as well as take on other responsibilities as needed.
@@ -52696,7 +53573,7 @@ Examined patient rooms, staff offices, halls and lobbies to determine need for r
 Associate of Science : Kinesiology , 05/2013 Paris Junior College - City
 Graduation of Aircraft Hydraulics Systems : Aircraft Hydraulics Systems 2 A635 , 12/2016 Sheppard Air Force Base - City
 Associate of Applied Science : Mechatronics , Expected in 01/2022 Paris Junior College - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (370, 164, 'Healthcare', '../../data\\HEALTHCARE\\12315079.pdf', 'DIRECTOR OF NATIONAL SALES- US. HEALTHCARE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (370, 162, 'Healthcare', '../../data\\HEALTHCARE\\12315079.pdf', 'DIRECTOR OF NATIONAL SALES- US. HEALTHCARE
 Executive Profile
 SALES AND BUSINESS DEVELOPMENT EXECUTIVE Successful in sales management and business development at the local, regional, and
 national levels. Hands-on manager with highly developed negotiation skills. Provide sound budgeting, financial, and forecasting management.
@@ -52790,7 +53667,41 @@ Challenger Sales Training
 Completed Advanced Sales Training I
 Consultative Sales Training Situational Leadership I
 Behavioral Interviewing Training
-Advanced Lead Generation Techniques and Diversity Training', '', '', 'Director of National Sales- US. Healthcare
+Advanced Lead Generation Techniques and Diversity Training', 'SALES AND BUSINESS DEVELOPMENT EXECUTIVE Successful in sales management and business development at the local, regional, and
+national levels. Hands-on manager with highly developed negotiation skills. Provide sound budgeting, financial, and forecasting management.
+Creative problem solver who drives revenue, resolves conflict, and consistently exceeds sales goals.
+Skill Highlights
+Leadership/communication skills
+Business operations organization
+Client account management
+Budgeting expertise
+Negotiations expert
+Employee relations
+Self-motivated
+Market research and analysis
+Customer-oriented
+Microsoft Family Products
+Customer CRM
+GPO and IDN targeting
+Vendor and Distributor Relations
+National Business Development
+Regional Business Development
+Local Business Development
+Forecasting
+C-Suite Executive Targeting
+Exceed Profit and Sales Goals
+Problem Solver
+Sales Management
+Core Accomplishments
+45% Healthcare division growth in 2014
+500% growth of Healthcare active business pipeline
+Developed, managed, supported sales budget that exceeded 20 million dollars
+Exceeded sales and profit goals by 40% plus in 2010, 2011, 2012, 2013, 2014
+Grew Northeast Region into largest and most profitable territory in company 2012-2014
+Largest territory margin increase in company 2012-2014
+Took territory from 5 % under contract to 65% (highest % in company) 2012-2014
+Highest new account margin in company 2013-2014
+Multi-Year contest winner', '', 'Director of National Sales- US. Healthcare
 March 2014 to Current Company Name ï¼​ City , State
 Responsible for leading and overseeing all national sales functions for healthcare segment consisting of medical gases,
 maintenance/certification services, and durable medical equipment
@@ -52845,7 +53756,7 @@ Completed Advanced Sales Training I
 Consultative Sales Training Situational Leadership I
 Behavioral Interviewing Training
 Advanced Lead Generation Techniques and Diversity Training', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (371, 165, 'Healthcare', '../../data\\HEALTHCARE\\12333703.pdf', 'FACILITY MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (371, 163, 'Healthcare', '../../data\\HEALTHCARE\\12333703.pdf', 'FACILITY MANAGER
 Summary
 Operations * Maintenance * Procurement * Security * Safety
 Experience
@@ -52962,7 +53873,7 @@ and HVAC- Certificate in commercial and residential wiring, motor control and th
 safety including proper use of tools and equipment. Safety standards according to OSHA''s rules and regulations. electrical theory to installation
 and repair of power apparatus, conductors and various types of switching devices. Interpret the National Electrical Code and read Blueprints.
 Establishing the source of energy loss and providing solutions', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (372, 166, 'Healthcare', '../../data\\HEALTHCARE\\12613221.pdf', 'SLEEP TECHNOLOGIST, RPSGT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (372, 164, 'Healthcare', '../../data\\HEALTHCARE\\12613221.pdf', 'SLEEP TECHNOLOGIST, RPSGT
 Summary
 Healthcare professional with more than ten years'' experience seeking an opportunity where I can utilize my skills and knowledge in multiple
 healthcare settings to have a positive impact impact on patient outcomes. Looking for a work setting in health information management and
@@ -53042,7 +53953,7 @@ Bachelor of Science : Healthcare Information Management & Technology 1999 2017 U
 Management & Technology', 'Interscore Relability Testing 92% average (expected 85%).
 Obtained my Registered Polysomnographic Technologist license in 01/2015.
 Graduated Valedictorian Hannibal La-Grange University in 2000.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (373, 167, 'Healthcare', '../../data\\HEALTHCARE\\12938200.pdf', 'EMERGENCY ROOM ADMITTING SPECIALIST/QUALITY ASSURANCE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (373, 165, 'Healthcare', '../../data\\HEALTHCARE\\12938200.pdf', 'EMERGENCY ROOM ADMITTING SPECIALIST/QUALITY ASSURANCE
 Summary
 Driven, highly dedicated to my job and duties (Quality Assurance). I am an active listener, excellent problem solver and Speak,write and read
 Spanish fluently. Â Very professional and articulate. Strongly motivated, and have excellent customer service skills. Fast leaner and excel in
@@ -53173,7 +54084,7 @@ Bachelors Summer 2007 California State University ï¼​ City in the Art of Soc
 Languages
 Bilingual, Speak, Read and Write English and Spanish Fluently.', 'Master''s in Social Work Spring 2016 University of Utah
 Bachelor''s in Social Work Summer 2007 California State University of Los Angeles', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (374, 168, 'Healthcare', '../../data\\HEALTHCARE\\13352113.pdf', 'LICENSED UNITED HEALTHCARE INSURANCE SALES AGENT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (374, 166, 'Healthcare', '../../data\\HEALTHCARE\\13352113.pdf', 'LICENSED UNITED HEALTHCARE INSURANCE SALES AGENT
 Summary
 Talent for identifying customers'' needs and referring appropriate company products and services while demonstrating the ability to gain customers''
 trust providing exceptional follow up, leading to increased sales and repeated referral of business Expertise in resolving escalated customer service
@@ -53291,7 +54202,7 @@ Charlotte, NC: Web/ IVR Certificate (2008) Central Piedmont Community College Ch
 Goodwill Career Development Center ï¼​ City , State
 Computer Office Information Systems Certificate 2001 Central Piedmont Community College ï¼​ City , State
 High School Equivalency Diploma 2001 Central Piedmont Community College ï¼​ City , State 3.75', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (375, 169, 'Healthcare', '../../data\\HEALTHCARE\\13565152.pdf', 'ACCOUNT EXECUTIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (375, 167, 'Healthcare', '../../data\\HEALTHCARE\\13565152.pdf', 'ACCOUNT EXECUTIVE
 Summary
 Extensive experience in healthcare management, leadership, mentor, healthcare sales, customer service; Succeeded in exceeding targets and
 expectations; Earned the reputation of being the most dependable and trusted healthcare care employee Recognize for dedication and
@@ -53549,7 +54460,7 @@ Bachelors of Science : Healthcare Management Letourneau University Dallas ï¼�
 Associates of Science : Healthcare Management Letourneau University Dallas ï¼​ City , State Healthcare Management
 1993
 High School Diploma Ferris High School ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (376, 170, 'Healthcare', '../../data\\HEALTHCARE\\13575312.pdf', 'PROJECT MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (376, 168, 'Healthcare', '../../data\\HEALTHCARE\\13575312.pdf', 'PROJECT MANAGER
 Professional Summary
 Accomplished Information technology professional with 20 years of experience in the software development life cycle (SDLC) with focus on
 Â application analysis and design, application development, systems testing, and systems integration. Â Certified as a Project Management
@@ -53709,7 +54620,7 @@ pricing configuration of healthcare claims.', 'MBA : Finance , University of Geo
 Finance
 BS : Computer Science , Spelman College - City , State
 Computer Science', 'Project Management Professional (PMP) certified by Project Management Institute (PMI)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (377, 171, 'Healthcare', '../../data\\HEALTHCARE\\14062078.pdf', 'REGISTERED NURSE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (377, 169, 'Healthcare', '../../data\\HEALTHCARE\\14062078.pdf', 'REGISTERED NURSE
 Professional Summary
 To provide safe, efficient, and quality care to patients and their families whileÂ adhering to policies and procedures.
 Licenses
@@ -53880,7 +54791,7 @@ A.S : Nursing Columbus Technical College BSN. South University ï¼​ City , St
 Microbiology Lab, and Medical Terminology
 Skill Highlights
 Microsoft Office, Word, Excel, Power Point, and Outlook', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (378, 172, 'Healthcare', '../../data\\HEALTHCARE\\14667957.pdf', 'FIELD BASED NURSE CHART REVIEWER - HEALTHCARE INFORMATICS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (378, 170, 'Healthcare', '../../data\\HEALTHCARE\\14667957.pdf', 'FIELD BASED NURSE CHART REVIEWER - HEALTHCARE INFORMATICS
 Professional Summary
 Seventeen years of nursing experience from multiple different facilities and hospitals: Diverse background in nursing as a Registered Nurse.
 Registered Nurse Manager
@@ -54043,7 +54954,7 @@ Professional Affiliations
 membership in: American Association of Managed Care Nurses, Medicaid Provider Identification Number- 03074935, and National Provider
 Identification Number-1477790020', 'RN Registered Nurse American Association of Managed Care Nurses CAA CAT Registered Nurse Manager Registered Nurse/MDS
 Coordinator', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (379, 173, 'Healthcare', '../../data\\HEALTHCARE\\15499825.pdf', 'HEALTH INFORMATION SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (379, 171, 'Healthcare', '../../data\\HEALTHCARE\\15499825.pdf', 'HEALTH INFORMATION SPECIALIST
 Summary
 Highly efficient, detail oriented HIM Specialist with extensive experience in all types of request relating to release of information and medical record
 management. Dedicated professional skilled in technical and clerical support with strong ability to clearly and professionally communicate with
@@ -54105,7 +55016,8 @@ providers, patients, attorneys and insurance companies. Over 10 years Health Inf
 HIPAA and HITECH compliance; state and federal laws governing release of protected health information in both paper and electronic form.
 *Technologically advanced in utilizing release of information database with advanced proficiency in various EMR database such as Epic, Meditech,
 Medilink, Centricity, Docuware, 3 M Encoder, and Medisoft; various MS Applications. *Reliable analyst to ensuring medical record readiness and
-completeness through management of ICR feature and audit. *Solid leadership in customer service, excellent interpersonal relations and probl', 'billing, charts, clarify, clients, DDS, diagnosis, documentation, focus, government regulations, RHIT, home health, insurance, law, legal, managing,
+completeness through management of ICR feature and audit. *Solid leadership in customer service, excellent interpersonal relations and problem
+solving and can effectively coordinate amongst diverse range of clients hence, promoting optimal outcome.', 'billing, charts, clarify, clients, DDS, diagnosis, documentation, focus, government regulations, RHIT, home health, insurance, law, legal, managing,
 patient privacy, payroll processing, policies, coding, protected health information, quality, quality assurance, requirement, research', 'January 2016 to
 Current
 Company Name, City, State Health Information Specialist
@@ -54147,7 +55059,7 @@ Held direct accountability for 200 active charts; streamlined document availabil
 medical record inefficiency and resolved issues to eradicate future discrepancies which resulted to optimal audit readiness.', '2009
 Spokane Community College City , State Associate of Arts Degree : Health Information Technology Health Information Technology
 Health Records Clerk certification RHIT Pending', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (380, 174, 'Hr', '../../data\\HR\\10399912.pdf', 'HR PERSONNEL ASSISTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (380, 172, 'Hr', '../../data\\HR\\10399912.pdf', 'HR PERSONNEL ASSISTANT
 Summary
 I am a U.S. citizen who is authorized to work in the US for any employer. I have worked 8 years as an Office Clerk, 2 years as a Student
 Intern/Office Assistant, and 4 years as a Contractor. I am applying for the Data Entry Clerk position (Advert ID# 224278 Advert ID# 224278).
@@ -54282,7 +55194,7 @@ Providing clerical support to Office administrators & Managers.', 'Bachelor''s o
 and Law Montclair State University - Upper Montclair, NJ 1998 to 2007
 High School Diploma 1998 Our Lady of Good Counsel High School , City , State , US High School Diploma Our Lady of Good Counsel High
 School - Newark, NJ 1995 to 1998', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (381, 175, 'Hr', '../../data\\HR\\10694288.pdf', 'HR BENEFITS/LEAVE COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (381, 173, 'Hr', '../../data\\HR\\10694288.pdf', 'HR BENEFITS/LEAVE COORDINATOR
 Summary
 13 years of Human Resources experience and 27 years of administrative experience working in various settings *Professional, detail-oriented,
 excellent time-management skills, team player, open and honest communicator, effective at maintaining confidentiality and multi-tasker.
@@ -54430,7 +55342,7 @@ Maintain patient confidentiality.', 'Bluefield College City , State Bachelor of 
 New River Community College Associate of Applied Science : Business Management Business Management
 Activities and Honors
 Society for Human Resources Management (SHRM) Colleges and Universities Professional Association for Human Resources (CUPA-HR)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (382, 176, 'Hr', '../../data\\HR\\11480899.pdf', 'HR MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (382, 174, 'Hr', '../../data\\HR\\11480899.pdf', 'HR MANAGER
 Summary
 Human Resources Manager with practical understanding of business needs. Areas of expertise include conflict management and employee training.
 Human Resources Generalist who promotes a team-oriented and open-door environment that is conducive to a successful staff. Offering
@@ -54605,7 +55517,7 @@ and Prevention * Tax ISO/TS 16949 & ISO 14001 requirements * Leadership Competen
 Law Balance Scorecard and KPI * Happy Work Place Welfare and Salary Structure * Recruitment Compensation and Benefit Corrective
 and Preventive Action By 8 D report and Why Why Analysis Technique Safety Supervisor Level Software Expertise Efficient in MS Office
 package and surfing internet.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (383, 177, 'Hr', '../../data\\HR\\11592605.pdf', 'HR GENERALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (383, 175, 'Hr', '../../data\\HR\\11592605.pdf', 'HR GENERALIST
 Summary
 Dedicated and focused Administrative Assistant who excels at prioritizing, completing multiple tasks simultaneously and following through to
 achieve project goals. Seeking a role of increased responsibility and authority.
@@ -54750,7 +55662,7 @@ to complete a task. This office could not operate in its current modus operandi 
 Proposal, NJIT Thank you for your steadfast style and contributions you make to this office. You are truly valued." 2006 Annual Performance
 Evaluation Notification, NJIT - Overall Performance Level - Commendable/Outstanding. She is calm, humorous, personable and a model of
 patience." 2004 Annual Performance Evaluation, NJIT - Overall Performance Level - Outstanding.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (384, 178, 'Hr', '../../data\\HR\\11698189.pdf', 'HR EMPLOYEE RELATIONS SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (384, 176, 'Hr', '../../data\\HR\\11698189.pdf', 'HR EMPLOYEE RELATIONS SPECIALIST
 Summary
 Dedicated and self-motivated professional with experience in providing outstanding support to business partners. Skillful in tracking details, office
 management, and following-up with internal and external partners to ensure ontime completion of projects. Possesses easily transferable skills such
@@ -54857,7 +55769,7 @@ MBA : Management Davenport University ï¼​ City , State
 Currently enrolled', 'As a Programs Director, created a fundraiser for the United Negro College Fund that raised over $2500.
 Planned networking events forÂ employees
 Held leadership roles within the Order of the Eastern Star where responsible for membership, accounting, and event planning', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (385, 179, 'Hr', '../../data\\HR\\11763983.pdf', 'HR GENERALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (385, 177, 'Hr', '../../data\\HR\\11763983.pdf', 'HR GENERALIST
 Summary
 A people-oriented, results-driven professional with outstanding communication skills. Extensive experience delivering top-quality solutions for high-
 profile clients. Seeking to
@@ -55004,7 +55916,7 @@ Professional Affiliations
 1995-Present Volunteer Judo Instructor
 1998-1999 United States Olympic Training Center Resident-USA Judo', 'Created and implemented Employee Requisition Procedure
 Developed and executed Employee Internship/Co-Op Program', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (386, 180, 'Hr', '../../data\\HR\\11847784.pdf', 'HR SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (386, 178, 'Hr', '../../data\\HR\\11847784.pdf', 'HR SPECIALIST
 Summary
 Possess 15+ years of experience as an HR Classification/Compensation Lead and as an HR Specialist, Recruitment. Managed recruitment efforts
 that included qualifying candidates based on documented knowledge, skills, and abilities to match organizational resource needs. Ensured
@@ -55092,7 +56004,8 @@ competency and skill-based pay programs for a variety of occupations including m
 engineers. Led a statewide review of jobs (18,000 employees) toward determining appropriate FLSA designations (e.g., executive, administrative,
 computer-related, creative). Provided executive and middle management consultation toward acquiring class/levels and roles necessary to
 accomplish departmental goals and objectives that resulted in mission successes. Training and Development: Eight years of experience in training
-and development that', 'Problem-solve and serve as change agent to ensure that HR functions are included in organizational missions. Negotiate budget revisions to include
+and development that included development and delivery of leadership and management/supervisory skills acquisition. Additionally, developed
+policy and procedural training including performance management, interaction management, ADA, and prevention of workplace violence and sexual harassment.', 'Problem-solve and serve as change agent to ensure that HR functions are included in organizational missions. Negotiate budget revisions to include
 HR initiatives. Ensure excellent customer service delivery, provide state/federal and soft-skills management/employee training. Conduct job
 analyses, as well as conduct compensation/job market analysis, and deliver and measure leadership training. Develop, implement, and monitor
 performance management. Develop, implement, and monitor personnel policies and procedures, and manage full-cycle recruitment.', '03/2016 to 08/2017
@@ -55150,7 +56063,7 @@ Developed, delivered and evaluated leadership, technical, administrative, and st
 Served as team lead for the development and delivery of statewide initiatives such as performance-based pay and performance evaluations.Â
 Major contributor toward the research and development of internalÂ Ethical Practice of Trainers/Educational Leaders.', '2007
 Bachelor of Arts : English Lit/Language NC State University ï¼​ City , State , US', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (387, 181, 'Hr', '../../data\\HR\\12786012.pdf', 'HR COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (387, 179, 'Hr', '../../data\\HR\\12786012.pdf', 'HR COORDINATOR
 Summary
 Certified Human Resources Professional with extensive employee relations experience in a full range of functions, as well as success in
 simultaneously managing multiple projects.
@@ -55303,7 +56216,7 @@ Keller Graduate School of Management City , State MBA : Human Resource Managemen
 2002
 University of North Dakota City , State B.A : Communications Communications', 'Revamped the orientation process for all new hires, which was implemented company-wide. Led the Staffing Planning Committee for [Number]
 years. Introduced the first passive Open Enrollment process.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (388, 182, 'Hr', '../../data\\HR\\13376919.pdf', 'REGIONAL HR DEPUTY MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (388, 180, 'Hr', '../../data\\HR\\13376919.pdf', 'REGIONAL HR DEPUTY MANAGER
 Summary
 Competent HR Generalist and seasoned recruiter with an extensive background in HR Operations functions across large corporates. Through my
 progressive career, I have helped build HR operational efficiencies by meeting standards of excellence in end-to-end HR delivery
@@ -55392,7 +56305,7 @@ Responsible for overseeing all activities in regards to opening new corporate ac
 at new and existing corporate customers Accredited for creating and executing sales training classes for all new associates Responsible for
 creating a strong network of local corporate clients Handled branch banking operations effectively.', 'MBA : Human Resources 2007 GHS-IMR Business School India Human Resources
 B.Com 2005 CSJMU, Uttar Pradesh University India', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (389, 183, 'Hr', '../../data\\HR\\13520837.pdf', 'HR REPRESENTATIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (389, 181, 'Hr', '../../data\\HR\\13520837.pdf', 'HR REPRESENTATIVE
 Summary
 A motivated business partner who communicates and collaborates effectively with all levels of personnel by relying on outstanding interpersonal
 and customer service skills, excellent sense of urgency and time management skills and taking pride in delivering high quality work.
@@ -55484,7 +56397,14 @@ Flexible, able to change direction quickly.
 Excellent oral and written communication skills, an ability to multitask, strong attention
 to detail and be able to work autonomously.
 A track record of demonstrating strong work ethic, integrity and personal
-accountability. Organized', 'administrative, administrative support, benefits, C, cash handling, closing, coaching, com, Interpersonal Skills, Council, customer service, Customer
+accountability. Organized with strong time management and problem solving skills,
+intense attention to detail and accuracy, ability to prioritize.
+Human resources audits
+Maintains confidentiality
+People-oriented
+Organized
+Exceptional communicator
+New employee orientations', 'administrative, administrative support, benefits, C, cash handling, closing, coaching, com, Interpersonal Skills, Council, customer service, Customer
 Service Skills, data entry, Decision Making, Employee Relations, hiring, HRIS, Human Resources, HR, Interpretation, Labor Relations,
 leadership, merchandising, Lisa, negotiations, organizational, payroll, performance reviews, personnel, policies, Problem Resolution, reconciling,
 recruiting, reporting, sales, sound, employee development', 'HR Representative , 11/2008 ï¼​ 02/2016 Company Name ï¼​ City , State
@@ -55538,7 +56458,7 @@ Resolved internal and external customer problems and made smart decisions that d
 Responsible for reconciling timecards, employee development, performance reviews, and maintaining confidentiality
 08/1998 ï¼​ 02/2000 Company Name ï¼​ City , State', 'Colorado State University ï¼​ City , State Bachelor of Science Apparel and Merchandising Apparel and Merchandising
 Human Resources Certificate Mountain States Employers Council', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (390, 184, 'Hr', '../../data\\HR\\13879043.pdf', 'HR CONSULTING
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (390, 182, 'Hr', '../../data\\HR\\13879043.pdf', 'HR CONSULTING
 Summary
 7+ years of Experience as a HR Partner with experience in all the facets of the Human Resource Function. Extensive background in HR generalist
 affairs, including experience in Recruiting, On boarding, Performance Management, employee retention, staff development, mediation, conflict
@@ -55615,7 +56535,7 @@ win compromises, developing teambuilding programs, corporate policies. Experienc
 Sourcing , Interviewing, Placement and On boarding. HR Generalist Responsibilities Benefits/Payroll Administration HR Policies & Procedures
 Performance Management Data analysis and Reporting Staff Retention Employee Relations HR Programs Recruitment/Hiring Employee
 Counseling Administration Conflict Resolution Orientation & On-Boarding SAP HR - Database access Training & Development Organizational
-Development Compensation and', 'benefits, budget, client, delivery, hiring, Human Resource, HR, Insurance, Leadership, People Management, Managerial, Managing, market,
+Development Compensation and Benefits', 'benefits, budget, client, delivery, hiring, Human Resource, HR, Insurance, Leadership, People Management, Managerial, Managing, market,
 Mentor, MIS, negotiations, networking, Internet research, optimization, Organization Development, payroll, Performance Management,
 philosophy, policies, processes, promotion, Recruitment, recruiting, seminars, strategic
 Additional Information
@@ -55671,7 +56591,7 @@ Bachelors of Commerce BNDC University : Karnataka University
 Masters of Business Administration
 Interests
 ACADEMIC CREDENTIALS COMPUTERS CORE COMPETENCIES AND AWARDS', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (391, 185, 'Hr', '../../data\\HR\\14225422.pdf', 'HR MANAGER/GENERALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (391, 183, 'Hr', '../../data\\HR\\14225422.pdf', 'HR MANAGER/GENERALIST
 Summary
 Background of progressively responsible Human Resources experience in union and non-union, ISO and FDA regulated manufacturing
 environments Knowledge of State and Federal employment laws Ability to work effectively with all levels of employees and management,
@@ -55772,7 +56692,7 @@ management, Corporate HR and Labor Attorney LOA and COBRA management administrat
 employee relations, recruitment, facility management.', 'Master of Science Degree : Industrial Psychology Continuing education and training on an on-going basis in employment related subjects, OSHA
 10-hour training, Wellness Program coordination, PHR designation Industrial Psychology
 Bachelor of Arts Degree : Psychology Psychology', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (392, 186, 'Hr', '../../data\\HR\\14256329.pdf', 'HR SERVICES REPRESENTATIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (392, 184, 'Hr', '../../data\\HR\\14256329.pdf', 'HR SERVICES REPRESENTATIVE
 Summary
 A multi-skilled professional with good all-round HR imformatory skills. Very capable with an ability deal with all the recruitment/processing needs
 of the organization. Experienced in providing timely and up to date HR advice to both managers and employees whilst at the same time making
@@ -55896,7 +56816,7 @@ Select One : General St. Jago High School ï¼​ City , State , Jamaica
 7 CSEC (CXC) Subjects
 Professional Affiliations
 The Jamaica National Building Society - Teller/Customer Service Representative', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (393, 187, 'Hr', '../../data\\HR\\14640322.pdf', 'HR GENERALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (393, 185, 'Hr', '../../data\\HR\\14640322.pdf', 'HR GENERALIST
 Summary
 HR Generalist with 8 yrs of professional experience in employee recruitment, orientation, engagement ,assimilation and termination procedures .
 Highlights â€¢Employee recruitment â€¢Talent Acquisition â€¢New employee orientations
@@ -56033,7 +56953,7 @@ Marital Status : Married with 1 Kid
 Nationality : Indian
 Hobbies : Listening to music, Dancing, & Dairy Writing,
 Additional Information', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (394, 188, 'Hr', '../../data\\HR\\14886205.pdf', 'HR MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (394, 186, 'Hr', '../../data\\HR\\14886205.pdf', 'HR MANAGER
 Summary
 HR Coordinator motivated to create collaborative team environment by using background in the organization of employee training and team building events.
 Key Skills
@@ -56149,7 +57069,7 @@ hiking/camping/going to the beach with our dog
 Additional Information
 INTERESTS Some of my interests: painting on canvas, drawing, arts/crafts for home decor, cooking foreign meals, writing short stories,
 and hiking/camping/going to the beach with our dog', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (395, 189, 'Hr', '../../data\\HR\\15041689.pdf', 'HR DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (395, 187, 'Hr', '../../data\\HR\\15041689.pdf', 'HR DIRECTOR
 Summary
 HR Professional offering over 15 years of progressive experience including extensive practice in multi-unit businesses (in and out of state
 locations). Highly driven to achieve company goals. Expertise in developing and implementing HR plans and procedures smoothly and with little
@@ -56270,7 +57190,7 @@ OSHA reporting Conduct annual anti-harassment and safety training.', 'Newberry C
 City , State Mathematics Computer Science Mathematics Computer Science
 Batesburg Leesville High School
 City , State H.S. Diploma GPA: GPA: 3.5 Honor graduate GPA: 3.5 Honor graduate', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (396, 190, 'Hr', '../../data\\HR\\15375009.pdf', 'HR MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (396, 188, 'Hr', '../../data\\HR\\15375009.pdf', 'HR MANAGER
 Professional Summary
 Senior HR professional with a continuous improvement approach to building and supporting organizations. Driven HR Manager bringing an
 innovative approach to human resource management while creating a team-driven environment that fosters room for development and growth.
@@ -56483,7 +57403,7 @@ University of Phoenix - City , State
 MBA : Human Resources , 2018
 Notre Dame de Namur University - City , State
 Human Resources', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (397, 191, 'Hr', '../../data\\HR\\15575117.pdf', 'HR SENIOR SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (397, 189, 'Hr', '../../data\\HR\\15575117.pdf', 'HR SENIOR SPECIALIST
 Career Overview
 Dedicated Service Representative Professional motivated to maintain customer satisfaction and contribute to company success.
 Core Strengths
@@ -56689,7 +57609,7 @@ Fluent in English, and Spanish', 'Customer Assistance Â
 Worked with company systems such as Live Support and diligently completed all assigned tasks, working overtime as needed.
 Customer Service Â
 Researched, calmed and rapidly resolved client conflicts to prevent loss of key accounts.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (398, 192, 'Hr', '../../data\\HR\\15576950.pdf', 'HR SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (398, 190, 'Hr', '../../data\\HR\\15576950.pdf', 'HR SPECIALIST
 Highlights
 Staffing and recruiting professional
 Interviewing expertise
@@ -56842,7 +57762,7 @@ Maintained inventory of office supplies.
 Coordinated CPR classes for customers and staff.
 Assisted staff in coordinating meetings and telephone conferences.', '2001
 Diploma Rogers High School', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (399, 193, 'Hr', '../../data\\HR\\16852973.pdf', 'HR ADMINISTRATOR/MARKETING ASSOCIATE HR ADMINISTRATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (399, 191, 'Hr', '../../data\\HR\\16852973.pdf', 'HR ADMINISTRATOR/MARKETING ASSOCIATE HR ADMINISTRATOR
 Summary
 Dedicated Customer Service Manager with 15+ years of experience in Hospitality and Customer Service Management.
 Respected builder and leader of customer-focused teams; strives to instill a shared, enthusiastic commitment to customer service.
@@ -56975,7 +57895,7 @@ Accomplished Trainer for cross server hospitality systems such as Hilton On Q , 
 System (ORS) , Holidex
 Completed courses and seminars in customer service, sales strategies, inventory control, loss prevention, safety, time management,
 leadership and performance assessment.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (400, 194, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10089434.pdf', 'INFORMATION TECHNOLOGY TECHNICIAN I
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (400, 192, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10089434.pdf', 'INFORMATION TECHNOLOGY TECHNICIAN I
 Summary
 Versatile Systems Administrator possessing superior troubleshooting skills for networking issues, end user problems, and network security.
 Experienced in server management, systems analysis, and offering in-depth understanding of IT infrastructure areas. Detail-oriented, independent,
@@ -57178,7 +58098,7 @@ Microsoft Office XP, 2003, and 2007.', 'Bachelor of Science , Information Techno
 Coursework in Programming, Web Administration, Network Administration, Database Administration, and Systems Administration â€“
 Linux
 Programming Languages: C++, Java, JSP, HTML, CSS, VB.Net, Bash, T-SQL', 'Comp TIA Network+ - 2014', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (401, 195, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10247517.pdf', 'INFORMATION TECHNOLOGY MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (401, 193, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10247517.pdf', 'INFORMATION TECHNOLOGY MANAGER
 Professional Summary
 Possesses an extensive background in Information Technology Management, along with a Masters of Science degree and multiple certifications.
 Excels in planning, implementing, and evaluating the systems, infrastructure, and staffing necessary to execute complex initiatives and meet
@@ -57315,7 +58235,7 @@ Drafter Company Name ï¼​ City , State', 'Master of Science : Leadership Wald
 Master of Science : Information Systems Management Project Management Walden University ï¼​ City , State
 2013
 Bachelor of Science : Information Systems Management Mechanical Engineering Walden University ï¼​ City , State', 'MCP, Â Comp TIA Network+, Comp TIA A+', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (402, 196, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10265057.pdf', 'WORKING RF SYSTEMS ENGINEER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (402, 194, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10265057.pdf', 'WORKING RF SYSTEMS ENGINEER
 Qualifications
 Microsoft office/Office for Mac, pages, numbers, keynote Â· RF/Microwave software: Ansoft Designer, AWR Microwave Office. Â· RF test
 instruments: Spectrum analyzer, Vector Network/Signal Analyzer, Logic Analyzer, etc. Â· Programming language: C/C++, Python, Java,
@@ -57404,7 +58324,7 @@ B.S : Electrical and Computer Engineering , Dec. 2011 GPA: GPA: 3.2/4.0 Electric
 and Evaluation of a 5.8 GHz Laptop-Based Radar System Publication Â· Innovative laptop radar design to operate in both FMCW and CW
 mode Â· Doppler shift (DTI), ranging (RTI), and SAR measurement capability Â· Operate in ISM frequency band with +13d Bm transmitting
 power Â· Data acquisition and signal processing using Matlab', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (403, 197, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10553553.pdf', 'INFORMATION TECHNOLOGY MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (403, 195, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10553553.pdf', 'INFORMATION TECHNOLOGY MANAGER
 Summary
 Dedicated IT Manager well-versed in analyzing and mitigating risk and finding cost-effective solutions. Excels at boosting performance and
 productivity by establishing realistic goals and enforcing deadlines.
@@ -57551,7 +58471,7 @@ Troubleshot general Novell Client issues.
 Installed and maintained peripherals.
 Built images to be used with Symantec Ghost.', 'Master of Science : Business Information Technology , 2018 De Paul University ï¼​ City , State
 Bachelor of Science : Network and Communications Management , 2009 De Vry University ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (404, 198, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10641230.pdf', 'IT MANAGEMENT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (404, 196, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10641230.pdf', 'IT MANAGEMENT
 Career Overview
 Detail-oriented professional with extensive Information Technology experience in hardware and software troubleshooting/management. With
 additional experience in networking, task automation, server technologies, digital graphic design, client + server side programming technologies and
@@ -57634,7 +58554,7 @@ Troubleshot medical technology including X-ray machines and medical industry cli
 Information Technology project management experience.
 Programmed a cloud storage website allowing a client access to a shared home network drive from any browser, anywhere.
 It includes security login, uploading and downloading.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (405, 199, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10839851.pdf', 'INFORMATION TECHNOLOGY SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (405, 197, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10839851.pdf', 'INFORMATION TECHNOLOGY SPECIALIST
 Professional Summary
 Seeking to obtain a career in Information Assurance with a focus on Cyber Network Defense
 Seeking to obtain a career in Information Assurance with a focus on Cyber Network Defense
@@ -57815,7 +58735,7 @@ Provided customer support for email, hosted applications, desktop, system and ne
 Agreements.
 Languages
 Fluent in Dari, Dutch, and Russian', '', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (406, 200, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10840430.pdf', 'BRANCH CHIEF INFORMATION TECHNOLOGY SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (406, 198, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\10840430.pdf', 'BRANCH CHIEF INFORMATION TECHNOLOGY SPECIALIST
 Profile
 Motivated Information Technology and Cyber security professional with outstanding managerial and customer service skills, excellent written and
 verbal communication skills, seeks challenging position with an organization where I can make a big impact with my multifaceted experience,
@@ -57904,7 +58824,12 @@ and highly-motivated mentor with proven dedication to self and subordinate impro
 techniques to determine requirements for information technology equipment and systems. Excellent knowledge and ability to negotiate in financial
 control, budget systems, and security management. Working knowledge of budget and cost analysis processes. *Thorough knowledge of Office of
 Management and Budget (OMB), Department of Defense (Do D) and U.S. Air Force regulations, principles and practices pertaining to logistics,
-INFOSEC/NETOPS, insta', 'Air Force, art, Agency, Basic, budget, oral, hardware, Computer Operations, configuration management, cost analysis, data management, Dec,
+INFOSEC/NETOPS, installations, and mission support functions. Exceptional ability to recognize and analyze problems, conduct research;
+summarize results, and make appropriate recommendations. Recognized expert in Do D planning, programming, budgeting and execution (PPBE)
+process. *Expertise in capability planning in IT environment, enterprise technical/Certification and Accreditation standards, CCRI processes,
+procedures, security practices, and IA vulnerability tools i.e. ACAS. *Ability to apply knowledge of current security tools, and techniques to
+execute Authority to Connect and Authority to Operate network systems. *Thorough knowledge of SCADA systems operations, security,
+safeguards and protection *SECURITY CLEARANCE: TOP SECRET (SCI) w/CI Polygraph', 'Air Force, art, Agency, Basic, budget, oral, hardware, Computer Operations, configuration management, cost analysis, data management, Dec,
 direction, documentation, edge, feasibility studies, forms, functional, Government, Information Systems, information technology, computer support,
 meetings, Office, enterprise, Network, personnel, policies, problem resolution, procurement, project management, publications, publication,
 software development, strategic, systems administration, systems analysis, systems development, systems integration, training manuals, trend, written', '07/2014 to Current
@@ -57967,7 +58892,7 @@ Sep-2010
 Sep-2009
 *DISA Action Officers Course 10-Dec-2009 *DOD Information Assurance Boot Camp 06-Nov-2009 *Computer Network Defense/Computer
 Network Threat 24-', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (407, 201, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11580408.pdf', 'INFORMATION TECHNOLOGY COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (407, 199, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11580408.pdf', 'INFORMATION TECHNOLOGY COORDINATOR
 Career Overview
 AVP / Director of Information Technology I Network Engineer with extensive experience.
 Strengths - excellent communication skills, strong problem solving skills. Sound work ethic, capable of working independently or in a team
@@ -58079,7 +59004,7 @@ City , State Business Management
 Bachelor of Arts Business Management', 'Microsoft Certified Professional -NT 4 0 Microsoft Certified Professional - Windows XP / Windows 2003 Microsoft Certified Professional -
 Internet Comp-TA A+ Certified Microsoft Certified System Administrator (eligible should be completed by end of 2006) Microsoft SQL 2000
 Design and Administration Microsoft Access I, II, III Navision Report Writer I & II', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (408, 202, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11584809.pdf', 'MANAGER - INFORMATION TECHNOLOGY AND BUILDING AUTOMATION SYSTEMS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (408, 200, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11584809.pdf', 'MANAGER - INFORMATION TECHNOLOGY AND BUILDING AUTOMATION SYSTEMS
 Summary
 Manager - InformationÂ Technology and Building Automation Systems
 Versatile Building Automation System engineer and IT professional with vast knowledge of Enterprise Project Lifecycle methodology
@@ -58249,7 +59174,7 @@ Comp TIA
 Security+
 Network+
 A+', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (409, 203, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11957080.pdf', 'LEAD INFORMATION TECHNOLOGY SUPPORT SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (409, 201, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\11957080.pdf', 'LEAD INFORMATION TECHNOLOGY SUPPORT SPECIALIST
 Work History
 Company Name
 Company Name
@@ -58460,7 +59385,7 @@ Activities and Honors
 Driven Information Technology Professional with broad technical skill set. Known for ability to multi-task and juggle multiple projects
 simultaneously, meeting all deadlines. Excels in customer support, training, and documentation. Most noted for customer service and teamwork
 expertise. Thrives in environments that continually embraces new technologies.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (410, 204, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12045067.pdf', 'INFORMATION TECHNOLOGY (IT) SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (410, 202, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12045067.pdf', 'INFORMATION TECHNOLOGY (IT) SPECIALIST
 Experience
 Information Technology (IT) Specialist
 January 2012 Company Name
@@ -58643,7 +59568,7 @@ related telecommunications equipment and infrastructure.', 'Bachelor of Science 
 Associates of Applied Science (AAS) : Electronic Technology , 2003 Cochise College GPA: GPA: 4.0 Phi Theta Kappa Electronic Technology
 GPA: 4.0 Phi Theta Kappa
 Associate : General Studies , 2001 AGS Cochise College GPA: GPA: 4.0 Phi Theta Kappa General Studies GPA: 4.0 Phi Theta Kappa', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (411, 205, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12334140.pdf', 'PRODUCTION ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (411, 203, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12334140.pdf', 'PRODUCTION ASSOCIATE
 Summary
 Conclude your application letter by thanking the employer for considering you for the position. Include information on how you will follow-up.
 Complimentary Close Sincerely, Signature The following application letter template lists the information you need to include in the letter you submit
@@ -58769,7 +59694,31 @@ with your resume when applying for a job. Use the application template as a guid
 resume. Then review letter samples to get ideas on writing your own application letters. The first paragraph of your job application letter should
 include information on why you are writing. Mention the job you are applying for and where you found the position. If you have a contact at the
 company, include it. Middle Paragraphs: The next section of your cover letter should describe what you have to offer the company. Make strong
-connections between your abilities and the requirements listed in the job posting. Mention specifically how your skills and expe', 'Accounting, administrative, agency, Basic Programming, Bookkeeping, Business Communication, hardware, Finance, fundraising, help desk
+connections between your abilities and the requirements listed in the job posting. Mention specifically how your skills and experience match the
+job. Expand on the information in your resume, don''t just repeat it. Try to support each statement you make with a piece of evidence. Use several
+shorter paragraphs or bullets rather than one large block of text. Conclude your application letter by thanking the employer for considering you for
+the position. Include information on how you will follow-up. State that you will do so and indicate when (one week''s time is typical). You may
+want to reduce the time between sending out your resume and follow up if you fax or email it. View More Free Email Newsletter Top of Form Let
+About.com send you the latest from our Job Searching Expert. You can opt-out at any time. Please refer to our privacy policy for contact
+information. Bottom of Form Copyright Alison Doyle This cover letter takes the position requirements and matches the applicant''s skills to those
+requirements. This way, the resume reviewer can see the candidate''s relevant qualifications at a glance. Sample Targeted Cover Letter Your Name
+Your Address Your City, State, Zip Code Your Phone Number Your Email Date Name Title Organization Address City, State, Zip Code Dear
+Mr./Ms. Last Name: I am interested in the Coordinator position advertised on XYZ. My resume is enclosed for your review. Given my related
+experience and excellent capabilities I would appreciate your consideration for this job opening. My skills are an ideal match for this position. Your
+Requirements: Responsible for evening operations in Student Center and other facilities, including managing registration, solving customer
+problems, dealing with risk management and emergencies, enforcement of department policies. Assists with hiring, training, and management of
+staff. Coordinate statistics and inventory. Experience in the supervision of student staff and strong interpersonal skills are also preferred. Valid
+Minnesota driver''s license with good driving record. Ability to travel to different sites required. Experience in collegiate programming and
+management. My Qualifications: Register students for courses, design and manage program software, solve customer problems, enforce
+department policies, and serve as a contact for students, faculty, and staff. Hiring, training, scheduling and management of staff, managing supply
+inventory, and ordering. Minnesota driver''s license with NTSA defensive driving certification. Extensive experience in collegiate programming and
+management. Excellent interpersonal and communication skills. I appreciate your taking the time to review my credentials and experience. Again,
+thank you for your consideration. Sincerely, Your Signature (for hard copy letter) Your Typed Name INFORMATION TECHNOLOGY
+TECHNICIAN TIER ONE TECHNICAL SUPPORT - HELP DESK TECHNICIAN Experienced and knowledgeable Information Technology
+Professional seeking to contribute training and acquired skills within a Tier One Technical Support and/or Help Desk role. Work well
+independently, or in a group setting providing all facets of computer support such as troubleshooting, installations, and maintenance. In-depth
+knowledge and understanding of numerous software packages and operating systems. Skilled in providing Customer and End-User Help Desk
+Support. Easily identify and resolve technical issues and concerns. Excellent communication and presentation capabilities.', 'Accounting, administrative, agency, Basic Programming, Bookkeeping, Business Communication, hardware, Finance, fundraising, help desk
 support, help desk, IBM, IBM Software, inventory, letters, Lotus 2.1, Macros, Marketing, mail, Office, MS-DOS, Network, networking, Novell
 Netware, Novell Netware 4.11, page, Programming, express, Shorthand, technical training, telephone, troubleshooting, Typing, Word Processing,
 Word Perfect 5.1, written
@@ -58850,7 +59799,7 @@ You may need to try a couple of different sizes to make sure that your cover let
 How to Select a Cover Letter Font Select a font from the list at the top of your document before you start writing your letter, or: Type your cover letter.
 Highlight the content of your letter.
 Either select the font from the pop-up window or select the font from the list at the top of the document.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (412, 206, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12635195.pdf', 'Objective
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (412, 204, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12635195.pdf', 'Objective
 To obtain a position in the information technology, personnel development, or computer science field to help manage, develop, and support projects and individuals.
 ADJUNCT INFORMATION TECHNOLOGY INSTRUCTOR
 Experience
@@ -58921,7 +59870,7 @@ Microsoft Technology Associate - Network Fundamentals
 Microsoft Technology Associate -Â Windows O.S. Fundamentals
 Microsoft Technology Associate - Software DevelopmentÂ
 Microsoft Technology Associate - Web Development', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (413, 1, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12763627.pdf', 'ASP.NET WEB DEVELOPER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (413, 205, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\12763627.pdf', 'ASP.NET WEB DEVELOPER
 Accomplishments
 Won Associate of the Month award at CYIENT
 Member of the team which won the Team of the Month award for projects such as DEBTS and e RFA
@@ -59039,7 +59988,7 @@ University, Andhra Pradesh, India Bachelor of Technology in Computer Science and
 Professional Affiliations
 Source Controls: Team Foundation Sever, Git Hub, Visual Source Safe of the team which won the Team of the Month award for projects such as
 DEBTS and e RFA', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (414, 2, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13385306.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (414, 206, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13385306.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
 Profile
 SUMMAR Y Applying technology and workflow solutions to business challenges is exciting for me because I love to learn and apply new lessons
 and approaches to support and enhance the organization to achieve its goals and mission.
@@ -59158,7 +60107,7 @@ I also helped out as a.
 banyan administrator to our Network Administrator.', 'Master of Business Administration (MBA) : Management Information Systems, General Delta Mu Delta Suffolk University - Sawyer School of
 Management City Management Information Systems, General Delta Mu Delta
 Bachelor of Arts (BA) : Economics GPA: Omicron Delta Epsilon Economics Omicron Delta Epsilon', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (415, 3, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13405733.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (415, 207, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13405733.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
 Professional Summary
 Dynamic Information Technology Manager with 13 years of IT leadership experience including oversight of infrastructure, application support and
 cybersecurity services. Dedicated to customer satisfaction with focused delivery of technical solutions. Proven leader in directing operations,
@@ -59349,7 +60298,7 @@ Bachelor of Science : Business Administration and Management, Marketing and Mana
 University Of South Carolina - Columbia - State
 Affiliations
 Project Management Institute (PMI) â€“ # 6203883, Current Member', 'Certified [Job Title] , [Company Name] - [Timeframe]', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (416, 4, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13477922.pdf', 'INFORMATION TECHNOLOGY SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (416, 208, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13477922.pdf', 'INFORMATION TECHNOLOGY SPECIALIST
 Professional Profile
 To continue work in the Information Technology field while developing my skills in Information Systems and Networking.
 Experience
@@ -59468,7 +60417,7 @@ M.A : Education Biology and General Science , 1982 George Mason University Fairf
 B.S : Biology , 15 Biology
 NVCC Alexandria A.A.S Networking (06-25-2001) NVCC Alexandria A.A.S Microcomputer Specialization (06-25-2001) Virginia
 Commonwealth University Richmond', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (417, 5, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13836471.pdf', 'INFORMATION TECHNOLOGY MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (417, 1, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\13836471.pdf', 'INFORMATION TECHNOLOGY MANAGER
 Experience
 Information Technology Manager
 April 2007 to Current Company Name ï¼​ City , State
@@ -59587,7 +60536,7 @@ Engineer
 Computer Technician : April 26 1997
 Certification in LAN Network Administration : January 1997 Centro Colombiano de Estudios Profesionales Pontificia Universidad Javeriana ï¼​
 City , Colombia', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (418, 6, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\14789139.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (418, 2, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\14789139.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
 Professional Profile
 Senior Project Management Position Senior Project Manager with over 25 years of diverse experience including health care, private sector, local
 and state government and aerospace/defense contracting. Successful management of fast-paced private sector projects as well as large multi-
@@ -59755,7 +60704,7 @@ Ventura County Sheriff''s Department.
 Graduated in 2009 with the honors of Class President, Top Academic Award and Top Cadet award for Leadership.', 'MBA Pepperdine University
 BS : Biology Computer Science Loyola Marymount University Biology Computer Science
 Numerous classes in Project Management and virtually all facets of IT Systems', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (419, 7, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\15118506.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (419, 3, 'Information Technology', '../../data\\INFORMATION-TECHNOLOGY\\15118506.pdf', 'DIRECTOR OF INFORMATION TECHNOLOGY
 Executive Profile
 Innovative executive and technology professional with strong work ethic and excellent communication skills, experienced in high-volume, multi-unit,
 retail and business operations. Desires a high-level position in a professional business environment.
@@ -59831,7 +60780,23 @@ Handled all technology vendor interactions including contract negotiations, SLA 
 Education
 Bachelor of Science : Management Information Systems Cardinal Stritch University City , State
 Online Profile
-Linked In www.linkedin.com/in/Robert RJordan Â', '', '', 'Director of Information Technology 11/2012 to Current Company Name, City, State
+Linked In www.linkedin.com/in/Robert RJordan Â', 'Innovative executive and technology professional with strong work ethic and excellent communication skills, experienced in high-volume, multi-unit,
+retail and business operations. Desires a high-level position in a professional business environment.
+Skill Highlights
+Microsoft Server 2003, 2008, 2012
+Exchange Server 2007, 2010
+VMware ESXi
+VMware v Center
+VMware Horizon ViewÂ 5.x, 6.x, and 7.x
+Microsoft Hyper-V
+Cisco UCM and Unity
+Help Desk
+ITIL Service Catalog
+Vendor Management
+Budgeting
+Project Management
+SLA Management
+Asset Management', '', 'Director of Information Technology 11/2012 to Current Company Name, City, State
 Developed and implemented the IT strategy for the organization including software, support and infrastructure
 Hired, developed, and managed IT staff
 Negotiated terms and products from external vendors, including changes needed as business needs changed
@@ -59884,7 +60849,7 @@ successful use of company technology tools
 Operations Management:
 Managed the infrastructure to support 260 users selling 500 vehicles and servicing 7,000Â vehicles each month
 Handled all technology vendor interactions including contract negotiations, SLA monitoring, and license utilization', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (420, 8, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10070224.pdf', 'PUBLIC RELATIONS DIRECTOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (420, 4, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10070224.pdf', 'PUBLIC RELATIONS DIRECTOR
 Summary
 Talented PR professional with 11 years'' expertise developing and executing all aspects of public outreach campaigns to increase media exposure
 and support strategic marketing initiatives. Proven creative talent with demonstrated strength in media production, messaging, communications and
@@ -60071,7 +61036,7 @@ Public Relations Association of Louisiana- 2009 to present
 National Council for Marketing and Public Relations - 2006 to present
 National Association of Black Journalists- 2014 to present', 'Outstanding Professional Staff Award, 2016
 Outstanding Staff Achievement Award, 2013', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (421, 9, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10554045.pdf', 'WARD CLERK UNIT SECRETARY ADMISSIONS AND DISPOSITIONS CLERK 3 RD PARTY LIABILITY CLERK PATIENT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (421, 5, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10554045.pdf', 'WARD CLERK UNIT SECRETARY ADMISSIONS AND DISPOSITIONS CLERK 3 RD PARTY LIABILITY CLERK PATIENT
 Executive Summary
 Seeking a part-time nonmedical/retail position that will afford me the opportunity to use my various social and professional skills. strong
 organizational and problem-solving abilities, demonstrating sound judgment in establishing priorities and making decisions. *Well-Developed
@@ -60188,7 +61153,7 @@ Responsible for collecting cash, posting of ledgers and maintaining accountabili
 Prepared billings; maintained files and ensured security of cashier''s cage.
 Restructured hospital''s insurance billing and accounts receivable system, resulting in outstanding ratings.', 'University of North Carolina 1982 Bachelors of Arts : Sociology City Sociology
 Military - 1983- 1992', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (422, 10, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10873344.pdf', 'ACCOUNT MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (422, 6, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10873344.pdf', 'ACCOUNT MANAGER
 Highlights
 Excellent verbal and written communication skills
 Ability to successfully complete multiple tasks concurrently
@@ -60310,7 +61275,7 @@ Assist students, faculty and university administration with various admission po
 Accountable for organization and administration of student applications.
 Responsible for scanning and indexing documents into database.', 'Bachelor of Arts : Public Relations and Journalism Seton Hall University ï¼​ City , State GPA: Cum Laude Public Relations and Journalism Cum
 Laude', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (423, 11, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10926726.pdf', 'ASSISTANT DIRECTOR OF POLAR EXPEDITIONS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (423, 7, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\10926726.pdf', 'ASSISTANT DIRECTOR OF POLAR EXPEDITIONS
 Summary
 To acquire an executive assistant position with a dynamic company. My detailed project management, writing, creative and communication
 experience will allow me to take a leadership role in managing multiple responsibilities.
@@ -60451,7 +61416,7 @@ Assisted directors, board of directors and human resources.
 Key participant in the development of fundraising events, including staffing events such as the annual benefit concert which gained support
 for the Jewish Community Centers.
 Drafted employee resource book, assisted in hiring office clerks, organized board meetings and other functions.', 'Bachelor of Arts : Photography & Fiction Writing Columbia College Chicago ï¼​ City , State GPA: Dean''s List Dean''s ListÂ Spring 1999', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (424, 12, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11160414.pdf', 'VP MARKETING & COMMUNICATIONS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (424, 8, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11160414.pdf', 'VP MARKETING & COMMUNICATIONS
 Summary
 Marketing manager and writer offering a comprehensive background in the development and execution of strategic marketing communication plans
 across all platforms to drive customer acquisition and retention.
@@ -60606,7 +61571,7 @@ Exceeded goals through teen driver safety program by r educing claim losses by 0
 Best in Show Award â€“ Insurance Marketing Communications Association.
 National Award of Merit â€“ United States Department of Transportation, U.S. Coast Guard.
 Trademarks for branding from the United States Patent and Trademark Office.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (425, 13, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11624880.pdf', 'COMMUNICATIONS COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (425, 9, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11624880.pdf', 'COMMUNICATIONS COORDINATOR
 Summary
 Creative and highly-motivated Communications and Marketing professional with experience creating engaging and interesting work that achieves results.
 Highlights
@@ -60745,7 +61710,7 @@ for winter term in January 2014. Visited the cities of Sydney, Brisbane, Cairns,
 Participants'' Association''s magazineâ€”The Leader]
 Raised circulation of organization''s magazine in one year by more than 2,500 issues (VPP Participants'' Association)
 Promoted and helped execute fundraising benefit/auction and concert; raised over $9,000. (Susquehanna Life Magazine)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (426, 14, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11635137.pdf', 'MARKETING & COMMUNICATIONS EXECUTIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (426, 10, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11635137.pdf', 'MARKETING & COMMUNICATIONS EXECUTIVE
 Executive Profile
 Creative leader offering rich career experience in corporate communications for domestic and global brands and strategic communications for
 use on social media, internal operations, and multi-media production. Successfully communicates brand messages to impressive heights through
@@ -60811,7 +61776,40 @@ Nothing; Oversaw the public relations and communications for the worldwide launc
 Education
 Bachelor of Arts : English Literature UC SANTA BARBARA ï¼​ City , State
 Credentials
-Content development, corporate communications, health care, new business development, producing, public relations, sales, stories, strategic planning', '', '', 'City
+Content development, corporate communications, health care, new business development, producing, public relations, sales, stories, strategic planning', 'Creative leader offering rich career experience in corporate communications for domestic and global brands and strategic communications for
+use on social media, internal operations, and multi-media production. Successfully communicates brand messages to impressive heights through
+story-telling; key to transforming ideas into realities.
+Achievements include product penetration, brand recognition and value, brand and image awareness, visual communications, and public
+relations campaign management/execution. Recognized skills in content development, project planning/management, multi-million-dollar budget
+oversight, business development, advertising, and agency management.
+Skill Highlights
+Persuasive Leader
+Skilled Negotiator
+Brand Champion
+Revenue Generator
+Communications
+Branding
+Strategic Planning
+Operations
+Social Media Marketing
+Digital Production
+Budgeting
+Project Planning & Execution
+Business Development Support
+Customer Service
+Leadership
+Sales
+Core Accomplishments
+Capitalize on story-telling talents and visionary approach to communicate corporate accomplishments across all media including success in
+global media platforms such as You Tube, Twitter, Facebook, Linked In, Instagram, Vimeo, and Tumblr
+Principal player that navigated Robert Redford''s Sundance TV from conceptualization through launch. Collaborated with television and feature
+film producers and distributors, cemented 12+ national partnerships, and spearheaded public relations and corporate communications campaigns
+that garnered global coverage. Developed communication positioning that boosted entity from a premium-only subscriber base to recognition as a vital entertainment channel
+Contributed to millions of dollars in sales by architecting awareness and communications strategies for the issue or re-issue of Disney films such
+as â€œCinderella,â€​ â€œJungle Book II,â€​ â€œAnnie,â€​ and other popular films. Crafted a brand identity for actor/director Kenneth Branagh,
+directors Ang Lee and Anthony Minghella, and actress Julia Roberts, among others.
+Collaborated on projects involving industry giants such as Steven Spielberg, Spike Lee, Ridley Scott, and others
+Introduced aggressive marketing and public relations campaigns to launch several film distribution companies', '', 'City
 01/1995 to 04/2016
 Marketing & Communications Executive Company Name ï¼​ City , State
 Highly successful firm that has provided public relations and corporate communications services to more than 100 national and global clients.
@@ -60839,7 +61837,7 @@ Projects included : Madness of King George, Ang Lee''s Wedding Banquet & Eat Dri
 Nothing; Oversaw the public relations and communications for the worldwide launch and multi-season success for iconic American Gladiators series', 'Bachelor of Arts : English Literature UC SANTA BARBARA ï¼​ City , State
 Credentials
 Content development, corporate communications, health care, new business development, producing, public relations, sales, stories, strategic planning', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (427, 15, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11842274.pdf', 'BARTENDER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (427, 11, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11842274.pdf', 'BARTENDER
 Experience
 Bartender , 05/2018
 Company Name â€“ City , State
@@ -61393,7 +62391,98 @@ Knowledge of beverage preparation and service of various alcoholic beverages Per
 Professional demeanor in appearance
 Confident manner of speaking
 Willingness to engage with guests
-Mental flexibility to perform dif', 'Accounting, advertising, basic, brochures, C, cashier, closing, conferences, cooking, credit, make change, clients, customer satisfaction,
+Mental flexibility to perform different roles day to day
+Sense of urgency to complete tasks and service guests in a timely manner
+Ability to work with a sense of urgency on behalf of the membership without disrupting the atmosphere of the dining room
+Effortlessly polite, patient and courteous at all times
+Interacts well and effectively communicate with members, guests and staff
+Maintains neat and professional appearance
+Ability to follow directions from a supervisor
+Ability to work fast and safely
+Possesses good coordination and balance
+Personable, responsible and willing to work in a team environment
+Ability to properly execute the POS system
+Capable bartender that is passionate about serving in warm, efficient and courteous manner while exceeding customer expectations and maintaining
+poise and sense of humor in demanding environments. Looking to bring history of exceptional service to growing restaurant. Professional
+Bartender with extensive knowledge of spirits and intuitive ability to engage customers of all types. Friendly, open and committed to building
+customer base by providing positive service experience.
+Interests
+License:
+TX Drivers
+Food Handler
+TABC
+Highlights
+Accounting, Organizing
+Advertising, Organizational
+Basic, Policies
+Brochures, POS
+C, Presentations
+Cashier, Press
+Closing, Press releases
+Conferences, PR
+Cooking, Processes
+Credit, Promotion
+Make change, Public Relations
+Clients, Publicity
+Customer satisfaction, Quality
+Customer Service, Radio
+Direct mail, Safety
+Documentation, Selling
+Editing, Sales
+Special events, Speeches
+Exhibitions, Supervisor
+Fast, Supervising
+Forms, Supervision
+Functional, Tables
+Funds, Taxes
+Health and safety standards, TV
+IDs, Television
+Image, Tops
+Instruction, Website
+Insurance, Articles
+Maintain inventory, Annual reports
+Inventory
+Law
+Legal
+Multimedia
+Neat
+Newsletters
+Newspapers
+Preparing garnishes
+Basic math
+Classic cocktails
+Responsible alcohol service
+Liquor, beer and wine knowledge
+Staff management
+Beverage preparation
+Food running
+Hospitality service expertise
+Performance improvement
+Making change
+Aloha POS
+Fast learner
+Creative mixology
+Clear and effective communication
+New hire training
+Positive attitude
+Food preparation and safety
+Attending multiple customers
+Fluency in English
+Customer service
+Reporting and documentation
+Engaging personality
+Interpersonal skills
+Highly reliable
+Cash register operation
+Able to bend, squat and reach
+Market
+Marketing
+Meetings
+Money
+Sale expertise
+Handling difficult customers
+TABC license
+FOOD HANDLER license', 'Accounting, advertising, basic, brochures, C, cashier, closing, conferences, cooking, credit, make change, clients, customer satisfaction,
 Customer Service, direct mail, documentation, editing, special events, exhibitions, fast, forms, functional, funds, health and safety standards, IDs,
 image, instruction, Insurance, Maintain inventory, inventory, law, legal, market, Marketing, meetings, money, multimedia, neat, newsletters,
 newspapers, Organizing, Organizational, policies, POS, presentations, press, press releases, PR, Processes, promotion, Public Relations, publicity,
@@ -61610,7 +62699,7 @@ Stock service areas with supplies such as coffee, food, tableware, and linens.',
 Susan B. Dorsey High - City , State
 Cosmetology , 1993
 Career Academy Inc - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (428, 16, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11850315.pdf', 'PUBLIC RELATIONS SPECIALIST AND BRAND CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (428, 12, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11850315.pdf', 'PUBLIC RELATIONS SPECIALIST AND BRAND CONSULTANT
 Summary
 With so many individuals applying for a position within your organization, how can you decide who is the best candidate? Successful public relation
 professionals need to be creative, dynamic, organized, team-oriented with a strong desire to succeed and these are qualities I have been
@@ -61692,7 +62781,9 @@ recognized for in all of my previous roles. I have worked for iconic fashion bra
 national and international media relations, special events and served as the on camera company spokesperson. I have a consistent record of
 creating, implementing and leading extremely successful public relations campaigns and executing high profile events. As you will note, I have solid
 interpersonal skills, with the ability to interface with individuals at all levels. I also have strong talents in creating, writing, and producing
-communication pieces. My organizational skills have allowed me to prioritize schedules and complete projects within time and budget guidel', 'agency, branding, budgets, content creation, clients, direction, editorial, editor, email, event planning, special events, Fashion, financial, functional,
+communication pieces. My organizational skills have allowed me to prioritize schedules and complete projects within time and budget guidelines.
+Highlights
+MS Office Suite: Word, Excel, Access, Power Point, Project Pro; Cision, Google Analytics, Lexis Nexis, Fashion', 'agency, branding, budgets, content creation, clients, direction, editorial, editor, email, event planning, special events, Fashion, financial, functional,
 Google Analytics, GPS, image, leadership, Lexis Nexis, marketing, marketing communications, media plans, media relations, merchandising,
 Access, Excel, MS Office Suite, Power Point, Word, press, press releases, PR, project plans, Public Relations, public speaking, retail, sales,
 Spanish, speeches, strategy, strategic, TV, video', 'Public Relations Specialist and Brand Consultant
@@ -61753,7 +62844,7 @@ Additional Information
 I know I will make a positive contribution to your company and look forward to discussing my capabilities in more detail. I am available for
 a personal interview at your convenience. I know you are busy, and have many applications to review, so please let me know if you wish to
 further discuss your requirements and my ability to meet them. Thank you for your time and consideration. Sincerely, Lorena Pino', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (429, 17, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11902276.pdf', 'PUBLIC RELATIONS MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (429, 13, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\11902276.pdf', 'PUBLIC RELATIONS MANAGER
 Summary
 [Job Title] bringing expertise in listed equity and index options as well as extensive experience with regulatory inquiries and examinations, retail and
 professional trading practices and back-office functions.
@@ -61858,7 +62949,30 @@ Highlights
 Energetic
 People-oriented
 Fluent in Spanish
-Exc', 'approach, C, concept, Credit, Client, clients, customer service, English, senior management, Financial, Leadership, marketing, market, meetings,
+Excellent communication skills
+Reliable
+Financial analysis
+Detail-oriented
+Analytical
+Strategic positioning
+Financial reporting
+Critical thinking
+Conflict resolution
+Strong organizational skills
+Active listening skills
+Energetic work attitude
+Goal-oriented
+Bilingual in [languages]
+Excellent time management skills
+Inspiring team leader
+Excellent sales techniques
+Fortune 500 partner experience
+Cold calling
+Prospecting and cold calling
+Strategic account development
+Strong interpersonal skills
+Relationship selling
+Customer-oriented', 'approach, C, concept, Credit, Client, clients, customer service, English, senior management, Financial, Leadership, marketing, market, meetings,
 Money, enterprise, oil, policies, processes, quality, quick, relationship management, repairs, research, Selling, sales, Spanish, strategic, technical training', 'Company Name September 2015 to May 2016 Public Relations Manager
 City , State
 Organized the company into a formal structure, defined roles and responsibilities for each position, planned the growth of the company in the
@@ -61905,7 +63019,7 @@ Process Improvement
 Created new departmental procedures manual.
 Assessed organizational training needs.
 Launched aggressive growth plans that helped increase customer base from [Number] to [Number] customers.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (430, 18, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12191094.pdf', 'DIRECTOR OF PUBLIC RELATIONS
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (430, 14, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12191094.pdf', 'DIRECTOR OF PUBLIC RELATIONS
 Executive Profile
 Centene MARCOM resources and Development, promotion and personnel across Centene Health Plans implementation of statewide initiatives
 and Specialty Companies for various organizations Design and Printing Oversight: Design, Community Relations Expertise, review and revise
@@ -61969,7 +63083,24 @@ Marketing, Public Relations, Business Development, Solutions, Budgets, Exchange,
 Including Sales, Promotional, Sales, Sales Management, Sales Organization, Securities, Clients, American Red Cross, Documentation, Health And
 Wellness, Red Cross, Registered Nurse, And Marketing, Budget, Business Plan, Community Relations, Conflict Management, Crisis
 Management, Customer Relations, Customer Service, Educational Programs, Emergency Preparedness, Fact, Fact Erp, Graphic Design,
-Healthcare, Hippa, Marcom, Mba, Media Planning, Networking, Printing, Product Management, Receptionist, Retail Sales, Rn', '', 'Marketing, Public Relations, Business Development, Solutions, Budgets, Exchange, Liaison, Marketing Department, Operations, B2b, B2b Sales,
+Healthcare, Hippa, Marcom, Mba, Media Planning, Networking, Printing, Product Management, Receptionist, Retail Sales, Rn', 'Centene MARCOM resources and Development, promotion and personnel across Centene Health Plans implementation of statewide initiatives
+and Specialty Companies for various organizations Design and Printing Oversight: Design, Community Relations Expertise, review and revise
+collateral materials for including outreach event management, various organizations and audiences, healthcare education programming and ensure
+appropriateness of content, implementation for various organizations readability and translation Represented organizations to the public Artwork
+Management and served as point of contact Collateral design using Adobe Suite or Developed relationships with area work with external graphic
+design/print businesses to support community vendors events, educational programs and fund- Budget Oversight and Compliance raisers
+Promotional Products Management Resourceful team member who excels Research Management at building trustful relationships with Business
+plan development members, colleagues, external Compose news releases, fact sheets, organizations, and key audiences letters to a variety of
+audiences, including Healthcare background as registered key influencers nurse with experience in SNF, assisted Social Media Planning and living,
+and adult day programs Implementation using Centene guidelines E-newsletter design/distribution MBA DANIEL WEBSTER COLLEGE
+Organizational Management Nashua, NH
+Core Accomplishments
+Member: Business Networking International (BNI), Rotary International, Chambers of
+Commerce and Business Associations
+Courses: Corporate Compliance and Ethics, Customer Relations, Basic
+Communication and Conflict Management Skills, Confidentiality and HIPPA
+Emergency Preparedness, Crisis Management, Maximize Customer Service and
+Initiate Quality Improvements', 'Marketing, Public Relations, Business Development, Solutions, Budgets, Exchange, Liaison, Marketing Department, Operations, B2b, B2b Sales,
 Including Sales, Promotional, Sales, Sales Management, Sales Organization, Securities, Clients, American Red Cross, Documentation, Health And
 Wellness, Red Cross, Registered Nurse, And Marketing, Budget, Business Plan, Community Relations, Conflict Management, Crisis
 Management, Customer Relations, Customer Service, Educational Programs, Emergency Preparedness, Fact, Fact Erp, Graphic Design,
@@ -62007,7 +63138,7 @@ Affiliations
 Press Association for writing
 Presentations
 marketing, presentations, and social media', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (431, 19, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12237267.pdf', 'SENIOR ACCOUNT MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (431, 15, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12237267.pdf', 'SENIOR ACCOUNT MANAGER
 Professional Summary
 Skills
 Managing
@@ -62124,7 +63255,7 @@ Company Name â€“ City , State
 Planned and executed all store-level events including fashion productions, sales promotions, charity partnerships, and new customer acquisition.
 Liaised between all impacted departments and vendors to ensure proper communications and reporting practices for a successful event outcome.', 'Bachelor of Arts : Business Administration , 05/2011
 California State University - City', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (432, 20, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12545844.pdf', 'PUBLIC RELATIONS ACCOUNT COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (432, 16, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12545844.pdf', 'PUBLIC RELATIONS ACCOUNT COORDINATOR
 Summary
 Public relations professional possessing excellent project management, leadership and event planning skills with a strong background in brand building public relations.
 Highlights
@@ -62203,7 +63334,7 @@ Company Name ï¼​ City , State
 Charged with building press books for clients'' media hits, and with creating event press releases for use in driving additional traffic to client sites and businesses.
 Oversaw three-part red carpet event with Nicky Hilton when she hosted at Chateau Nightclub, and created detailed write-up of event for client''s blog.
 Managed social media accounts via Hootsuite that better leveraged client services.', 'Bachelor of Arts , Communication and Journalism 2014 University of Nevada ï¼​ City , State Marketing, Public Relations and Journalism coursework', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (433, 21, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12567516.pdf', 'PROGRAM MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (433, 17, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12567516.pdf', 'PROGRAM MANAGER
 Professional Summary
 Highly-motivated community service professional skilled at networking, media outreach and relationship development. Flexible and versatile team
 player who maintains a sense of humor under pressure.
@@ -62330,7 +63461,7 @@ Intern Company Name ï¼​ City , State
 Identified customer needs through market research and analysis.
 Tracked communication regarding clients using print and electronic media.', 'Bachelorof Science : Public Relations University of Texas at Austin Public Relations
 Bachelor of Journalism : Broadcast University of Texas ï¼​ City Broadcast', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (434, 22, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12920612.pdf', 'PUBLIC RELATIONS MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (434, 18, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\12920612.pdf', 'PUBLIC RELATIONS MANAGER
 Summary
 I am a seasoned professional with 30 years of experience in communications, public relations, event planning and media relations. I have extensive
 knowledge of marketing campaigns, sales, messaging, and dissemination techniques and methods. I am an award-winning writer and editor with
@@ -62455,7 +63586,7 @@ These duties include the following: Both write of all locally-generated Infoline
 from short commercials to major presentations on health and legal issues; liaison to editorial staffs of Free Press and Times in designing
 public opinion polls and other special features.', 'Bachelor of Science : Mass Communications Speech , 1 1984 St. Cloud State University ï¼​ City , State , United States GPA: GPA: 3.07 GPA:
 3.2 Mass Communications Speech GPA: 3.07 GPA: 3.2', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (435, 23, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13129275.pdf', 'INTERNAL AUDIT ASSISTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (435, 19, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13129275.pdf', 'INTERNAL AUDIT ASSISTANT
 Professional Summary
 Communications professional with exceptional writing and editing skills. Extensive experience in print and web content development, media
 relations and special event planning.
@@ -62588,7 +63719,7 @@ Created and edited documents informing staff of Fifth District Federal Reserve B
 Documented, monitored, and resolved Fifth District Federal Reserve Bank''s FAQ section on external website, resulting in a redesign of the web page
 Responsible for the redesign of Fifth District Federal Reserve Bank''s Code of Conduct brochure to align with company branding
 Qualifications and Relevant Experience Demonstrated ability to interact effectively with all levels, including senior management', 'Bachelor of Arts Bennett College - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (436, 24, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13727873.pdf', 'MARKET ANALYST PROMOTED TO ASSISTANT DIRECTOR OF BRAND STRATEGY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (436, 20, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13727873.pdf', 'MARKET ANALYST PROMOTED TO ASSISTANT DIRECTOR OF BRAND STRATEGY
 Professional Summary
 Dear Cristina and team, The second I found out about this position, my I found myself extremely excited. I knew right away this is something I
 have to be a part of, and something I''d deeply regret if I didn''t try. I''m looking to really start my career and be involved with something I can grow
@@ -62687,7 +63818,39 @@ into and invest myself in long term. I see that in the Customer Marketing Coordi
 Before Zendesk, I was at a marketing company supporting the entire staff with demographic research for target market campaigns. I enjoyed the
 marketing aspect and always thought I''d find myself back in it somehow. Now, I consider myself lucky to be a part of this amazing company, I''ve
 put my best effort into everything given to me and I know Zendesk is the only place I want to be. I am responsible for coordinating every interview
-within the San Francisco office, greeting all candidates onsite, and maintaining an organized status database. As well as my', 'administrative, ad, agency, Autism, brand strategy, budget, Consulting, contracts, credit, clients, Data Visualization, drafting, event planning,
+within the San Francisco office, greeting all candidates onsite, and maintaining an organized status database. As well as my main responsibilities,
+I''ve also managed our office expansion and filled in for administrative duties when needed. I had the pleasure of assisting in planning our Holiday
+Party as well as other team activities. What I love most about Recruiting is how much personable interaction there is on a daily basis with different
+backgrounds and different personalities. I''ve had the privilege of being trained to always have a poised and appropriate response to every situation,
+and guidelines for the utmost professionalism with every phone screen, reference call, email, or in-person interview. I recently had the opportunity
+to visit college campuses to promote Zendesk. I realized then how much I enjoy educating others and making them too, believe in what we do.
+Now that I''ve found the perfect company, I''m ready for the perfect position that combines everything I love and excel in; planning, coordinating
+and evangelizing. With my history in Marketing and my current role, I''m used to supporting an entire team and an entire company. I can manage
+multiple projects at once, I''m highly dependable and extremely detailed. Zendesk has made me a more passionate professional and I would love
+the opportunity to promote our vision for customer love. Best regards, Zendesk is looking for a Recruiting Program Associate who is ready to
+wear multiple hats within Recruiting. The ideal Associate will be skilled in areas of project management, event planning, vendor and university
+relations, budgeting, and training. This person will be the "glue" for the Recruiting''s day-to-day operations. S/he will operate cross-functionally
+across our global organization and with external vendors in order to ensure that we are hitting our hiring goals, all while keeping an eye on cost per
+hire, and of course, candidate experience. Responsibilities: *Partner with the Recruiting Manager on efforts to drive talent acquisition results in a
+period of high growth *Serve as the point of contact on headcount matters *Maintain relationships with external vendors and agencies *Promote
+and manage employee referral program *Demonstrate subject matter expertise when it comes to our ATS and Linked In *Work with Human
+Resources to manage immigration needs for new hires and existing staff *Coordinate job board postings *Manage and maintain ATS - run reports,
+organize job descriptions, add/delete employee access, etc *Assist Recruiting Manager with tracking the department budget and ROI *Plan and
+organize recruiting events such as college fairs, hackathons and meet-ups *Assist with reference calls, as needed *Manage new hire background
+check process *Collaborate with Human Resources to ensure seamless candidate on-boarding *Educate new hires and hiring managers about our
+Zendesk recruiting process *Create ad-hoc reports and presentations, as needed Required: *2+ years experience in a Human Resources,
+Recruiting or Administrative role *1-2 years experience working with an ATS, Jobvite preferred *Basic understanding of the recruiting world - the
+tools, processes and data that drive talent acquisition *Passion for driving a best-in-class candidate experience *Ability to maintain confidentiality
+*Demonstrated success at developing relationships with stakeholders across the organization *Exceptional "can-do" and service-oriented attitude
+*Strong written and verbal communication skills *Track record of successfully being able to manage multiple projects, with multiple deadlines, for
+multiple owners *High attention to detail and organizational skills *Demonstrated integrity, maturity, professionalism, and sensitivity *Comfortable
+with ambiguity *Bachelor''s degree or related experience To be clear, Jamie is responsible for: Being the point of contact on headcount matters
+(meaning, if you have a question as to whether a HM has a seat to open, or the timing of filling that seat according to Finance, please check with
+Jamie first)
+Core Qualifications
+Pitney Bowes Map Info including Target Pro and Map Marker - Predcitive Analytics Software, Geoscape - Market Intelligence Software, Nielsen
+Prime Location --- Market Structure and Segmentation Software, Microsoft Office/Word, Excel, Power Point, Cision Media Services,
+Workamajig, Jobvite, Zendesk.', 'administrative, ad, agency, Autism, brand strategy, budget, Consulting, contracts, credit, clients, Data Visualization, drafting, event planning,
 facilities management, focus, graphic, HR, Legal, Map Info, market analysis, marketing strategies, marketing, Market, materials, meetings, access,
 Excel, Microsoft Office, Power Point, Word, presentations, processes, recruiting, research, SLA, phone, therapeutic interventions, vision, workshops
 Additional Information
@@ -62735,7 +63898,7 @@ Sociology and French Studies Dean''s list
 Personal Information
 I hope that this clarifies Jamie''s role, and the items that you should work with her directly on. Let me know if you have any questions about what
 I''ve detailed above.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (437, 25, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13915715.pdf', 'ASSISTANT COMPANY SECRETARY
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (437, 21, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\13915715.pdf', 'ASSISTANT COMPANY SECRETARY
 Summary
 Reliable Legal Secretary successful at maintaining complex docket systems, tracking deadlines and coordinating depositions. Organized Legal
 Secretary adept at managing multiple high priority tasks. Expert in preparing legal documents such as briefs, motions and subpoenas.
@@ -62862,7 +64025,7 @@ Tresury of Ping Pong Club Ui TM Kedah.
 Special Force of Diploma in Public Administration Club (Di PAC) Fasilitator for Program Transformasi SKKP at Emerald Puteri Hotle,
 Sungai Petani organized by Sekolah kebangsaan Kampong Pasir, and Di PAC Uitm Kedah, Kedah.
 Team Manager of "Ui TM Kedah Netball Open 2008", organized by Persatuan Bola Jaing Ui TM Kedah, Ui TM Kedah, Kedah.Â', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (438, 26, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\14009087.pdf', 'INDEPENDENT PUBLIC RELATIONS CONSULTANT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (438, 22, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\14009087.pdf', 'INDEPENDENT PUBLIC RELATIONS CONSULTANT
 Executive Profile
 Accomplished professional with demonstrated ability to deliver strategic internal and external communications. Experienced in hospitality industry.
 Highly-skilled in event creation, oversight and management, as well as all aspects of media relations.
@@ -62938,7 +64101,28 @@ Palm Beach County CVB, Marketing and PR Sub-Committees Chair (4 years)
 Palm Beach County Cultural Council, Marketing/PR Committee Representative (1999-present)
 Palm Beach Film Society, Vice President (2002-present)
 Skills
-MS Office, Dreamweaver, advertising, social media platforms, wesbsites Conversational Spanish and elementary Mandarin', '', 'MS Office, Dreamweaver, advertising, social media platforms, wesbsites Conversational Spanish and elementary Mandarin', 'Company Name January 2009 to Current Independent Public Relations Consultant
+MS Office, Dreamweaver, advertising, social media platforms, wesbsites Conversational Spanish and elementary Mandarin', 'Accomplished professional with demonstrated ability to deliver strategic internal and external communications. Experienced in hospitality industry.
+Highly-skilled in event creation, oversight and management, as well as all aspects of media relations.
+Skill Highlights
+Event management International Relations
+Project management Market research and analysis
+Copywriting and copyediting Customer-oriented
+Deadline-driven MS Office, Social Media platforms, basic HTML through
+Dreamweaver
+Exceptional leadership/communication skills Creative pitching
+Promotional campaigns Experienced spokesperson
+Core Accomplishments
+Public Relations and Event Management: Initiated re-branding and imaging campaign which resulted in 10%-20% increased visitation per year.
+Created and managed private and public events for parties, corporate break-outs, weddings, family days and visiting VIP''s.
+Initiated a public relations capital campaign for a non-profit on a tight budget, raising over $20 million in pledges and support.
+Garnered first national and international coverage for 40+ year old institution, and maintained visibility with more than 40 features and spotlight listings each year.
+Spearheaded new social media programs which increased program sales 25% within the first year.
+Collaborated with local organizations to increase exposure for Palm Beach County to key travel and tour groups Represented clients on Culture
+Key initiative to drive tourism post-9/11 resulting in 10% increased visitation and hotel stays Collaborated on behalf of clients on tourism initiatives
+through the Palm Beach County CVB resulting in record-breaking stays and visitation for three fiscal years.
+Coordinated major press events for Jet Aviation terminal opening and Keys to the City with less than three weeks'' notice, resulting in more than 20
+features and national exposure.
+Researched story ideas and created national pitch, resulting in international coverage in more than 15 countries.', 'MS Office, Dreamweaver, advertising, social media platforms, wesbsites Conversational Spanish and elementary Mandarin', 'Company Name January 2009 to Current Independent Public Relations Consultant
 City , State
 Provide full public relations services for nearly 20 for and non-for-profit businesses and organizations through the quad-county area.
 Services include: Identifying customer needs through market research and analysis.
@@ -62986,7 +64170,7 @@ Palm Beach County Attractions Association, Past President and Treasurer (1999-pr
 Palm Beach County CVB, Marketing and PR Sub-Committees Chair (4 years)
 Palm Beach County Cultural Council, Marketing/PR Committee Representative (1999-present)
 Palm Beach Film Society, Vice President (2002-present)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (439, 27, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\14128006.pdf', 'ABOUT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (439, 23, 'Public Relations', '../../data\\PUBLIC-RELATIONS\\14128006.pdf', 'ABOUT
 Creative communications professional good with implementing PR strategy, writing press collateral and managing press on-site at events, launches
 and trade shows. Also experienced in maintaining relationships to secure press placements, creating event and launch timelines and strategies and
 managing influencer campaigns and partnerships. Additionallyâ€š accomplished and well-versed in ROI, social media marketing strategy, creative
@@ -63098,7 +64282,7 @@ project-based clients in just 7 months
 Through strategic social media marketing, increased social media revenue up to $15,000 a month for HATCH CollectionÂ
 Managed and initiated brand and influencer partnerships garnering over $60,000 in conversion
 Increased acquisition, engagement and following on social media platforms: 8,000 followers in 5 months at HATCH CollectionÂ', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (440, 28, 'Sales', '../../data\\SALES\\10138632.pdf', 'SALES MANAGER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (440, 24, 'Sales', '../../data\\SALES\\10138632.pdf', 'SALES MANAGER
 Professional Summary
 Accomplished and energeticÂ with a solid history of achievement in sales. Motivated leader with strong organizational and prioritization abilities. Areas of expertise include Meeting Goals, Negotiation and
 Selling to Customer Needs.
@@ -63239,7 +64423,7 @@ ActivitiesÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â �
 Seeds Of Hope - Oct 2013 - present Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Serve food, beverages, and desserts in
 lunchrooms,Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â business or industrial establishments.Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â
 Community Service, etc.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (441, 29, 'Sales', '../../data\\SALES\\10464113.pdf', 'SALES EXECUTIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (441, 25, 'Sales', '../../data\\SALES\\10464113.pdf', 'SALES EXECUTIVE
 Summary
 Sales and Customer Service Professional with proven record of accomplishment growing client list and maintaining existing clients. Delivered
 consistent gains in growth, profits and customer satisfaction and retention through expertise in customer relationship management. Expert
@@ -63312,7 +64496,18 @@ troubleshooter, innovative problem-solver. Proactive in ensuring high levels of 
 Medical and Commercial as well as Selling to Consumers. Exceptional communication and interpersonal skills; talent for quickly establishing
 rapport, cultivating relationships and building loyalty by becoming a trusted customer resource. Unparalleled commitment to customer retention by
 providing superior service. Disciplined, Independent, Driven and Motivated Professional with Experience in many industries selling to Buyers at all
-Levels. Both a Hunter and a Harvester who enjoys prospecting, presenting and closing the sale, as well as client retention and stellar', 'Inside and Outside Sales, Customer Service, Salesforce, Act, and Goldmine CRM, Allscripts Software, Outlook, Practice Fusion Software,
+Levels. Both a Hunter and a Harvester who enjoys prospecting, presenting and closing the sale, as well as client retention and stellar customer service.
+Highlights
+Grew placements with FFCC Inc. from under a hundred thousand
+to over two and a half million per month. The company had five
+collectors when I accepted the position and they have well over 80
+collectors now. Fees grew from under $20,000.00 per month to
+over $100,000.00 per month.
+Started a new company for Silent Owners in the Tri State area
+and required another employee to assist with servicing the
+growing client list and the company was later sold and has been
+sold 4 other times and is in business with many of the initial
+clients as State Chemical Company.', 'Inside and Outside Sales, Customer Service, Salesforce, Act, and Goldmine CRM, Allscripts Software, Outlook, Practice Fusion Software,
 Appointment Setting, Cold Calling, Presenting, Closing and Client Retention. Database management, direct mail, insurance, marketing, reporting
 and training and support.', 'SALES EXECUTIVE 02/2001 to 10/2012 Company Name, City, State
 Sold collection services to provide accounts receivable solutions to Physicians in both large and small medical offices, hospitals, and any
@@ -63353,7 +64548,7 @@ With Ohio Truck Body I was promoted from Inside Sales Coordinator to Outside Sal
 While working for Fyr Fyter Sales and Service I was offered a position to leave the company with a Manager to work for them in a new position
 with a compensation increase and opportunity for growth and advancement.
 With Change Med I acquired five of the largest clients for the company within a few months of accepting the position.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (442, 30, 'Sales', '../../data\\SALES\\10603337.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (442, 26, 'Sales', '../../data\\SALES\\10603337.pdf', 'SALES ASSOCIATE
 Experience
 08/2014 to Current
 Sales Associate Company Name ï¼​ City , State
@@ -63418,7 +64613,7 @@ appropriate expeditions, instruction, and commentary.', 'Dec 2016
 Associates Borough of Manhattan Community College ï¼​ City , State
 Jun 2013
 High School Diploma Talent Unlimited High School ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (443, 31, 'Sales', '../../data\\SALES\\10724818.pdf', 'SALES
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (443, 27, 'Sales', '../../data\\SALES\\10724818.pdf', 'SALES
 Career Overview
 Executive Assistant who is skilled at multi-tasking and maintaining a strong attention to detail. Employs professionalism and superior communication
 skills to meet client and company needs.
@@ -63535,7 +64730,7 @@ Oversaw staff ranging from 2-10 employees per shift Observed established trends 
 segments, in order to increase RTD sales Utilized revenue data along with environmental factors as primary source of research based upon
 direct contact with consumers.', 'Bachelor''s : Anthropology Hunter College ï¼​ City , State
 Emphasis in Linguistics', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (444, 32, 'Sales', '../../data\\SALES\\10898339.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (444, 28, 'Sales', '../../data\\SALES\\10898339.pdf', 'SALES ASSOCIATE
 Summary
 Dependable, hard-workerÂ with over seven years of experience in Â maintenance work.
 Skills
@@ -63611,7 +64806,7 @@ Liberal Arts , 2013 Clackamas Community College ï¼​ City , State Liberal Art
 Liberal Arts , 2016 Oakland Community College ï¼​ City , State
 Personal Information
 Hard worker and fast learner. Always able to compete a task on time and with satisfaction.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (445, 33, 'Sales', '../../data\\SALES\\12082377.pdf', 'SALES REPRESENTATIVE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (445, 29, 'Sales', '../../data\\SALES\\12082377.pdf', 'SALES REPRESENTATIVE
 Professional Summary
 Experience sales rep with territory management and closing experience. Computer proficient with strong communication skills. Offering more than
 13 years in outside sales, sales operations and marketing. Quality-focused Account Manager, focused on driving sales and maximizing profits.
@@ -63730,7 +64925,7 @@ Retailed all types of flooring, ceramic & porcelain tile, natural stone, resilie
 Assigned tasks to associates, staffed projects, tracked progress and updated managers, partners and clients as necessary.
 Matched purchase orders with invoices and recorded the necessary information.', 'High School Diploma : James Pace High School -
 Continuing education Interior Decorator', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (446, 34, 'Sales', '../../data\\SALES\\12351749.pdf', 'SALES COORDINATOR
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (446, 30, 'Sales', '../../data\\SALES\\12351749.pdf', 'SALES COORDINATOR
 Summary
 Current MS of Data Analytics graduate student with exposure to data analysis and modeling skills. Seeking evolutionary role in analytics that will
 allow to adapt and change to company and problem solving needs.
@@ -63808,7 +65003,7 @@ Served as link between broker dealer and advisor by handling questions, interpre
 Memberships/Scholarly Societies University of Houston- Downtown Analytics Society.', 'Master of Science , Data Analytics 2018 University of Houston ï¼​ City , State Data Analytics
 BBA , Finance 2005 University of Houston ï¼​ City , State Finance
 Finance', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (447, 35, 'Sales', '../../data\\SALES\\12696104.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (447, 31, 'Sales', '../../data\\SALES\\12696104.pdf', 'SALES ASSOCIATE
 Summary
 Motivated sales associate with 3+ years of sales and customer service experience. Currently enrolled in Suffolk County Community College studying culinary.
 Experience
@@ -63853,7 +65048,7 @@ Answer calls.
 Interact with customers.', '2015
 High School Diploma High School ï¼​ City , State
 Suffolk County Community College ï¼​ State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (448, 36, 'Sales', '../../data\\SALES\\12820557.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (448, 32, 'Sales', '../../data\\SALES\\12820557.pdf', 'SALES ASSOCIATE
 Highlights
 Computer Proficiency Client Relations
 Experience
@@ -63968,7 +65163,7 @@ Phoenix, AZ 2014 to 2018
 Professional Affiliations
 Team Member/Cashier
 Presentations team conferences', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (449, 37, 'Sales', '../../data\\SALES\\13178604.pdf', 'MERCHANDISER, SALES
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (449, 33, 'Sales', '../../data\\SALES\\13178604.pdf', 'MERCHANDISER, SALES
 Summary
 [Job Title] equipped with the excellent negotiation skills, market insight and business acumen necessary to guide struggling and newly-formed
 companies to financial success.
@@ -64139,7 +65334,7 @@ territories and meet set objectives, 12 per quarter. Provided clients with a pro
 internet marketing. Continuously maintained and established solid relationships with clients. Met publication and internet deadlines; achieved
 100% of sales quotas. Elected Captain and Speaker of Yorktown/Peekskill county team
 Presidential Achievement Award. Ranked 6th (must be in top 10 % of region)', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (450, 38, 'Sales', '../../data\\SALES\\13348915.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (450, 34, 'Sales', '../../data\\SALES\\13348915.pdf', 'SALES ASSOCIATE
 Summary
 Punctual retail sales professional focused on exceeding expectations and building customer loyalty. Flexible schedule and strong mathematical
 aptitude. Results-oriented Store Manager focused on increasing profits, reducing costs, inventory management and transforming customer service
@@ -64302,7 +65497,7 @@ Reported inventory balances and cycle counts in both the ERP and WMS systems.
 Oversaw warehousing and storage practices and housekeeping.', 'Manchester Community College City , State Associate of Science : General Studies General Studies
 2012
 Windsor High School City , State High School Diploma : General Studies General Studies', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (451, 39, 'Sales', '../../data\\SALES\\13637605.pdf', 'SALES ASSOCIATE/CASHIER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (451, 35, 'Sales', '../../data\\SALES\\13637605.pdf', 'SALES ASSOCIATE/CASHIER
 Summary
 Friendly Sales Associate proficient in managing all areas of sales and customer service in fast-paced retail environments. Excellent multi-
 tasker and team player.
@@ -64382,7 +65577,7 @@ of the management team.
 I communicated clearly and positively with co-workers and management and resolved guest complaints promptly and professionally.
 I quickly and efficiently processed payments and made accurate change.', '2017
 High School Diploma : Education Waynesboro Area Senior High School ï¼​ City , State , USA Education', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (452, 40, 'Sales', '../../data\\SALES\\13812481.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (452, 36, 'Sales', '../../data\\SALES\\13812481.pdf', 'SALES ASSOCIATE
 Summary
 My goal is to become associated with a company where I can utilize my skills and gain further experience while enhancing the company''s productivity and reputation.
 Skills
@@ -64515,7 +65710,7 @@ Actively pursued personal learning and development opportunities.', 'Associate o
 Currently Attending
 High School Diploma : 2017
 Eastmont Senior High School - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (453, 41, 'Sales', '../../data\\SALES\\14267489.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (453, 37, 'Sales', '../../data\\SALES\\14267489.pdf', 'SALES ASSOCIATE
 Profile
 Highly effective in promoting a positive, productive environment. Reputation for excellence and high quality service to clients. Good eye for detail;
 well organized, skilled in setting priorities. Resourceful and self-confident; can get the job done, and do it well. Strong interpersonal and
@@ -64620,7 +65815,7 @@ Being able to learn every little thing i can about each department of my job , g
 Design
 Created high-quality Flash designs.
 Website Design
-Created accent graphics, banner ads, icons, animations and logos us', 'Adobe, Photoshop, billing, brochures, C, Cashier, clerical, closing, Communication Skills, credit, Customer Service, Data Entry, designing, fax
+Created accent graphics, banner ads, icons, animations and logos using Photoshop and Illustrator.', 'Adobe, Photoshop, billing, brochures, C, Cashier, clerical, closing, Communication Skills, credit, Customer Service, Data Entry, designing, fax
 machine, forms, inspects, inventory levels, letters, materials, Math, Merchandising, access, mail, money I, Microsoft Office, MS Office, Works,
 Multi-Tasking, multitasking, object-oriented programming, office machines, Packaging, personnel, copiers, POS, pricing, printer, Quick learner,
 maintaining files, sales, Shipping, supervision, troubleshooting, Typing Skills, weighing
@@ -64686,7 +65881,7 @@ Skills and Typing Skills
 Floresville High School City , State , USA High School Diploma : High School Diploma Coursework in Marketing, Public Relations and
 Promotions Management Coursework in Business, Marketing and Communications Communications, English and Journalism coursework Training
 course in Microsoft Excel and Word.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (454, 42, 'Sales', '../../data\\SALES\\14358578.pdf', 'Camryn
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (454, 38, 'Sales', '../../data\\SALES\\14358578.pdf', 'Camryn
 Hilliard
 Professional Summary
 Highly motivated Sales Associate with extensive customer service and sales experience. Outgoing sales professional with track record of driving
@@ -64848,7 +66043,7 @@ American Sign Language :
 Elementary
 American Sign Language :
 Elementary', 'University of Scranton City , State Expected in 05/2024 Bachelor of Science : Psychology And Political Science', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (455, 43, 'Sales', '../../data\\SALES\\14381464.pdf', 'SALES ASSOCIATE
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (455, 39, 'Sales', '../../data\\SALES\\14381464.pdf', 'SALES ASSOCIATE
 Summary
 My goal is to become associated with a company where i can utilize my skills and gain further experience while enhancing the company''s productivity and reputation.
 Experience
@@ -64875,7 +66070,7 @@ Landscaper Company Name ï¼​ City , State
 Customer service Worked as Landscaper in Preston''s Tree Service from Jan 2010 to May 2015 Role :Concrete/Pavements Roofing Yard
 maintenance Trim and cut trees Pressure wash.', '2013
 Diploma David Douglas High School 3.0', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (456, 44, 'Sales', '../../data\\SALES\\15273850.pdf', 'SENIOR SALES ASSISTANT/ SALES SUPPORT
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (456, 40, 'Sales', '../../data\\SALES\\15273850.pdf', 'SENIOR SALES ASSISTANT/ SALES SUPPORT
 Skills
 ads, attention to detail, customer service, data base, inventory, office, presentations, quality control, sales, phones
 Experience
@@ -64906,7 +66101,7 @@ Box Office Manager , 01/2003 to 01/2006 Company Name ï¼​ City , State
 Managed all aspects of ticket sales.
 Maintained data base of all season ticket holders, answered multi-line phones, and kept an inventory of all supplies.
 Organized volunteers to work in the box office to help with ticket sales for concerts.', 'High School Diploma : 1985 Northwood High School ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (457, 45, 'Sales', '../../data\\SALES\\15581242.pdf', 'SALES SPECIALIST
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (457, 41, 'Sales', '../../data\\SALES\\15581242.pdf', 'SALES SPECIALIST
 Objective
 To obtain a position in a challenging environment that presents the opportunities for growth and knowledge; where I can maximize and apply my
 work ethic, time management skills, management techniques, quality assurance skills, and scientific knowledge.
@@ -64968,7 +66163,7 @@ Apple CRM: proprietary CRM software used to organize client information, track l
 SAP Inventory Management: Software to track product movement, catalog merchandise, and audit for lossÂ
 i OSdm Hub & Jamf: device management platform to maintain functionality, and push software updates
 Conducted research on model organism, fruit fly ( Drosophila, melanogaster)', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (458, 46, 'Sales', '../../data\\SALES\\15620421.pdf', 'CENTER SALES
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (458, 42, 'Sales', '../../data\\SALES\\15620421.pdf', 'CENTER SALES
 Summary
 Results-oriented customer service managerÂ with diverse background in management and customer service. Dedicated to providing excellent
 customer service and making operational and procedural improvements.Â
@@ -65137,7 +66332,7 @@ Languages
 Fluent English reading and writing
 Technical Skills and Qualifications
 Microsoft Word, Excel, Power Point, Outlook', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (459, 47, 'Sales', '../../data\\SALES\\15765660.pdf', 'SALES
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (459, 43, 'Sales', '../../data\\SALES\\15765660.pdf', 'SALES
 Summary
 Passionate Marketing Manager leveraging expertise program management, sales enablement, and brand awareness to deliver lucrative results for
 rapid-growth corporations. Identifies long-term opportunities to produce high-impact ROI and increase customer outreach with cost-centric solutions.
@@ -65308,7 +66503,7 @@ Affiliate Marketing Manager, Nationwide Territory
 January 1998 to January 2000 Company Name ï¼​ City , State
 Channel Sales Account Manager, North-West Territory
 January 1995 to January 1998 Company Name ï¼​ City , State', 'Bachelor of Science : Marketing , 1994 California State University Northridge ï¼​ City , State , US', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (460, 48, 'Teacher', '../../data\\TEACHER\\10504237.pdf', 'BIOLOGY TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (460, 44, 'Teacher', '../../data\\TEACHER\\10504237.pdf', 'BIOLOGY TEACHER
 Experience
 11/2016 to Current
 Biology Teacher Company Name ï¼​ City , State
@@ -65461,7 +66656,7 @@ January 2005
 Bachelors of Sciences : Biological Sciences Atlantic Cape Community College Composition I, Introduction to Literature *Burlington County
 College -Anatomy & Physiology I & II with Laboratory, Introduction to Statistics Biological Sciences
 Rutgers the State University of New Jersey ï¼​ City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (461, 49, 'Teacher', '../../data\\TEACHER\\10527994.pdf', 'SUBSTITUTE TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (461, 45, 'Teacher', '../../data\\TEACHER\\10527994.pdf', 'SUBSTITUTE TEACHER
 Skills
 Outlook, Excel, Word, Power Point, Quick Books and One Note
 Experience
@@ -65504,7 +66699,7 @@ Enthusiastically conversed with customers about purchase needs and available pro
 Inquired about buying experience, item preferences and future purchases.
 Tracked inventory and prepared for promotions by setting up displays, adding signage, and retagging merchandise.
 Recommended appropriate items and direct or lead customers to selections.', 'Bachelor of Arts : Business Administration Management Eastern Oregon University ï¼​ City , State Business Administration Management', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (462, 50, 'Teacher', '../../data\\TEACHER\\10909720.pdf', 'MASTER TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (462, 46, 'Teacher', '../../data\\TEACHER\\10909720.pdf', 'MASTER TEACHER
 Highlights
 Home schooling knowledge
 Calm and patient
@@ -65614,7 +66809,7 @@ Coursework in Child Nutrition Child Abuse Awareness training Coursework in Emerg
 Management Emphasis in Child Development
 High School Diploma , General 1991 Beaumont High School ï¼​ City , State , USA
 Emphasis in Child Development', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (463, 51, 'Teacher', '../../data\\TEACHER\\11336022.pdf', 'LEAD TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (463, 47, 'Teacher', '../../data\\TEACHER\\11336022.pdf', 'LEAD TEACHER
 Summary
 To secure a position where I can utilize my skills, work ethic, achievement where we it can be an asset to your company.
 Highlights
@@ -65689,7 +66884,7 @@ Supported residential clients in completing tasks such as toileting, brushing te
 Acted as a role model for clients by exhibiting positive behaviors.', 'Associates of Science : Teachers Education December 2010 Medgar Evers College City , State Teachers Education
 High School Diploma : Liberal Arts 2005 Thomas Jefferson High School City , State , USA
 Willing to relocate: Anywhere', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (464, 52, 'Teacher', '../../data\\TEACHER\\11616482.pdf', 'GUEST TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (464, 48, 'Teacher', '../../data\\TEACHER\\11616482.pdf', 'GUEST TEACHER
 Professional Overview
 A detail - oriented, high energy Social Science Teacher with the ability to motivate students to work at optimum levels while maintaining a
 comfortable, creative environment, and keeping a clear perspective of goals to be accomplished. Experience in helping students broaden
@@ -65781,7 +66976,7 @@ Memberships/Scholarly Societies
 Fraternity www.lasvegasnupes.com/curtisnether.html Â', 'MBA , Business 2006 University of Nevada ï¼​ City , State Business
 Bachelor of Science , Education Social Science Emporia State University ï¼​ City , State Education Social Science', 'Secondary 7-12 Social Studies.
 Issued: 11/17/15.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (465, 53, 'Teacher', '../../data\\TEACHER\\11943065.pdf', 'CLASSROOM TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (465, 49, 'Teacher', '../../data\\TEACHER\\11943065.pdf', 'CLASSROOM TEACHER
 Professional Summary
 Skilled and experienced classroom teacher certified and licensed to teach in the State of South Carolina. Demonstrated knowledge of successful
 teaching, behavior modification and classroom management. Ready to help students by leveraging training, skills and many years of classroom experience.
@@ -65927,7 +67122,7 @@ Rock Hill High School -
 Northwestern High School - City , State', 'SC Â Certified SCST
 Read to Succeed certification
 First aid and CPR certified', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (466, 54, 'Teacher', '../../data\\TEACHER\\12467531.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (466, 50, 'Teacher', '../../data\\TEACHER\\12467531.pdf', 'TEACHER
 Professional Summary
 Master teacher looking for new role and Industry. I''m looking to leverage the valuable skills, knowledge, and experiences as a teacher to advance
 a new client or organization in an executive or leadership position.
@@ -66066,7 +67261,7 @@ Master''s degree Elementary Education and Teaching
 Bachelor of Arts : Psychology , 2003
 The University of New Mexico - City
 Studio Arts Santa Monica College - City , State', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (467, 55, 'Teacher', '../../data\\TEACHER\\12587973.pdf', 'SUBSTITUTE TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (467, 51, 'Teacher', '../../data\\TEACHER\\12587973.pdf', 'SUBSTITUTE TEACHER
 Summary
 Receiving an education on Psychology and pursuing my teaching certification,ha been the best professional accomplishment I have achieved. The
 teaching in the absence of the teacher helped me understand that I haveÂ a background to implement the strategist teach.
@@ -66187,7 +67382,7 @@ San Diego, CA 92123 Accomplishments Attentive Sales Manager with track record of
 Driven to exceed goals and expectations.
 Talented sales professional effective at multi-tasking and reaching sales targets.
 Builds loyalty and long-term relationships with customers.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (468, 56, 'Teacher', '../../data\\TEACHER\\13087952.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (468, 52, 'Teacher', '../../data\\TEACHER\\13087952.pdf', 'TEACHER
 Farrah M. Bauman
 Professional Summary
 A position as an adjunct teacher/professor with major responsibilities that will effectively utilize my experience and training in coordination with my
@@ -66297,7 +67492,7 @@ Plate microbiology specimens on appropriate media, rapid test for strep, influen
 A, B, O typing and antibody identification, sickle cell determination, antigen typing, cross matching.', 'M.Ed : Secondary Education 2007 Southern Wesleyan University - State Secondary Education GPA: 3.8
 Certificate in Medical Technology : 1999 Carolinas College of Health Sciences, Carolinas Medical Center - City , State
 B.S : Biology 1998 Univ. of South Carolina - State Biology GPA: 3.4', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (469, 57, 'Teacher', '../../data\\TEACHER\\13296856.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (469, 53, 'Teacher', '../../data\\TEACHER\\13296856.pdf', 'TEACHER
 Summary
 Experienced, detail-oriented Program Manager withÂ excellent communication, problem solving and strategic planning skills. Passionate about
 networking, community engagement, building partnerships, training, and educational equity.Â
@@ -66397,7 +67592,9 @@ Masters degree in education
 Experience with work based learning opportunities
 Community Outreach Specialist
 Certified in conflict and dispute resolution
-Knowledge of educational trends, expectations, clim', 'Training
+Knowledge of educational trends, expectations, climate
+Deep understanding ELA
+Familiarity with Denver Plan', 'Training
 Conference Organization
 Microsoft Office Suite
 Non-profit management
@@ -66450,7 +67647,7 @@ Collected and entered statistical data into databases', 'MA , Education August 2
 Bachelor of Science , Political Communications May 2006 Emerson College ï¼​ City , State Political Communications Magna Cum Laude', 'Colorado Teaching Certification
 ELA-E CertifiedÂ
 Conflict and Dispute Resolution Certification', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (470, 58, 'Teacher', '../../data\\TEACHER\\13330982.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (470, 54, 'Teacher', '../../data\\TEACHER\\13330982.pdf', 'TEACHER
 Summary
 Education professional driven to create an environment that promotes hands-on learning for children at all stages of the learning process.
 Highlights
@@ -66591,7 +67788,7 @@ Monitored the cleaning of Keiser Park Beach in Coney Island where we pulled off 
 Sponsered a graffiti clean up in Coney Island.
 Affiliations include Alliance for Climate Education, Partnership for Parks/Coney Island division, Friends of Kaiser Park, Community board
 13, Coney Island Generation Gap, and Urban Neighborhood Services.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (471, 59, 'Teacher', '../../data\\TEACHER\\13583538.pdf', 'ASSISTANT TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (471, 55, 'Teacher', '../../data\\TEACHER\\13583538.pdf', 'ASSISTANT TEACHER
 Summary
 Teacher''s Aide who has lovingly taught 8 children, ages 0 through 18 months. Thorough in guiding children through a variety of daily activities and
 making sure the curriculum is age-appropriate and fun. Dependable and reliable worked others shifts when they couldn''t make it to work.
@@ -66778,7 +67975,7 @@ Social Work University of North Dakota ï¼​ City , State
 I got Credits and I finished most of my Liberals 08/2012 - 05/2014 I did alot of classes for Social Work
 Business Northland Community and Technical College ï¼​ City , State
 I took alot of classes for Office Assistant and did Liberals too. 08/2008 - 05/2014', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (472, 60, 'Teacher', '../../data\\TEACHER\\13855004.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (472, 56, 'Teacher', '../../data\\TEACHER\\13855004.pdf', 'TEACHER
 Professional Summary
 To be enthusiastic, highly motivated and dedicated to instilling in children the passion to become life-long learners through obtaining the position of
 the Enrichment Specialist at Perry Hill School.
@@ -66880,7 +68077,7 @@ NCATE Endorsement, National Council for Accreditation of Teacher Education Remed
 May 2007 Bachelor of Arts : Psychology Psychology
 Passed Praxis II (Regular Education) *Passed Praxis II (Special Education) *Remedial Reading and Remedial Language Arts, Grades K-12 (102
 Certification) *Passed Reading Test :', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (473, 61, 'Teacher', '../../data\\TEACHER\\14958913.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (473, 57, 'Teacher', '../../data\\TEACHER\\14958913.pdf', 'TEACHER
 Interests
 RANGOLI DANCE COMPANY Los Angeles, CA Lead/Post-Graduate Company Dancer 2004 - Present *Graduated with a solo dance debut
 and performed in over 15+ large scale productions *Worked alongside world-renowned dancers from India and the United States *Lead the
@@ -66964,7 +68161,7 @@ Completed Cardiopulmonary Resuscitation (CPR) Certification through the course, 
 COASTLINE REGIONAL OCCUPATIONAL PROGRAM-NURSING
 City , State', 'CALIFORNIA STATE UNIVERSITY May B.S : Chemistry City Chemistry 3.65
 Survey of Chemistry, Introduction to Crime, Law and Justice : Biology General Chemistry Biology General Chemistry', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (474, 62, 'Teacher', '../../data\\TEACHER\\15850434.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (474, 58, 'Teacher', '../../data\\TEACHER\\15850434.pdf', 'TEACHER
 Professional Summary
 Over the past ten years I have excelled at effectively building highly motivated teams of varying backgrounds and abilities, and challenged them to
 succeed in growing and attaining goals that they previously thought impossible. Â My work has centered on reducing anxiety through
@@ -67084,7 +68281,7 @@ Bachelors Degree : 1998
 Eastern University -
 Certificate of Completion : 1995
 Covenant Bible College -', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (475, 63, 'Teacher', '../../data\\TEACHER\\15899269.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (475, 59, 'Teacher', '../../data\\TEACHER\\15899269.pdf', 'TEACHER
 Experience
 08/2015 to 07/2017
 Teacher Company Name ï¼​ City , State
@@ -67153,7 +68350,7 @@ Master of Science : Forensic Psychology Legal Systems Southeastern University ï
 Master of Social Work Clinical In Progress I was a student-athlete on a softball scholarship. I received Bright Futures Scholarship and maintained
 a GPA required of a NAIA student-athlete. Honors: Alpha Lambda Delta Honors Society, Phi Alpha Honors Society, Pi Gamma Mu Honors
 society, Magna Cum Laude Honors Society, Dean''s list 2010-2014, Academic All-Conference team 2012-2013 and 2013-2014.', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (476, 64, 'Teacher', '../../data\\TEACHER\\16210888.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (476, 60, 'Teacher', '../../data\\TEACHER\\16210888.pdf', 'TEACHER
 Core Accomplishments
 Girl Scouts of the Missouri Heartland Â​ Cole County Service Unit Manager, Community 2012 Â​ present Involvement & Professional
 Develop and present engaging and timely written and electronic organizational training Affiliations materials, identify and develop service
@@ -67255,7 +68452,7 @@ DESE Initial Administration Certification, Principal K-8 : Curriculum Leadership
 Master of Education : Educational Leadership and Policy Analysis University of Missouri Educational Leadership and Policy Analysis Graduated with distinction
 Bachelor of Science : Elementary Education Elementary Education
 DESE Elementary 1-6 Certification, Spanish K-9, Middle School Language Arts', '', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (477, 65, 'Teacher', '../../data\\TEACHER\\16270906.pdf', 'TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (477, 61, 'Teacher', '../../data\\TEACHER\\16270906.pdf', 'TEACHER
 Accomplishments
 Monitor school districts in delinquent status and recommend warrants to withhold state funds administered by the Texas Education Agency
 with an effort to collect outstanding dues
@@ -67403,7 +68600,7 @@ Professional Affiliations
 MAXIMUS, TEXAS ACCESS ALLIANCE to', 'Developed knowledge in both areas of Accounts Receivable and Accounts Payable.
 Saved the department money despite the short-handed status in staff and budget fall for over a year with assisting in both Accounts
 Receivable and Accounts Payable.', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (478, 66, 'Teacher', '../../data\\TEACHER\\16820422.pdf', 'ASSOCIATE TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (478, 62, 'Teacher', '../../data\\TEACHER\\16820422.pdf', 'ASSOCIATE TEACHER
 Accomplishments
 Bachelor of Science in Management and Business The Marshall Award 2007
 The Barbara Hume Memorial Award 2011 Coach''s Award 2007
@@ -67502,7 +68699,7 @@ University of Rochester Boys'' Basketball Camp (League Commissioner)', 'Bachelor
 The Barbara Hume Memorial Award 2011 Coach''s Award 2007
 The Rev. B.W. "Pete" Woodward, Jr. Prize 2010
 Coached Hunter Forward, Kristen Markoe, CUNYAC Player of the Year', 0);
-INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (479, 67, 'Teacher', '../../data\\TEACHER\\17311685.pdf', 'KINDERGARTEN TEACHER
+INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted) VALUES (479, 63, 'Teacher', '../../data\\TEACHER\\17311685.pdf', 'KINDERGARTEN TEACHER
 Summary
 Dedicated educator committed to creating a classroom atmosphere that is stimulating, encouraging and supportive for all students. Skilled ESL
 Instructor who uses effective and efficient methods of teaching, while focusing on the individual needs of each student.

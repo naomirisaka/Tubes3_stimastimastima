@@ -201,16 +201,6 @@ CREATE TABLE IF NOT EXISTS ApplicationDetail (
 """
 
 # create database
-conn_init = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD
-)
-cursor_init = conn_init.cursor()
-cursor_init.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
-cursor_init.close()
-conn_init.close()
-
 db = mysql.connector.connect(
     host=DB_HOST,
     user=DB_USER,
@@ -346,7 +336,7 @@ def extract_cv_sections(cv_text):
         'others', 'other', 'personal information', 'personal info', 'additional information', 
         'additional info', 'miscellaneous', 'references', 'hobbies', 'interests', 
         'personal details', 'contact information', 'contact info', 'contact',
-        'objective', 'career objective', 'personal statement'
+        'objective', 'career objective', 'personal statement', 'highlights'
     ]
     
     # Find section headers with their positions
@@ -356,21 +346,20 @@ def extract_cv_sections(cv_text):
         line_clean = line.strip().lower()
         if not line_clean or len(line_clean) > 100:  # Skip very long lines
             continue
-            
-        # Skip ignored sections
+
         if any(ignored in line_clean for ignored in ignored_sections):
             continue
-
+            
         # More precise section header detection
-        if re.match(r'^(summary|profile|overview|about|professional summary)$', line_clean):
-            section_positions.append(('summary', i))
-        elif re.match(r'^(skills|technical skills|professional skills|key skills|core competencies)$', line_clean):
+        if re.match(r'^(summary|profile|overview|about|professional summary|career focus|executive profile)$', line_clean):
+            section_positions.append(('summary', i))  
+        elif re.match(r'^(skills|summary of skills|technical skills|professional skills|key skills|core competencies)$', line_clean):
             section_positions.append(('skills', i))
         elif re.match(r'^(experience|work experience|employment history|professional experience|work history)$', line_clean):
             section_positions.append(('experience', i))
         elif re.match(r'^(education|academic background|qualifications|educational background|education and training)$', line_clean):
             section_positions.append(('education', i))
-        elif re.match(r'^(accomplishments|achievements|certifications|certificates|awards|honors|licenses|certifications and training)$', line_clean):
+        elif re.match(r'^(accomplishments|achievements|certifications|certificates|awards|honors|licenses|core acccomplishments|certifications and training)$', line_clean):
             section_positions.append(('accomplishments', i))
     
     # Sort by position
@@ -395,7 +384,7 @@ def extract_cv_sections(cv_text):
         # Clean and limit content
         content = '\n'.join(content_lines).strip()
         if section_name == 'summary':
-            sections['summary'] = content[:1000]  # Limit summary length
+            sections['summary'] = content # Limit summary length
         else:
             sections[section_name] = content
     
@@ -427,7 +416,7 @@ def extract_sections_with_regex(normalized_text, text_lower):
             r'(?:^|\n)\s*(?:education|academic background|qualifications|educational background)\s*:?\s*\n(.*?)(?=\n\s*(?:accomplishments|skills|experience|certifications)\s*:?\s*\n|\Z)',
         ],
         'accomplishments': [
-            r'(?:^|\n)\s*(?:accomplishments|achievements|certifications|certificates|awards|honors|licenses)\s*:?\s*\n(.*?)(?=\n\s*(?:skills|experience|education|summary)\s*:?\s*\n|\Z)',
+            r'(?:^|\n)\s*(?:accomplishments|achievements|certifications|certificates|core accomplishments|awards|honors|licenses|certifications and training)\s*:?\s*\n(.*?)(?=\n\s*(?:skills|experience|education|summary)\s*:?\s*\n|\Z)',
         ]
     }
     
@@ -480,6 +469,7 @@ def clean_sections(sections):
 
 def should_keep_in_section(content, section1, section2):
     """Determine which section should keep the content based on context"""
+    
     # Skills should stay in skills section
     skill_keywords = ['python', 'java', 'sql', 'excel', 'programming', 'software', 'technical']
     if any(keyword in content.lower() for keyword in skill_keywords):
@@ -897,7 +887,7 @@ if __name__ == "__main__":
     cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
     cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
     db.commit()
-    print("Database cleared successfully")
+    print("Database cleared and AUTO_INCREMENT reset")
     
     # Uncomment to test single file extraction
     # test_extraction("../../data/CHEF/10276858.pdf")
