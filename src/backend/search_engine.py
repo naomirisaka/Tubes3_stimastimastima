@@ -23,6 +23,7 @@ class CVMatch:
     keyword_matches: Dict[str, int]
     similarity_score: float = 0.0
     is_encrypted: bool = False
+    match_sources: List[str] = None
 
 @dataclass
 class SearchResult:
@@ -54,6 +55,8 @@ class DatabaseCVSearchEngine:
         self.cache_loaded = False
         self.encryption_enabled = False
 
+    # Replace the load_cv_cache and load_applicant_cache methods in your backend/search_engine.py
+
     def load_cv_cache(self, force_reload: bool = False):
         if self.cache_loaded and not force_reload:
             return
@@ -61,16 +64,29 @@ class DatabaseCVSearchEngine:
         if not self.db_manager.connect():
             raise Exception("Failed to connect to database")
         
-        # print("Loading CV data from database...")
+        print("Loading CV data from database...")
+        
+        # Ensure encryption columns exist
+        self.db_manager._ensure_encryption_columns()
         
         encryption_status = self.db_manager.get_encryption_status()
         
         cursor = self.db_manager.connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE is_encrypted = TRUE")
-        encrypted_count = cursor.fetchone()[0]
         
-        cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE is_encrypted = FALSE")
-        unencrypted_count = cursor.fetchone()[0]
+        # Check encrypted records with safer query
+        try:
+            cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE COALESCE(is_encrypted, FALSE) = TRUE")
+            encrypted_count = cursor.fetchone()[0]
+            
+            cursor.execute("SELECT COUNT(*) FROM ApplicationDetail WHERE COALESCE(is_encrypted, FALSE) = FALSE")
+            unencrypted_count = cursor.fetchone()[0]
+        except Exception as e:
+            print(f"Warning: Could not check encryption status: {e}")
+            encrypted_count = 0
+            unencrypted_count = 0
+            cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
+            total_count = cursor.fetchone()[0]
+            unencrypted_count = total_count
         
         total_records = encrypted_count + unencrypted_count
         
@@ -78,17 +94,17 @@ class DatabaseCVSearchEngine:
         
         if encrypted_count > 0 and manager_ready:
             self.encryption_enabled = True
+            print(f"   Found {encrypted_count} encrypted records - decryption enabled")
         elif encrypted_count > 0 and not manager_ready:
             print("Warning: Encrypted data found but encryption manager not ready")
             self.encryption_enabled = False
         elif encrypted_count == 0:
             self.encryption_enabled = False
+            print(f"   All {unencrypted_count} records are unencrypted")
         else:
-            # print("Data is partly encrypted")
             self.encryption_enabled = manager_ready
-        # print(f"   Encrypted records: {encrypted_count}/{total_records}")
-        # print(f"   Encryption manager ready: {manager_ready}")
         
+        # Get CV data (will be automatically decrypted by the database manager)
         cv_data = self.db_manager.get_cv_texts_for_search()
         
         self.cv_cache = {}
@@ -97,10 +113,65 @@ class DatabaseCVSearchEngine:
         
         self.cache_loaded = True
         self.db_manager.disconnect()
-        # print(f"Loaded {len(self.cv_cache)} CVs into cache (encryption: {'enabled' if self.encryption_enabled else 'disabled'})")
+        print(f"Loaded {len(self.cv_cache)} CVs into cache (encryption: {'enabled' if self.encryption_enabled else 'disabled'})")
+
+    def load_applicant_cache(self):
+        """Load applicant profile data for name-based searching"""
+        if not self.db_manager.connect():
+            return
+        
+        try:
+            # Ensure encryption columns exist
+            self.db_manager._ensure_encryption_columns()
+            
+            # Load applicant profiles for searching
+            query = """
+            SELECT ad.detail_id, ap.first_name, ap.last_name, ad.application_role, 
+                COALESCE(ap.is_encrypted, FALSE) as is_encrypted
+            FROM ApplicationDetail ad
+            JOIN ApplicantProfile ap ON ad.applicant_id = ap.applicant_id
+            """
+            
+            cursor = self.db_manager.connection.cursor()
+            cursor.execute(query)
+            results = cursor.fetchall()
+            
+            self.applicant_cache = {}
+            
+            for result in results:
+                detail_id, first_name, last_name, role, is_encrypted = result
+                
+                # Decrypt if needed
+                if is_encrypted and self.db_manager.encryption_manager.encryption_enabled:
+                    first_name = self.db_manager.encryption_manager.decrypt_text(first_name) if first_name else ""
+                    last_name = self.db_manager.encryption_manager.decrypt_text(last_name) if last_name else ""
+                
+                # Create searchable text (name + role)
+                full_name = f"{first_name or ''} {last_name or ''}".strip()
+                searchable_text = f"{full_name} {role or ''}".lower()
+                
+                self.applicant_cache[detail_id] = {
+                    'name': full_name,
+                    'role': role or '',
+                    'searchable_text': searchable_text
+                }
+            
+            print(f"Loaded {len(self.applicant_cache)} applicant profiles for searching")
+            
+        except Exception as e:
+            print(f"Error loading applicant cache: {e}")
+            self.applicant_cache = {}
+        
+        finally:
+            self.db_manager.disconnect()
+
     def search_cvs(self, keywords_str: str, algorithm: SearchAlgorithm = SearchAlgorithm.KMP, 
-                   fuzzy_threshold: float = 70.0, top_n: int = 10) -> SearchResult:
+                fuzzy_threshold: float = 70.0, top_n: int = 10) -> SearchResult:
         self.load_cv_cache()
+        
+        # Load applicant profiles if not already loaded
+        if not hasattr(self, 'applicant_cache'):
+            self.load_applicant_cache()
         
         result = SearchResult()
         keywords = self._parse_keywords(keywords_str)
@@ -112,24 +183,77 @@ class DatabaseCVSearchEngine:
         if not keywords:
             return result
         
+        # 1. Search in CV content (existing)
         start_time = time.time()
         cv_exact_matches = self._perform_exact_search_on_cvs(keywords, algorithm)
+        
+        # 2. Search in applicant profiles (NEW)
+        profile_exact_matches = self._perform_exact_search_on_profiles(keywords, algorithm)
         result.exact_match_time = (time.time() - start_time) * 1000
         
-        result.exact_matches = {kw: sum(matches.get(kw, 0) for matches in cv_exact_matches.values()) 
-                               for kw in keywords}
+        # Combine CV and profile matches
+        combined_exact_matches = {}
+        all_detail_ids = set(cv_exact_matches.keys()) | set(profile_exact_matches.keys())
         
+        for detail_id in all_detail_ids:
+            cv_matches = cv_exact_matches.get(detail_id, {})
+            profile_matches = profile_exact_matches.get(detail_id, {})
+            
+            # Combine matches for each keyword
+            combined_matches = {}
+            for keyword in keywords:
+                cv_count = cv_matches.get(keyword, 0)
+                profile_count = profile_matches.get(keyword, 0)
+                combined_matches[keyword] = cv_count + profile_count
+            
+            combined_exact_matches[detail_id] = combined_matches
+        
+        # Calculate overall exact match counts
+        result.exact_matches = {kw: sum(matches.get(kw, 0) for matches in combined_exact_matches.values()) 
+                            for kw in keywords}
+        
+        # 3. Fuzzy search for keywords without exact matches
         keywords_without_matches = [kw for kw, count in result.exact_matches.items() if count == 0]
+        combined_fuzzy_matches = {}
         
         if keywords_without_matches:
             print(f"Performing fuzzy search for {len(keywords_without_matches)} keywords without exact matches")
             start_time = time.time()
+            
             cv_fuzzy_matches = self._perform_fuzzy_search_on_cvs(keywords_without_matches, fuzzy_threshold)
+            profile_fuzzy_matches = self._perform_fuzzy_search_on_profiles(keywords_without_matches, fuzzy_threshold)
+            
+            # Combine fuzzy matches
+            all_fuzzy_ids = set(cv_fuzzy_matches.keys()) | set(profile_fuzzy_matches.keys())
+            
+            for detail_id in all_fuzzy_ids:
+                cv_fuzzy = cv_fuzzy_matches.get(detail_id, {})
+                profile_fuzzy = profile_fuzzy_matches.get(detail_id, {})
+                
+                combined_fuzzy = {}
+                for keyword in keywords_without_matches:
+                    cv_words = cv_fuzzy.get(keyword, [])
+                    profile_words = profile_fuzzy.get(keyword, [])
+                    
+                    # Combine and deduplicate similar words
+                    all_words = {}
+                    for word, score in cv_words + profile_words:
+                        if word not in all_words or score > all_words[word]:
+                            all_words[word] = score
+                    
+                    if all_words:
+                        combined_fuzzy[keyword] = [(word, score) for word, score in all_words.items()]
+                        combined_fuzzy[keyword].sort(key=lambda x: x[1], reverse=True)
+                
+                if combined_fuzzy:
+                    combined_fuzzy_matches[detail_id] = combined_fuzzy
+            
             result.fuzzy_match_time = (time.time() - start_time) * 1000
             
+            # Set fuzzy matches result
             for keyword in keywords_without_matches:
                 all_fuzzy_words = set()
-                for cv_matches in cv_fuzzy_matches.values():
+                for cv_matches in combined_fuzzy_matches.values():
                     if keyword in cv_matches:
                         all_fuzzy_words.update([word for word, _ in cv_matches[keyword]])
                 
@@ -141,12 +265,56 @@ class DatabaseCVSearchEngine:
                     
                     similarity_scores.sort(key=lambda x: x[1], reverse=True)
                     result.fuzzy_matches[keyword] = similarity_scores[:10]
-        else:
-            cv_fuzzy_matches = {}
         
-        result.cv_matches = self._rank_cvs(cv_exact_matches, cv_fuzzy_matches, top_n)
+        # 4. Rank CVs using combined matches
+        result.cv_matches = self._rank_cvs(combined_exact_matches, combined_fuzzy_matches, top_n)
         
         return result
+
+    def _perform_exact_search_on_profiles(self, keywords: List[str], algorithm: SearchAlgorithm) -> Dict[int, Dict[str, int]]:
+        """Search in applicant profiles (names and roles)"""
+        profile_matches = {}
+        
+        for detail_id, profile_data in self.applicant_cache.items():
+            searchable_text = profile_data['searchable_text']
+            keyword_counts = {}
+            
+            if algorithm == SearchAlgorithm.KMP:
+                for keyword in keywords:
+                    matches = kmp.kmp_search(searchable_text, keyword)
+                    keyword_counts[keyword] = len(matches)
+            
+            elif algorithm == SearchAlgorithm.BOYER_MOORE:
+                for keyword in keywords:
+                    matches = boyer_moore.boyer_moore_search(searchable_text, keyword)
+                    keyword_counts[keyword] = len(matches)
+            
+            elif algorithm == SearchAlgorithm.AHO_CORASICK:
+                matches = aho_corasick.aho_corasick_search(searchable_text, keywords)
+                for keyword in keywords:
+                    keyword_counts[keyword] = len(matches.get(keyword, []))
+            
+            if sum(keyword_counts.values()) > 0:
+                profile_matches[detail_id] = keyword_counts
+        
+        return profile_matches
+
+    def _perform_fuzzy_search_on_profiles(self, keywords: List[str], threshold: float) -> Dict[int, Dict[str, List[Tuple[str, float]]]]:
+        profile_fuzzy_matches = {}
+        
+        for detail_id, profile_data in self.applicant_cache.items():
+            searchable_text = profile_data['searchable_text']
+            fuzzy_results = {}
+            
+            for keyword in keywords:
+                similar_words = levenshtein.find_similar_words(keyword, searchable_text, threshold)
+                if similar_words:
+                    fuzzy_results[keyword] = similar_words[:3]  # Top 3 similar words
+            
+            if fuzzy_results:
+                profile_fuzzy_matches[detail_id] = fuzzy_results
+        
+        return profile_fuzzy_matches
     
     def _parse_keywords(self, keywords_str: str) -> List[str]:
         if not keywords_str:
@@ -195,8 +363,8 @@ class DatabaseCVSearchEngine:
         return cv_fuzzy_matches
     
     def _rank_cvs(self, exact_matches: Dict[int, Dict[str, int]], 
-                  fuzzy_matches: Dict[int, Dict[str, List[Tuple[str, float]]]], 
-                  top_n: int) -> List[CVMatch]:
+                fuzzy_matches: Dict[int, Dict[str, List[Tuple[str, float]]]], 
+                top_n: int) -> List[CVMatch]:
         cv_scores = {}
         
         for detail_id, keyword_counts in exact_matches.items():
@@ -205,15 +373,39 @@ class DatabaseCVSearchEngine:
                 cv_scores[detail_id] = {
                     'exact_score': total_exact,
                     'fuzzy_score': 0,
-                    'keyword_breakdown': keyword_counts.copy()
+                    'keyword_breakdown': keyword_counts.copy(),
+                    'match_sources': []
                 }
+                
+                cv_matches = self.cv_cache.get(detail_id, "")
+                profile_data = getattr(self, 'applicant_cache', {}).get(detail_id, {})
+                
+                has_cv_matches = False
+                has_profile_matches = False
+                
+                for keyword, count in keyword_counts.items():
+                    if count > 0:
+                        if cv_matches and keyword in cv_matches:
+                            has_cv_matches = True
+                        
+                        if profile_data and keyword in profile_data.get('searchable_text', ''):
+                            has_profile_matches = True
+                
+                sources = []
+                if has_cv_matches:
+                    sources.append('CV')
+                if has_profile_matches:
+                    sources.append('Name/Role')
+                
+                cv_scores[detail_id]['match_sources'] = sources
         
         for detail_id, keyword_fuzzy in fuzzy_matches.items():
             if detail_id not in cv_scores:
                 cv_scores[detail_id] = {
                     'exact_score': 0,
                     'fuzzy_score': 0,
-                    'keyword_breakdown': {}
+                    'keyword_breakdown': {},
+                    'match_sources': ['Fuzzy']
                 }
             
             fuzzy_score = 0
@@ -226,6 +418,8 @@ class DatabaseCVSearchEngine:
                 cv_scores[detail_id]['keyword_breakdown'][fuzzy_key] = word_count
             
             cv_scores[detail_id]['fuzzy_score'] = fuzzy_score
+            if 'Fuzzy' not in cv_scores[detail_id]['match_sources']:
+                cv_scores[detail_id]['match_sources'].append('Fuzzy')
         
         ranked_cvs = []
         
@@ -251,6 +445,10 @@ class DatabaseCVSearchEngine:
                             similarity_score=total_score,
                             is_encrypted=app.is_encrypted
                         )
+                        
+                        if hasattr(cv_match, 'match_sources'):
+                            cv_match.match_sources = scores['match_sources']
+                        
                         ranked_cvs.append(cv_match)
             
             ranked_cvs.sort(key=lambda x: x.similarity_score, reverse=True)

@@ -66,7 +66,8 @@ class ATSBackend:
                         "application_role": cv.application_role,
                         "total_matches": cv.total_matches,
                         "keyword_matches": cv.keyword_matches,
-                        "similarity_score": cv.similarity_score
+                        "similarity_score": cv.similarity_score,
+                        "match_sources": getattr(cv, 'match_sources', ['CV'])
                     }
                     for cv in cv_matches
                 ]

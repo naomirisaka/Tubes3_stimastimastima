@@ -166,7 +166,8 @@ class ATSController:
                     "match": cv['total_matches'],
                     "keywords": cv['keyword_matches'],
                     "cv_path": resolved_cv_path,  # Use resolved path
-                    "original_path": original_cv_path  # Keep original for debugging
+                    "original_path": original_cv_path,  
+                    "match_sources": cv.get('match_sources', ['CV']) 
                 })
             
             # Add search metadata for display

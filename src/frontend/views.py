@@ -1,4 +1,4 @@
-# frontend/views.py
+# frontend/views.py - Updated to fix source_color error
 
 import flet as ft
 from frontend.controller import get_controller, get_applicant_summary_from_detail_id
@@ -334,7 +334,7 @@ def home_view(page: ft.Page):
                 controls=[
                     ft.Container(
                         content=ft.Row([
-                            ft.Icon(size=18, color=ft.Colors.BLUE_600),
+                            ft.Icon(ft.Icons.SEARCH, size=18, color=ft.Colors.BLUE_600),
                             stats_text
                         ], spacing=5),
                         padding=10,
@@ -365,22 +365,6 @@ def home_view(page: ft.Page):
 
         # Show loading
         result_column.controls.clear()
-
-        if algo == "BM" and len(keywords) <= 3:
-            warning = ft.Text(
-                "⚠️ Warning: Searching with short keyword (<= 3) using Boyer-Moore may be slow.",
-                size=14,
-                color=ft.Colors.ORANGE_600,
-                text_align=ft.TextAlign.CENTER
-            )
-            result_column.controls.append(
-                ft.Container(
-                    content=warning,
-                    alignment=ft.alignment.center,
-                    padding=10
-                )
-            )
-            
         result_column.controls.append(
             ft.Container(
                 content=ft.Row([
@@ -419,6 +403,9 @@ def home_view(page: ft.Page):
                 )
             )
             page.update()
+            print(f"Search error details: {e}")  # Debug print
+            import traceback
+            traceback.print_exc()  # Print full traceback
 
     def show_summary(detail_id):
         showing_summary.current = True
@@ -482,7 +469,7 @@ def home_view(page: ft.Page):
                             ft.Container(
                                 content=ft.Row([
                                     ft.Icon(
-                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
+                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.Icons.ERROR,
                                         color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
                                         size=20
                                     ),
@@ -724,6 +711,17 @@ def home_view(page: ft.Page):
                 pdf_exists = bool(cv_path and os.path.exists(cv_path))
                 applicant_name = cv.get('applicant_name', 'Unknown')
                 
+                # Get match sources if available
+                match_sources = cv.get('match_sources', ['CV'])
+                
+                # Create match source display
+                if match_sources:
+                    source_display = ", ".join(match_sources)
+                    source_color = ft.Colors.BLUE_600
+                else:
+                    source_display = "CV"
+                    source_color = ft.Colors.GREY_600
+                
                 result_column.controls.append(
                     ft.Card(
                         content=ft.Container(
@@ -745,11 +743,16 @@ def home_view(page: ft.Page):
                                 
                                 ft.Text(f"🎯 {keyword_text}", 
                                     size=12, color=ft.Colors.GREY_600),
+
+                                ft.Row([
+                                    ft.Icon(ft.Icons.SOURCE, size=14, color=source_color),
+                                    ft.Text(f"Found in: {source_display}", 
+                                        size=10, color=source_color)
+                                ], spacing=5),
                                 
-                                # PDF Status
                                 ft.Row([
                                     ft.Icon(
-                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.icons.ERROR,
+                                        ft.Icons.PICTURE_AS_PDF if pdf_exists else ft.Icons.ERROR,
                                         color=ft.Colors.GREEN if pdf_exists else ft.Colors.RED,
                                         size=16
                                     ),
@@ -772,12 +775,6 @@ def home_view(page: ft.Page):
                                         style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_100, color=ft.Colors.PURPLE_800),
                                         disabled=not pdf_exists
                                     )
-                                    # ft.ElevatedButton(
-                                    #     "🚀 Quick Open", 
-                                    #     on_click=lambda e, path=cv_path: quick_open_cv(path),
-                                    #     style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_100, color=ft.Colors.GREEN_800),
-                                    #     disabled=not pdf_exists
-                                    # )
                                 ], spacing=8)
                             ], spacing=8),
                             padding=15
@@ -786,7 +783,6 @@ def home_view(page: ft.Page):
                     )
                 )
 
-        # ⬇ Pagination Controls
         total_pages = max(1, (len(last_search_results) + results_per_page - 1) // results_per_page)
 
         page_info_label.value = f"Page {current_page + 1} / {total_pages}"
@@ -808,8 +804,6 @@ def home_view(page: ft.Page):
         page.update()
 
     def build_layout():
-        # print("showing_summary is", showing_summary.current)
-
         navbar = ft.Container(
             bgcolor="#A6DAFF",
             padding=20,
@@ -824,8 +818,8 @@ def home_view(page: ft.Page):
         )
 
         welcome_text = ft.Text(
-            "Welcome to StimaStimaStima CV Matcher!",
-            size=24,
+            "Welcome to Matchify - ATS CV Matcher!",
+            size=20,
             weight=ft.FontWeight.W_600,
             text_align=ft.TextAlign.CENTER
         )
@@ -865,32 +859,13 @@ def home_view(page: ft.Page):
     except:
         stats_text.value = "📊 Database: Ready"
 
-    # layout = ft.Column(
-    #     controls = (
-    #         [navbar]
-    #         + (
-    #             # Jika tidak sedang lihat summary → tampilkan input
-    #             [
-    #                 ft.Container(welcome_text, alignment=ft.alignment.center),
-    #                 ft.Container(keyword_input_field, alignment=ft.alignment.center),
-    #                 control_row,
-    #                 ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
-    #             ] if not showing_summary.current else [
-    #                 ft.Text("CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
-    #             ]
-    #         )
-    #         + [ft.Container(result_column, padding=20)]
-    #     ),
-    #     spacing=25
-    # )
-
     result_column.controls.append(
         ft.Row(
             alignment=ft.MainAxisAlignment.CENTER,
             controls=[
                 ft.Container(
                     content=ft.Row([
-                        ft.Icon(size=18, color=ft.Colors.GREY_800),
+                        ft.Icon(ft.Icons.STORAGE, size=18, color=ft.Colors.GREY_800),
                         stats_text
                     ], spacing=5),
                     padding=10,
