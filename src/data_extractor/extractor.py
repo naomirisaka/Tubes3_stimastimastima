@@ -1,8 +1,8 @@
 import os
 import glob
 import re
-from faker import Faker 
-import fitz
+from faker import Faker
+import fitz 
 import mysql.connector
 import getpass 
 import random
@@ -250,21 +250,25 @@ def extract_text_from_pdf(pdf_path):
         for page_num in range(len(doc)):
             page = doc.load_page(page_num)
             
+            # Method 1: Try structured extraction with blocks
             blocks = page.get_text("blocks")
             page_lines = []
             
-            blocks.sort(key=lambda block: (block[1], block[0]))
+            # Sort blocks by position (top to bottom, left to right)
+            blocks.sort(key=lambda block: (block[1], block[0]))  # Sort by y, then x
             
             for block in blocks:
-                if len(block) >= 5:  
+                if len(block) >= 5:  # Text block
                     text = block[4].strip()
                     if text:
+                        # Split block text into lines and clean
                         lines = text.split('\n')
                         for line in lines:
                             line = line.strip()
                             if line:
                                 page_lines.append(line)
             
+            # If structured extraction didn't work well, try simple extraction
             if len(page_lines) < 5:
                 simple_text = page.get_text().strip()
                 if simple_text:
@@ -275,13 +279,14 @@ def extract_text_from_pdf(pdf_path):
         
         doc.close()
         
+        # Join with newlines and clean up
         result = '\n'.join(full_text)
         return clean_extracted_text(result)
         
     except Exception as e:
         print(f"PyMuPDF extraction failed for {pdf_path}: {e}")
         return ""
-
+    
 def clean_extracted_text(text):
     if not text:
         return ""
@@ -326,159 +331,173 @@ def clean_extracted_text(text):
     
     return '\n'.join(final_lines)
 
-
 def extract_cv_sections(cv_text):
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    text = cv_text
+    if not cv_text:
+        return sections
     
+    # Normalize text
     normalized_text = cv_text.replace('\r', '\n')
     text_lower = normalized_text.lower()
     
-    # summary
+    # SUMMARY PATTERNS - improved with line boundaries
     summary_patterns = [
-        r'summary\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)',
-        r'profile\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)',
-        r'overview\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)'
+        r'(?:^|\n)\s*summary\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+        r'(?:^|\n)\s*profile\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+        r'(?:^|\n)\s*overview\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))'
     ]
     
+    # Try summary regex patterns first
     for pattern in summary_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
             start, end = match.start(1), match.end(1)
             sections['summary'] = normalized_text[start:end].strip()[:1000]
-    
-    # skills and highlights - combine both sections
-    skills_content = []
-    
-    highlights_patterns = [
-        r'highlights\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional|skills)',
-        r'key skills\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional)',
-        r'core competencies\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional)'
-    ]
-    
-    for pattern in highlights_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            skills_content.append(normalized_text[match.start(1):match.end(1)].strip())
             break
     
-    # get skills section at end of cv
+    # HIGHLIGHTS - merge into summary section
+    if not sections['summary']:
+        highlights_patterns = [
+            r'(?:^|\n)\s*highlights\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+            r'(?:^|\n)\s*key highlights\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+            r'(?:^|\n)\s*core competencies\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))'
+        ]
+        
+        for pattern in highlights_patterns:
+            match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
+            if match:
+                start, end = match.start(1), match.end(1)
+                sections['summary'] = normalized_text[start:end].strip()[:1000]
+                break
+    
+    # Handle summary without explicit header (after job title/position)
+    if not sections['summary']:
+        lines = normalized_text.split('\n')
+        for i, line in enumerate(lines[:15]):
+            line_stripped = line.strip()
+            line_lower = line_stripped.lower()
+            
+            # Skip empty lines and contact info
+            if not line_stripped or any(indicator in line_lower for indicator in ['@', 'phone', 'email', 'address']):
+                continue
+                
+            # Skip single words or very short lines (likely names/titles)
+            if len(line_stripped.split()) <= 3:
+                continue
+            
+            # If we find a descriptive sentence, it's likely summary
+            if (len(line_stripped.split()) >= 5 and 
+                any(word in line_lower for word in ['specializing', 'experienced', 'professional', 'expert', 'skilled', 'responsible', 'managing'])):
+                
+                # Find where summary ends
+                summary_lines = [line_stripped]
+                for j in range(i + 1, min(i + 10, len(lines))):
+                    next_line = lines[j].strip()
+                    if not next_line:
+                        continue
+                    
+                    # Stop if we hit a section header (but not highlights - that goes to summary)
+                    next_lower = next_line.lower()
+                    if (len(next_line) <= 50 and 
+                        any(header in next_lower for header in ['skills', 'experience', 'education', 'accomplishments'])):
+                        break
+                    
+                    # Stop if we hit date patterns (likely experience section)
+                    if re.search(r'\b\d{4}\s+to\s+\d{4}\b|\b\d{1,2}/\d{4}\s*[-–]\s*\d{1,2}/\d{4}\b', next_line):
+                        break
+                    
+                    # Stop if we hit "Company Name" patterns
+                    if 'company name' in next_lower:
+                        break
+                    
+                    summary_lines.append(next_line)
+                
+                sections['summary'] = '\n'.join(summary_lines).strip()[:1000]
+                break
+    
+    # SKILLS - handle both early and late positioning in CV
     skills_patterns = [
-        r'(?:^|\s)skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)',
-        r'technical skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)',
-        r'professional skills\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|$)'
+        # Skills section that appears mid-document (before experience/education)
+        r'(?:^|\n)\s*skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*technical skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*professional skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*key skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        
+        # Skills section that appears at the end of document (after experience/education)
+        r'(?:^|\n)\s*skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*technical skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*professional skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*key skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        
+        # Skills section at very end of document (no following sections)
+        r'(?:^|\n)\s*skills\s+(.*?)$',
+        r'(?:^|\n)\s*technical skills\s+(.*?)$',
+        r'(?:^|\n)\s*professional skills\s+(.*?)$'
     ]
     
     for pattern in skills_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            skills_content.append(normalized_text[match.start(1):match.end(1)].strip())
+            start, end = match.start(1), match.end(1)
+            sections['skills'] = normalized_text[start:end].strip()
             break
     
-    if skills_content:
-        sections['skills'] = ' '.join(skills_content)
-    
-    # experience
+    # EXPERIENCE with improved patterns
     experience_patterns = [
-        r'experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
-        r'work experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
-        r'employment history\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)',
-        r'professional experience\s+(.*?)(?=education|accomplishments|achievements|certifications|interests|additional|skills)'
+        r'(?:^|\n)\s*experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*work experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*employment history\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*professional experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))'
     ]
     
     for pattern in experience_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            exp_text = normalized_text[match.start(1):match.end(1)].strip()
+            start, end = match.start(1), match.end(1)
+            exp_text = normalized_text[start:end].strip()
             exp_text = re.sub(r'company\s*name', 'Company Name', exp_text, flags=re.IGNORECASE)
             exp_text = re.sub(r'city\s*,\s*state', 'City, State', exp_text, flags=re.IGNORECASE)
             sections['experience'] = exp_text[:2000]
             break
     
-    # education
+    # EDUCATION with improved patterns
     education_patterns = [
-        r'education\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)',
-        r'academic background\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)',
-        r'qualifications\s+(.*?)(?=accomplishments|achievements|certifications|interests|additional|skills)'
+        r'(?:^|\n)\s*education\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*academic background\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*qualifications\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))'
     ]
     
     for pattern in education_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            edu_text = normalized_text[match.start(1):match.end(1)].strip()
+            start, end = match.start(1), match.end(1)
+            edu_text = normalized_text[start:end].strip()
             sections['education'] = edu_text[:1000]
             break
     
-    # accomplishments
+    # ACCOMPLISHMENTS with improved patterns
     accomplishments_patterns = [
-        r'accomplishments\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'achievements\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'key achievements\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'certificates\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'professional certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'licenses and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'awards and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'qualifications and certifications\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'licenses\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'awards\s+(.*?)(?=highlights|experience|education|interests|additional|skills)',
-        r'honors\s+(.*?)(?=highlights|experience|education|interests|additional|skills)'
+        r'(?:^|\n)\s*accomplishments\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*achievements\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*key achievements\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*certificates\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*professional certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*licenses and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*awards and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*qualifications and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*licenses\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*awards\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*honors\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))'
     ]
+    
     for pattern in accomplishments_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            sections['accomplishments'] = normalized_text[match.start(1):match.end(1)].strip()
+            start, end = match.start(1), match.end(1)
+            sections['accomplishments'] = normalized_text[start:end].strip()
             break
-    
-    # fallback parsing
-    if not any(sections.values()):
-        sections = extract_cv_sections_fallback(cv_text)
-    
-    return sections
-
-def extract_cv_sections_fallback(cv_text):
-    sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
-    
-    lines = cv_text.split('\n')
-    current_section = None
-    content = []
-    
-    section_keywords = {
-        'summary': ['summary', 'profile', 'overview', 'about'],
-        'skills': ['highlights', 'skills', 'technical skills', 'competencies', 'core competencies'],
-        'experience': ['experience', 'work experience', 'employment', 'professional experience'],
-        'education': ['education', 'academic', 'qualifications'],
-        'accomplishments': ['accomplishments', 'achievements', 'certifications', 'certificates', 
-        'awards', 'professional certifications', 'licenses', 'honors',
-        'licenses and certifications', 'awards and certifications']
-    }
-    
-    for line in lines:
-        line = line.strip()
-        if not line or len(line) < 3:
-            continue
-        
-        line_lower = line()
-        
-        found_section = None
-        for section, keywords in section_keywords.items():
-            if any(keyword in line_lower and len(line) < 50 for keyword in keywords):
-                if current_section and content:
-                    sections[current_section] = ' '.join(content)
-                
-                found_section = section
-                content = []
-                break
-        
-        if found_section:
-            current_section = found_section
-        elif current_section:
-            content.append(line)
-    
-    if current_section and content:
-        sections[current_section] = ' '.join(content)
-    
     return sections
 
 def insert_applicant_profile(profile_data, encrypt_data=False):
@@ -831,8 +850,6 @@ def test_extraction(pdf_path):
             print("(Not found)")
 
 if __name__ == "__main__":
-    print("=== CV ATS Extraction App with Encryption Support ===\n")
-    
     # Check for existing encryption configuration
     config = load_encryption_config()
     use_encryption = False
@@ -862,7 +879,7 @@ if __name__ == "__main__":
     cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
     cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
     db.commit()
-    print("Database cleared successfully")
+    print("Database cleared and AUTO_INCREMENT reset")
     
     # Uncomment to test single file extraction
     # test_extraction("../../data/CHEF/10276858.pdf")

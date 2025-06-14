@@ -1,5 +1,3 @@
-# frontend/views.py - Updated to fix source_color error
-
 import flet as ft
 from frontend.controller import get_controller, get_applicant_summary_from_detail_id
 import os
@@ -297,8 +295,7 @@ def home_view(page: ft.Page):
     last_search_metadata = {}
 
     def open_cv_dialog(cv_path: str, applicant_name: str = ""):
-        """Open CV file with enhanced dialog."""
-        print(f"Opening CV dialog for: {applicant_name} - {cv_path}")
+        # print(f"Opening CV dialog for: {applicant_name} - {cv_path}")
         
         if not cv_path:
             page.snack_bar = ft.SnackBar(
@@ -309,11 +306,9 @@ def home_view(page: ft.Page):
             page.update()
             return
         
-        # Show the PDF dialog
         show_pdf_dialog(page, cv_path, applicant_name)
 
     def render_search_metadata():
-        """Render search metadata/info (algorithm, time, etc)."""
         if not last_search_metadata:
             return
         
@@ -389,7 +384,6 @@ def home_view(page: ft.Page):
                 last_search_results = search_result if search_result else []
                 last_search_metadata = {}
             
-            current_page = 0
             render_paginated_results()
 
             

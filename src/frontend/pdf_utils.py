@@ -1,5 +1,3 @@
-# frontend/pdf_utils.py
-
 import os
 import subprocess
 import platform
@@ -7,15 +5,6 @@ import webbrowser
 from pathlib import Path
 
 def open_pdf_with_system_viewer(pdf_path: str) -> bool:
-    """
-    Open PDF with system default viewer.
-    
-    Args:
-        pdf_path: Path to the PDF file
-        
-    Returns:
-        bool: True if successful, False otherwise
-    """
     if not pdf_path or not os.path.exists(pdf_path):
         print(f"PDF file not found: {pdf_path}")
         return False
@@ -24,19 +13,15 @@ def open_pdf_with_system_viewer(pdf_path: str) -> bool:
         system = platform.system().lower()
         
         if system == "windows":
-            # Windows - use os.startfile
             os.startfile(pdf_path)
             
-        elif system == "darwin":  # macOS
-            # macOS - use 'open' command
+        elif system == "darwin":  
             subprocess.run(['open', pdf_path], check=True)
             
         elif system == "linux":
-            # Linux - use xdg-open
             subprocess.run(['xdg-open', pdf_path], check=True)
             
         else:
-            # Fallback - try webbrowser
             webbrowser.open(f'file://{os.path.abspath(pdf_path)}')
         
         print(f"Opened PDF: {pdf_path}")
