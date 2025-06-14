@@ -275,9 +275,12 @@ def home_view(page: ft.Page):
     def update_slider(e):
         try:
             val = int(e.control.value)
-            if 1 <= val <= 50:
+            cv_count.current.value = val
+            if val > 50:
+                cv_count.current.value = 50
+            else:
                 cv_count.current.value = val
-                page.update()
+            page.update()
         except:
             pass
 
@@ -319,7 +322,7 @@ def home_view(page: ft.Page):
                 controls=[
                     ft.Container(
                         content=ft.Row([
-                            ft.Icon(ft.Icons.SEARCH, size=18, color=ft.Colors.BLUE_600),
+                            ft.Icon(size=18, color=ft.Colors.BLUE_600),
                             stats_text
                         ], spacing=5),
                         padding=10,
@@ -334,7 +337,7 @@ def home_view(page: ft.Page):
         showing_summary.current = False
         keywords = (keyword_input.current.value or "").strip()
         algo = (algorithm_selector.current.value or "").strip()
-        top_n = int(cv_count.current.value or 10)
+        value = cv_input.current.value
 
         if not keywords:
             page.snack_bar = ft.SnackBar(ft.Text("Please enter keywords!"), bgcolor=ft.Colors.RED_400)
@@ -348,6 +351,20 @@ def home_view(page: ft.Page):
             page.update()
             return
 
+        if not value or value.strip() == "":
+            page.snack_bar = ft.SnackBar(ft.Text("Please enter Top CVs!"), bgcolor=ft.Colors.RED_400)
+            page.snack_bar.open = True
+            page.update()
+            return
+
+        try:
+            top_n = int(value)
+        except ValueError:
+            page.snack_bar = ft.SnackBar(ft.Text("Top CVs must be a number!"), bgcolor=ft.Colors.RED_400)
+            page.snack_bar.open = True
+            page.update()
+            return
+        
         # Show loading
         result_column.controls.clear()
         result_column.controls.append(
