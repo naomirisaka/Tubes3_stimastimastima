@@ -114,33 +114,3 @@ def find_all_matches_in_file(filepath: str, keyword_string: str) -> Dict[str, Li
     keywords = parse_keywords(keyword_string.lower())
     
     return aho_corasick_search(text, keywords)
-
-if __name__ == "__main__":
-    path = "data/schema.sql"
-    input_keywords = "React, Next.js, HTML, CSS, JavaScript"
-    
-    print("=== Aho-Corasick Algorithm Test ===")
-    
-    counts = count_keyword_occurrences_in_file(path, input_keywords)
-    print("\nKeyword counts:")
-    for keyword, count in counts.items():
-        print(f"  {keyword}: {count} occurrence(s)")
-    
-    positions = find_all_matches_in_file(path, input_keywords)
-    print("\nKeyword positions:")
-    for keyword, pos_list in positions.items():
-        if pos_list:
-            print(f"  {keyword}: found at positions {pos_list[:5]}{'...' if len(pos_list) > 5 else ''}")
-        else:
-            print(f"  {keyword}: not found")
-    
-    print("\n=== Direct Test ===")
-    test_text = "she sells seashells by the seashore"
-    test_patterns = ["she", "shells", "sea"]
-    
-    direct_results = aho_corasick_search(test_text, test_patterns)
-    print(f"Text: '{test_text}'")
-    print(f"Patterns: {test_patterns}")
-    print("Results:")
-    for pattern, positions in direct_results.items():
-        print(f"  '{pattern}': {positions}")

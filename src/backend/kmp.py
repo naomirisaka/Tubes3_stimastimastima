@@ -59,11 +59,3 @@ def count_keyword_occurrences_in_file(filepath: str, keyword_string: str) -> Dic
         matches = kmp_search(text, kw)
         result[kw] = len(matches)
     return result
-
-if __name__ == "__main__":
-    path = "data/schema.sql"
-    input_keywords = "React, Next.js, HTML"
-
-    counts = count_keyword_occurrences_in_file(path, input_keywords)
-    for keyword, count in counts.items():
-        print(f"{keyword}: {count} occurrence(s)")

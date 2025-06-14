@@ -808,7 +808,7 @@ def home_view(page: ft.Page):
         page.update()
 
     def build_layout():
-        print("showing_summary is", showing_summary.current)
+        # print("showing_summary is", showing_summary.current)
 
         navbar = ft.Container(
             bgcolor="#A6DAFF",
@@ -857,7 +857,6 @@ def home_view(page: ft.Page):
             spacing=25
         )
 
-    # Initialize with database stats
     try:
         stats = controller.get_database_stats()
         if stats:
@@ -877,7 +876,7 @@ def home_view(page: ft.Page):
     #                 control_row,
     #                 ft.Row(alignment=ft.MainAxisAlignment.CENTER, controls=[search_button]),
     #             ] if not showing_summary.current else [
-    #                 ft.Text("📄 CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
+    #                 ft.Text("CV Summary", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
     #             ]
     #         )
     #         + [ft.Container(result_column, padding=20)]
@@ -885,7 +884,6 @@ def home_view(page: ft.Page):
     #     spacing=25
     # )
 
-    # Tampilkan info database sebagai tampilan awal
     result_column.controls.append(
         ft.Row(
             alignment=ft.MainAxisAlignment.CENTER,
