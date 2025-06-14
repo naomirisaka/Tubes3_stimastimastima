@@ -4,21 +4,11 @@ import os
 import subprocess
 import platform
 import webbrowser
-import fitz 
 import re
+from data_extractor.extractor import extract_text_from_pdf
 
-def extract_pdf_text(pdf_path: str) -> str:
-    try:
-        doc = fitz.open(pdf_path)
-        text = ""
-        for page in doc:
-            text += page.get_text()
-        return text.strip()
-    except Exception as e:
-        return f"Error reading PDF: {e}"
-    
 def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
-    extracted_text = extract_pdf_text(pdf_path)
+    extracted_text = extract_text_from_pdf(pdf_path)
 
     section_headers = ["Summary", "Skills", "Experience", "Education", "Accomplishments"]
     for header in section_headers:
