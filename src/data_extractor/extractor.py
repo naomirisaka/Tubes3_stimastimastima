@@ -37,7 +37,7 @@ if not DB_PASSWORD:
             print("Password verification failed")
             exit(1) 
 
-# Encryption configuration
+# encryption configuration
 ENCRYPTION_KEY_FILE = "ats_encryption.key"
 ENCRYPTION_CONFIG_FILE = "ats_config.json"
 
@@ -48,13 +48,10 @@ class EncryptionManager:
         self.encryption_enabled = False
     
     def generate_key(self) -> bytes:
-        """Generate a new encryption key."""
         return Fernet.generate_key()
     
     def save_key(self, key: bytes, password: str = None):
-        """Save encryption key to file, optionally password-protected."""
         if password:
-            # Derive key from password using PBKDF2
             password_hash = hashlib.pbkdf2_hmac('sha256', 
                                                password.encode('utf-8'), 
                                                b'ats_salt_2024', 
@@ -94,12 +91,9 @@ class EncryptionManager:
             return key_data
     
     def initialize_encryption(self, password: str = None) -> bool:
-        """Initialize encryption with existing or new key."""
-        # Try to load existing key
         key = self.load_key(password)
         
         if not key:
-            # Generate new key
             key = self.generate_key()
             self.save_key(key, password)
             print("Generated new encryption key")
@@ -112,7 +106,6 @@ class EncryptionManager:
         return True
     
     def encrypt_text(self, text: str) -> str:
-        """Encrypt text and return base64 encoded string."""
         if not self.encryption_enabled or not text:
             return text
         
@@ -120,7 +113,6 @@ class EncryptionManager:
         return base64.b64encode(encrypted_data).decode('utf-8')
     
     def decrypt_text(self, encrypted_text: str) -> str:
-        """Decrypt base64 encoded encrypted text."""
         if not self.encryption_enabled or not encrypted_text:
             return encrypted_text
         
@@ -133,20 +125,17 @@ class EncryptionManager:
             return encrypted_text
 
     def is_encrypted_data(self, text: str) -> bool:
-        """Check if text appears to be encrypted (base64 encoded)."""
         if not text or len(text) < 10:
             return False
         
         try:
             # Try to decode as base64
             decoded = base64.b64decode(text.encode('utf-8'))
-            # Check if it looks like Fernet encrypted data (starts with specific bytes)
             return len(decoded) > 10 and decoded.startswith(b'\x80')
         except:
             return False
 
 def save_encryption_config(encryption_enabled: bool, password_protected: bool = False):
-    """Save encryption configuration."""
     config = {
         "encryption_enabled": encryption_enabled,
         "password_protected": password_protected,
@@ -157,7 +146,6 @@ def save_encryption_config(encryption_enabled: bool, password_protected: bool = 
         json.dump(config, f, indent=2)
 
 def load_encryption_config() -> dict:
-    """Load encryption configuration."""
     if not os.path.exists(ENCRYPTION_CONFIG_FILE):
         return {"encryption_enabled": False, "password_protected": False}
     
@@ -167,10 +155,8 @@ def load_encryption_config() -> dict:
     except:
         return {"encryption_enabled": False, "password_protected": False}
 
-# Global encryption manager
 encryption_manager = EncryptionManager()
 
-# Modified table creation with encryption support
 create_applicant_profile_table = """
 CREATE TABLE IF NOT EXISTS ApplicantProfile (
     applicant_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -220,7 +206,6 @@ def generate_phone():
     return "08" + ''.join(faker.random_choices(elements='0123456789', length=10))
 
 def generate_fake_profile():
-    # use simple Indonesian name generation
     first_name = faker.first_name()
     last_name = faker.last_name() 
     
@@ -239,26 +224,22 @@ def extract_text_from_pdf(pdf_path):
         
         for page_num in range(len(doc)):
             page = doc.load_page(page_num)
-            
-            # Method 1: Try structured extraction with blocks
+
             blocks = page.get_text("blocks")
             page_lines = []
             
-            # Sort blocks by position (top to bottom, left to right)
-            blocks.sort(key=lambda block: (block[1], block[0]))  # Sort by y, then x
+            blocks.sort(key=lambda block: (block[1], block[0])) 
             
             for block in blocks:
-                if len(block) >= 5:  # Text block
+                if len(block) >= 5: 
                     text = block[4].strip()
                     if text:
-                        # Split block text into lines and clean
                         lines = text.split('\n')
                         for line in lines:
                             line = line.strip()
                             if line:
                                 page_lines.append(line)
             
-            # If structured extraction didn't work well, try simple extraction
             if len(page_lines) < 5:
                 simple_text = page.get_text().strip()
                 if simple_text:
@@ -269,7 +250,6 @@ def extract_text_from_pdf(pdf_path):
         
         doc.close()
         
-        # Join with newlines and clean up
         result = '\n'.join(full_text)
         return clean_extracted_text(result)
         
@@ -291,7 +271,6 @@ def clean_extracted_text(text):
         if not line:
             continue
         
-        # Fix common PDF extraction issues
         line = re.sub(r'\s+', ' ', line)  
 
         if (prev_line and 
@@ -327,7 +306,6 @@ def extract_cv_sections(cv_text):
     if not cv_text:
         return sections
     
-    # Normalize text and create lines for analysis
     normalized_text = cv_text.replace('\r', '\n')
     lines = normalized_text.split('\n')
     text_lower = normalized_text.lower()
@@ -339,7 +317,6 @@ def extract_cv_sections(cv_text):
         'objective', 'career objective', 'personal statement', 'highlights'
     ]
     
-    # Find section headers with their positions
     section_positions = []
     
     for i, line in enumerate(lines):
@@ -350,7 +327,6 @@ def extract_cv_sections(cv_text):
         if any(ignored in line_clean for ignored in ignored_sections):
             continue
             
-        # More precise section header detection
         if re.match(r'^(summary|profile|overview|about|professional summary|career focus|executive profile)$', line_clean):
             section_positions.append(('summary', i))  
         elif re.match(r'^(skills|summary of skills|technical skills|professional skills|key skills|core competencies)$', line_clean):
@@ -361,11 +337,9 @@ def extract_cv_sections(cv_text):
             section_positions.append(('education', i))
         elif re.match(r'^(accomplishments|achievements|certifications|certificates|awards|honors|licenses|core acccomplishments|certifications and training)$', line_clean):
             section_positions.append(('accomplishments', i))
-    
-    # Sort by position
+
     section_positions.sort(key=lambda x: x[1])
     
-    # Extract content between sections
     for i, (section_name, start_pos) in enumerate(section_positions):
         # Determine end position
         if i + 1 < len(section_positions):
@@ -373,7 +347,6 @@ def extract_cv_sections(cv_text):
         else:
             end_pos = len(lines)
         
-        # Extract content
         content_lines = []
         for j in range(start_pos + 1, end_pos):
             if j < len(lines):
@@ -381,19 +354,14 @@ def extract_cv_sections(cv_text):
                 if line:
                     content_lines.append(line)
         
-        # Clean and limit content
         content = '\n'.join(content_lines).strip()
         if section_name == 'summary':
-            sections['summary'] = content # Limit summary length
+            sections['summary'] = content 
         else:
             sections[section_name] = content
     
-    # Fallback extraction using improved regex (only if sections not found)
     if not any(sections.values()):
         sections = extract_sections_with_regex(normalized_text, text_lower)
-    
-    # Post-process to remove duplicates and clean up
-    sections = clean_sections(sections)
     
     return sections
 
@@ -401,7 +369,6 @@ def extract_sections_with_regex(normalized_text, text_lower):
     """Fallback regex extraction with improved patterns"""
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    # More precise regex patterns with better boundaries
     patterns = {
         'summary': [
             r'(?:^|\n)\s*(?:summary|profile|overview|about|professional summary|career focus)\s*:?\s*\n(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|work history|employment)\s*:?\s*\n|\Z)',
@@ -426,83 +393,40 @@ def extract_sections_with_regex(normalized_text, text_lower):
             if match:
                 start, end = match.start(1), match.end(1)
                 content = normalized_text[start:end].strip()
-                if content and len(content) > 10:  # Minimum content length
+                if content and len(content) > 10:  
                     sections[section_name] = content
                     break
     
     return sections
 
 def clean_sections(sections):
-    """Clean sections to remove duplicates and overlaps"""
-    
-    # Remove content that appears in multiple sections
-    section_contents = list(sections.values())
-    
     for section_name, content in sections.items():
         if not content:
             continue
             
-        # Check for significant overlap with other sections
         for other_section, other_content in sections.items():
             if other_section == section_name or not other_content:
                 continue
-                
-            # If content is substantially similar or one contains the other
-            if content in other_content and len(content) > 50:
-                # Keep in the section that makes more sense
-                if should_keep_in_section(content, section_name, other_section):
-                    sections[other_section] = other_content.replace(content, '').strip()
-                else:
-                    sections[section_name] = ''
-                    break
     
-    # Final cleanup
     for section_name in sections:
         content = sections[section_name]
         if content:
-            # Remove extra whitespace
             content = re.sub(r'\n\s*\n', '\n', content)
             content = content.strip()
             sections[section_name] = content
     
     return sections
 
-def should_keep_in_section(content, section1, section2):
-    """Determine which section should keep the content based on context"""
-    
-    # Skills should stay in skills section
-    skill_keywords = ['python', 'java', 'sql', 'excel', 'programming', 'software', 'technical']
-    if any(keyword in content.lower() for keyword in skill_keywords):
-        return section1 == 'skills'
-    
-    # Education should stay in education
-    edu_keywords = ['university', 'degree', 'bachelor', 'master', 'college', 'school', 'graduated']
-    if any(keyword in content.lower() for keyword in edu_keywords):
-        return section1 == 'education'
-    
-    # Experience should stay in experience
-    exp_keywords = ['company', 'worked', 'position', 'role', 'responsibilities', 'managed']
-    if any(keyword in content.lower() for keyword in exp_keywords):
-        return section1 == 'experience'
-    
-    # Default: keep in first section (arbitrary but consistent)
-    return True
-
-# Additional helper function for better section boundary detection
 def find_section_boundaries(lines):
-    """Find clear section boundaries in CV text"""
     boundaries = []
     
     for i, line in enumerate(lines):
         line_clean = line.strip().lower()
-        
-        # Skip empty lines and very long lines
         if not line_clean or len(line_clean) > 100:
             continue
         
-        # Look for clear section headers (standalone lines that are section names)
-        if (len(line.strip()) < 50 and  # Short lines
-            re.match(r'^[a-z\s]+$', line_clean) and  # Only letters and spaces
+        if (len(line.strip()) < 50 and 
+            re.match(r'^[a-z\s]+$', line_clean) and  
             any(section in line_clean for section in ['summary', 'skills', 'experience', 'education', 'accomplishments'])):
             boundaries.append((i, line_clean))
     
@@ -510,7 +434,6 @@ def find_section_boundaries(lines):
 
 def insert_applicant_profile(profile_data, encrypt_data=False):
     if encrypt_data:
-        # Encrypt sensitive personal data
         first_name = encryption_manager.encrypt_text(profile_data['first_name'])
         last_name = encryption_manager.encrypt_text(profile_data['last_name'])
         date_of_birth = encryption_manager.encrypt_text(profile_data['date_of_birth'])
@@ -540,7 +463,6 @@ def insert_application_detail(applicant_id, cv_path, cv_text, sections, encrypt_
     role = extract_application_role(cv_text, cv_path)
     
     if encrypt_data:
-        # Encrypt CV content and sections
         cv_raw_text = encryption_manager.encrypt_text(cv_text)
         summary_section = encryption_manager.encrypt_text(sections['summary'])
         skills_section = encryption_manager.encrypt_text(sections['skills'])
@@ -705,7 +627,6 @@ def process_folder(base_folder, use_encryption=False):
     
     db.commit()
     
-    # verify profile count
     cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
     profile_count_after_creation = cursor.fetchone()[0]
     print(f"Verified: {profile_count_after_creation} profiles in database")
@@ -714,7 +635,6 @@ def process_folder(base_folder, use_encryption=False):
         print(f"ERROR: Expected {num_base_profiles} but found {profile_count_after_creation}")
         return
     
-    # process pdfs - NEVER create new profiles
     processed = 0
     failed = 0
     
@@ -732,7 +652,6 @@ def process_folder(base_folder, use_encryption=False):
                 
             sections = extract_cv_sections(cv_text)
             
-            # ONLY use existing profiles
             selected_profile = min(base_profiles, key=lambda p: p['application_count'])
             applicant_id = selected_profile['id']
             selected_profile['application_count'] += 1
@@ -740,7 +659,6 @@ def process_folder(base_folder, use_encryption=False):
             insert_application_detail(applicant_id, path, cv_text, sections, use_encryption)
             processed += 1
             
-            # check if profiles are being created somehow
             if processed % 100 == 0:
                 cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
                 current_profile_count = cursor.fetchone()[0]
@@ -770,7 +688,6 @@ def process_folder(base_folder, use_encryption=False):
     print(f"Successfully processed: {processed}")
     print(f"Failed: {failed}")
     print(f"Profiles in ApplicantProfile table: {total_profiles_in_table}")
-    print(f"Unique profiles used in applications: {unique_profiles}")
     print(f"Total applications: {total_applications}")
     print(f"Encryption used: {'YES' if use_encryption else 'NO'}")
     
@@ -809,7 +726,6 @@ def export_data_to_sql(filename):
                 original_id, first_name, last_name, dob, address, phone, is_encrypted = profile
                 dob_val = escape_sql(dob if dob else None)
                 
-                # use sequential IDs starting from 1
                 insert_stmt = (
                     "INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number, is_encrypted) VALUES ("
                     f"{i}, {escape_sql(first_name)}, {escape_sql(last_name)}, {dob_val}, "
@@ -819,7 +735,6 @@ def export_data_to_sql(filename):
             
             f.write("\n-- Insert ApplicationDetail data\n")
             
-            # create mapping from old IDs to new IDs to maintain relationships
             id_mapping = {}
             for i, profile in enumerate(profiles, 1):
                 original_id = profile[0]
@@ -827,7 +742,7 @@ def export_data_to_sql(filename):
             
             for i, detail in enumerate(details, 1):  # start from 1
                 detail_id, original_applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments, is_encrypted = detail
-                new_applicant_id = id_mapping[original_applicant_id]  # maintain one-to-many relationships
+                new_applicant_id = id_mapping[original_applicant_id]
                 
                 insert_stmt = (
                     "INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, "
@@ -843,29 +758,13 @@ def export_data_to_sql(filename):
     except Exception as e:
         print(f"Error while exporting data: {e}")
 
-def test_extraction(pdf_path):
-    print(f"Testing extraction on: {pdf_path}")
-    cv_text = extract_text_from_pdf(pdf_path)
-    sections = extract_cv_sections(cv_text)
-    
-    print("\n=== RESULT ===")
-    for section_name, content in sections.items():
-        print(f"\n{section_name.upper()}:")
-        print("-" * 40)
-        if content:
-            print(content[:200] + "..." if len(content) > 200 else content)
-        else:
-            print("(Not found)")
-
 if __name__ == "__main__":
-    # Check for existing encryption configuration
     config = load_encryption_config()
     use_encryption = False
     
     if config.get("encryption_enabled"):
         print("Existing encryption configuration found.")
         
-        # Try to load existing encryption
         password = None
         if config.get("password_protected"):
             password = getpass.getpass("Enter encryption password: ")
@@ -877,7 +776,6 @@ if __name__ == "__main__":
             print("Failed to load encryption. Proceeding without encryption.")
             use_encryption = False
     else:
-        # Setup new encryption
         use_encryption = setup_encryption()
     
     # CLEAR DATABASE FIRST
@@ -889,13 +787,12 @@ if __name__ == "__main__":
     db.commit()
     print("Database cleared and AUTO_INCREMENT reset")
     
-    # Uncomment to test single file extraction
     # test_extraction("../../data/CHEF/10276858.pdf")
     
-    # Process all PDFs
+    # process all pdfs
     process_folder("../../data", use_encryption)
     
-    # Export to SQL file
+    # export to SQL file
     export_filename = "../../data/ats_encrypted.sql" if use_encryption else "../../data/ats.sql"
     export_data_to_sql(export_filename)
     
