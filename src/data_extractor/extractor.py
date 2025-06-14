@@ -798,7 +798,7 @@ if __name__ == "__main__":
     
     print(f"\n=== EXTRACTION COMPLETED ===")
     print(f"Database: {DB_NAME}")
-    print(f"Encryption: {'ENABLED' if use_encryption else 'DISABLED'}")
+    print(f"Encryption: {'enabled' if use_encryption else 'disabled'}")
     print(f"Export file: {export_filename}")
     
     if use_encryption:
