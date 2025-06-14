@@ -5,7 +5,7 @@ from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 import json
 import base64
-import hashlib
+from data_extractor.extractor import SecureEncryption
 
 @dataclass
 class ApplicantProfile:
@@ -99,15 +99,26 @@ class EncryptionManager:
             
             if password:
                 try:
-                    from cryptography.fernet import Fernet
+                    if len(key_data) < 34:  # 32 bytes key + 2 bytes checksum minimum
+                        print("Invalid key file format")
+                        return None
                     
-                    password_hash = hashlib.pbkdf2_hmac('sha256', 
-                                                       password.encode('utf-8'), 
-                                                       b'ats_salt_2024', 
-                                                       100000)
-                    password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
-                    key = password_cipher.decrypt(key_data)
-                    return key
+                    encrypted_key = key_data[:-2]
+                    stored_checksum = int.from_bytes(key_data[-2:], 'big')
+                    
+                    # Decrypt the key using our simple encryption
+                    password_key = self._password_to_key(password)
+                    password_cipher = SecureEncryption(password_key)
+                    decrypted_key = password_cipher.decrypt(encrypted_key)
+                    
+                    # Verify checksum
+                    calculated_checksum = sum(decrypted_key) % 65536
+                    if calculated_checksum != stored_checksum:
+                        print("Key integrity check failed - wrong password or corrupted file")
+                        return None
+                    
+                    return decrypted_key
+                    
                 except Exception as e:
                     print(f"Failed to decrypt key with password: {e}")
                     return None
@@ -119,28 +130,24 @@ class EncryptionManager:
             return None
     
     def initialize_encryption(self, password: str = None) -> bool:
-        config = self.load_encryption_config()
-        
-        if not config.get("encryption_enabled"):
-            self.encryption_enabled = False
-            print("Encryption disabled in config")
-            return True
-        
         key = self.load_key(password)
         
         if not key:
-            print("Failed to load encryption key")
-            return False
+            key = self.generate_key()
+            self.save_key(key, password)
+            print("Generated new encryption key")
+        else:
+            print("Loaded existing encryption key")
         
         try:
-            from cryptography.fernet import Fernet
             self.key = key
-            self.cipher = Fernet(key)
+            self.cipher = SecureEncryption(key)  # Use your custom SecureEncryption class
             self.encryption_enabled = True
             print("Encryption initialized successfully")
             return True
         except Exception as e:
             print(f"Failed to initialize encryption: {e}")
+            self.encryption_enabled = False
             return False
     
     def decrypt_text(self, encrypted_text: str) -> str:
@@ -186,7 +193,7 @@ class DatabaseManager:
         if self._initialized:
             return
             
-        print("Initializing DatabaseManager (singleton)")
+        print("Initializing DatabaseManager")
         
         self.host = host
         self.user = user

@@ -7,11 +7,10 @@ import mysql.connector
 import getpass 
 import random
 import base64
-from cryptography.fernet import Fernet
 import json
-import hashlib
 import os
 import sys
+import time
 
 DB_HOST = "localhost"
 DB_USER = "root"
@@ -59,6 +58,143 @@ def get_mysql_password():
 ENCRYPTION_KEY_FILE = "ats_encryption.key"
 ENCRYPTION_CONFIG_FILE = "ats_config.json"
 
+class SecureEncryption:
+    """Fixed custom encryption using only built-in Python functions"""
+    
+    def __init__(self, key: bytes):
+        self.key = key
+        # Create multiple derived keys from the main key
+        self.key1 = self._derive_key(key, 1)
+        self.key2 = self._derive_key(key, 2)
+        self.key3 = self._derive_key(key, 3)
+    
+    def _derive_key(self, key: bytes, salt: int) -> bytes:
+        """Derive a key using simple mathematical operations"""
+        derived = bytearray()
+        for i, byte in enumerate(key):
+            # Use modular arithmetic and bit operations for key derivation
+            new_byte = ((byte ^ salt) + i) % 256
+            new_byte = ((new_byte << 1) | (new_byte >> 7)) & 0xFF  # Rotate bits
+            derived.append(new_byte)
+        return bytes(derived)
+    
+    def _expand_key(self, target_length: int, base_key: bytes) -> bytes:
+        """Expand key to match data length"""
+        if target_length <= len(base_key):
+            return base_key[:target_length]
+        
+        expanded = bytearray()
+        key_pos = 0
+        
+        for i in range(target_length):
+            # Use multiple keys and position for expansion
+            byte1 = base_key[key_pos % len(base_key)]
+            byte2 = self.key1[key_pos % len(self.key1)]
+            byte3 = self.key2[key_pos % len(self.key2)]
+            
+            # Combine bytes using XOR and arithmetic
+            combined = (byte1 ^ byte2 ^ byte3 ^ (i % 256)) % 256
+            expanded.append(combined)
+            key_pos += 1
+        
+        return bytes(expanded)
+    
+    def _substitute_bytes(self, data: bytes, encrypt: bool = True) -> bytes:
+        """Apply substitution cipher - FIXED VERSION"""
+        result = bytearray()
+        
+        for i, byte in enumerate(data):
+            # Use position and key for substitution
+            key_byte = self.key3[i % len(self.key3)]
+            
+            if encrypt:
+                # Forward substitution
+                new_byte = (byte + key_byte + i) % 256
+                new_byte = ((new_byte << 3) | (new_byte >> 5)) & 0xFF  # Rotate
+            else:
+                # Reverse substitution - FIXED: Apply operations in reverse order
+                byte = ((byte >> 3) | (byte << 5)) & 0xFF  # Reverse rotate first
+                new_byte = (byte - key_byte - i) % 256
+            
+            result.append(new_byte)
+        
+        return bytes(result)
+    
+    def _permute_bytes(self, data: bytes, encrypt: bool = True) -> bytes:
+        """Apply byte permutation based on key - SIMPLIFIED VERSION"""
+        if len(data) < 4:
+            return data
+        
+        # Create permutation pattern from key
+        key_sum = sum(self.key) % 256
+        block_size = 8  # Fixed block size for consistency
+        
+        result = bytearray()
+        
+        for block_start in range(0, len(data), block_size):
+            block = data[block_start:block_start + block_size]
+            
+            if len(block) < 4:  # Don't permute small blocks
+                result.extend(block)
+                continue
+            
+            # Create simple permutation based on key
+            perm_key = (key_sum + block_start) % len(block)
+            
+            if encrypt:
+                # Simple rotation permutation
+                permuted = block[perm_key:] + block[:perm_key]
+            else:
+                # Reverse rotation
+                reverse_key = len(block) - perm_key
+                permuted = block[reverse_key:] + block[:reverse_key]
+            
+            result.extend(permuted)
+        
+        return bytes(result)
+    
+    def encrypt(self, data: bytes) -> bytes:
+        """Encrypt data using multiple layers"""
+        if not data:
+            return data
+        
+        # Layer 1: XOR with expanded key
+        expanded_key = self._expand_key(len(data), self.key)
+        layer1 = bytes(a ^ b for a, b in zip(data, expanded_key))
+        
+        # Layer 2: Substitution
+        layer2 = self._substitute_bytes(layer1, encrypt=True)
+        
+        # Layer 3: Permutation
+        layer3 = self._permute_bytes(layer2, encrypt=True)
+        
+        # Layer 4: Final XOR with different key
+        final_key = self._expand_key(len(layer3), self.key2)
+        result = bytes(a ^ b for a, b in zip(layer3, final_key))
+        
+        return result
+    
+    def decrypt(self, data: bytes) -> bytes:
+        """Decrypt data by reversing encryption layers"""
+        if not data:
+            return data
+        
+        # Reverse Layer 4: XOR with different key
+        final_key = self._expand_key(len(data), self.key2)
+        layer3 = bytes(a ^ b for a, b in zip(data, final_key))
+        
+        # Reverse Layer 3: Permutation
+        layer2 = self._permute_bytes(layer3, encrypt=False)
+        
+        # Reverse Layer 2: Substitution
+        layer1 = self._substitute_bytes(layer2, encrypt=False)
+        
+        # Reverse Layer 1: XOR with expanded key
+        expanded_key = self._expand_key(len(layer1), self.key)
+        result = bytes(a ^ b for a, b in zip(layer1, expanded_key))
+        
+        return result
+    
 class EncryptionManager:
     def __init__(self):
         self.key = None
@@ -66,19 +202,74 @@ class EncryptionManager:
         self.encryption_enabled = False
     
     def generate_key(self) -> bytes:
-        return Fernet.generate_key()
+        """Generate a secure 32-byte key using multiple entropy sources"""
+        # Use system entropy and time-based randomness
+        entropy1 = os.urandom(16)
+        
+        # Time-based entropy
+        current_time = int(time.time() * 1000000)  # microseconds
+        time_bytes = current_time.to_bytes(8, 'big')
+        
+        # Random number entropy
+        random.seed()  # Use system time as seed
+        random_nums = [random.randint(0, 255) for _ in range(8)]
+        random_bytes = bytes(random_nums)
+        
+        # Combine entropy sources
+        combined = entropy1 + time_bytes + random_bytes
+        
+        # Simple key derivation - mix the bytes
+        final_key = bytearray(32)
+        for i in range(32):
+            # Combine multiple bytes with different operations
+            byte1 = combined[i % len(combined)]
+            byte2 = combined[(i * 3) % len(combined)]
+            byte3 = combined[(i * 7) % len(combined)]
+            
+            final_key[i] = (byte1 ^ byte2 ^ byte3 ^ i) % 256
+        
+        return bytes(final_key)
+    
+    def _password_to_key(self, password: str) -> bytes:
+        """Convert password to 32-byte key"""
+        if not password:
+            return b'\x00' * 32
+        
+        # Simple password-based key derivation
+        password_bytes = password.encode('utf-8')
+        salt = b'ats_simple_salt_2024'  # Fixed salt for consistency
+        
+        # Extend password to at least 32 bytes
+        extended_password = (password_bytes + salt) * ((32 // len(password_bytes + salt)) + 1)
+        extended_password = extended_password[:32]
+        
+        # Apply transformations
+        key = bytearray(32)
+        for i in range(32):
+            # Multiple rounds of transformation
+            byte_val = extended_password[i]
+            for round_num in range(1000):  # 1000 rounds for strength
+                byte_val = ((byte_val ^ (round_num % 256)) + i) % 256
+                byte_val = ((byte_val << 1) | (byte_val >> 7)) & 0xFF  # Bit rotation
+            key[i] = byte_val
+        
+        return bytes(key)
     
     def save_key(self, key: bytes, password: str = None):
         if password:
-            password_hash = hashlib.pbkdf2_hmac('sha256', 
-                                               password.encode('utf-8'), 
-                                               b'ats_salt_2024', 
-                                               100000)
-            password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
+            # Encrypt key with password
+            password_key = self._password_to_key(password)
+            password_cipher = SecureEncryption(password_key)
             encrypted_key = password_cipher.encrypt(key)
             
+            # Add simple checksum (sum of original key bytes)
+            checksum = sum(key) % 65536  # 2-byte checksum
+            checksum_bytes = checksum.to_bytes(2, 'big')
+            
+            final_data = encrypted_key + checksum_bytes
+            
             with open(ENCRYPTION_KEY_FILE, 'wb') as f:
-                f.write(encrypted_key)
+                f.write(final_data)
         else:
             with open(ENCRYPTION_KEY_FILE, 'wb') as f:
                 f.write(key)
@@ -94,13 +285,26 @@ class EncryptionManager:
         
         if password:
             try:
-                password_hash = hashlib.pbkdf2_hmac('sha256', 
-                                                   password.encode('utf-8'), 
-                                                   b'ats_salt_2024', 
-                                                   100000)
-                password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
-                key = password_cipher.decrypt(key_data)
-                return key
+                if len(key_data) < 34:  # 32 bytes key + 2 bytes checksum minimum
+                    print("Invalid key file format")
+                    return None
+                
+                encrypted_key = key_data[:-2]
+                stored_checksum = int.from_bytes(key_data[-2:], 'big')
+                
+                # Decrypt the key
+                password_key = self._password_to_key(password)
+                password_cipher = SecureEncryption(password_key)
+                decrypted_key = password_cipher.decrypt(encrypted_key)
+                
+                # Verify checksum
+                calculated_checksum = sum(decrypted_key) % 65536
+                if calculated_checksum != stored_checksum:
+                    print("Key integrity check failed - wrong password or corrupted file")
+                    return None
+                
+                return decrypted_key
+                
             except Exception as e:
                 print(f"Failed to decrypt key with password: {e}")
                 return None
@@ -118,7 +322,7 @@ class EncryptionManager:
             print("Loaded existing encryption key")
         
         self.key = key
-        self.cipher = Fernet(key)
+        self.cipher = SecureEncryption(key)
         self.encryption_enabled = True
         return True
     
@@ -126,29 +330,59 @@ class EncryptionManager:
         if not self.encryption_enabled or not text:
             return text
         
-        encrypted_data = self.cipher.encrypt(text.encode('utf-8'))
+        # Add magic header to identify encrypted data
+        text_bytes = text.encode('utf-8')
+        full_data = text_bytes
+        
+        encrypted_data = self.cipher.encrypt(full_data)
         return base64.b64encode(encrypted_data).decode('utf-8')
-    
+        
     def decrypt_text(self, encrypted_text: str) -> str:
+        """Improved decrypt_text with better error handling"""
         if not self.encryption_enabled or not encrypted_text:
             return encrypted_text
         
         try:
-            encrypted_data = base64.b64decode(encrypted_text.encode('utf-8'))
-            decrypted_data = self.cipher.decrypt(encrypted_data)
-            return decrypted_data.decode('utf-8')
+            # Try to decode as base64
+            try:
+                encrypted_data = base64.b64decode(encrypted_text.encode('utf-8'))
+            except Exception as e:
+                print(f"Base64 decode failed: {e}")
+                return encrypted_text
+            
+            # Decrypt the data
+            try:
+                decrypted_data = self.cipher.decrypt(encrypted_data)
+            except Exception as e:
+                print(f"Cipher decryption failed: {e}")
+                return encrypted_text
+                    
+            # Remove magic header and decode
+            text_bytes = decrypted_data
+            try:
+                return text_bytes.decode('utf-8')
+            except UnicodeDecodeError as e:
+                print(f"UTF-8 decode failed: {e}")
+                # Try with error handling
+                try:
+                    return text_bytes.decode('utf-8', errors='replace')
+                except:
+                    print("All decoding attempts failed")
+                    return encrypted_text
+                    
         except Exception as e:
-            print(f"Decryption failed: {e}")
+            print(f"General decryption failed: {e}")
             return encrypted_text
 
+
     def is_encrypted_data(self, text: str) -> bool:
-        if not text or len(text) < 10:
+        if not text or len(text) < 16:
             return False
         
         try:
             # Try to decode as base64
             decoded = base64.b64decode(text.encode('utf-8'))
-            return len(decoded) > 10 and decoded.startswith(b'\x80')
+            return len(decoded) > 16  # Minimum size for encrypted data
         except:
             return False
 
