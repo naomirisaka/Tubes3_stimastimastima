@@ -1,8 +1,8 @@
 import os
 import glob
 import re
-from faker import Faker
-from PyPDF2 import PdfReader
+from faker import Faker 
+import fitz
 import mysql.connector
 import getpass 
 import random
@@ -244,20 +244,96 @@ def generate_fake_profile():
 
 def extract_text_from_pdf(pdf_path):
     try:
-        reader = PdfReader(pdf_path)
-        text = "\n".join([page.extract_text() or "" for page in reader.pages])
-        return text.strip()
+        doc = fitz.open(pdf_path)
+        full_text = []
+        
+        for page_num in range(len(doc)):
+            page = doc.load_page(page_num)
+            
+            blocks = page.get_text("blocks")
+            page_lines = []
+            
+            blocks.sort(key=lambda block: (block[1], block[0]))
+            
+            for block in blocks:
+                if len(block) >= 5:  
+                    text = block[4].strip()
+                    if text:
+                        lines = text.split('\n')
+                        for line in lines:
+                            line = line.strip()
+                            if line:
+                                page_lines.append(line)
+            
+            if len(page_lines) < 5:
+                simple_text = page.get_text().strip()
+                if simple_text:
+                    page_lines = [line.strip() for line in simple_text.split('\n') if line.strip()]
+            
+            if page_lines:
+                full_text.extend(page_lines)
+        
+        doc.close()
+        
+        result = '\n'.join(full_text)
+        return clean_extracted_text(result)
+        
     except Exception as e:
-        print(f"Failed to read {pdf_path}: {e}")
+        print(f"PyMuPDF extraction failed for {pdf_path}: {e}")
         return ""
+
+def clean_extracted_text(text):
+    if not text:
+        return ""
+    
+    lines = text.split('\n')
+    cleaned_lines = []
+    
+    prev_line = ""
+    for line in lines:
+        line = line.strip()
+        
+        if not line:
+            continue
+        
+        # Fix common PDF extraction issues
+        line = re.sub(r'\s+', ' ', line)  
+
+        if (prev_line and 
+            len(prev_line) > 0 and 
+            not prev_line.endswith(('.', '!', '?', ':', ';')) and
+            not line[0].isupper() and 
+            len(line.split()) < 4 and
+            not any(char.isdigit() for char in line[:3])): 
+            if cleaned_lines:
+                cleaned_lines[-1] = cleaned_lines[-1] + " " + line
+        else:
+            cleaned_lines.append(line)
+        
+        prev_line = line
+    
+    final_lines = []
+    for line in cleaned_lines:
+        line = re.sub(r'(\d{2}/\d{4})\s+to\s+(\d{2}/\d{4})', r'\1 to \2', line)
+        line = re.sub(r'(\d{2}/\d{4})\s*-\s*(\d{2}/\d{4})', r'\1 - \2', line)
+        
+        line = re.sub(r'Company Name\s*[,\s]*City\s*[,\s]*State', 'Company Name, City, State', line)
+        
+        line = re.sub(r'([a-z])([A-Z])', r'\1 \2', line)  
+        line = re.sub(r'([0-9])([A-Z])', r'\1 \2', line) 
+        
+        final_lines.append(line)
+    
+    return '\n'.join(final_lines)
+
 
 def extract_cv_sections(cv_text):
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    # normalize text
-    text = cv_text.replace('\n', ' ').replace('\r', ' ')
-    text = ' '.join(text.split())  
-    text_lower = text.lower()
+    text = cv_text
+    
+    normalized_text = cv_text.replace('\r', '\n')
+    text_lower = normalized_text.lower()
     
     # summary
     summary_patterns = [
@@ -269,8 +345,8 @@ def extract_cv_sections(cv_text):
     for pattern in summary_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            sections['summary'] = match.group(1).strip()[:1000]
-            break
+            start, end = match.start(1), match.end(1)
+            sections['summary'] = normalized_text[start:end].strip()[:1000]
     
     # skills and highlights - combine both sections
     skills_content = []
@@ -284,7 +360,7 @@ def extract_cv_sections(cv_text):
     for pattern in highlights_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            skills_content.append(match.group(1).strip())
+            skills_content.append(normalized_text[match.start(1):match.end(1)].strip())
             break
     
     # get skills section at end of cv
@@ -297,11 +373,11 @@ def extract_cv_sections(cv_text):
     for pattern in skills_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            skills_content.append(match.group(1).strip())
+            skills_content.append(normalized_text[match.start(1):match.end(1)].strip())
             break
     
     if skills_content:
-        sections['skills'] = ' '.join(skills_content)[:1500]
+        sections['skills'] = ' '.join(skills_content)
     
     # experience
     experience_patterns = [
@@ -314,7 +390,7 @@ def extract_cv_sections(cv_text):
     for pattern in experience_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            exp_text = match.group(1).strip()
+            exp_text = normalized_text[match.start(1):match.end(1)].strip()
             exp_text = re.sub(r'company\s*name', 'Company Name', exp_text, flags=re.IGNORECASE)
             exp_text = re.sub(r'city\s*,\s*state', 'City, State', exp_text, flags=re.IGNORECASE)
             sections['experience'] = exp_text[:2000]
@@ -330,7 +406,7 @@ def extract_cv_sections(cv_text):
     for pattern in education_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            edu_text = match.group(1).strip()
+            edu_text = normalized_text[match.start(1):match.end(1)].strip()
             sections['education'] = edu_text[:1000]
             break
     
@@ -352,7 +428,7 @@ def extract_cv_sections(cv_text):
     for pattern in accomplishments_patterns:
         match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
         if match:
-            sections['accomplishments'] = match.group(1).strip()[:1500]
+            sections['accomplishments'] = normalized_text[match.start(1):match.end(1)].strip()
             break
     
     # fallback parsing
@@ -383,13 +459,13 @@ def extract_cv_sections_fallback(cv_text):
         if not line or len(line) < 3:
             continue
         
-        line_lower = line.lower()
+        line_lower = line()
         
         found_section = None
         for section, keywords in section_keywords.items():
             if any(keyword in line_lower and len(line) < 50 for keyword in keywords):
                 if current_section and content:
-                    sections[current_section] = ' '.join(content)[:1500]
+                    sections[current_section] = ' '.join(content)
                 
                 found_section = section
                 content = []
@@ -399,12 +475,9 @@ def extract_cv_sections_fallback(cv_text):
             current_section = found_section
         elif current_section:
             content.append(line)
-            
-            if len(' '.join(content)) > 1500:
-                break
     
     if current_section and content:
-        sections[current_section] = ' '.join(content)[:1500]
+        sections[current_section] = ' '.join(content)
     
     return sections
 
@@ -789,7 +862,7 @@ if __name__ == "__main__":
     cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
     cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
     db.commit()
-    print("Database cleared and AUTO_INCREMENT reset")
+    print("Database cleared successfully")
     
     # Uncomment to test single file extraction
     # test_extraction("../../data/CHEF/10276858.pdf")
