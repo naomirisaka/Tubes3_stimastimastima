@@ -843,7 +843,7 @@ def home_view(page: ft.Page):
             controls=[
                 ft.Container(
                     content=ft.Row([
-                        ft.Icon(ft.Icons.STORAGE, size=18, color=ft.Colors.GREY_800),
+                        ft.Icon(color=ft.Colors.GREY_800),
                         stats_text
                     ], spacing=5),
                     padding=10,
