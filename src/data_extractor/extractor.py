@@ -345,7 +345,9 @@ def extract_cv_sections(cv_text):
     summary_patterns = [
         r'(?:^|\n)\s*summary\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
         r'(?:^|\n)\s*profile\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
-        r'(?:^|\n)\s*overview\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))'
+        r'(?:^|\n)\s*overview\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+        r'(?:^|\n)\s*about\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+        r'(?:^|\n)\s*professional\s+summary\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
     ]
     
     # Try summary regex patterns first
@@ -360,8 +362,8 @@ def extract_cv_sections(cv_text):
     if not sections['summary']:
         highlights_patterns = [
             r'(?:^|\n)\s*highlights\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
-            r'(?:^|\n)\s*key highlights\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
-            r'(?:^|\n)\s*core competencies\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))'
+            r'(?:^|\n)\s*key\s+highlights\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))',
+            r'(?:^|\n)\s*core\s+competencies\s+(.*?)(?=\n\s*(?:skills|experience|education|accomplishments|certifications|interests|additional))'
         ]
         
         for pattern in highlights_patterns:
@@ -420,20 +422,24 @@ def extract_cv_sections(cv_text):
     skills_patterns = [
         # Skills section that appears mid-document (before experience/education)
         r'(?:^|\n)\s*skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
-        r'(?:^|\n)\s*technical skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
-        r'(?:^|\n)\s*professional skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
-        r'(?:^|\n)\s*key skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
-        
+        r'(?:^|\n)\s*technical\s+skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*professional\s+skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*key\s+skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',
+        r'(?:^|\n)\s*summary\s+of\s+skills\s+(.*?)(?=\n\s*(?:experience|education|accomplishments|achievements|certifications|interests|additional))',       
+       
         # Skills section that appears at the end of document (after experience/education)
         r'(?:^|\n)\s*skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
-        r'(?:^|\n)\s*technical skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
-        r'(?:^|\n)\s*professional skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
-        r'(?:^|\n)\s*key skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*technical\s+skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*professional\s+skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*key\s+skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
+        r'(?:^|\n)\s*summary\s+of\s+skills\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|$))',
         
         # Skills section at very end of document (no following sections)
         r'(?:^|\n)\s*skills\s+(.*?)$',
-        r'(?:^|\n)\s*technical skills\s+(.*?)$',
-        r'(?:^|\n)\s*professional skills\s+(.*?)$'
+        r'(?:^|\n)\s*technical\s+skills\s+(.*?)$',
+        r'(?:^|\n)\s*professional\s+skills\s+(.*?)$'
+        r'(?:^|\n)\s*key\s+skills\s+(.*?)$',
+        r'(?:^|\n)\s*summary\s+of\s+skills\s+(.*?)$'
     ]
     
     for pattern in skills_patterns:
@@ -446,9 +452,11 @@ def extract_cv_sections(cv_text):
     # EXPERIENCE with improved patterns
     experience_patterns = [
         r'(?:^|\n)\s*experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
-        r'(?:^|\n)\s*work experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
-        r'(?:^|\n)\s*employment history\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
-        r'(?:^|\n)\s*professional experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))'
+        r'(?:^|\n)\s*work\s+experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*employment\s+history\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*professional\s+experience\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*affiliations\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*work\s+history\s+(.*?)(?=\n\s*(?:education|accomplishments|achievements|certifications|interests|additional|skills))'
     ]
     
     for pattern in experience_patterns:
@@ -458,14 +466,16 @@ def extract_cv_sections(cv_text):
             exp_text = normalized_text[start:end].strip()
             exp_text = re.sub(r'company\s*name', 'Company Name', exp_text, flags=re.IGNORECASE)
             exp_text = re.sub(r'city\s*,\s*state', 'City, State', exp_text, flags=re.IGNORECASE)
-            sections['experience'] = exp_text[:2000]
+            sections['experience'] = exp_text
             break
     
     # EDUCATION with improved patterns
     education_patterns = [
         r'(?:^|\n)\s*education\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
-        r'(?:^|\n)\s*academic background\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
-        r'(?:^|\n)\s*qualifications\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))'
+        r'(?:^|\n)\s*academic\s+background\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*qualifications\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*education\s+and\s+training\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
+        r'(?:^|\n)\s*academic\s+qualifications\s+(.*?)(?=\n\s*(?:accomplishments|achievements|certifications|interests|additional|skills))',
     ]
     
     for pattern in education_patterns:
@@ -473,20 +483,21 @@ def extract_cv_sections(cv_text):
         if match:
             start, end = match.start(1), match.end(1)
             edu_text = normalized_text[start:end].strip()
-            sections['education'] = edu_text[:1000]
+            sections['education'] = edu_text
             break
     
     # ACCOMPLISHMENTS with improved patterns
     accomplishments_patterns = [
         r'(?:^|\n)\s*accomplishments\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*achievements\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
-        r'(?:^|\n)\s*key achievements\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*key\s+achievements\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*certifications\s+and\s+training\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*certificates\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
-        r'(?:^|\n)\s*professional certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
-        r'(?:^|\n)\s*licenses and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
-        r'(?:^|\n)\s*awards and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
-        r'(?:^|\n)\s*qualifications and certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*professional\s+certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*licenses\s+and\s+certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*awards\s+and\s+certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
+        r'(?:^|\n)\s*qualifications\s+and\s+certifications\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*licenses\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*awards\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))',
         r'(?:^|\n)\s*honors\s+(.*?)(?=\n\s*(?:experience|education|interests|additional|skills))'
@@ -498,6 +509,7 @@ def extract_cv_sections(cv_text):
             start, end = match.start(1), match.end(1)
             sections['accomplishments'] = normalized_text[start:end].strip()
             break
+    
     return sections
 
 def insert_applicant_profile(profile_data, encrypt_data=False):

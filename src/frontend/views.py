@@ -737,12 +737,6 @@ def home_view(page: ft.Page):
                                 
                                 ft.Text(f"🎯 {keyword_text}", 
                                     size=12, color=ft.Colors.GREY_600),
-
-                                ft.Row([
-                                    ft.Icon(ft.Icons.SOURCE, size=14, color=source_color),
-                                    ft.Text(f"Found in: {source_display}", 
-                                        size=10, color=source_color)
-                                ], spacing=5),
                                 
                                 ft.Row([
                                     ft.Icon(

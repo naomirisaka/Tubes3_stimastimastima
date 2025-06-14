@@ -80,7 +80,7 @@ class EncryptionManager:
         try:
             with open(config_path, 'r') as f:
                 config = json.load(f)
-            print(f"Loaded encryption config from: {config_path}")
+            # print(f"Loaded encryption config from: {config_path}")
             return config
         except Exception as e:
             print(f"Failed to load encryption config: {e}")
@@ -98,7 +98,7 @@ class EncryptionManager:
         try:
             with open(key_path, 'rb') as f:
                 key_data = f.read()
-            print(f"Loaded encryption key from: {key_path}")
+            # print(f"Loaded encryption key from: {key_path}")
             
             if password:
                 try:
