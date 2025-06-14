@@ -4,74 +4,116 @@ import os
 
 import database
 import search_engine
+from data_extractor.extractor import extract_realtime, insert_application_detail, insert_applicant_profile, EncryptionManager, ExtractionResult
+# Add this to the TOP of main_be.py after other imports
+
+try:
+    from cv_cache_manager import cv_cache_manager, initialize_cv_cache
+    print("✅ Successfully imported cv_cache_manager")
+    USE_CACHE_MANAGER = True
+except ImportError as e:
+    print(f"⚠️ Could not import cv_cache_manager: {e}")
+    USE_CACHE_MANAGER = False
 
 class ATSBackend:
     def __init__(self):
         self.search_engine = search_engine.DatabaseCVSearchEngine()
         self.db_manager = database.get_database_connection()
         self._cache_loaded = False
-    
-    def initialize(self) -> bool:
+        self.encryption = EncryptionManager()
+        self.encryption.initialize()  # Bisa tambahkan password jika terenkripsi
+
+    def extract_and_insert_cv(self, cv_path: str, applicant_profile: dict) -> Dict:
         try:
-            # Test database connection
-            if not self.db_manager.connect():
-                print("Failed to connect to database")
-                return False
-            
-            self.db_manager.disconnect()
-            
-            # Load CV cache for faster searching
-            self.search_engine.load_cv_cache()
-            self._cache_loaded = True
-            
-            print("ATS Backend initialized successfully")
-            return True
-        
+            # Lakukan ekstraksi PDF
+            result: ExtractionResult = extract_realtime(cv_path)
+
+            if not result.success:
+                return {
+                    "success": False,
+                    "error": f"Extraction failed: {result.error_message}"
+                }
+
+            # Masukkan profil pelamar ke DB
+            applicant_id = insert_applicant_profile(applicant_profile, encrypt=self.encryption.encryption_enabled)
+
+            # Masukkan detail aplikasi
+            insert_application_detail(applicant_id, cv_path, result, encrypt=self.encryption.encryption_enabled)
+
+            return {
+                "success": True,
+                "applicant_id": applicant_id
+            }
+
         except Exception as e:
-            print(f"Backend initialization failed: {e}")
-            return False
-    
+            return {
+                "success": False,
+                "error": f"Exception occurred: {str(e)}"
+            }
+
     def search_cvs(self, keywords: str, algorithm: str = "kmp", 
-                   top_results: int = 10, fuzzy_threshold: float = 70.0) -> Dict:
+                top_results: int = 10, fuzzy_threshold: float = 70.0) -> Dict:
 
         if not self._cache_loaded:
             if not self.initialize():
                 return {"error": "Backend not initialized"}
         
         try:
-            # Perform search
-            result, cv_matches = search_engine.search_database_cvs(
-                keywords=keywords,
-                algorithm=algorithm,
-                top_n=top_results,
-                fuzzy_threshold=fuzzy_threshold
-            )
-            
-            # Convert to dictionary format for easy GUI consumption
-            return {
-                "success": True,
-                "search_metadata": {
-                    "keywords_searched": result.keywords_searched,
-                    "algorithm_used": result.algorithm_used,
-                    "exact_match_time_ms": round(result.exact_match_time, 2),
-                    "fuzzy_match_time_ms": round(result.fuzzy_match_time, 2),
-                    "total_cvs_scanned": result.total_cvs_scanned
-                },
-                "exact_matches": result.exact_matches,
-                "fuzzy_matches": result.fuzzy_matches,
-                "cv_results": [
-                    {
-                        "detail_id": cv.detail_id,
-                        "applicant_name": cv.applicant_name,
-                        "application_role": cv.application_role,
-                        "total_matches": cv.total_matches,
-                        "keyword_matches": cv.keyword_matches,
-                        "similarity_score": cv.similarity_score,
-                        "match_sources": getattr(cv, 'match_sources', ['CV'])
-                    }
-                    for cv in cv_matches
-                ]
-            }
+            if USE_CACHE_MANAGER:
+                print("🔍 Using cv_cache_manager for search...")
+                # Use the cache manager's search functionality
+                keyword_list = [kw.strip() for kw in keywords.split(',') if kw.strip()]
+                
+                # Get cached results
+                results = cv_cache_manager.search_keywords(keyword_list, algorithm)
+                
+                # Convert to expected format
+                return {
+                    "success": True,
+                    "search_metadata": {
+                        "keywords_searched": keyword_list,
+                        "algorithm_used": algorithm,
+                        "exact_match_time_ms": 0.0,  # Cache manager doesn't track time separately
+                        "fuzzy_match_time_ms": 0.0,
+                        "total_cvs_scanned": len(cv_cache_manager.memory_cache)
+                    },
+                    "exact_matches": {kw: 0 for kw in keyword_list},  # Simplified
+                    "fuzzy_matches": {},
+                    "cv_results": results[:top_results]
+                }
+            else:
+                # Fall back to original search engine
+                result, cv_matches = search_engine.search_database_cvs(
+                    keywords=keywords,
+                    algorithm=algorithm,
+                    top_n=top_results,
+                    fuzzy_threshold=fuzzy_threshold
+                )
+                
+                # Convert to dictionary format for easy GUI consumption
+                return {
+                    "success": True,
+                    "search_metadata": {
+                        "keywords_searched": result.keywords_searched,
+                        "algorithm_used": result.algorithm_used,
+                        "exact_match_time_ms": round(result.exact_match_time, 2),
+                        "fuzzy_match_time_ms": round(result.fuzzy_match_time, 2),
+                        "total_cvs_scanned": result.total_cvs_scanned
+                    },
+                    "exact_matches": result.exact_matches,
+                    "fuzzy_matches": result.fuzzy_matches,
+                    "cv_results": [
+                        {
+                            "detail_id": cv.detail_id,
+                            "applicant_name": cv.applicant_name,
+                            "application_role": cv.application_role,
+                            "total_matches": cv.total_matches,
+                            "keyword_matches": cv.keyword_matches,
+                            "similarity_score": cv.similarity_score
+                        }
+                        for cv in cv_matches
+                    ]
+                }
         
         except Exception as e:
             return {

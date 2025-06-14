@@ -5,10 +5,10 @@ import subprocess
 import platform
 import webbrowser
 import re
-from data_extractor.extractor import extract_text_from_pdf
+from data_extractor.extractor import extract_pdf_text
 
 def show_pdf_as_text(page: ft.Page, pdf_path: str, applicant_name: str = ""):
-    extracted_text = extract_text_from_pdf(pdf_path)
+    extracted_text = extract_pdf_text(pdf_path)
 
     section_headers = ["Summary", "Skills", "Experience", "Education", "Accomplishments"]
     for header in section_headers:
