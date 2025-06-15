@@ -159,70 +159,68 @@ def extract_pdf_text(pdf_path: str) -> str:
         print(f"PDF extraction error: {e}")
         return ""
 
-def extract_cv_sections(cv_raw_text: str) -> dict[str, str]:
-    """Extract CV sections using improved pattern matching"""
-    sections = {
-        'summary': '',
-        'skills': '',
-        'experience': '',
-        'education': '',
-        'accomplishments': ''
-    }
+def extract_cv_sections(cv_text):
+    sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    if not cv_raw_text:
+    if not cv_text:
         return sections
     
-    lines = cv_raw_text.split('\n')
+    normalized_text = cv_text.replace('\r', '\n')
+    lines = normalized_text.split('\n')
+    text_lower = normalized_text.lower()
+
+    ignored_sections = [
+        'others', 'other', 'personal information', 'personal info', 'additional information', 
+        'additional info', 'miscellaneous', 'references', 'hobbies', 'interests', 
+        'personal details', 'contact information', 'contact info', 'contact',
+        'objective', 'career objective', 'personal statement', 'highlights'
+    ]
     
-    # Define section headers with variations
-    section_patterns = {
-        'summary': [
-            r'^\s*(summary|profile|about|objective|career\s+objective|professional\s+summary)\s*:?\s*$',
-            r'^\s*(summary|profile|about|objective)\s*$'
-        ],
-        'skills': [
-            r'^\s*(skills|technical\s+skills|core\s+competencies|expertise|competencies)\s*:?\s*$',
-            r'^\s*(skills|competencies)\s*$'
-        ],
-        'experience': [
-            r'^\s*(experience|work\s+experience|employment|professional\s+experience|career\s+history)\s*:?\s*$',
-            r'^\s*(experience|employment)\s*$'
-        ],
-        'education': [
-            r'^\s*(education|academic\s+background|qualifications|educational\s+background)\s*:?\s*$',
-            r'^\s*(education|qualifications)\s*$'
-        ],
-        'accomplishments': [
-            r'^\s*(accomplishments|achievements|awards|honors|certifications)\s*:?\s*$',
-            r'^\s*(accomplishments|achievements)\s*$'
-        ]
-    }
-    
-    # Find section positions
     section_positions = []
-    for i, line in enumerate(lines):
-        line_lower = line.lower().strip()
-        for section, patterns in section_patterns.items():
-            for pattern in patterns:
-                if re.match(pattern, line_lower):
-                    section_positions.append((section, i))
-                    break
     
-    # Sort by position
+    for i, line in enumerate(lines):
+        line_clean = line.strip().lower()
+        if not line_clean or len(line_clean) > 100:  # Skip very long lines
+            continue
+
+        if any(ignored in line_clean for ignored in ignored_sections):
+            continue
+            
+        if re.match(r'^(summary|profile|overview|about|professional summary|career focus|executive profile)$', line_clean):
+            section_positions.append(('summary', i))  
+        elif re.match(r'^(skills|summary of skills|technical skills|professional skills|key skills|core competencies)$', line_clean):
+            section_positions.append(('skills', i))
+        elif re.match(r'^(experience|work experience|employment history|professional experience|work history)$', line_clean):
+            section_positions.append(('experience', i))
+        elif re.match(r'^(education|academic background|qualifications|educational background|education and training)$', line_clean):
+            section_positions.append(('education', i))
+        elif re.match(r'^(accomplishments|achievements|certifications|certificates|awards|honors|licenses|core acccomplishments|certifications and training)$', line_clean):
+            section_positions.append(('accomplishments', i))
+
     section_positions.sort(key=lambda x: x[1])
     
-    # Extract content for each section
-    for i, (section, start_line) in enumerate(section_positions):
-        end_line = section_positions[i + 1][1] if i + 1 < len(section_positions) else len(lines)
+    for i, (section_name, start_pos) in enumerate(section_positions):
+        # Determine end position
+        if i + 1 < len(section_positions):
+            end_pos = section_positions[i + 1][1]
+        else:
+            end_pos = len(lines)
         
-        # Get content between section headers
         content_lines = []
-        for line_idx in range(start_line + 1, end_line):
-            line = lines[line_idx].strip()
-            if line:  # Skip empty lines
-                content_lines.append(line)
+        for j in range(start_pos + 1, end_pos):
+            if j < len(lines):
+                line = lines[j].strip()
+                if line:
+                    content_lines.append(line)
         
-        sections[section] = '\n'.join(content_lines)
+        content = '\n'.join(content_lines).strip()
+        if section_name == 'summary':
+            sections['summary'] = content 
+        else:
+            sections[section_name] = content
+    
+    if not any(sections.values()):
+        sections = extract_sections_with_regex(normalized_text, text_lower)
     
     return sections
 
