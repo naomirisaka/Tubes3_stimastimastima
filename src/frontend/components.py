@@ -1,1 +1,0 @@
-# buat simpen komponen UI
