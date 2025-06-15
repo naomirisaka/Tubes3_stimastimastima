@@ -23,12 +23,6 @@ class ApplicationDetail:
     applicant_id: int
     application_role: str
     cv_path: str
-    cv_raw_text: str
-    summary_section: str
-    skills_section: str
-    experience_section: str
-    education_section: str
-    accomplishments_section: str
     is_encrypted: bool = False
 
 class EncryptionManager:
@@ -154,6 +148,17 @@ class EncryptionManager:
         except Exception as e:
             print(f"Decryption failed: {e}")
             return encrypted_text
+    
+    def encrypt_text(self, text: str) -> str:
+        if not self.encryption_enabled or not text:
+            return text
+        
+        try:
+            encrypted_data = self.cipher.encrypt(text.encode('utf-8'))
+            return base64.b64encode(encrypted_data).decode('utf-8')
+        except Exception as e:
+            print(f"Encryption failed: {e}")
+            return text
     
     def is_encrypted_data(self, text: str) -> bool:
         if not text or len(text) < 10:
@@ -336,39 +341,27 @@ class DatabaseManager:
             applicant_id=applicant_id,
             first_name=first_name or "",
             last_name=last_name or "",
-            date_of_birth=date_of_birth or "",
+            date_of_birth=str(date_of_birth) if date_of_birth else "",
             address=address or "",
             phone_number=phone_number or "",
             is_encrypted=is_encrypted
         )
     
     def _decrypt_application_data(self, row: tuple) -> ApplicationDetail:
-        if len(row) == 11:
-            detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section, is_encrypted = row
+        if len(row) == 5:
+            detail_id, applicant_id, application_role, cv_path, is_encrypted = row
         else:
-            detail_id, applicant_id, application_role, cv_path, cv_raw_text, summary_section, skills_section, experience_section, education_section, accomplishments_section = row
+            detail_id, applicant_id, application_role, cv_path = row
             is_encrypted = False
         
         if is_encrypted and self.encryption_manager.encryption_enabled:
             application_role = self.encryption_manager.decrypt_text(application_role) if application_role else ""
-            cv_raw_text = self.encryption_manager.decrypt_text(cv_raw_text) if cv_raw_text else ""
-            summary_section = self.encryption_manager.decrypt_text(summary_section) if summary_section else ""
-            skills_section = self.encryption_manager.decrypt_text(skills_section) if skills_section else ""
-            experience_section = self.encryption_manager.decrypt_text(experience_section) if experience_section else ""
-            education_section = self.encryption_manager.decrypt_text(education_section) if education_section else ""
-            accomplishments_section = self.encryption_manager.decrypt_text(accomplishments_section) if accomplishments_section else ""
         
         return ApplicationDetail(
             detail_id=detail_id,
             applicant_id=applicant_id,
             application_role=application_role or "General Application",
             cv_path=cv_path or "",
-            cv_raw_text=cv_raw_text or "",
-            summary_section=summary_section or "",
-            skills_section=skills_section or "",
-            experience_section=experience_section or "",
-            education_section=education_section or "",
-            accomplishments_section=accomplishments_section or "",
             is_encrypted=is_encrypted
         )
     
@@ -376,9 +369,7 @@ class DatabaseManager:
         self._ensure_encryption_columns()
         
         query = """
-        SELECT detail_id, applicant_id, application_role, cv_path, cv_raw_text,
-               summary_section, skills_section, experience_section, 
-               education_section, accomplishments_section, 
+        SELECT detail_id, applicant_id, application_role, cv_path, 
                COALESCE(is_encrypted, FALSE) as is_encrypted
         FROM ApplicationDetail
         """
@@ -396,9 +387,7 @@ class DatabaseManager:
         self._ensure_encryption_columns()
         
         query = """
-        SELECT detail_id, applicant_id, application_role, cv_path, cv_raw_text,
-               summary_section, skills_section, experience_section, 
-               education_section, accomplishments_section,
+        SELECT detail_id, applicant_id, application_role, cv_path,
                COALESCE(is_encrypted, FALSE) as is_encrypted
         FROM ApplicationDetail WHERE detail_id = %s
         """
@@ -434,27 +423,6 @@ class DatabaseManager:
         
         return matching_applications
     
-    def search_applications_by_text(self, search_term: str) -> List[ApplicationDetail]:
-        all_applications = self.get_all_applications()
-        matching_applications = []
-        
-        search_term_lower = search_term.lower()
-        
-        for app in all_applications:
-            searchable_text = " ".join([
-                app.cv_raw_text,
-                app.summary_section,
-                app.skills_section,
-                app.experience_section,
-                app.education_section,
-                app.accomplishments_section
-            ]).lower()
-            
-            if search_term_lower in searchable_text:
-                matching_applications.append(app)
-        
-        return matching_applications
-    
     def get_database_stats(self) -> Dict[str, int]:
         stats = {}
         
@@ -482,30 +450,30 @@ class DatabaseManager:
         
         return stats
     
-    def get_cv_texts_for_search(self) -> List[Tuple[int, str]]:
+    def get_cv_data_for_search(self) -> List[Tuple[int, str, str, str]]:
+        """Get CV data with realtime extraction for search purposes"""
         self._ensure_encryption_columns()
         
         query = """
-        SELECT detail_id, cv_raw_text, COALESCE(is_encrypted, FALSE) as is_encrypted 
-        FROM ApplicationDetail 
-        WHERE cv_raw_text IS NOT NULL
+        SELECT ad.detail_id, ad.cv_path, 
+               CONCAT(ap.first_name, ' ', ap.last_name) as applicant_name,
+               ad.application_role
+        FROM ApplicationDetail ad
+        JOIN ApplicantProfile ap ON ad.applicant_id = ap.applicant_id
+        WHERE ad.cv_path IS NOT NULL
         """
         results = self.execute_query(query)
         
         cv_data = []
         for row in results:
-            detail_id, cv_text, is_encrypted = row
-            
-            if cv_text and len(cv_text.strip()) > 0:
-                # Decrypt if necessary
-                if is_encrypted and self.encryption_manager.encryption_enabled:
-                    cv_text = self.encryption_manager.decrypt_text(cv_text)
-                
-                cv_data.append((detail_id, cv_text.lower()))
+            detail_id, cv_path, applicant_name, application_role = row
+            if cv_path and cv_path.strip():
+                cv_data.append((detail_id, cv_path, applicant_name, application_role))
         
         return cv_data
     
-    def get_application_summary_data(self, detail_id: int) -> Dict[str, str]:
+    def get_application_basic_data(self, detail_id: int) -> Dict[str, str]:
+        """Get basic application data for summary without extraction"""
         app = self.get_application_by_id(detail_id)
         profile = self.get_applicant_profile(app.applicant_id) if app else None
         
@@ -517,13 +485,73 @@ class DatabaseManager:
             'phone': profile.phone_number,
             'address': profile.address,
             'role': app.application_role,
-            'summary': app.summary_section,
-            'skills': app.skills_section,
-            'experience': app.experience_section,
-            'education': app.education_section,
-            'accomplishments': app.accomplishments_section,
             'cv_path': app.cv_path
         }
+    
+    def insert_applicant_profile(self, profile_data: dict, encrypt: bool = False) -> int:
+        """Insert new applicant profile"""
+        self._ensure_encryption_columns()
+        
+        if not self.connect():
+            return -1
+        
+        try:
+            cursor = self.connection.cursor()
+            
+            # Encrypt data if needed
+            if encrypt and self.encryption_manager.encryption_enabled:
+                first_name = self.encryption_manager.encrypt_text(profile_data.get('first_name', ''))
+                last_name = self.encryption_manager.encrypt_text(profile_data.get('last_name', ''))
+                date_of_birth = self.encryption_manager.encrypt_text(str(profile_data.get('date_of_birth', '')))
+                address = self.encryption_manager.encrypt_text(profile_data.get('address', ''))
+                phone_number = self.encryption_manager.encrypt_text(profile_data.get('phone_number', ''))
+            else:
+                first_name = profile_data.get('first_name', '')
+                last_name = profile_data.get('last_name', '')
+                date_of_birth = profile_data.get('date_of_birth', '')
+                address = profile_data.get('address', '')
+                phone_number = profile_data.get('phone_number', '')
+            
+            cursor.execute("""
+                INSERT INTO ApplicantProfile (first_name, last_name, date_of_birth, address, phone_number, is_encrypted)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (first_name, last_name, date_of_birth, address, phone_number, encrypt))
+            
+            applicant_id = cursor.lastrowid
+            self.connection.commit()
+            cursor.close()
+            return applicant_id
+            
+        except Exception as e:
+            print(f"Error inserting applicant profile: {e}")
+            return -1
+    
+    def insert_application_detail(self, applicant_id: int, application_role: str, cv_path: str, encrypt: bool = False) -> bool:
+        """Insert new application detail"""
+        self._ensure_encryption_columns()
+        
+        if not self.connect():
+            return False
+        
+        try:
+            cursor = self.connection.cursor()
+            
+            # Encrypt data if needed
+            if encrypt and self.encryption_manager.encryption_enabled:
+                application_role = self.encryption_manager.encrypt_text(application_role)
+            
+            cursor.execute("""
+                INSERT INTO ApplicationDetail (applicant_id, application_role, cv_path, is_encrypted)
+                VALUES (%s, %s, %s, %s)
+            """, (applicant_id, application_role, cv_path, encrypt))
+            
+            self.connection.commit()
+            cursor.close()
+            return True
+            
+        except Exception as e:
+            print(f"Error inserting application detail: {e}")
+            return False
     
     def is_encryption_enabled(self) -> bool:
         return self.encryption_manager.encryption_enabled
@@ -539,6 +567,7 @@ class DatabaseManager:
             "encryption_manager_ready": self.encryption_manager.encryption_enabled
         }
 
+# Global instance
 db_manager = DatabaseManager()
 
 def get_database_connection():

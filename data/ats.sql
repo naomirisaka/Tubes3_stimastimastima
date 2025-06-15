@@ -4,50 +4,28 @@ USE ats_db;
 SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 SET FOREIGN_KEY_CHECKS = 0;
 
--- Drop existing tables if they exist
 DROP TABLE IF EXISTS ApplicationDetail;
 DROP TABLE IF EXISTS ApplicantProfile;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- ApplicantProfile table with encryption support
 CREATE TABLE ApplicantProfile (
     applicant_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) DEFAULT NULL,
-    last_name VARCHAR(255) DEFAULT NULL,
-    date_of_birth VARCHAR(255) DEFAULT NULL,
-    address TEXT DEFAULT NULL,
-    phone_number VARCHAR(255) DEFAULT NULL,
-    is_encrypted BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    date_of_birth DATE,
+    address VARCHAR(255),
+    phone_number VARCHAR(20)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ApplicationDetail table with encryption support and CV extraction fields
 CREATE TABLE ApplicationDetail (
     detail_id INT AUTO_INCREMENT PRIMARY KEY,
     applicant_id INT NOT NULL,
-    application_role VARCHAR(255) DEFAULT NULL,
+    application_role VARCHAR(100),
     cv_path TEXT,
-    cv_raw_text LONGTEXT,
-    summary_section TEXT,
-    skills_section TEXT,
-    experience_section TEXT,
-    education_section TEXT,
-    accomplishments_section TEXT,
-    is_encrypted BOOLEAN DEFAULT FALSE,
-    extraction_status ENUM('pending', 'processing', 'completed', 'failed') DEFAULT 'pending',
-    extraction_timestamp TIMESTAMP NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (applicant_id) REFERENCES ApplicantProfile(applicant_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    FOREIGN KEY (applicant_id) REFERENCES ApplicantProfile(applicant_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Indexes for better performance
-CREATE INDEX idx_applicant_name ON ApplicantProfile(first_name, last_name);
-CREATE INDEX idx_application_role ON ApplicationDetail(application_role);
-CREATE INDEX idx_extraction_status ON ApplicationDetail(extraction_status);
-CREATE INDEX idx_created_at ON ApplicationDetail(created_at);
 
 INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number) VALUES
 -- Mohammad Nugraha Eka Prawira

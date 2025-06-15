@@ -5,14 +5,14 @@ from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 import os
 
-from cv_cache_manager import (
-    cv_cache_manager, 
-    initialize_cv_cache, 
-    search_cvs_cached, 
-    get_cv_summary_cached
+from backend.cv_cache_manager import ( 
+    realtime_cv_cache_manager as cv_cache_manager,
+    initialize_realtime_cv_cache, 
+    search_cvs_realtime, 
+    get_cv_summary_realtime_cached
 )
 import database
-from backend import search_engine
+# from backend import search_engine
 from data_extractor.extractor import extract_realtime
 from levenshtein import fuzzy_search_keywords, parse_keywords
 
@@ -62,7 +62,7 @@ class IntegratedATSBackend:
             # Initialize CV cache jika belum
             if not self._cache_initialized:
                 print("Loading CV cache...")
-                initialize_cv_cache()
+                initialize_realtime_cv_cache()
                 self._cache_initialized = True
                 print("Cache initialized successfully")
             
@@ -87,7 +87,7 @@ class IntegratedATSBackend:
         
         # Exact matching menggunakan cache
         start_time = time.time()
-        cached_results = search_cvs_cached(keywords, algorithm, top_n * 2)  # Get more for fuzzy fallback
+        cached_results = search_cvs_realtime(keywords, algorithm, top_n * 2)  # Get more for fuzzy fallback
         exact_time = (time.time() - start_time) * 1000
         
         # Count exact matches per keyword
@@ -154,7 +154,7 @@ class IntegratedATSBackend:
         """Get enhanced CV summary dari cache dengan fallback ke database"""
         
         # Try cache first
-        summary = get_cv_summary_cached(detail_id)
+        summary = get_cv_summary_realtime_cached(detail_id)
         if summary:
             return summary
         
@@ -170,13 +170,13 @@ class IntegratedATSBackend:
                     ad.detail_id,
                     CONCAT(ap.first_name, ' ', ap.last_name) as name,
                     ap.phone_number as phone,
-                    ap.address,
-                    ad.application_role,
-                    ad.summary_section,
-                    ad.skills_section,
-                    ad.experience_section,
-                    ad.education_section,
-                    ad.accomplishments_section,
+                    ap.address as address,
+                    ad.application_role as role,
+                    ad.summary_section as summary,
+                    ad.skills_section as skills,
+                    ad.experience_section as experience,
+                    ad.education_section as education,
+                    ad.accomplishments_section as accomplishments,
                     ad.cv_path
                 FROM ApplicationDetail ad
                 JOIN ApplicantProfile ap ON ad.applicant_id = ap.applicant_id
@@ -212,11 +212,11 @@ class IntegratedATSBackend:
     def refresh_cache_for_cv(self, detail_id: int) -> bool:
         """Refresh cache untuk specific CV"""
         try:
-            cv_data_list = self.cache_manager.load_cv_data_from_database()
+            cv_data_list = self.cache_manager.load_cv_metadata_from_database()
             target_cv = next((cv for cv in cv_data_list if cv['detail_id'] == detail_id), None)
             
             if target_cv:
-                entry = self.cache_manager.extract_cv_if_needed(target_cv)
+                entry = self.cache_manager.extract_cv_realtime(target_cv)
                 return entry is not None
             
             return False
@@ -287,7 +287,7 @@ class IntegratedATSBackend:
                 'application_role': applicant_data.get('role', 'General')
             }
             
-            self.cache_manager.extract_cv_if_needed(cv_data)
+            self.cache_manager.extract_cv_realtime(cv_data)
             
             return {
                 "success": True,
@@ -481,7 +481,7 @@ def refresh_cache_integrated() -> Dict:
     
     try:
         # Reinitialize cache
-        initialize_cv_cache()
+        initialize_realtime_cv_cache()
         backend._cache_initialized = True
         
         stats = backend.get_database_stats()

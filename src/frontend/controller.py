@@ -16,7 +16,7 @@ if backend_path not in sys.path:
 
 try:
     # Import integrated backend
-    from integrated_ats_backend import (
+    from backend.integrated_ats_backend import (
         get_integrated_backend,
         search_cvs_integrated,
         get_cv_summary_integrated,
