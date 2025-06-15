@@ -1,4 +1,4 @@
-# cv_cache_manager.py - Real-time extraction cache manager for ATS
+# cv_cache_manager.py - Fixed version
 
 import os
 import json
@@ -12,7 +12,7 @@ import sqlite3
 import hashlib
 
 from data_extractor.extractor import extract_realtime, ExtractionResult
-import database
+from backend import database  # Fixed import path
 
 @dataclass
 class CVCacheEntry:
@@ -24,7 +24,12 @@ class CVCacheEntry:
     file_hash: str
     last_modified: float
     cache_time: datetime
-    # raw_text: Optional[str] = ""
+    raw_text: str = ""  # Added raw_text field
+    summary_section: str = ""
+    skills_section: str = ""
+    experience_section: str = ""
+    education_section: str = ""
+    accomplishments_section: str = ""
 
 class RealTimeCVCacheManager:
     _instance = None
@@ -66,6 +71,7 @@ class RealTimeCVCacheManager:
         conn = sqlite3.connect(self.cache_file)
         cursor = conn.cursor()
         
+        # Fixed SQL syntax - removed missing comma
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS cv_realtime_cache (
                 detail_id INTEGER PRIMARY KEY,
@@ -74,8 +80,13 @@ class RealTimeCVCacheManager:
                 application_role TEXT,
                 file_hash TEXT,
                 last_modified REAL,
-                cache_time TEXT
-                raw_text TEXT
+                cache_time TEXT,
+                raw_text TEXT,
+                summary_section TEXT,
+                skills_section TEXT,
+                experience_section TEXT,
+                education_section TEXT,
+                accomplishments_section TEXT
             )
         ''')
         
@@ -144,7 +155,13 @@ class RealTimeCVCacheManager:
                         application_role=row[3] or "",
                         file_hash=row[4] or "",
                         last_modified=row[5] or 0.0,
-                        cache_time=cache_time
+                        cache_time=cache_time,
+                        raw_text=row[7] or "",
+                        summary_section=row[8] or "",
+                        skills_section=row[9] or "",
+                        experience_section=row[10] or "",
+                        education_section=row[11] or "",
+                        accomplishments_section=row[12] or ""
                     )
                     
                     self.memory_cache[detail_id] = entry
@@ -173,7 +190,7 @@ class RealTimeCVCacheManager:
         
         cursor.execute('''
             INSERT OR REPLACE INTO cv_realtime_cache 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             entry.detail_id,
             entry.cv_path,
@@ -181,7 +198,13 @@ class RealTimeCVCacheManager:
             entry.application_role,
             entry.file_hash,
             entry.last_modified,
-            entry.cache_time.isoformat()
+            entry.cache_time.isoformat(),
+            entry.raw_text,
+            entry.summary_section,
+            entry.skills_section,
+            entry.experience_section,
+            entry.education_section,
+            entry.accomplishments_section
         ))
         
         conn.commit()
@@ -316,29 +339,12 @@ class RealTimeCVCacheManager:
                 if detail_id in self.memory_cache:
                     existing = self.memory_cache[detail_id]
                     if existing.file_hash != file_hash:
-                        # File changed, update cache
-                        existing.file_hash = file_hash
-                        existing.last_modified = last_modified
-                        existing.cache_time = datetime.now()
-                        existing.applicant_name = applicant_name
-                        existing.application_role = application_role
-                        
-                        self._save_cache_entry(existing)
+                        # File changed, need re-extraction
+                        self._extract_and_cache_cv(detail_id, cv_path, applicant_name, application_role)
                         updated_count += 1
                 else:
-                    # New entry
-                    entry = CVCacheEntry(
-                        detail_id=detail_id,
-                        cv_path=cv_path,
-                        applicant_name=applicant_name,
-                        application_role=application_role,
-                        file_hash=file_hash,
-                        last_modified=last_modified,
-                        cache_time=datetime.now()
-                    )
-                    
-                    self.memory_cache[detail_id] = entry
-                    self._save_cache_entry(entry)
+                    # New entry - extract immediately
+                    self._extract_and_cache_cv(detail_id, cv_path, applicant_name, application_role)
                     new_count += 1
             
             print(f"📊 CV Metadata loaded: {new_count} new, {updated_count} updated")
@@ -349,77 +355,61 @@ class RealTimeCVCacheManager:
         finally:
             db_manager.disconnect()
 
-    def extract_cv_realtime(self, cv_data: Dict) -> ExtractionResult:
-    # """Extract CV dengan path resolution yang benar"""
-        detail_id = cv_data['detail_id']
-        cv_path = cv_data['cv_path']
-
-        # RESOLVE PATH CORRECTLY
+    def _extract_and_cache_cv(self, detail_id: int, cv_path: str, applicant_name: str, application_role: str):
+        """Extract CV and cache the results"""
         resolved_path = self._resolve_cv_path(cv_path)
-
+        
         if not resolved_path:
             print(f"❌ CV file not found: {cv_path}")
-            return None
-
-        print(f"✅ Found CV: {os.path.basename(resolved_path)}")
-
-        # Check if extraction needed
-        # if not self._needs_extraction(detail_id, resolved_path):
-        #     return self.memory_cache[detail_id]
-
-        print(f"🔄 Extracting: {cv_data['applicant_name']}")
-
+            return
+        
         try:
+            print(f"🔄 Extracting: {applicant_name}")
             extraction_result = extract_realtime(resolved_path)
-
-            if extraction_result is None or not extraction_result.success:
-                print(f"❌ Extraction failed: {extraction_result.error_message}")
-                return None
-
-            # Create cache entry
+            
+            if not extraction_result or not extraction_result.success:
+                print(f"❌ Extraction failed: {extraction_result.error_message if extraction_result else 'Unknown error'}")
+                return
+            
+            # Create cache entry with extracted content
             entry = CVCacheEntry(
                 detail_id=detail_id,
                 cv_path=cv_path,
-                applicant_name=cv_data['applicant_name'],
-                application_role=cv_data['application_role'],
+                applicant_name=applicant_name,
+                application_role=application_role,
                 file_hash=self._get_file_hash(resolved_path),
                 last_modified=os.path.getmtime(resolved_path),
-                cache_time=datetime.now()
+                cache_time=datetime.now(),
+                raw_text=extraction_result.cv_raw_text or "",
+                summary_section=extraction_result.summary_section or "",
+                skills_section=extraction_result.skills_section or "",
+                experience_section=extraction_result.experience_section or "",
+                education_section=extraction_result.education_section or "",
+                accomplishments_section=extraction_result.accomplishments_section or ""
             )
-
+            
             self.memory_cache[detail_id] = entry
             self._save_cache_entry(entry)
-
-            print(f"✅ Successfully cached: {cv_data['applicant_name']}")
-            return extraction_result
-
+            
+            print(f"✅ Successfully cached: {applicant_name}")
+            
         except Exception as e:
-            print(f"❌ Error extracting CV: {e}")
-            return None
-
+            print(f"❌ Error extracting CV {applicant_name}: {e}")
 
     def search_keywords_realtime(self, keywords: List[str], algorithm: str = "kmp") -> List[Dict]:
-        """Search keywords dengan real-time extraction"""
+        """Search keywords dalam cached content"""
         if not keywords:
             return []
         
         results = []
         
         for detail_id, entry in self.memory_cache.items():
-            # Extract CV content in real-time
-            cv_data = {
-                'detail_id': entry.detail_id,
-                'cv_path': entry.cv_path,
-                'applicant_name': entry.applicant_name,
-                'application_role': entry.application_role
-            }
-            extraction_result = self.extract_cv_realtime(cv_data)
-
+            # Use cached raw text
+            cv_text = entry.raw_text.lower()
             
-            if extraction_result is None or not extraction_result.success:
+            if not cv_text:
+                # If no cached text, skip this CV
                 continue
-            
-            cv_text = extraction_result.cv_raw_text.lower()
             
             # Search for keywords using specified algorithm
             keyword_matches = {}
@@ -469,34 +459,11 @@ class RealTimeCVCacheManager:
         return results
 
     def get_cv_summary_realtime(self, detail_id: int) -> Optional[Dict]:
-        """Get CV summary dengan real-time extraction"""
+        """Get CV summary dari cached content"""
         if detail_id not in self.memory_cache:
             return None
         
         entry = self.memory_cache[detail_id]
-        
-        # Extract CV content in real-time
-        cv_data = {
-            'detail_id': entry.detail_id,
-            'cv_path': entry.cv_path,
-            'applicant_name': entry.applicant_name,
-            'application_role': entry.application_role
-        }
-        extraction_result = self.extract_cv_realtime(cv_data)
-
-        
-        if extraction_result is None or not extraction_result.success:
-            return {
-                'detail_id': detail_id,
-                'name': entry.applicant_name,
-                'role': entry.application_role,
-                'cv_path': entry.cv_path,
-                'summary': f'Extraction failed: {extraction_result.error_message}',
-                'skills': 'Unable to extract',
-                'experience': 'Unable to extract',
-                'education': 'Unable to extract',
-                'accomplishments': 'Unable to extract'
-            }
         
         # Get additional profile data from database
         db_manager = database.get_database_connection()
@@ -520,11 +487,11 @@ class RealTimeCVCacheManager:
             'address': address,
             'role': entry.application_role,
             'cv_path': entry.cv_path,
-            'summary': extraction_result.summary_section or 'No summary available',
-            'skills': extraction_result.skills_section or 'No skills listed',
-            'experience': extraction_result.experience_section or 'No experience listed',
-            'education': extraction_result.education_section or 'No education listed',
-            'accomplishments': extraction_result.accomplishments_section or 'No accomplishments listed'
+            'summary': entry.summary_section or 'No summary available',
+            'skills': entry.skills_section or 'No skills listed',
+            'experience': entry.experience_section or 'No experience listed',
+            'education': entry.education_section or 'No education listed',
+            'accomplishments': entry.accomplishments_section or 'No accomplishments listed'
         }
     
     def get_cache_stats(self) -> Dict:
@@ -549,69 +516,6 @@ class RealTimeCVCacheManager:
             'cache_size_mb': os.path.getsize(self.cache_file) / (1024*1024) if os.path.exists(self.cache_file) else 0,
             'last_update': max([entry.cache_time for entry in self.memory_cache.values()]) if self.memory_cache else None
         }
-    
-    def refresh_cache(self):
-        """Refresh cache dengan reload dari database"""
-        print("🔄 Refreshing real-time cache...")
-        old_count = len(self.memory_cache)
-        
-        self.load_cv_metadata_from_database()
-        
-        new_count = len(self.memory_cache)
-        print(f"✅ Cache refreshed: {old_count} -> {new_count} CVs")
-        
-        return {
-            'success': True,
-            'old_count': old_count,
-            'new_count': new_count,
-            'stats': self.get_cache_stats()
-        }
-
-    def test_realtime_extraction(self, sample_size: int = 3):
-        """Test real-time extraction pada sample CVs"""
-        print(f"🧪 Testing real-time extraction on {sample_size} CVs...")
-        
-        sample_ids = list(self.memory_cache.keys())[:sample_size]
-        results = []
-        
-        for detail_id in sample_ids:
-            entry = self.memory_cache[detail_id]
-            print(f"   Testing: {entry.applicant_name}")
-            
-            start_time = time.time()
-            entry = self.memory_cache[detail_id]
-            cv_data = {
-                'detail_id': entry.detail_id,
-                'cv_path': entry.cv_path,
-                'applicant_name': entry.applicant_name,
-                'application_role': entry.application_role
-            }
-            extraction_result = self.extract_cv_realtime(cv_data)
-
-            extraction_time = (time.time() - start_time) * 1000
-            
-            results.append({
-                'detail_id': detail_id,
-                'applicant_name': entry.applicant_name,
-                'success': extraction_result.success,
-                'extraction_time_ms': extraction_time,
-                'text_length': len(extraction_result.cv_raw_text) if extraction_result.success else 0,
-                'error': extraction_result.error_message if not extraction_result.success else None
-            })
-            
-            if extraction_result.success:
-                print(f"      ✅ Success in {extraction_time:.1f}ms, {len(extraction_result.cv_raw_text)} chars")
-            else:
-                print(f"      ❌ Failed: {extraction_result.error_message}")
-        
-        success_count = sum(1 for r in results if r['success'])
-        avg_time = sum(r['extraction_time_ms'] for r in results if r['success']) / max(success_count, 1)
-        
-        print(f"📊 Test Results:")
-        print(f"   ✅ Successful: {success_count}/{len(results)}")
-        print(f"   ⏱️ Average time: {avg_time:.1f}ms")
-        
-        return results
 
 # Global instance
 print("🔄 Creating global realtime_cv_cache_manager instance...")
@@ -624,42 +528,11 @@ def initialize_realtime_cv_cache():
     return realtime_cv_cache_manager
 
 def search_cvs_realtime(keywords: str, algorithm: str = "kmp", top_n: int = 10) -> List[Dict]:
-    """Search function yang menggunakan real-time extraction"""
+    """Search function yang menggunakan cached content"""
     keyword_list = [kw.strip() for kw in keywords.split(',') if kw.strip()]
     results = realtime_cv_cache_manager.search_keywords_realtime(keyword_list, algorithm)
     return results[:top_n]
 
 def get_cv_summary_realtime_cached(detail_id: int) -> Optional[Dict]:
-    """Get CV summary dengan real-time extraction"""
+    """Get CV summary dari cached content"""
     return realtime_cv_cache_manager.get_cv_summary_realtime(detail_id)
-
-if __name__ == "__main__":
-    # Test the real-time cache manager
-    print("TESTING REAL-TIME CV CACHE MANAGER")
-    print("=" * 50)
-    
-    # Initialize cache
-    cache_manager = initialize_realtime_cv_cache()
-    
-    # Test extraction
-    cache_manager.test_realtime_extraction(3)
-    
-    # Test search
-    results = search_cvs_realtime("Python, engineer", "kmp", 5)
-    print(f"\nSearch results: {len(results)}")
-    
-    for result in results:
-        print(f"  - {result['applicant_name']}: {result['total_matches']} matches")
-    
-    # Test summary
-    if results:
-        detail_id = results[0]['detail_id']
-        summary = get_cv_summary_realtime_cached(detail_id)
-        if summary:
-            print(f"\nSummary for {summary['name']}:")
-            print(f"  Role: {summary['role']}")
-            print(f"  Skills: {summary['skills'][:100]}...")
-    
-    # Cache stats
-    stats = cache_manager.get_cache_stats()
-    print(f"\nCache stats: {stats}")

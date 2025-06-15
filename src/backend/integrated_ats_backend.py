@@ -1,20 +1,26 @@
-# integrated_ats_backend.py - Backend ATS dengan sistem caching
+# integrated_ats_backend.py - Fixed version
 
 import time
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 import os
 
+# Import algoritma pencarian
+from kmp import kmp_search
+from boyer_moore import boyer_moore_search  
+from aho_corasick import aho_corasick_search
+from levenshtein import fuzzy_search_keywords, parse_keywords
+
+# Import cache manager dan database
 from backend.cv_cache_manager import ( 
     realtime_cv_cache_manager as cv_cache_manager,
     initialize_realtime_cv_cache, 
     search_cvs_realtime, 
     get_cv_summary_realtime_cached
 )
-import database
-# from backend import search_engine
-from data_extractor.extractor import extract_realtime
-from levenshtein import fuzzy_search_keywords, parse_keywords
+from backend import database
+# Import extractor as module untuk avoid circular import
+import data_extractor.extractor as extractor_module
 
 @dataclass
 class SearchResult:
@@ -38,8 +44,29 @@ class CVMatch:
     similarity_score: float
     match_sources: List[str]
 
+# Wrapper functions untuk memastikan konsistensi output
+def standardized_kmp_search(text: str, pattern: str) -> List[int]:
+    """Wrapper untuk KMP search yang mengembalikan list posisi"""
+    try:
+        return kmp_search(text, pattern)
+    except:
+        return []
+
+def standardized_boyer_moore_search(text: str, pattern: str) -> List[int]:
+    """Wrapper untuk Boyer-Moore search yang mengembalikan list posisi"""
+    try:
+        return boyer_moore_search(text, pattern)
+    except:
+        return []
+
+def standardized_aho_corasick_search(text: str, patterns: List[str]) -> Dict[str, List[int]]:
+    """Wrapper untuk Aho-Corasick search yang mengembalikan dict"""
+    try:
+        return aho_corasick_search(text, patterns)
+    except:
+        return {pattern: [] for pattern in patterns}
+
 class IntegratedATSBackend:
-    """Backend ATS yang terintegrasi dengan caching system"""
     
     def __init__(self):
         self.cache_manager = cv_cache_manager
@@ -48,7 +75,6 @@ class IntegratedATSBackend:
         self.fuzzy_threshold = 70.0
     
     def initialize(self) -> bool:
-        """Initialize backend dengan loading cache"""
         try:
             print("Initializing Integrated ATS Backend...")
             
@@ -85,18 +111,90 @@ class IntegratedATSBackend:
         # Parse keywords
         keyword_list = parse_keywords(keywords)
         
-        # Exact matching menggunakan cache
+        # Pastikan cache sudah diinisialisasi
+        if not self._cache_initialized:
+            self.initialize()
+        
+        # Exact matching menggunakan algoritma yang dipilih
         start_time = time.time()
-        cached_results = search_cvs_realtime(keywords, algorithm, top_n * 2)  # Get more for fuzzy fallback
+        
+        # Gunakan algoritma yang sesuai untuk pencarian
+        algorithm_map = {
+            "kmp": standardized_kmp_search,
+            "boyer_moore": standardized_boyer_moore_search, 
+            "aho_corasick": standardized_aho_corasick_search
+        }
+        
+        if algorithm not in algorithm_map:
+            algorithm = "kmp"  # Default fallback
+        
+        search_func = algorithm_map[algorithm]
+        
+        # Lakukan pencarian di cache untuk setiap CV
+        cv_results = []
+        exact_matches = {keyword: 0 for keyword in keyword_list}
+        
+        for detail_id, cache_entry in self.cache_manager.memory_cache.items():
+            # Ambil raw text dari cache
+            cv_text = getattr(cache_entry, 'raw_text', '')
+            
+            if not cv_text:
+                # If no cached text, try to get from cache using real-time extraction
+                print(f"No cached text for {cache_entry.applicant_name}, trying real-time extraction...")
+                cv_data = {
+                    'detail_id': cache_entry.detail_id,
+                    'cv_path': cache_entry.cv_path,
+                    'applicant_name': cache_entry.applicant_name,
+                    'application_role': cache_entry.application_role
+                }
+                extraction_result = self.cache_manager.extract_cv_realtime(cv_data)
+                if extraction_result and extraction_result.success:
+                    cv_text = extraction_result.cv_raw_text.lower()
+                else:
+                    continue  # Skip if extraction fails
+            else:
+                cv_text = cv_text.lower()
+            
+            # Hitung matches untuk setiap keyword
+            keyword_matches = {}
+            total_matches = 0
+            
+            if algorithm == "aho_corasick":
+                # Untuk Aho-Corasick, cari semua keyword sekaligus
+                keyword_list_lower = [kw.lower() for kw in keyword_list]
+                matches = search_func(cv_text, keyword_list_lower)
+                
+                for keyword in keyword_list:
+                    keyword_lower = keyword.lower()
+                    count = len(matches.get(keyword_lower, []))
+                    keyword_matches[keyword] = count
+                    total_matches += count
+                    exact_matches[keyword] += count
+            else:
+                # Untuk KMP dan Boyer-Moore, cari satu per satu
+                for keyword in keyword_list:
+                    keyword_lower = keyword.lower()
+                    positions = search_func(cv_text, keyword_lower)
+                    count = len(positions)
+                    keyword_matches[keyword] = count
+                    total_matches += count
+                    exact_matches[keyword] += count
+            
+            # Hanya simpan CV yang memiliki matches
+            if total_matches > 0:
+                cv_results.append({
+                    'detail_id': detail_id,
+                    'applicant_name': cache_entry.applicant_name,
+                    'application_role': cache_entry.application_role,
+                    'total_matches': total_matches,
+                    'keyword_matches': keyword_matches,
+                    'cv_path': cache_entry.cv_path
+                })
+        
         exact_time = (time.time() - start_time) * 1000
         
-        # Count exact matches per keyword
-        exact_matches = {}
-        for keyword in keyword_list:
-            exact_matches[keyword] = sum(
-                result['keyword_matches'].get(keyword, 0) 
-                for result in cached_results
-            )
+        # Sort results by total matches (descending)
+        cv_results.sort(key=lambda x: x['total_matches'], reverse=True)
         
         # Fuzzy matching untuk keywords yang tidak ditemukan
         start_fuzzy = time.time()
@@ -108,6 +206,9 @@ class IntegratedATSBackend:
             
             # Fuzzy search pada cached text
             for detail_id, cache_entry in self.cache_manager.memory_cache.items():
+                if not cache_entry.raw_text:
+                    continue
+                    
                 fuzzy_result = fuzzy_search_keywords(
                     cache_entry.raw_text, 
                     missing_keywords, 
@@ -120,9 +221,12 @@ class IntegratedATSBackend:
         
         fuzzy_time = (time.time() - start_fuzzy) * 1000
         
+        # Ambil top N results
+        top_results = cv_results[:top_n]
+        
         # Convert results to CVMatch objects
         cv_matches = []
-        for i, result in enumerate(cached_results[:top_n]):
+        for result in top_results:
             # Calculate similarity score
             similarity_score = min(100.0, (result['total_matches'] / len(keyword_list)) * 20)
             
@@ -154,9 +258,36 @@ class IntegratedATSBackend:
         """Get enhanced CV summary dari cache dengan fallback ke database"""
         
         # Try cache first
-        summary = get_cv_summary_realtime_cached(detail_id)
-        if summary:
-            return summary
+        if detail_id in self.cache_manager.memory_cache:
+            cache_entry = self.cache_manager.memory_cache[detail_id]
+            
+            # Get additional profile data from database
+            phone = 'Not available'
+            address = 'Not available'
+            
+            try:
+                if self.db_manager.connect():
+                    basic_data = self.db_manager.get_application_basic_data(detail_id)
+                    phone = basic_data.get('phone', 'Not available')
+                    address = basic_data.get('address', 'Not available')
+                    self.db_manager.disconnect()
+            except:
+                pass
+            
+            # Return data dalam format yang konsisten
+            return {
+                'detail_id': detail_id,
+                'name': cache_entry.applicant_name,
+                'phone': phone,
+                'address': address, 
+                'role': cache_entry.application_role or 'Not specified',
+                'summary': cache_entry.summary_section or 'No summary available',
+                'skills': cache_entry.skills_section or 'No skills listed',
+                'experience': cache_entry.experience_section or 'No experience listed',
+                'education': cache_entry.education_section or 'No education listed',
+                'accomplishments': cache_entry.accomplishments_section or 'No accomplishments listed',
+                'cv_path': cache_entry.cv_path
+            }
         
         # Fallback ke database query
         try:
@@ -190,8 +321,8 @@ class IntegratedATSBackend:
                 return {
                     'detail_id': result[0],
                     'name': result[1],
-                    'phone': result[2],
-                    'address': result[3],
+                    'phone': result[2] or 'Not available',
+                    'address': result[3] or 'Not available',
                     'role': result[4] or 'Not specified',
                     'summary': result[5] or 'No summary available',
                     'skills': result[6] or 'No skills listed',
@@ -209,99 +340,15 @@ class IntegratedATSBackend:
         finally:
             self.db_manager.disconnect()
     
-    def refresh_cache_for_cv(self, detail_id: int) -> bool:
-        """Refresh cache untuk specific CV"""
+    def get_cv_file_path(self, detail_id: int) -> str:
+        """Get CV file path untuk detail_id tertentu"""
         try:
-            cv_data_list = self.cache_manager.load_cv_metadata_from_database()
-            target_cv = next((cv for cv in cv_data_list if cv['detail_id'] == detail_id), None)
-            
-            if target_cv:
-                entry = self.cache_manager.extract_cv_realtime(target_cv)
-                return entry is not None
-            
-            return False
-            
+            summary = self.get_cv_summary_enhanced(detail_id)
+            return summary.get('cv_path', '') if summary else ''
+        
         except Exception as e:
-            print(f"Error refreshing cache for CV {detail_id}: {e}")
-            return False
-    
-    def add_new_cv_to_cache(self, applicant_data: Dict, cv_file_path: str) -> Dict:
-        """Add new CV to database dan cache"""
-        try:
-            # Extract CV terlebih dahulu
-            extraction_result = extract_realtime(cv_file_path)
-            
-            if not extraction_result.success:
-                return {
-                    "success": False,
-                    "error": f"CV extraction failed: {extraction_result.error_message}"
-                }
-            
-            # Insert ke database
-            if not self.db_manager.connect():
-                return {"success": False, "error": "Database connection failed"}
-            
-            cursor = self.db_manager.connection.cursor()
-            
-            # Insert applicant profile
-            cursor.execute("""
-                INSERT INTO ApplicantProfile (first_name, last_name, phone_number, address)
-                VALUES (%s, %s, %s, %s)
-            """, (
-                applicant_data.get('first_name', ''),
-                applicant_data.get('last_name', ''),
-                applicant_data.get('phone', ''),
-                applicant_data.get('address', '')
-            ))
-            
-            applicant_id = cursor.lastrowid
-            
-            # Insert application detail
-            cursor.execute("""
-                INSERT INTO ApplicationDetail 
-                (applicant_id, application_role, cv_path, cv_raw_text, 
-                 summary_section, skills_section, experience_section, 
-                 education_section, accomplishments_section, extraction_status)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                applicant_id,
-                applicant_data.get('role', 'General'),
-                cv_file_path,
-                extraction_result.cv_raw_text,
-                extraction_result.summary_section,
-                extraction_result.skills_section,
-                extraction_result.experience_section,
-                extraction_result.education_section,
-                extraction_result.accomplishments_section,
-                'completed'
-            ))
-            
-            detail_id = cursor.lastrowid
-            self.db_manager.connection.commit()
-            
-            # Update cache
-            cv_data = {
-                'detail_id': detail_id,
-                'cv_path': cv_file_path,
-                'applicant_name': f"{applicant_data.get('first_name', '')} {applicant_data.get('last_name', '')}",
-                'application_role': applicant_data.get('role', 'General')
-            }
-            
-            self.cache_manager.extract_cv_realtime(cv_data)
-            
-            return {
-                "success": True,
-                "detail_id": detail_id,
-                "applicant_id": applicant_id
-            }
-            
-        except Exception as e:
-            return {
-                "success": False,
-                "error": f"Error adding CV: {str(e)}"
-            }
-        finally:
-            self.db_manager.disconnect()
+            print(f"Error getting CV path: {e}")
+            return ''
     
     def get_database_stats(self) -> Dict:
         """Get database dan cache statistics"""
@@ -336,7 +383,7 @@ class IntegratedATSBackend:
                 'total_applicants': total_applicants,
                 'total_applications': total_applications,
                 'applications_by_role': applications_by_role,
-                'cache_hit_rate': len(cache_stats) / max(total_applications, 1) * 100
+                'cache_hit_rate': len(self.cache_manager.memory_cache) / max(total_applications, 1) * 100
             }
             
         except Exception as e:
@@ -454,11 +501,6 @@ def get_cv_summary_integrated(detail_id: int) -> Dict:
             "error": f"Failed to get summary: {str(e)}"
         }
 
-def add_cv_integrated(applicant_data: Dict, cv_file_path: str) -> Dict:
-    """Add new CV API"""
-    backend = get_integrated_backend()
-    return backend.add_new_cv_to_cache(applicant_data, cv_file_path)
-
 def get_stats_integrated() -> Dict:
     """Get statistics API"""
     backend = get_integrated_backend()
@@ -497,203 +539,3 @@ def refresh_cache_integrated() -> Dict:
             "success": False,
             "error": f"Failed to refresh cache: {str(e)}"
         }
-
-# Demo dan testing functions
-def demo_integrated_search():
-    """Demo integrated search functionality"""
-    print("DEMO: Integrated ATS Search with Caching")
-    print("=" * 50)
-    
-    backend = get_integrated_backend()
-    
-    # Initialize
-    if not backend.initialize():
-        print("Failed to initialize backend")
-        return
-    
-    # Demo search scenarios
-    test_scenarios = [
-        {
-            "name": "Python Developer Search",
-            "keywords": "Python, programming, software",
-            "algorithm": "kmp"
-        },
-        {
-            "name": "Data Analyst Search", 
-            "keywords": "data, analysis, SQL",
-            "algorithm": "boyer_moore"
-        },
-        {
-            "name": "Multi-keyword Search (Aho-Corasick)",
-            "keywords": "Java, Spring, REST, API",
-            "algorithm": "aho_corasick"
-        },
-        {
-            "name": "Fuzzy Search (with typos)",
-            "keywords": "Pyhton, programing, databse",  # Intentional typos
-            "algorithm": "kmp"
-        }
-    ]
-    
-    for i, scenario in enumerate(test_scenarios, 1):
-        print(f"\n{i}. {scenario['name']}")
-        print(f"   Keywords: {scenario['keywords']}")
-        print(f"   Algorithm: {scenario['algorithm']}")
-        
-        # Perform search
-        start_time = time.time()
-        results = search_cvs_integrated(
-            keywords=scenario['keywords'],
-            algorithm=scenario['algorithm'],
-            top_n=5,
-            fuzzy_threshold=75.0
-        )
-        search_time = (time.time() - start_time) * 1000
-        
-        if results.get('success'):
-            metadata = results['search_metadata']
-            print(f"   ✅ Search completed in {search_time:.1f}ms")
-            print(f"   📊 Algorithm time: {metadata['exact_match_time_ms']:.1f}ms")
-            print(f"   📄 Scanned: {metadata['total_cvs_scanned']} CVs")
-            
-            # Show exact matches
-            exact_total = sum(results['exact_matches'].values())
-            print(f"   🎯 Total exact matches: {exact_total}")
-            
-            # Show top results
-            cv_results = results['cv_results']
-            if cv_results:
-                print(f"   🏆 Top result: {cv_results[0]['applicant_name']}")
-                print(f"      Role: {cv_results[0]['application_role']}")
-                print(f"      Score: {cv_results[0]['total_matches']} matches")
-                print(f"      Keywords found: {list(cv_results[0]['keyword_matches'].keys())}")
-            else:
-                print("   📝 No matching CVs found")
-            
-            # Show fuzzy matches if any
-            fuzzy_count = sum(len(matches) for matches in results['fuzzy_matches'].values())
-            if fuzzy_count > 0:
-                print(f"   🔍 Fuzzy matches found: {fuzzy_count} similar words")
-                for keyword, similar in results['fuzzy_matches'].items():
-                    if similar:
-                        similar_words = [f"{word}({score:.1f}%)" for word, score in similar[:2]]
-                        print(f"      '{keyword}' → {', '.join(similar_words)}")
-        
-        else:
-            print(f"   ❌ Search failed: {results.get('error')}")
-
-def demo_cv_summary():
-    """Demo CV summary functionality"""
-    print("\n" + "=" * 50)
-    print("DEMO: CV Summary Retrieval")
-    print("=" * 50)
-    
-    # Get a sample CV for summary demo
-    search_results = search_cvs_integrated("engineer, software", "kmp", 3)
-    
-    if search_results.get('success') and search_results.get('cv_results'):
-        cv_result = search_results['cv_results'][0]
-        detail_id = cv_result['detail_id']
-        
-        print(f"\nGetting summary for: {cv_result['applicant_name']}")
-        print(f"Detail ID: {detail_id}")
-        print(f"Role: {cv_result['application_role']}")
-        print(f"Matches: {cv_result['total_matches']}")
-        
-        # Get detailed summary
-        summary_result = get_cv_summary_integrated(detail_id)
-        
-        if summary_result.get('success'):
-            summary = summary_result['summary']
-            
-            print(f"\n📋 DETAILED CV SUMMARY")
-            print(f"   👤 Name: {summary.get('name')}")
-            print(f"   📞 Phone: {summary.get('phone', 'N/A')}")
-            print(f"   🏢 Role: {summary.get('role')}")
-            
-            # Show content previews
-            sections = {
-                'Summary': summary.get('summary', ''),
-                'Skills': summary.get('skills', ''),
-                'Experience': summary.get('experience', ''),
-                'Education': summary.get('education', '')
-            }
-            
-            for section_name, content in sections.items():
-                if content and content.strip():
-                    preview = content[:100] + "..." if len(content) > 100 else content
-                    print(f"   📝 {section_name}: {preview}")
-                else:
-                    print(f"   📝 {section_name}: Not available")
-            
-            cv_path = summary.get('cv_path', '')
-            if cv_path:
-                print(f"   📁 CV File: {cv_path}")
-                print(f"   📁 File exists: {os.path.exists(cv_path)}")
-        
-        else:
-            print(f"❌ Failed to get summary: {summary_result.get('error')}")
-    
-    else:
-        print("❌ No search results available for summary demo")
-
-def show_system_stats():
-    """Show comprehensive system statistics"""
-    print("\n" + "=" * 50)
-    print("SYSTEM STATISTICS")
-    print("=" * 50)
-    
-    stats_result = get_stats_integrated()
-    
-    if stats_result.get('success'):
-        stats = stats_result['stats']
-        
-        print(f"📊 DATABASE STATS:")
-        print(f"   👥 Total Applicants: {stats.get('total_applicants', 0)}")
-        print(f"   📄 Total Applications: {stats.get('total_applications', 0)}")
-        print(f"   💾 Cache Size: {stats.get('cache_size_mb', 0):.2f} MB")
-        print(f"   🎯 Cache Hit Rate: {stats.get('cache_hit_rate', 0):.1f}%")
-        
-        if stats.get('last_update'):
-            print(f"   🕒 Last Cache Update: {stats['last_update']}")
-        
-        print(f"\n🏢 TOP APPLICATION ROLES:")
-        roles_by_count = stats.get('applications_by_role', {})
-        if roles_by_count:
-            for i, (role, count) in enumerate(list(roles_by_count.items())[:10], 1):
-                print(f"   {i:2d}. {role}: {count} applications")
-        else:
-            print("   No role data available")
-    
-    else:
-        print(f"❌ Failed to get stats: {stats_result.get('error')}")
-
-if __name__ == "__main__":
-    print("🚀 INTEGRATED ATS BACKEND DEMO")
-    print("=" * 60)
-    
-    try:
-        # Run comprehensive demo
-        demo_integrated_search()
-        demo_cv_summary()
-        show_system_stats()
-        
-        print(f"\n✅ DEMO COMPLETED SUCCESSFULLY!")
-        print(f"\n📖 INTEGRATION GUIDE:")
-        print(f"   1. Import: from integrated_ats_backend import search_cvs_integrated")
-        print(f"   2. Search: results = search_cvs_integrated(keywords, algorithm)")
-        print(f"   3. Summary: summary = get_cv_summary_integrated(detail_id)")
-        print(f"   4. Stats: stats = get_stats_integrated()")
-        print(f"   5. Add CV: result = add_cv_integrated(applicant_data, cv_path)")
-        
-        print(f"\n🎯 PERFORMANCE BENEFITS:")
-        print(f"   - Fast searches using pre-extracted text cache")
-        print(f"   - No repeated PDF extraction on each search")
-        print(f"   - Supports all three algorithms: KMP, Boyer-Moore, Aho-Corasick")
-        print(f"   - Automatic fuzzy matching for typos")
-        print(f"   - Real-time cache updates when new CVs added")
-        
-    except Exception as e:
-        print(f"❌ Demo failed: {e}")
-        import traceback
-        traceback.print_exc()
