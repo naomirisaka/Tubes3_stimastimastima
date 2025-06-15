@@ -17,13 +17,16 @@
 | Naomi Risaka Sitorus | 13523122 |
 
 ## Deskripsi
-Matchify merupakan sebuah aplikasi
+Matchify adalah aplikasi ATS (Applicant Tracking System) berbasis desktop yang mampu mencocokkan CV pelamar dengan kata kunci tertentu menggunakan algoritma pencocokan string. 
+Tujuannya adalah membantu recruiter menemukan kandidat yang paling relevan secara otomatis dan efisien dari kumpulan CV digital.
 
 ## Fitur
 ### 1. Algoritma Knuth-Morris-Pratt (KMP)
-Algoritma string matching dengan ...
+KMP adalah algoritma pencocokan string yang menghindari pemeriksaan ulang karakter yang sudah diperiksa sebelumnya. 
+Algoritma ini bekerja dengan membangun prefix table (failure function) untuk mempercepat proses pencarian pola di dalam teks.
 ### 2.  Algoritma Boyer-Moore (BM)
-Algoritma string matching dengan ...
+BM adalah salah satu algoritma string matching tercepat untuk teks panjang. 
+Algoritma ini membandingkan pola dari kanan ke kiri dan menggunakan dua strategi utama, yaitu bad character rule dan good suffix rule.
 
 ## Requirements
 - Python 3.10 atau lebih baru
