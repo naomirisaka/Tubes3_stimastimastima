@@ -1,555 +1,584 @@
 import os
-import glob
 import re
+import fitz  # PyMuPDF
+import base64
 import json
-from faker import Faker
-from PyPDF2 import PdfReader
+import hashlib
+import getpass
 import mysql.connector
+from cryptography.fernet import Fernet
+from faker import Faker
 from datetime import datetime
+from dataclasses import dataclass
+import time
 
-# database configuration
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_NAME = "ats_db"
+DB_PASSWORD = ""
 
-import os
-DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')  
+ENCRYPTION_KEY_FILE = "ats_encryption.key"
+ENCRYPTION_CONFIG_FILE = "ats_config.json"
 
-if not DB_PASSWORD:
+# ================== EXTRACTION RESULT ===================
+@dataclass
+class ExtractionResult:
+    success: bool
+    cv_raw_text: str = ""
+    summary_section: str = ""
+    skills_section: str = ""
+    experience_section: str = ""
+    education_section: str = ""
+    accomplishments_section: str = ""
+    error_message: str = ""
+    extraction_time_ms: float = 0.0
+    keyword_matches: dict = None
+
+    def __post_init__(self):
+        if self.keyword_matches is None:
+            self.keyword_matches = {}
+
+# ================== ENCRYPTION MANAGER ===================
+class EncryptionManager:
+    def __init__(self):
+        self.key = None
+        self.cipher = None
+        self.encryption_enabled = False
+
+    def generate_key(self) -> bytes:
+        return Fernet.generate_key()
+
+    def save_key(self, key: bytes, password: str = None):
+        if password:
+            password_hash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), b'ats_salt_2024', 100000)
+            password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
+            encrypted_key = password_cipher.encrypt(key)
+            with open(ENCRYPTION_KEY_FILE, 'wb') as f:
+                f.write(encrypted_key)
+        else:
+            with open(ENCRYPTION_KEY_FILE, 'wb') as f:
+                f.write(key)
+
+    def load_key(self, password: str = None) -> bytes:
+        if not os.path.exists(ENCRYPTION_KEY_FILE):
+            return None
+        with open(ENCRYPTION_KEY_FILE, 'rb') as f:
+            key_data = f.read()
+        if password:
+            try:
+                password_hash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), b'ats_salt_2024', 100000)
+                password_cipher = Fernet(base64.urlsafe_b64encode(password_hash))
+                key = password_cipher.decrypt(key_data)
+                return key
+            except:
+                return None
+        else:
+            return key_data
+
+    def initialize(self, password: str = None):
+        key = self.load_key(password)
+        if not key:
+            key = self.generate_key()
+            self.save_key(key, password)
+        self.key = key
+        self.cipher = Fernet(key)
+        self.encryption_enabled = True
+
+    def encrypt(self, text: str) -> str:
+        if not self.encryption_enabled or not text:
+            return text
+        encrypted_data = self.cipher.encrypt(text.encode('utf-8'))
+        return base64.b64encode(encrypted_data).decode('utf-8')
+
+    def decrypt(self, encrypted_text: str) -> str:
+        if not self.encryption_enabled or not encrypted_text:
+            return encrypted_text
+        try:
+            encrypted_data = base64.b64decode(encrypted_text.encode('utf-8'))
+            decrypted_data = self.cipher.decrypt(encrypted_data)
+            return decrypted_data.decode('utf-8')
+        except:
+            return encrypted_text
+
+# =============== DATABASE ===============
+def get_mysql_password():
+    global DB_PASSWORD
+    if DB_PASSWORD:
+        return DB_PASSWORD
+    DB_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
+    if DB_PASSWORD:
+        return DB_PASSWORD
     try:
         test_conn = mysql.connector.connect(host=DB_HOST, user=DB_USER)
         test_conn.close()
-    except:
-        DB_PASSWORD = input("Input MySQL Password: ")
+        return ""
+    except Exception:
+        pass
+    DB_PASSWORD = getpass.getpass("Enter MySQL Password: ")
+    return DB_PASSWORD
 
-create_applicant_profile_table = """
-CREATE TABLE IF NOT EXISTS ApplicantProfile (
-    applicant_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) DEFAULT NULL,
-    last_name VARCHAR(50) DEFAULT NULL,
-    date_of_birth DATE DEFAULT NULL,
-    address VARCHAR(255) DEFAULT NULL,
-    phone_number VARCHAR(20) DEFAULT NULL
-)
-"""
+def get_db_connection():
+    return mysql.connector.connect(
+        host=DB_HOST,
+        user=DB_USER,
+        password=get_mysql_password(),
+        database=DB_NAME
+    )
 
-create_application_detail_table = """
-CREATE TABLE IF NOT EXISTS ApplicationDetail (
-    detail_id INT AUTO_INCREMENT PRIMARY KEY,
-    applicant_id INT NOT NULL,
-    application_role VARCHAR(100) DEFAULT NULL,
-    cv_path TEXT,
-    cv_raw_text LONGTEXT,
-    summary_section TEXT,
-    skills_section TEXT,
-    experience_section TEXT,
-    education_section TEXT,
-    accomplishments_section TEXT,
-    FOREIGN KEY (applicant_id) REFERENCES ApplicantProfile(applicant_id)
-)
-"""
-
-# create database
-conn_init = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD
-)
-cursor_init = conn_init.cursor()
-cursor_init.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
-cursor_init.close()
-conn_init.close()
-
-db = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD,
-    database=DB_NAME
-)
-cursor = db.cursor()
-
-cursor.execute(create_applicant_profile_table)
-cursor.execute(create_application_detail_table)
-db.commit()
-
-# seeding with faker
-faker = Faker('id_ID')
-
-def generate_phone():
-    return "08" + ''.join(faker.random_choices(elements='0123456789', length=10))
-
-def generate_fake_profile():
-    # use simple Indonesian name generation
-    first_name = faker.first_name()
-    last_name = faker.last_name() 
-    
-    return {
-        "first_name": first_name,
-        "last_name": last_name,
-        "phone_number": generate_phone(),
-        "date_of_birth": faker.date_of_birth(minimum_age=22, maximum_age=60).isoformat(),
-        "address": faker.address().replace('\n', ', ')
-    }
-
-def extract_text_from_pdf(pdf_path):
+# =============== CV EXTRACTION ===============
+def extract_pdf_text(pdf_path: str) -> str:
+    """Extract text from PDF with better structure preservation"""
     try:
-        reader = PdfReader(pdf_path)
-        text = "\n".join([page.extract_text() or "" for page in reader.pages])
-        return text.strip()
+        doc = fitz.open(pdf_path)
+        full_text = []
+        
+        for page_num in range(len(doc)):
+            page = doc.load_page(page_num)
+            # Use dict format for better text extraction
+            text_dict = page.get_text("dict")
+            
+            page_text = []
+            for block in text_dict["blocks"]:
+                if "lines" in block:  # Text block
+                    block_text = []
+                    for line in block["lines"]:
+                        line_text = []
+                        for span in line["spans"]:
+                            if span["text"].strip():
+                                line_text.append(span["text"])
+                        if line_text:
+                            block_text.append(" ".join(line_text))
+                    if block_text:
+                        page_text.extend(block_text)
+            
+            if page_text:
+                full_text.extend(page_text)
+        
+        doc.close()
+        return '\n'.join(full_text)
     except Exception as e:
-        print(f"Failed to read {pdf_path}: {e}")
+        print(f"PDF extraction error: {e}")
         return ""
 
 def extract_cv_sections(cv_text):
+    """Extract CV sections using regex patterns"""
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    # normalize text
-    text = cv_text.replace('\n', ' ').replace('\r', ' ')
-    text = ' '.join(text.split())  
-    text_lower = text.lower()
+    if not cv_text:
+        return sections
     
-    # summary
-    summary_patterns = [
-        r'summary\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)',
-        r'profile\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)',
-        r'overview\s+(.*?)(?=highlights|skills|experience|education|accomplishments|certifications|interests|additional)'
+    normalized_text = cv_text.replace('\r', '\n')
+    lines = normalized_text.split('\n')
+    text_lower = normalized_text.lower()
+
+    ignored_sections = [
+        'others', 'other', 'personal information', 'personal info', 'additional information', 
+        'additional info', 'miscellaneous', 'references', 'hobbies', 'interests', 
+        'personal details', 'contact information', 'contact info', 'contact',
+        'objective', 'career objective', 'personal statement', 'highlights'
     ]
     
-    for pattern in summary_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            sections['summary'] = match.group(1).strip()[:1000]
-            break
+    section_positions = []
     
-    # skills and highlights - combine both sections
-    skills_content = []
+    for i, line in enumerate(lines):
+        line_clean = line.strip().lower()
+        if not line_clean or len(line_clean) > 100:  # Skip very long lines
+            continue
+
+        if any(ignored in line_clean for ignored in ignored_sections):
+            continue
+            
+        if re.match(r'^(summary|profile|overview|about|professional summary|career focus|executive profile)$', line_clean):
+            section_positions.append(('summary', i))  
+        elif re.match(r'^(skills|summary of skills|technical skills|professional skills|key skills|core competencies)$', line_clean):
+            section_positions.append(('skills', i))
+        elif re.match(r'^(experience|work experience|employment history|professional experience|work history)$', line_clean):
+            section_positions.append(('experience', i))
+        elif re.match(r'^(education|academic background|qualifications|educational background|education and training)$', line_clean):
+            section_positions.append(('education', i))
+        elif re.match(r'^(accomplishments|achievements|certifications|certificates|awards|honors|licenses|core acccomplishments|certifications and training)$', line_clean):
+            section_positions.append(('accomplishments', i))
+
+    section_positions.sort(key=lambda x: x[1])
     
-    highlights_patterns = [
-        r'highlights\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional|skills)',
-        r'key skills\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional)',
-        r'core competencies\s+(.*?)(?=accomplishments|experience|education|certifications|interests|additional)'
-    ]
+    for i, (section_name, start_pos) in enumerate(section_positions):
+        # Determine end position
+        if i + 1 < len(section_positions):
+            end_pos = section_positions[i + 1][1]
+        else:
+            end_pos = len(lines)
+        
+        content_lines = []
+        for j in range(start_pos + 1, end_pos):
+            if j < len(lines):
+                line = lines[j].strip()
+                if line:
+                    content_lines.append(line)
+        
+        content = '\n'.join(content_lines).strip()
+        if section_name == 'summary':
+            sections['summary'] = content 
+        else:
+            sections[section_name] = content
     
-    for pattern in highlights_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            skills_content.append(match.group(1).strip())
-            break
-    
-    # get skills section at end of cv
-    skills_patterns = [
-        r'(?:^|\s)skills\s+(.*?)(?=certifications|interests|additional information|$)',
-        r'technical skills\s+(.*?)(?=certifications|interests|additional information|$)',
-        r'professional skills\s+(.*?)(?=certifications|interests|additional information|$)'
-    ]
-    
-    for pattern in skills_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            skills_content.append(match.group(1).strip())
-            break
-    
-    if skills_content:
-        sections['skills'] = ' '.join(skills_content)[:1500]
-    
-    # experience
-    experience_patterns = [
-        r'experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'work experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'employment history\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))',
-        r'professional experience\s+(.*?)(?=education|certifications|interests|additional|skills\s+(?:accounting|general))'
-    ]
-    
-    for pattern in experience_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            exp_text = match.group(1).strip()
-            exp_text = re.sub(r'company\s*name', 'Company Name', exp_text, flags=re.IGNORECASE)
-            exp_text = re.sub(r'city\s*,\s*state', 'City, State', exp_text, flags=re.IGNORECASE)
-            sections['experience'] = exp_text[:2000]
-            break
-    
-    # education
-    education_patterns = [
-        r'education\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
-        r'academic background\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)',
-        r'qualifications\s+(.*?)(?=certifications|interests|additional|skills\s+(?:accounting|general)|$)'
-    ]
-    
-    for pattern in education_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            edu_text = match.group(1).strip()
-            sections['education'] = edu_text[:1000]
-            break
-    
-    # accomplishments
-    accomplishments_patterns = [
-        r'accomplishments\s+(.*?)(?=experience|education|certifications|interests|additional|skills)',
-        r'achievements\s+(.*?)(?=experience|education|certifications|interests|additional|skills)',
-        r'key achievements\s+(.*?)(?=experience|education|certifications|interests|additional|skills)'
-    ]
-    
-    for pattern in accomplishments_patterns:
-        match = re.search(pattern, text_lower, re.DOTALL | re.IGNORECASE)
-        if match:
-            sections['accomplishments'] = match.group(1).strip()[:1500]
-            break
-    
-    # fallback parsing
     if not any(sections.values()):
-        sections = extract_cv_sections_fallback(cv_text)
+        sections = extract_sections_with_regex(normalized_text, text_lower)
     
     return sections
 
-def extract_cv_sections_fallback(cv_text):
+def extract_sections_with_regex(normalized_text, text_lower):
+    """Fallback method using regex patterns"""
     sections = {'summary': '', 'skills': '', 'experience': '', 'education': '', 'accomplishments': ''}
     
-    lines = cv_text.split('\n')
-    current_section = None
-    content = []
-    
-    section_keywords = {
-        'summary': ['summary', 'profile', 'overview', 'about'],
-        'skills': ['highlights', 'skills', 'technical skills', 'competencies', 'core competencies'],
-        'experience': ['experience', 'work experience', 'employment', 'professional experience'],
-        'education': ['education', 'academic', 'qualifications'],
-        'accomplishments': ['accomplishments', 'achievements', 'certifications', 'awards']
+    # Define regex patterns for each section
+    patterns = {
+        'summary': r'(?i)(summary|profile|overview|about)[:\-\s]*\n(.*?)(?=\n\s*(skills|experience|education|accomplishments|$))',
+        'skills': r'(?i)(skills|technical skills|core competencies)[:\-\s]*\n(.*?)(?=\n\s*(experience|education|accomplishments|summary|$))',
+        'experience': r'(?i)(experience|work experience|employment)[:\-\s]*\n(.*?)(?=\n\s*(education|skills|accomplishments|summary|$))',
+        'education': r'(?i)(education|academic background)[:\-\s]*\n(.*?)(?=\n\s*(experience|skills|accomplishments|summary|$))',
+        'accomplishments': r'(?i)(accomplishments|achievements|certifications)[:\-\s]*\n(.*?)(?=\n\s*(experience|skills|education|summary|$))'
     }
     
-    for line in lines:
-        line = line.strip()
-        if not line or len(line) < 3:
-            continue
-        
-        line_lower = line.lower()
-        
-        found_section = None
-        for section, keywords in section_keywords.items():
-            if any(keyword in line_lower and len(line) < 50 for keyword in keywords):
-                if current_section and content:
-                    sections[current_section] = ' '.join(content)[:1500]
-                
-                found_section = section
-                content = []
-                break
-        
-        if found_section:
-            current_section = found_section
-        elif current_section:
-            content.append(line)
-            
-            if len(' '.join(content)) > 1500:
-                break
-    
-    if current_section and content:
-        sections[current_section] = ' '.join(content)[:1500]
+    for section_name, pattern in patterns.items():
+        match = re.search(pattern, normalized_text, re.DOTALL | re.MULTILINE)
+        if match:
+            sections[section_name] = match.group(2).strip()
     
     return sections
 
-def insert_applicant_profile(profile_data):
-    cursor.execute("""
-        INSERT INTO ApplicantProfile (first_name, last_name, date_of_birth, address, phone_number)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (
-        profile_data['first_name'],
-        profile_data['last_name'],
-        profile_data['date_of_birth'],
-        profile_data['address'],
-        profile_data['phone_number']
-    ))
-    return cursor.lastrowid
-
-def insert_application_detail(applicant_id, cv_path, cv_text, sections):
-    role = extract_application_role(cv_text, cv_path)
+def search_keywords_in_cv(cv_text: str, keywords: list) -> dict:
+    """Search for keywords using multiple algorithms"""
+    if not cv_text or not keywords:
+        return {}
     
-    cursor.execute("""
-        INSERT INTO ApplicationDetail 
-        (applicant_id, application_role, cv_path, cv_raw_text, summary_section, 
-         skills_section, experience_section, education_section, accomplishments_section)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (
-        applicant_id,
-        role,
-        cv_path,
-        cv_text,
-        sections['summary'],
-        sections['skills'],
-        sections['experience'],
-        sections['education'],
-        sections['accomplishments']
-    ))
-
-def extract_application_role(cv_text, cv_path):
-    path_parts = cv_path.replace('\\', '/').split('/')
-    for part in path_parts:
-        part_upper = part.upper()
-        if part_upper in ['ACCOUNTANT', 'ADVOCATE', 'AGRICULTURE', 'APPAREL', 'ARTS', 
-                         'AUTOMOBILE', 'AVIATION', 'BANKING', 'BPO', 'BUSINESS-DEVELOPMENT',
-                         'CHEF', 'CONSTRUCTION', 'CONSULTANT', 'DESIGNER', 'DIGITAL-MEDIA',
-                         'ENGINEERING', 'FINANCE', 'FITNESS', 'HEALTHCARE', 'HR',
-                         'INFORMATION-TECHNOLOGY', 'PUBLIC-RELATIONS', 'SALES', 'TEACHER']:
-            return part_upper.replace('-', ' ').title()
-    
-    lines = cv_text.split('\n')
-    for i, line in enumerate(lines[:5]): 
-        line_clean = line.strip()
-        if not line_clean or len(line_clean) < 3:
-            continue
-
-        if line_clean.isupper() and len(line_clean.split()) <= 3:
-            continue
-            
-        if re.search(r'(\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9})|(@)|(\d{5})', line_clean):
-            continue
-            
-        role_keywords = [
-            'chef', 'cook', 'accountant', 'engineer', 'developer', 'manager', 'analyst',
-            'designer', 'consultant', 'specialist', 'coordinator', 'assistant', 'director',
-            'supervisor', 'lead', 'senior', 'junior', 'associate', 'executive', 'officer',
-            'technician', 'administrator', 'representative', 'advisor', 'instructor',
-            'teacher', 'professor', 'nurse', 'doctor', 'therapist', 'lawyer', 'advocate'
-        ]
-        
-        line_lower = line_clean.lower()
-        for keyword in role_keywords:
-            if keyword in line_lower:
-                return line_clean.title()[:100]
-    
+    # Simple keyword search for now
+    results = {}
     cv_lower = cv_text.lower()
-    role_patterns = [
-        r'(?:job title|position|role|objective):\s*([^\n]+)',
-        r'(?:seeking|looking for|applying for)\s+(?:position as|role as|job as)?\s*([^\n]+)',
-        r'(?:current role|current position):\s*([^\n]+)',
-    ]
     
-    for pattern in role_patterns:
-        match = re.search(pattern, cv_lower)
-        if match:
-            role_text = match.group(1).strip()
-            if len(role_text) > 5:  
-                return role_text.title()[:100]
+    for keyword in keywords:
+        keyword_lower = keyword.lower()
+        positions = []
+        start = 0
+        while True:
+            pos = cv_lower.find(keyword_lower, start)
+            if pos == -1:
+                break
+            positions.append(pos)
+            start = pos + 1
+        results[keyword] = positions
     
-    content_role_map = {
-        'chef': ['chef', 'cook', 'culinary', 'kitchen', 'food prep', 'restaurant'],
-        'developer': ['developer', 'programming', 'coding', 'software', 'python', 'java', 'javascript'],
-        'accountant': ['accounting', 'bookkeeping', 'financial', 'tax', 'audit'],
-        'engineer': ['engineering', 'technical', 'system', 'design', 'development'],
-        'designer': ['design', 'creative', 'graphic', 'ui', 'ux', 'visual'],
-        'teacher': ['teaching', 'education', 'instructor', 'academic', 'student'],
-        'nurse': ['nursing', 'healthcare', 'medical', 'patient care', 'hospital'],
-        'sales': ['sales', 'selling', 'customer', 'revenue', 'target']
-    }
-    
-    for role, keywords in content_role_map.items():
-        if any(keyword in cv_lower for keyword in keywords):
-            return role.title()
-    
-    return 'General Application'
+    return results
 
-def process_folder(base_folder):
-    pdf_files = glob.glob(os.path.join(base_folder, "**/*.pdf"), recursive=True)
-    
-    if not pdf_files:
-        print("No PDF file found in data and its subfiles")
-        return
-    
-    total_files = len(pdf_files)
-    print(f"Found {total_files} PDF files to process")
-    
-    # CLEAR DATABASE FIRST - removed from here since it's in main now
-    # print("Clearing existing data...")
-    # cursor.execute("DELETE FROM ApplicationDetail")
-    # cursor.execute("DELETE FROM ApplicantProfile")
-    # db.commit()
-    # print("Database cleared")
-    
-    # create base profiles for one-to-many
-    base_profiles = []
-    num_base_profiles = 200  # Fixed number for testing
-    
-    print(f"Creating {num_base_profiles} base profiles")
-    
-    for i in range(num_base_profiles):
-        profile_data = generate_fake_profile()
-        applicant_id = insert_applicant_profile(profile_data)
-        base_profiles.append({
-            'id': applicant_id,
-            'application_count': 0
-        })
-        
-        if (i + 1) % 50 == 0:
-            print(f"Created {i + 1} profiles...")
-    
-    db.commit()
-    
-    # verify profile count
-    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-    profile_count_after_creation = cursor.fetchone()[0]
-    print(f"Verified: {profile_count_after_creation} profiles in database")
-    
-    if profile_count_after_creation != num_base_profiles:
-        print(f"ERROR: Expected {num_base_profiles} but found {profile_count_after_creation}")
-        return
-    
-    # process pdfs - NEVER create new profiles
-    processed = 0
-    failed = 0
-    
-    print("Starting PDF processing...")
-    
-    for i, path in enumerate(pdf_files):
-        try:
-            if i % 100 == 0:
-                print(f"Processing file {i+1}/{total_files}")
-            
-            cv_text = extract_text_from_pdf(path)
-            if not cv_text or len(cv_text) < 50:
-                failed += 1
-                continue
-                
-            sections = extract_cv_sections(cv_text)
-            
-            # ONLY use existing profiles
-            selected_profile = min(base_profiles, key=lambda p: p['application_count'])
-            applicant_id = selected_profile['id']
-            selected_profile['application_count'] += 1
-            
-            insert_application_detail(applicant_id, path, cv_text, sections)
-            processed += 1
-            
-            # check if profiles are being created somehow
-            if processed % 100 == 0:
-                cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-                current_profile_count = cursor.fetchone()[0]
-                if current_profile_count != num_base_profiles:
-                    print(f"ALERT: Profile count changed to {current_profile_count}!")
-                    break
-                db.commit()
-            
-        except Exception as e:
-            print(f"Error processing {path}: {e}")
-            failed += 1
-            continue
-    
-    db.commit()
-    
-    # final statistics
-    cursor.execute("SELECT COUNT(DISTINCT applicant_id) FROM ApplicationDetail")
-    unique_profiles = cursor.fetchone()[0]
-    
-    cursor.execute("SELECT COUNT(*) FROM ApplicationDetail")
-    total_applications = cursor.fetchone()[0]
-    
-    cursor.execute("SELECT COUNT(*) FROM ApplicantProfile")
-    total_profiles_in_table = cursor.fetchone()[0]
-    
-    print(f"\nProcessing completed")
-    print(f"Successfully processed: {processed}")
-    print(f"Failed: {failed}")
-    print(f"Profiles in ApplicantProfile table: {total_profiles_in_table}")
-    print(f"Unique profiles used in applications: {unique_profiles}")
-    print(f"Total applications: {total_applications}")
-    
-    if total_profiles_in_table != num_base_profiles:
-        print(f"ERROR: Something created extra profiles! Expected {num_base_profiles}")
-    
-    if unique_profiles != num_base_profiles:
-        print(f"ERROR: Not all profiles were used! Expected {num_base_profiles}")
-    
-    print(f"Average applications per profile: {total_applications/unique_profiles:.2f}")
+BASE_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 
-def export_data_to_sql(filename):
+def extract_realtime(cv_path: str, keywords: list = None) -> ExtractionResult:
+    """Real-time CV extraction with keyword search"""
+    full_path = os.path.join(BASE_DATA_PATH, cv_path) if not os.path.isabs(cv_path) else cv_path
+    start_time = time.time()
+    
+    # Validate file existence
+    if not os.path.exists(full_path):
+        return ExtractionResult(
+            success=False, 
+            error_message=f"File not found: {full_path}",
+            extraction_time_ms=(time.time() - start_time) * 1000
+        )
+    
+    # Validate file extension
+    if not full_path.lower().endswith('.pdf'):
+        return ExtractionResult(
+            success=False, 
+            error_message="Only PDF files are supported",
+            extraction_time_ms=(time.time() - start_time) * 1000
+        )
+    
     try:
-        cursor.execute("SELECT * FROM ApplicantProfile ORDER BY applicant_id")
-        profiles = cursor.fetchall()
+        # Extract text from PDF
+        raw_text = extract_pdf_text(full_path)
+        if not raw_text.strip():
+            return ExtractionResult(
+                success=False, 
+                error_message="No text content found in PDF",
+                extraction_time_ms=(time.time() - start_time) * 1000
+            )
         
-        cursor.execute("SELECT * FROM ApplicationDetail ORDER BY detail_id")
-        details = cursor.fetchall()
+        # Extract sections
+        sections = extract_cv_sections(raw_text)
         
-        def escape_sql(val):
-            if val is None:
-                return "NULL"
-            return "'" + str(val).replace("'", "''").replace("\\", "\\\\") + "'"
+        # Search for keywords if provided
+        keyword_matches = {}
+        if keywords:
+            keyword_matches = search_keywords_in_cv(raw_text, keywords)
         
-        with open(filename, "w", encoding="utf-8") as f:
-            f.write(f"CREATE DATABASE IF NOT EXISTS {DB_NAME};\n")
-            f.write(f"USE {DB_NAME};\n\n")
-            
-            f.write("-- Create ApplicantProfile table\n")
-            f.write(create_applicant_profile_table.strip() + ";\n\n")
-            f.write("-- Create ApplicationDetail table\n")
-            f.write(create_application_detail_table.strip() + ";\n\n")
-            
-            f.write("-- Insert ApplicantProfile data\n")
-            for i, profile in enumerate(profiles, 1):  # start from 1
-                original_id, first_name, last_name, dob, address, phone = profile
-                dob_val = escape_sql(dob.isoformat() if dob else None)
-                
-                # use sequential IDs starting from 1
-                insert_stmt = (
-                    "INSERT INTO ApplicantProfile (applicant_id, first_name, last_name, date_of_birth, address, phone_number) VALUES ("
-                    f"{i}, {escape_sql(first_name)}, {escape_sql(last_name)}, {dob_val}, "
-                    f"{escape_sql(address)}, {escape_sql(phone)});\n"
-                )
-                f.write(insert_stmt)
-            
-            f.write("\n-- Insert ApplicationDetail data\n")
-            
-            # create mapping from old IDs to new IDs to maintain relationships
-            id_mapping = {}
-            for i, profile in enumerate(profiles, 1):
-                original_id = profile[0]
-                id_mapping[original_id] = i
-            
-            for i, detail in enumerate(details, 1):  # start from 1
-                detail_id, original_applicant_id, role, cv_path, cv_raw_text, summary, skills, experience, education, accomplishments = detail
-                new_applicant_id = id_mapping[original_applicant_id]  # maintain one-to-many relationships
-                
-                insert_stmt = (
-                    "INSERT INTO ApplicationDetail (detail_id, applicant_id, application_role, cv_path, cv_raw_text, "
-                    "summary_section, skills_section, experience_section, education_section, accomplishments_section) VALUES ("
-                    f"{i}, {new_applicant_id}, {escape_sql(role)}, {escape_sql(cv_path)}, {escape_sql(cv_raw_text)}, "
-                    f"{escape_sql(summary)}, {escape_sql(skills)}, {escape_sql(experience)}, "
-                    f"{escape_sql(education)}, {escape_sql(accomplishments)});\n"
-                )
-                f.write(insert_stmt)
+        extraction_time = (time.time() - start_time) * 1000
         
-        print(f"Data exported successfully to: {filename}")
+        return ExtractionResult(
+            success=True,
+            cv_raw_text=raw_text,
+            summary_section=sections['summary'],
+            skills_section=sections['skills'],
+            experience_section=sections['experience'],
+            education_section=sections['education'],
+            accomplishments_section=sections['accomplishments'],
+            keyword_matches=keyword_matches,
+            extraction_time_ms=extraction_time
+        )
         
     except Exception as e:
-        print(f"Error while exporting data: {e}")
+        return ExtractionResult(
+            success=False,
+            error_message=f"Extraction failed: {str(e)}",
+            extraction_time_ms=(time.time() - start_time) * 1000
+        )
 
-def test_extraction(pdf_path):
-    print(f"Testing extraction on: {pdf_path}")
-    cv_text = extract_text_from_pdf(pdf_path)
-    sections = extract_cv_sections(cv_text)
-    
-    print("\n=== RESULT ===")
-    for section_name, content in sections.items():
-        print(f"\n{section_name.upper()}:")
-        print("-" * 40)
-        if content:
-            print(content[:200] + "..." if len(content) > 200 else content)
+def insert_applicant_profile(profile: dict, encrypt: bool = False) -> int:
+    """Insert applicant profile into database"""
+    try:
+        db = get_db_connection()
+        cursor = db.cursor()
+
+        if encrypt and encryption.encryption_enabled:
+            encrypted_profile = {k: encryption.encrypt(v) if v else v for k, v in profile.items()}
         else:
-            print("(Not found)")
+            encrypted_profile = profile
+
+        cursor.execute("""
+            INSERT INTO ApplicantProfile (first_name, last_name, date_of_birth, address, phone_number, is_encrypted)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (
+            encrypted_profile.get('first_name', ''),
+            encrypted_profile.get('last_name', ''),
+            encrypted_profile.get('date_of_birth', ''),
+            encrypted_profile.get('address', ''),
+            encrypted_profile.get('phone_number', ''),
+            encrypt
+        ))
+        
+        applicant_id = cursor.lastrowid
+        db.commit()
+        return applicant_id
+        
+    except Exception as e:
+        print(f"Database error in insert_applicant_profile: {e}")
+        return -1
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
+
+def insert_application_detail(applicant_id: int, cv_path: str, application_role: str = "General", encrypt: bool = False) -> bool:
+    """Insert application details into database (simplified for new schema)"""
+    try:
+        db = get_db_connection()
+        cursor = db.cursor()
+
+        if encrypt and encryption.encryption_enabled:
+            application_role = encryption.encrypt(application_role) if application_role else ""
+        
+        cursor.execute("""
+            INSERT INTO ApplicationDetail
+            (applicant_id, application_role, cv_path, is_encrypted)
+            VALUES (%s, %s, %s, %s)
+        """, (
+            applicant_id,
+            application_role,
+            cv_path,
+            encrypt
+        ))
+        
+        db.commit()
+        return True
+        
+    except Exception as e:
+        print(f"Database error in insert_application_detail: {e}")
+        return False
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
+
+def get_cv_summary_with_extraction(detail_id: int) -> dict:
+    """Get CV summary with real-time extraction"""
+    try:
+        db = get_db_connection()
+        cursor = db.cursor()
+        
+        # Get application and profile data
+        query = """
+        SELECT ad.detail_id, ad.cv_path, ad.application_role,
+               ap.first_name, ap.last_name, ap.phone_number, ap.address
+        FROM ApplicationDetail ad
+        JOIN ApplicantProfile ap ON ad.applicant_id = ap.applicant_id
+        WHERE ad.detail_id = %s
+        """
+        
+        cursor.execute(query, (detail_id,))
+        result = cursor.fetchone()
+        
+        if not result:
+            return {}
+        
+        detail_id, cv_path, role, first_name, last_name, phone, address = result
+        
+        # Extract CV content in real-time
+        extraction_result = extract_realtime(cv_path)
+        
+        summary_data = {
+            'detail_id': detail_id,
+            'name': f"{first_name} {last_name}",
+            'phone': phone or 'Not available',
+            'address': address or 'Not available', 
+            'role': role or 'Not specified',
+            'cv_path': cv_path
+        }
+        
+        if extraction_result.success:
+            summary_data.update({
+                'summary': extraction_result.summary_section or 'No summary available',
+                'skills': extraction_result.skills_section or 'No skills listed',
+                'experience': extraction_result.experience_section or 'No experience listed',
+                'education': extraction_result.education_section or 'No education listed',
+                'accomplishments': extraction_result.accomplishments_section or 'No accomplishments listed'
+            })
+        else:
+            # Fallback data if extraction fails
+            summary_data.update({
+                'summary': f'Extraction failed: {extraction_result.error_message}',
+                'skills': 'Unable to extract skills',
+                'experience': 'Unable to extract experience',
+                'education': 'Unable to extract education',
+                'accomplishments': 'Unable to extract accomplishments'
+            })
+        
+        return summary_data
+        
+    except Exception as e:
+        print(f"Error getting CV summary: {e}")
+        return {}
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
+
+def search_cvs_with_extraction(keywords: str, algorithm: str = "kmp", top_n: int = 10) -> list:
+    """Search CVs with real-time extraction"""
+    try:
+        db = get_db_connection()
+        cursor = db.cursor()
+        
+        # Get all CV data
+        query = """
+        SELECT ad.detail_id, ad.cv_path, 
+               CONCAT(ap.first_name, ' ', ap.last_name) as applicant_name,
+               ad.application_role
+        FROM ApplicationDetail ad
+        JOIN ApplicantProfile ap ON ad.applicant_id = ap.applicant_id
+        WHERE ad.cv_path IS NOT NULL
+        """
+        
+        cursor.execute(query)
+        cv_data = cursor.fetchall()
+        
+        keyword_list = [kw.strip() for kw in keywords.split(',') if kw.strip()]
+        results = []
+        
+        for detail_id, cv_path, applicant_name, role in cv_data:
+            # Extract CV content in real-time
+            extraction_result = extract_realtime(cv_path, keyword_list)
+            
+            if extraction_result.success:
+                # Count keyword matches
+                total_matches = 0
+                keyword_counts = {}
+                
+                for keyword in keyword_list:
+                    count = len(extraction_result.keyword_matches.get(keyword, []))
+                    keyword_counts[keyword] = count
+                    total_matches += count
+                
+                if total_matches > 0:
+                    results.append({
+                        'detail_id': detail_id,
+                        'applicant_name': applicant_name,
+                        'application_role': role,
+                        'total_matches': total_matches,
+                        'keyword_matches': keyword_counts,
+                        'cv_path': cv_path
+                    })
+        
+        # Sort by total matches (descending)
+        results.sort(key=lambda x: x['total_matches'], reverse=True)
+        
+        return results[:top_n]
+        
+    except Exception as e:
+        print(f"Error searching CVs: {e}")
+        return []
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
+
+# ================== INITIALIZATION =============
+encryption = EncryptionManager()
+# Uncomment to enable encryption:
+# encryption.initialize(password="your-password")
+
+# Example usage functions
+def demo_realtime_extraction():
+    """Demo real-time extraction"""
+    print("DEMO: Real-time CV Extraction")
+    print("=" * 40)
+    
+    # Test extraction
+    test_cv_path = "data/ENGINEERING/13149176.pdf"  # Adjust path as needed
+    keywords = ["Python", "JavaScript", "engineer"]
+    
+    print(f"Extracting: {test_cv_path}")
+    result = extract_realtime(test_cv_path, keywords)
+    
+    if result.success:
+        print(f"✅ Extraction successful in {result.extraction_time_ms:.1f}ms")
+        print(f"📄 Text length: {len(result.cv_raw_text)} characters")
+        print(f"📝 Summary: {result.summary_section[:100]}...")
+        print(f"🔍 Keyword matches: {result.keyword_matches}")
+    else:
+        print(f"❌ Extraction failed: {result.error_message}")
+
+def demo_database_integration():
+    """Demo database integration with real-time extraction"""
+    print("\nDEMO: Database Integration")
+    print("=" * 40)
+    
+    # Test search
+    results = search_cvs_with_extraction("Python, engineer", "kmp", 5)
+    print(f"Found {len(results)} matching CVs")
+    
+    for result in results:
+        print(f"- {result['applicant_name']}: {result['total_matches']} matches")
+    
+    # Test summary
+    if results:
+        detail_id = results[0]['detail_id']
+        summary = get_cv_summary_with_extraction(detail_id)
+        print(f"\nSummary for {summary.get('name', 'Unknown')}:")
+        print(f"  Role: {summary.get('role')}")
+        print(f"  Skills: {summary.get('skills', '')[:100]}...")
 
 if __name__ == "__main__":
-    print("=== CV ATS Extraction App ===\n")
+    print("ATS REAL-TIME EXTRACTION DEMO")
+    print("=" * 50)
     
-    # CLEAR DATABASE FIRST
-    print("Clearing existing data...")
-    cursor.execute("DELETE FROM ApplicationDetail")
-    cursor.execute("DELETE FROM ApplicantProfile")
-    cursor.execute("ALTER TABLE ApplicantProfile AUTO_INCREMENT = 1")
-    cursor.execute("ALTER TABLE ApplicationDetail AUTO_INCREMENT = 1")
-    db.commit()
-    print("Database cleared and AUTO_INCREMENT reset")
-    
-    # test_extraction("../../data/CHEF/10276858.pdf")
-    
-    process_folder("../../data")
-    export_data_to_sql("../../data/ats.sql")
-    
-    cursor.close()
-    db.close()
+    try:
+        demo_realtime_extraction()
+        demo_database_integration()
+        print("\n✅ All demos completed successfully!")
+        
+    except Exception as e:
+        print(f"❌ Demo failed: {e}")
+        import traceback
+        traceback.print_exc()

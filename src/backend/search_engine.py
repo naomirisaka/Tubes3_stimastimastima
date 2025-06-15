@@ -8,6 +8,7 @@ import boyer_moore
 import levenshtein
 import aho_corasick
 from database import DatabaseManager, get_database_connection
+from extractor import extract_realtime, get_cv_summary_with_extraction
 
 class SearchAlgorithm(Enum):
     KMP = "kmp"
@@ -22,6 +23,8 @@ class CVMatch:
     total_matches: int
     keyword_matches: Dict[str, int]
     similarity_score: float = 0.0
+    is_encrypted: bool = False
+    match_sources: List[str] = None
 
 @dataclass
 class SearchResult:
@@ -33,6 +36,7 @@ class SearchResult:
     keywords_searched: List[str] = None
     algorithm_used: str = ""
     cv_matches: List[CVMatch] = None
+    encryption_enabled: bool = False
     
     def __post_init__(self):
         if self.exact_matches is None:
@@ -48,29 +52,67 @@ class DatabaseCVSearchEngine:
     
     def __init__(self, db_manager: DatabaseManager = None):
         self.db_manager = db_manager or get_database_connection()
-        self.cv_cache = {}  # Cache CV data for performance
+        self.cv_cache = {} 
         self.cache_loaded = False
-    
+        self.encryption_enabled = False
+
     def load_cv_cache(self, force_reload: bool = False):
+        """Load CV data with real-time extraction capability"""
         if self.cache_loaded and not force_reload:
             return
         
         if not self.db_manager.connect():
             raise Exception("Failed to connect to database")
         
-        print("Loading CV data from database...")
-        cv_data = self.db_manager.get_cv_texts_for_search()
+        print("Loading CV data from database for real-time extraction...")
+        
+        # Ensure encryption columns exist
+        self.db_manager._ensure_encryption_columns()
+        
+        encryption_status = self.db_manager.get_encryption_status()
+        self.encryption_enabled = encryption_status.get('encryption_manager_ready', False)
+        
+        # Get CV data without extracted text (will be extracted real-time)
+        cv_data = self.db_manager.get_cv_data_for_search()
         
         self.cv_cache = {}
-        for detail_id, cv_text in cv_data:
-            self.cv_cache[detail_id] = cv_text
+        for detail_id, cv_path, applicant_name, application_role in cv_data:
+            self.cv_cache[detail_id] = {
+                'cv_path': cv_path,
+                'applicant_name': applicant_name,
+                'application_role': application_role,
+                'extracted_text': None  # Will be extracted on-demand
+            }
         
         self.cache_loaded = True
         self.db_manager.disconnect()
-        print(f"Loaded {len(self.cv_cache)} CVs into cache")
-    
+        print(f"Loaded {len(self.cv_cache)} CVs for real-time extraction (encryption: {'enabled' if self.encryption_enabled else 'disabled'})")
+
+    def _extract_cv_text_realtime(self, detail_id: int) -> str:
+        """Extract CV text in real-time"""
+        if detail_id not in self.cv_cache:
+            return ""
+        
+        cv_info = self.cv_cache[detail_id]
+        
+        # Check if already extracted
+        if cv_info['extracted_text'] is not None:
+            return cv_info['extracted_text']
+        
+        # Extract in real-time
+        cv_path = cv_info['cv_path']
+        extraction_result = extract_realtime(cv_path)
+        
+        if extraction_result.success:
+            cv_info['extracted_text'] = extraction_result.cv_raw_text.lower()
+        else:
+            cv_info['extracted_text'] = ""
+            print(f"Failed to extract CV {detail_id}: {extraction_result.error_message}")
+        
+        return cv_info['extracted_text']
+
     def search_cvs(self, keywords_str: str, algorithm: SearchAlgorithm = SearchAlgorithm.KMP, 
-                   fuzzy_threshold: float = 70.0, top_n: int = 10) -> SearchResult:
+                fuzzy_threshold: float = 70.0, top_n: int = 10) -> SearchResult:
         self.load_cv_cache()
         
         result = SearchResult()
@@ -78,86 +120,98 @@ class DatabaseCVSearchEngine:
         result.keywords_searched = keywords
         result.algorithm_used = algorithm.value
         result.total_cvs_scanned = len(self.cv_cache)
+        result.encryption_enabled = self.encryption_enabled
         
         if not keywords:
             return result
-        
-        # Perform exact matching
+
+        # 1. Perform exact search with real-time extraction
         start_time = time.time()
-        cv_exact_matches = self._perform_exact_search_on_cvs(keywords, algorithm)
+        exact_matches = self._perform_exact_search_realtime(keywords, algorithm)
         result.exact_match_time = (time.time() - start_time) * 1000
         
-        # Calculate total exact matches
-        result.exact_matches = {kw: sum(matches.get(kw, 0) for matches in cv_exact_matches.values()) 
-                               for kw in keywords}
+        # Calculate overall exact match counts
+        result.exact_matches = {kw: sum(matches.get(kw, 0) for matches in exact_matches.values()) 
+                            for kw in keywords}
         
-        # Perform fuzzy matching for keywords with no exact matches
+        # 2. Fuzzy search for keywords without exact matches
         keywords_without_matches = [kw for kw, count in result.exact_matches.items() if count == 0]
+        fuzzy_matches = {}
         
         if keywords_without_matches:
+            print(f"Performing fuzzy search for {len(keywords_without_matches)} keywords without exact matches")
             start_time = time.time()
-            cv_fuzzy_matches = self._perform_fuzzy_search_on_cvs(keywords_without_matches, fuzzy_threshold)
+            
+            fuzzy_matches = self._perform_fuzzy_search_realtime(keywords_without_matches, fuzzy_threshold)
+            
             result.fuzzy_match_time = (time.time() - start_time) * 1000
             
-            # Calculate fuzzy match summary
+            # Set fuzzy matches result
             for keyword in keywords_without_matches:
                 all_fuzzy_words = set()
-                for cv_matches in cv_fuzzy_matches.values():
+                for cv_matches in fuzzy_matches.values():
                     if keyword in cv_matches:
                         all_fuzzy_words.update([word for word, _ in cv_matches[keyword]])
                 
                 if all_fuzzy_words:
-                    # Get similarity scores for unique words found
                     similarity_scores = []
                     for word in all_fuzzy_words:
                         similarity = levenshtein.similarity_percentage(keyword, word)
                         similarity_scores.append((word, similarity))
                     
-                    # Sort by similarity and take top matches
                     similarity_scores.sort(key=lambda x: x[1], reverse=True)
                     result.fuzzy_matches[keyword] = similarity_scores[:10]
-        else:
-            cv_fuzzy_matches = {}
         
-        # Generate CV rankings
-        result.cv_matches = self._rank_cvs(cv_exact_matches, cv_fuzzy_matches, top_n)
+        # 3. Rank CVs
+        result.cv_matches = self._rank_cvs_realtime(exact_matches, fuzzy_matches, top_n)
         
         return result
-    
-    def _parse_keywords(self, keywords_str: str) -> List[str]:
-        if not keywords_str:
-            return []
-        return [kw.strip().lower() for kw in keywords_str.split(',') if kw.strip()]
-    
-    def _perform_exact_search_on_cvs(self, keywords: List[str], algorithm: SearchAlgorithm) -> Dict[int, Dict[str, int]]:
+
+    def _perform_exact_search_realtime(self, keywords: List[str], algorithm: SearchAlgorithm) -> Dict[int, Dict[str, int]]:
+        """Perform exact search with real-time extraction"""
         cv_matches = {}
         
-        for detail_id, cv_text in self.cv_cache.items():
+        for detail_id in self.cv_cache.keys():
+            # Extract CV text in real-time
+            cv_text = self._extract_cv_text_realtime(detail_id)
+            
+            if not cv_text:
+                continue
+            
             keyword_counts = {}
             
             if algorithm == SearchAlgorithm.KMP:
                 for keyword in keywords:
-                    matches = kmp.kmp_search(cv_text, keyword)
+                    matches = kmp.kmp_search(cv_text, keyword.lower())
                     keyword_counts[keyword] = len(matches)
             
             elif algorithm == SearchAlgorithm.BOYER_MOORE:
                 for keyword in keywords:
-                    matches = boyer_moore.boyer_moore_search(cv_text, keyword)
+                    matches = boyer_moore.boyer_moore_search(cv_text, keyword.lower())
                     keyword_counts[keyword] = len(matches)
             
             elif algorithm == SearchAlgorithm.AHO_CORASICK:
-                matches = aho_corasick.aho_corasick_search(cv_text, keywords)
+                matches = aho_corasick.aho_corasick_search(cv_text, [kw.lower() for kw in keywords])
                 for keyword in keywords:
-                    keyword_counts[keyword] = len(matches.get(keyword, []))
+                    keyword_counts[keyword] = len(matches.get(keyword.lower(), []))
             
-            cv_matches[detail_id] = keyword_counts
+            # Only include if there are matches
+            if sum(keyword_counts.values()) > 0:
+                cv_matches[detail_id] = keyword_counts
         
         return cv_matches
     
-    def _perform_fuzzy_search_on_cvs(self, keywords: List[str], threshold: float) -> Dict[int, Dict[str, List[Tuple[str, float]]]]:
+    def _perform_fuzzy_search_realtime(self, keywords: List[str], threshold: float) -> Dict[int, Dict[str, List[Tuple[str, float]]]]:
+        """Perform fuzzy search with real-time extraction"""
         cv_fuzzy_matches = {}
         
-        for detail_id, cv_text in self.cv_cache.items():
+        for detail_id in self.cv_cache.keys():
+            # Extract CV text in real-time
+            cv_text = self._extract_cv_text_realtime(detail_id)
+            
+            if not cv_text:
+                continue
+            
             fuzzy_results = {}
             
             for keyword in keywords:
@@ -170,99 +224,134 @@ class DatabaseCVSearchEngine:
         
         return cv_fuzzy_matches
     
-    def _rank_cvs(self, exact_matches: Dict[int, Dict[str, int]], 
-                  fuzzy_matches: Dict[int, Dict[str, List[Tuple[str, float]]]], 
-                  top_n: int) -> List[CVMatch]:
+    def _parse_keywords(self, keywords_str: str) -> List[str]:
+        if not keywords_str:
+            return []
+        return [kw.strip().lower() for kw in keywords_str.split(',') if kw.strip()]
+    
+    def _rank_cvs_realtime(self, exact_matches: Dict[int, Dict[str, int]], 
+                         fuzzy_matches: Dict[int, Dict[str, List[Tuple[str, float]]]], 
+                         top_n: int) -> List[CVMatch]:
+        """Rank CVs using cached data"""
         cv_scores = {}
         
-        # Score exact matches
+        # Process exact matches
         for detail_id, keyword_counts in exact_matches.items():
             total_exact = sum(keyword_counts.values())
             if total_exact > 0:
                 cv_scores[detail_id] = {
                     'exact_score': total_exact,
                     'fuzzy_score': 0,
-                    'keyword_breakdown': keyword_counts.copy()
+                    'keyword_breakdown': keyword_counts.copy(),
+                    'match_sources': ['CV Content']
                 }
         
-        # Add fuzzy match scores (weighted lower)
+        # Process fuzzy matches
         for detail_id, keyword_fuzzy in fuzzy_matches.items():
             if detail_id not in cv_scores:
                 cv_scores[detail_id] = {
                     'exact_score': 0,
                     'fuzzy_score': 0,
-                    'keyword_breakdown': {}
+                    'keyword_breakdown': {},
+                    'match_sources': ['Fuzzy Match']
                 }
             
             fuzzy_score = 0
             for keyword, similar_words in keyword_fuzzy.items():
-                # Count fuzzy matches but weight them less
                 word_count = len(similar_words)
-                weighted_score = word_count * 0.5  # Weight fuzzy matches at 50% of exact
+                weighted_score = word_count * 0.5
                 fuzzy_score += weighted_score
                 
-                # Add to keyword breakdown
                 fuzzy_key = f"{keyword} (fuzzy)"
                 cv_scores[detail_id]['keyword_breakdown'][fuzzy_key] = word_count
             
             cv_scores[detail_id]['fuzzy_score'] = fuzzy_score
+            if 'Fuzzy Match' not in cv_scores[detail_id]['match_sources']:
+                cv_scores[detail_id]['match_sources'].append('Fuzzy Match')
         
-        # Calculate final scores and get CV details from database
+        # Build final ranking
         ranked_cvs = []
         
-        if not self.db_manager.connect():
-            return ranked_cvs
-        
-        try:
-            for detail_id, scores in cv_scores.items():
-                total_score = scores['exact_score'] + scores['fuzzy_score']
-                
-                if total_score > 0:
-                    # Get applicant and application details
-                    app = self.db_manager.get_application_by_id(detail_id)
-                    if app:
-                        profile = self.db_manager.get_applicant_profile(app.applicant_id)
-                        applicant_name = f"{profile.first_name} {profile.last_name}" if profile else "Unknown"
-                        
-                        cv_match = CVMatch(
-                            detail_id=detail_id,
-                            applicant_name=applicant_name,
-                            application_role=app.application_role,
-                            total_matches=int(total_score),
-                            keyword_matches=scores['keyword_breakdown'],
-                            similarity_score=total_score
-                        )
-                        ranked_cvs.append(cv_match)
+        for detail_id, scores in cv_scores.items():
+            total_score = scores['exact_score'] + scores['fuzzy_score']
             
-            # Sort by total score and return top N
-            ranked_cvs.sort(key=lambda x: x.similarity_score, reverse=True)
-            return ranked_cvs[:top_n]
+            if total_score > 0 and detail_id in self.cv_cache:
+                cv_info = self.cv_cache[detail_id]
+                
+                cv_match = CVMatch(
+                    detail_id=detail_id,
+                    applicant_name=cv_info['applicant_name'],
+                    application_role=cv_info['application_role'],
+                    total_matches=int(total_score),
+                    keyword_matches=scores['keyword_breakdown'],
+                    similarity_score=total_score,
+                    is_encrypted=False,  # Will be determined from database if needed
+                    match_sources=scores['match_sources']
+                )
+                
+                ranked_cvs.append(cv_match)
         
-        finally:
-            self.db_manager.disconnect()
+        # Sort by similarity score (descending)
+        ranked_cvs.sort(key=lambda x: x.similarity_score, reverse=True)
+        return ranked_cvs[:top_n]
     
     def get_cv_summary(self, detail_id: int) -> Dict[str, str]:
-        if not self.db_manager.connect():
-            return {}
-        
-        try:
-            summary_data = self.db_manager.get_application_summary_data(detail_id)
-            return summary_data
-        finally:
-            self.db_manager.disconnect()
+        """Get CV summary using real-time extraction"""
+        return get_cv_summary_with_extraction(detail_id)
     
     def get_database_stats(self) -> Dict[str, int]:
         if not self.db_manager.connect():
             return {}
         
         try:
-            return self.db_manager.get_database_stats()
+            stats = self.db_manager.get_database_stats()
+            encryption_status = self.db_manager.get_encryption_status()
+            stats['encryption_enabled'] = encryption_status['encryption_enabled']
+            stats['encryption_ready'] = encryption_status['encryption_manager_ready']
+            return stats
+        finally:
+            self.db_manager.disconnect()
+    
+    def test_realtime_extraction(self) -> Dict[str, any]:
+        """Test real-time extraction capability"""
+        if not self.db_manager.connect():
+            return {"error": "Database connection failed"}
+        
+        try:
+            self.load_cv_cache()
+            
+            total_cvs = len(self.cv_cache)
+            successful_extractions = 0
+            failed_extractions = 0
+            
+            # Test extraction on first 5 CVs
+            test_cvs = list(self.cv_cache.keys())[:5]
+            
+            for detail_id in test_cvs:
+                cv_text = self._extract_cv_text_realtime(detail_id)
+                if cv_text and len(cv_text) > 0:
+                    successful_extractions += 1
+                else:
+                    failed_extractions += 1
+            
+            return {
+                "total_cvs_in_cache": total_cvs,
+                "test_sample_size": len(test_cvs),
+                "successful_extractions": successful_extractions,
+                "failed_extractions": failed_extractions,
+                "extraction_success_rate": (successful_extractions / len(test_cvs)) * 100 if test_cvs else 0,
+                "realtime_extraction_ready": successful_extractions > 0
+            }
+            
+        except Exception as e:
+            return {"error": f"Test failed: {str(e)}"}
+        
         finally:
             self.db_manager.disconnect()
 
-# Convenience functions for easy usage
 def search_database_cvs(keywords: str, algorithm: str = "kmp", top_n: int = 10, 
                        fuzzy_threshold: float = 70.0) -> Tuple[SearchResult, List[CVMatch]]:
+    """Search database CVs with real-time extraction."""
     engine = DatabaseCVSearchEngine()
     
     algo_enum = SearchAlgorithm.KMP
@@ -276,66 +365,11 @@ def search_database_cvs(keywords: str, algorithm: str = "kmp", top_n: int = 10,
     return search_result, search_result.cv_matches
 
 def get_cv_summary_by_id(detail_id: int) -> Dict[str, str]:
+    """Get CV summary by ID using real-time extraction"""
     engine = DatabaseCVSearchEngine()
     return engine.get_cv_summary(detail_id)
 
 def get_cv_path_by_id(detail_id: int) -> str:
+    """Get CV path by ID"""
     summary = get_cv_summary_by_id(detail_id)
     return summary.get('cv_path', '')
-
-if __name__ == "__main__":
-    print("Testing Database CV Search Engine")
-    print("=" * 50)
-    
-    try:
-        # Test database connection
-        engine = DatabaseCVSearchEngine()
-        stats = engine.get_database_stats()
-        
-        print(f"Database Statistics:")
-        print(f"  Total Applicants: {stats.get('total_applicants', 0)}")
-        print(f"  Total Applications: {stats.get('total_applications', 0)}")
-        print()
-        
-        # Test search scenarios
-        test_searches = [
-            "Python, JavaScript, React",
-            "Machine Learning, Data Science",
-            "Java, Spring Boot",
-            "Chef, Cooking, Kitchen"
-        ]
-        
-        for keywords in test_searches:
-            print(f"Testing search: '{keywords}'")
-            
-            result, cv_matches = search_database_cvs(
-                keywords, 
-                algorithm="kmp", 
-                top_n=3,
-                fuzzy_threshold=75.0
-            )
-            
-            print(f"  Exact match time: {result.exact_match_time:.2f}ms")
-            print(f"  Fuzzy match time: {result.fuzzy_match_time:.2f}ms")
-            print(f"  CVs scanned: {result.total_cvs_scanned}")
-            
-            total_exact = sum(result.exact_matches.values())
-            print(f"  Total exact matches: {total_exact}")
-            
-            if result.fuzzy_matches:
-                fuzzy_keywords = len([k for k, v in result.fuzzy_matches.items() if v])
-                print(f"  Keywords with fuzzy matches: {fuzzy_keywords}")
-            
-            if cv_matches:
-                print(f"  Top CV: {cv_matches[0].applicant_name} - {cv_matches[0].application_role} (Score: {cv_matches[0].total_matches})")
-            else:
-                print("  No matching CVs found")
-            
-            print()
-        
-        print("Database search engine test completed!")
-        
-    except Exception as e:
-        print(f"Test failed: {e}")
-        import traceback
-        traceback.print_exc()

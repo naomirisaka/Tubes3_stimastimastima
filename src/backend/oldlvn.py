@@ -32,7 +32,7 @@ def extract_words_from_text(text: str) -> List[str]:
     words = re.findall(r'\b\w+\b', text.lower())
     return words
 
-def find_similar_words(keyword: str, text: str, threshold: float = 60.0) -> List[Tuple[str, float]]:
+def find_similar_words(keyword: str, text: str, threshold: float = 70.0) -> List[Tuple[str, float]]:
     words = extract_words_from_text(text)
     similar_words = []
     
@@ -44,7 +44,7 @@ def find_similar_words(keyword: str, text: str, threshold: float = 60.0) -> List
     similar_words.sort(key=lambda x: x[1], reverse=True)
     return similar_words
 
-def fuzzy_search_keywords(text: str, keywords: List[str], threshold: float = 60.0) -> Dict[str, List[Tuple[str, float]]]:
+def fuzzy_search_keywords(text: str, keywords: List[str], threshold: float = 70.0) -> Dict[str, List[Tuple[str, float]]]:
     result = {}
     for keyword in keywords:
         similar = find_similar_words(keyword, text, threshold)
@@ -58,8 +58,26 @@ def read_file(filepath: str) -> str:
     with open(filepath, 'r', encoding='utf-8') as f:
         return f.read()
 
-def fuzzy_match_in_file(filepath: str, keyword_string: str, threshold: float = 60.0) -> Dict[str, List[Tuple[str, float]]]:
+def fuzzy_match_in_file(filepath: str, keyword_string: str, threshold: float = 70.0) -> Dict[str, List[Tuple[str, float]]]:
     text = read_file(filepath)
     keywords = parse_keywords(keyword_string)
     
     return fuzzy_search_keywords(text, keywords, threshold)
+
+if __name__ == "__main__":
+    path = "data/schema.sql"
+    input_keywords = "React, Python, JavaScript"
+    
+    results = fuzzy_match_in_file(path, input_keywords, threshold=60.0)
+    
+    for keyword, matches in results.items():
+        print(f"\nKeyword: '{keyword}'")
+        if matches:
+            for word, similarity in matches[:5]:
+                print(f"  - {word}: {similarity:.1f}% similar")
+        else:
+            print("  No similar words found")
+    
+    print(f"\nDirect tests:")
+    print(f"Distance between 'kitten' and 'sitting': {levenshtein_distance('kitten', 'sitting')}")
+    print(f"Similarity between 'python' and 'pyhton': {similarity_percentage('python', 'pyhton'):.1f}%")

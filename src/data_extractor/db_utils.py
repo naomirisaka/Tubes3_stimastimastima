@@ -36,13 +36,13 @@ def get_summary_by_applicant(applicant_id: int) -> Optional[dict]:
     cursor1 = conn.cursor(dictionary=True)
     cursor1.execute("SELECT * FROM ApplicantProfile WHERE applicant_id = %s", (applicant_id,))
     profile = cursor1.fetchone()
-    cursor1.nextset()  # 🔥 ini penting!
+    cursor1.nextset() 
     cursor1.close()
 
     cursor2 = conn.cursor(dictionary=True)
     cursor2.execute("SELECT * FROM ApplicationDetail WHERE applicant_id = %s", (applicant_id,))
     details = cursor2.fetchone()
-    cursor2.nextset()  # 🔥 tambahkan juga
+    cursor2.nextset()
     cursor2.close()
 
     conn.close()
