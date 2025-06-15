@@ -22,10 +22,10 @@ Tujuannya adalah membantu recruiter menemukan kandidat yang paling relevan secar
 
 ## Fitur
 ### 1. Algoritma Knuth-Morris-Pratt (KMP)
-KMP adalah algoritma pencocokan string yang menghindari pemeriksaan ulang karakter yang sudah diperiksa sebelumnya. 
+Algoritma Knuth-Morris-Pratt (KMP) adalah algoritma pencocokan string yang menghindari pemeriksaan ulang karakter yang sudah diperiksa sebelumnya. 
 Algoritma ini bekerja dengan membangun prefix table (failure function) untuk mempercepat proses pencarian pola di dalam teks.
 ### 2.  Algoritma Boyer-Moore (BM)
-BM adalah salah satu algoritma string matching tercepat untuk teks panjang. 
+Algoritma Boyer-Moore (BM) adalah salah satu algoritma string matching tercepat untuk teks panjang. 
 Algoritma ini membandingkan pola dari kanan ke kiri dan menggunakan dua strategi utama, yaitu bad character rule dan good suffix rule.
 
 ## Requirements
